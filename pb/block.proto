@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package pb;
+
+import "transaction.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+message Block {
+    BlockHeader block_header = 1;
+    repeated Transaction transactions = 2; // transaction set
+    bytes block_hash = 3 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    bytes signature = 4;
+    bytes extra = 5;
+}
+
+message BlockHeader {
+    uint64 number = 1;
+    bytes state_root = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    bytes tx_root = 3 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    bytes receipt_root = 4 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    bytes parent_hash = 5 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    int64 timestamp = 6;
+    bytes version = 7;
+    bytes interchain_index = 8;
+}
+
+message MerkleWrapper {
+    BlockHeader block_header = 1;
+    repeated bytes transaction_hashes = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    repeated Transaction transactions = 3;
+    bytes block_hash = 4 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    map<string, bytes> signatures = 5;
+}
+
+message MerkleWrappers {
+    repeated MerkleWrapper merkles = 1;
+}

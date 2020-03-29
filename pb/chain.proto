@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package pb;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+message ChainMeta {
+    uint64 height = 1;
+    bytes block_hash = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    uint64 interchain_tx_count = 3;
+}

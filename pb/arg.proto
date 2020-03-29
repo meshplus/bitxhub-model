@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package pb;
+
+message Arg {
+    enum Type {
+        I32 = 0;
+        I64 = 1;
+        U32 = 2;
+        U64 = 3;
+        F32 = 4;
+        F64 = 5;
+        String = 6;
+        Bytes = 7;
+        Bool = 8;
+    }
+    Type type = 1;
+    bool is_array = 2;
+    bytes value = 3;
+}

@@ -1,0 +1,806 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "broker.proto",
+    "version": "version not set"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/account_balance/{address}": {
+      "get": {
+        "operationId": "GetAccountBalance",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
+    "/v1/block": {
+      "get": {
+        "operationId": "GetBlock",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbBlock"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "HEIGHT",
+              "HASH"
+            ],
+            "default": "HEIGHT"
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
+    "/v1/blocks": {
+      "get": {
+        "operationId": "GetBlocks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetBlocksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "length",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
+    "/v1/chain_meta": {
+      "get": {
+        "operationId": "GetChainMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbChainMeta"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
+    "/v1/chain_status": {
+      "get": {
+        "operationId": "GetChainStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
+    "/v1/merkle_wrapper": {
+      "get": {
+        "operationId": "GetMerkleWrapper",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/pbResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/runtimeStreamError"
+                }
+              },
+              "title": "Stream result of pbResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "begin",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "pid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
+    "/v1/network": {
+      "get": {
+        "operationId": "GetNetworkMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
+    "/v1/receipt/{tx_hash}": {
+      "get": {
+        "operationId": "GetReceipt",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbReceipt"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tx_hash",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
+    "/v1/subscription": {
+      "get": {
+        "operationId": "Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/pbResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/runtimeStreamError"
+                }
+              },
+              "title": "Stream result of pbResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "BLOCK",
+              "EVENT",
+              "INTERCHAIN_TX",
+              "BLOCK_HEADER"
+            ],
+            "default": "BLOCK"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
+    "/v1/sync_merkle_wrapper": {
+      "get": {
+        "summary": "Pier sync merkle wrapper meta from bitxhub\nRequest includes the appchain id\nResponse includes MerkleWrapper struct",
+        "operationId": "SyncMerkleWrapper",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/pbResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/runtimeStreamError"
+                }
+              },
+              "title": "Stream result of pbResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "appchain_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
+    "/v1/transaction": {
+      "post": {
+        "operationId": "SendTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbTransactionHashMsg"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbSendTransactionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
+    "/v1/transaction/{tx_hash}": {
+      "get": {
+        "operationId": "GetTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetTransactionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tx_hash",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ReceiptStatus": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "FAILED"
+      ],
+      "default": "SUCCESS"
+    },
+    "TransactionDataVMType": {
+      "type": "string",
+      "enum": [
+        "BVM",
+        "XVM"
+      ],
+      "default": "BVM"
+    },
+    "pbBlock": {
+      "type": "object",
+      "properties": {
+        "block_header": {
+          "$ref": "#/definitions/pbBlockHeader"
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbTransaction"
+          }
+        },
+        "block_hash": {
+          "type": "string",
+          "format": "byte"
+        },
+        "signature": {
+          "type": "string",
+          "format": "byte"
+        },
+        "extra": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "pbBlockHeader": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "state_root": {
+          "type": "string",
+          "format": "byte"
+        },
+        "tx_root": {
+          "type": "string",
+          "format": "byte"
+        },
+        "receipt_root": {
+          "type": "string",
+          "format": "byte"
+        },
+        "parent_hash": {
+          "type": "string",
+          "format": "byte"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        },
+        "version": {
+          "type": "string",
+          "format": "byte"
+        },
+        "interchain_index": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "pbChainMeta": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "block_hash": {
+          "type": "string",
+          "format": "byte"
+        },
+        "interchain_tx_count": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "pbEvent": {
+      "type": "object",
+      "properties": {
+        "tx_hash": {
+          "type": "string",
+          "format": "byte",
+          "title": "Transaction Hash"
+        },
+        "data": {
+          "type": "string",
+          "format": "byte"
+        },
+        "interchain": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "The interchain flag used by interchain contract"
+        }
+      }
+    },
+    "pbGetBlockRequestType": {
+      "type": "string",
+      "enum": [
+        "HEIGHT",
+        "HASH"
+      ],
+      "default": "HEIGHT"
+    },
+    "pbGetBlocksResponse": {
+      "type": "object",
+      "properties": {
+        "blocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbBlock"
+          }
+        }
+      }
+    },
+    "pbGetTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "tx": {
+          "$ref": "#/definitions/pbTransaction"
+        },
+        "tx_meta": {
+          "$ref": "#/definitions/pbTransactionMeta"
+        }
+      }
+    },
+    "pbReceipt": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "format": "byte"
+        },
+        "tx_hash": {
+          "type": "string",
+          "format": "byte"
+        },
+        "ret": {
+          "type": "string",
+          "format": "byte"
+        },
+        "status": {
+          "$ref": "#/definitions/ReceiptStatus"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbEvent"
+          }
+        }
+      }
+    },
+    "pbResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "pbSendTransactionRequest": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "format": "byte"
+        },
+        "from": {
+          "type": "string",
+          "format": "byte"
+        },
+        "to": {
+          "type": "string",
+          "format": "byte"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        },
+        "data": {
+          "$ref": "#/definitions/pbTransactionData"
+        },
+        "nonce": {
+          "type": "string",
+          "format": "int64"
+        },
+        "signature": {
+          "type": "string",
+          "format": "byte"
+        },
+        "extra": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "pbSubscriptionRequestType": {
+      "type": "string",
+      "enum": [
+        "BLOCK",
+        "EVENT",
+        "INTERCHAIN_TX",
+        "BLOCK_HEADER"
+      ],
+      "default": "BLOCK"
+    },
+    "pbTransaction": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "format": "byte"
+        },
+        "from": {
+          "type": "string",
+          "format": "byte"
+        },
+        "to": {
+          "type": "string",
+          "format": "byte"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        },
+        "transaction_hash": {
+          "type": "string",
+          "format": "byte"
+        },
+        "data": {
+          "$ref": "#/definitions/pbTransactionData"
+        },
+        "nonce": {
+          "type": "string",
+          "format": "int64"
+        },
+        "signature": {
+          "type": "string",
+          "format": "byte"
+        },
+        "extra": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "pbTransactionData": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/pbTransactionDataType"
+        },
+        "amount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "vm_type": {
+          "$ref": "#/definitions/TransactionDataVMType"
+        },
+        "payload": {
+          "type": "string",
+          "format": "byte"
+        },
+        "extra": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "pbTransactionDataType": {
+      "type": "string",
+      "enum": [
+        "NORMAL",
+        "INVOKE",
+        "UPDATE",
+        "FREEZE",
+        "UNFREEZE"
+      ],
+      "default": "NORMAL"
+    },
+    "pbTransactionHashMsg": {
+      "type": "object",
+      "properties": {
+        "tx_hash": {
+          "type": "string"
+        }
+      }
+    },
+    "pbTransactionMeta": {
+      "type": "object",
+      "properties": {
+        "block_hash": {
+          "type": "string",
+          "format": "byte"
+        },
+        "block_height": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "index": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "runtimeError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "runtimeStreamError": {
+      "type": "object",
+      "properties": {
+        "grpc_code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "http_code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "http_status": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

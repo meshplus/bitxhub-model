@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package pb;
+
+message Message {
+    enum Type {
+        GET_BLOCK = 0;
+        GET_BLOCK_ACK = 1;
+        CONSENSUS = 2;
+        FETCH_CERT = 3;
+        FETCH_CERT_ACK = 4;
+        FETCH_BLOCK_SIGN = 5;
+        FETCH_BLOCK_SIGN_ACK = 6;
+    }
+    Type type = 1;
+    bytes Data = 2;
+    bytes Version = 3;
+}

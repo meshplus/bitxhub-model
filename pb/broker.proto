@@ -1,0 +1,156 @@
+syntax = "proto3";
+
+package pb;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "transaction.proto";
+import "receipt.proto";
+import "block.proto";
+import "chain.proto";
+
+service ChainBroker {
+    rpc Subscribe (SubscriptionRequest) returns (stream Response) {
+        option (google.api.http) = {
+            get: "/v1/subscription"
+        };
+    }
+    // Pier sync merkle wrapper meta from bitxhub
+    // Request includes the appchain id
+    // Response includes MerkleWrapper struct
+    rpc SyncMerkleWrapper (SyncMerkleWrapperRequest) returns (stream Response) {
+        option (google.api.http) = {
+            get: "/v1/sync_merkle_wrapper"
+        };
+    }
+
+    rpc GetMerkleWrapper (GetMerkleWrapperRequest) returns (stream Response) {
+        option (google.api.http) = {
+            get: "/v1/merkle_wrapper"
+        };
+    }
+
+    rpc SendTransaction (SendTransactionRequest) returns (TransactionHashMsg) {
+        option (google.api.http) = {
+            post: "/v1/transaction"
+            body: "*"
+        };
+    }
+
+    rpc GetTransaction (TransactionHashMsg) returns (GetTransactionResponse) {
+        option (google.api.http) = {
+            get: "/v1/transaction/{tx_hash}"
+        };
+    }
+
+    rpc GetReceipt (TransactionHashMsg) returns (pb.Receipt) {
+        option (google.api.http) = {
+            get: "/v1/receipt/{tx_hash}"
+        };
+    }
+
+    rpc GetBlock (GetBlockRequest) returns (pb.Block) {
+        option (google.api.http) = {
+            get: "/v1/block"
+        };
+    }
+
+    rpc GetBlocks (GetBlocksRequest) returns (GetBlocksResponse) {
+        option (google.api.http) = {
+            get: "/v1/blocks"
+        };
+    }
+
+    rpc GetChainMeta (Request) returns (pb.ChainMeta) {
+        option (google.api.http) = {
+            get: "/v1/chain_meta"
+        };
+    }
+
+    rpc GetChainStatus (Request) returns (Response) {
+        option (google.api.http) = {
+            get: "/v1/chain_status"
+        };
+    }
+
+    rpc GetNetworkMeta (Request) returns (Response) {
+        option (google.api.http) = {
+            get: "/v1/network"
+        };
+    }
+
+    rpc GetAccountBalance (Address) returns (Response) {
+        option (google.api.http) = {
+            get: "/v1/account_balance/{address}"
+        };
+    }
+}
+
+message GetMerkleWrapperRequest {
+    uint64 begin = 1;
+    uint64 end = 2;
+    string pid = 3;
+}
+
+message TransactionHashMsg {
+    string tx_hash = 1;
+}
+
+message GetBlockRequest {
+    enum Type {
+        HEIGHT = 0;
+        HASH = 1;
+    }
+    Type type = 1;
+    string value = 2;
+}
+
+message Request {
+}
+
+message Response {
+    bytes data = 1;
+}
+
+message Address {
+    string address = 1;
+}
+
+message SendTransactionRequest {
+    bytes version = 1;
+    bytes from = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address", (gogoproto.nullable) = false];
+    bytes to = 3 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address", (gogoproto.nullable) = false];
+    int64 timestamp = 4;
+    pb.TransactionData data = 6;
+    int64 nonce = 7;
+    bytes signature = 8;
+    bytes extra = 9;
+}
+
+message SyncMerkleWrapperRequest {
+    string appchain_id = 1;
+}
+
+message GetBlocksRequest {
+    uint64 offset = 1;
+    uint64 length = 2;
+}
+
+message GetBlocksResponse {
+    repeated pb.Block blocks = 1;
+}
+
+message SubscriptionRequest {
+    enum Type {
+        BLOCK = 0;
+        EVENT = 1;
+        INTERCHAIN_TX = 2;
+        BLOCK_HEADER = 3;
+    }
+    Type type = 1;
+}
+
+message GetTransactionResponse {
+    pb.Transaction tx = 1;
+    pb.TransactionMeta tx_meta = 2;
+}

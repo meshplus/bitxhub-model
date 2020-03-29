@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package pb;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+message Receipt {
+    enum Status {
+        SUCCESS = 0;
+        FAILED = 1;
+    }
+    bytes version = 1;
+    bytes tx_hash = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    bytes ret = 3;
+    Status status = 4;
+    repeated Event events = 5;
+}
+
+message Receipts {
+    repeated Receipt receipts = 1;
+}
+
+message Event {
+    // Transaction Hash
+    bytes tx_hash = 1 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    bytes data = 2;
+    // The interchain flag used by interchain contract
+    bool interchain = 3;
+}

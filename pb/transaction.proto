@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package pb;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "arg.proto";
+
+message Transaction {
+    bytes version = 1;
+    bytes from = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address", (gogoproto.nullable) = false];
+    bytes to = 3 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address", (gogoproto.nullable) = false];
+    int64 timestamp = 4;
+    bytes transaction_hash = 5 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    TransactionData data = 6;
+    int64 nonce = 7;
+    bytes signature = 8;
+    bytes extra = 9;
+}
+
+message TransactionData {
+    enum Type {
+        NORMAL = 0;
+        INVOKE = 1;
+        UPDATE = 2;
+        FREEZE = 3;
+        UNFREEZE = 4;
+    }
+    Type type = 1;
+    uint64 amount = 2;
+    enum VMType {
+        BVM = 0;
+        XVM = 1;
+    }
+    VMType vm_type = 3;
+    bytes payload = 4;
+    bytes extra = 5;
+}
+
+message InvokePayload {
+    string method = 1;
+    repeated Arg args = 2;
+}
+
+message Transactions {
+    repeated Transaction transactions = 1;
+}
+
+message TransactionMeta {
+    bytes block_hash = 1;
+    uint64 block_height = 2;
+    uint64 index = 3;
+}
+
+message CrosschainTransactionExtra {
+    uint64 index = 1; // to_id index
+    bool status = 2; // receipt status
+    bytes ret = 3; // receipt result
+}
+
+message TransactionTracingMeta {
+    bytes receipt_hash = 1;
+    bytes confirm_hash = 2;
+}
+
+message TransactionSlice {
+    uint64 height = 1;
+    repeated Transaction txs = 2;
+}
