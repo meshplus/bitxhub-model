@@ -73,6 +73,12 @@ service ChainBroker {
         };
     }
 
+    rpc GetValidators (Request) returns (Response) {
+        option (google.api.http) = {
+            get: "/v1/validators"
+        };
+    }
+
     rpc GetNetworkMeta (Request) returns (Response) {
         option (google.api.http) = {
             get: "/v1/network"
