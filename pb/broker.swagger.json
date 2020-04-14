@@ -137,14 +137,28 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "CHAIN_STATUS",
+              "NETWORK",
+              "VALIDATORS"
+            ],
+            "default": "CHAIN_STATUS"
+          }
+        ],
         "tags": [
           "ChainBroker"
         ]
       }
     },
-    "/v1/chain_status": {
+    "/v1/info": {
       "get": {
-        "operationId": "GetChainStatus",
+        "operationId": "GetInfo",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -159,6 +173,20 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "CHAIN_STATUS",
+              "NETWORK",
+              "VALIDATORS"
+            ],
+            "default": "CHAIN_STATUS"
+          }
+        ],
         "tags": [
           "ChainBroker"
         ]
@@ -212,28 +240,6 @@
             "type": "string"
           }
         ],
-        "tags": [
-          "ChainBroker"
-        ]
-      }
-    },
-    "/v1/network": {
-      "get": {
-        "operationId": "GetNetworkMeta",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
         "tags": [
           "ChainBroker"
         ]
@@ -416,28 +422,6 @@
           "ChainBroker"
         ]
       }
-    },
-    "/v1/validators": {
-      "get": {
-        "operationId": "GetValidators",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "tags": [
-          "ChainBroker"
-        ]
-      }
     }
   },
   "definitions": {
@@ -611,6 +595,15 @@
           }
         }
       }
+    },
+    "pbRequestType": {
+      "type": "string",
+      "enum": [
+        "CHAIN_STATUS",
+        "NETWORK",
+        "VALIDATORS"
+      ],
+      "default": "CHAIN_STATUS"
     },
     "pbResponse": {
       "type": "object",
