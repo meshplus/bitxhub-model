@@ -67,15 +67,9 @@ service ChainBroker {
         };
     }
 
-    rpc GetChainStatus (Request) returns (Response) {
+    rpc GetInfo (Request) returns (Response) {
         option (google.api.http) = {
-            get: "/v1/chain_status"
-        };
-    }
-
-    rpc GetNetworkMeta (Request) returns (Response) {
-        option (google.api.http) = {
-            get: "/v1/network"
+            get: "/v1/info"
         };
     }
 
@@ -106,6 +100,12 @@ message GetBlockRequest {
 }
 
 message Request {
+    enum Type {
+        CHAIN_STATUS = 0;
+        NETWORK = 1;
+        VALIDATORS = 2;
+    }
+    Type type = 1;
 }
 
 message Response {
