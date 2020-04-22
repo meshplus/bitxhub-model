@@ -101,14 +101,14 @@
         },
         "parameters": [
           {
-            "name": "offset",
+            "name": "start",
             "in": "query",
             "required": false,
             "type": "string",
             "format": "uint64"
           },
           {
-            "name": "length",
+            "name": "end",
             "in": "query",
             "required": false,
             "type": "string",
