@@ -194,6 +194,38 @@
         ]
       }
     },
+    "/v1/interchain_tx_wrapper": {
+      "get": {
+        "operationId": "GetInterchainTxWrapper",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "$ref": "#/x-stream-definitions/pbGetInterchainTxWrapperResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "begin",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
     "/v1/receipt/{tx_hash}": {
       "get": {
         "operationId": "GetReceipt",
@@ -239,7 +271,8 @@
               "BLOCK",
               "EVENT",
               "INTERCHAIN_TX",
-              "BLOCK_HEADER"
+              "BLOCK_HEADER",
+              "INTERCHAIN_TX_WRAPPER"
             ],
             "default": "BLOCK"
           }
@@ -435,6 +468,17 @@
         }
       }
     },
+    "pbGetInterchainTxWrapperResponse": {
+      "type": "object",
+      "properties": {
+        "wrapper": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbInterchainTxWrapper"
+          }
+        }
+      }
+    },
     "pbGetTransactionResponse": {
       "type": "object",
       "properties": {
@@ -443,6 +487,24 @@
         },
         "tx_meta": {
           "$ref": "#/definitions/pbTransactionMeta"
+        }
+      }
+    },
+    "pbInterchainTxWrapper": {
+      "type": "object",
+      "properties": {
+        "transaction_hashes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbTransaction"
+          }
         }
       }
     },
@@ -532,7 +594,8 @@
         "BLOCK",
         "EVENT",
         "INTERCHAIN_TX",
-        "BLOCK_HEADER"
+        "BLOCK_HEADER",
+        "INTERCHAIN_TX_WRAPPER"
       ],
       "default": "BLOCK"
     },
@@ -674,6 +737,18 @@
     }
   },
   "x-stream-definitions": {
+    "pbGetInterchainTxWrapperResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/pbGetInterchainTxWrapperResponse"
+        },
+        "error": {
+          "$ref": "#/definitions/runtimeStreamError"
+        }
+      },
+      "title": "Stream result of pbGetInterchainTxWrapperResponse"
+    },
     "pbResponse": {
       "type": "object",
       "properties": {

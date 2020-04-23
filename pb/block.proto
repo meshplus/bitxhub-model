@@ -24,14 +24,7 @@ message BlockHeader {
     bytes interchain_index = 8;
 }
 
-message MerkleWrapper {
-    BlockHeader block_header = 1;
+message InterchainTxWrapper {
     repeated bytes transaction_hashes = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
     repeated Transaction transactions = 3;
-    bytes block_hash = 4 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
-    map<string, bytes> signatures = 5;
-}
-
-message MerkleWrappers {
-    repeated MerkleWrapper merkles = 1;
 }

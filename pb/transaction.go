@@ -10,7 +10,6 @@ import (
 	mt "github.com/cbergoon/merkletree"
 	"github.com/gogo/protobuf/proto"
 	"github.com/meshplus/bitxhub-kit/crypto"
-	"github.com/meshplus/bitxhub-kit/merkle/merkletree"
 	"github.com/meshplus/bitxhub-kit/types"
 )
 
@@ -28,28 +27,6 @@ func (t TransactionHash) Equals(other mt.Content) (bool, error) {
 		return false, errors.New("parameter should be type TransactionHash")
 	}
 	return bytes.Equal(t, tOther), nil
-}
-
-// Verify that MerkleWrapper is valid: Related transactions in MerkleWrapper can be verified by merkle existence
-func (m *MerkleWrapper) VerifyMerkleWrapper() (bool, error) {
-	HashesForMerkle := make([]interface{}, 0, len(m.TransactionHashes))
-	for _, txHash := range m.TransactionHashes {
-		HashesForMerkle = append(HashesForMerkle, TransactionHash(txHash.Bytes()))
-	}
-
-	txTree := merkletree.NewMerkleTree()
-	err := txTree.InitMerkleTree(HashesForMerkle)
-
-	if err != nil {
-		return false, err
-	}
-	for _, tx := range m.Transactions {
-		exist, err := txTree.VerifyContent(TransactionHash(tx.TransactionHash.Bytes()))
-		if err != nil || !exist {
-			return false, nil
-		}
-	}
-	return true, nil
 }
 
 func (m *Transaction) Hash() types.Hash {
