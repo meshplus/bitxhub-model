@@ -60,49 +60,21 @@ func request_ChainBroker_Subscribe_0(ctx context.Context, marshaler runtime.Mars
 }
 
 var (
-	filter_ChainBroker_SyncMerkleWrapper_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+	filter_ChainBroker_GetBlockHeader_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
 
-func request_ChainBroker_SyncMerkleWrapper_0(ctx context.Context, marshaler runtime.Marshaler, client ChainBrokerClient, req *http.Request, pathParams map[string]string) (ChainBroker_SyncMerkleWrapperClient, runtime.ServerMetadata, error) {
-	var protoReq SyncMerkleWrapperRequest
+func request_ChainBroker_GetBlockHeader_0(ctx context.Context, marshaler runtime.Marshaler, client ChainBrokerClient, req *http.Request, pathParams map[string]string) (ChainBroker_GetBlockHeaderClient, runtime.ServerMetadata, error) {
+	var protoReq GetBlockHeaderRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ChainBroker_SyncMerkleWrapper_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ChainBroker_GetBlockHeader_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	stream, err := client.SyncMerkleWrapper(ctx, &protoReq)
-	if err != nil {
-		return nil, metadata, err
-	}
-	header, err := stream.Header()
-	if err != nil {
-		return nil, metadata, err
-	}
-	metadata.HeaderMD = header
-	return stream, metadata, nil
-
-}
-
-var (
-	filter_ChainBroker_GetMerkleWrapper_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
-
-func request_ChainBroker_GetMerkleWrapper_0(ctx context.Context, marshaler runtime.Marshaler, client ChainBrokerClient, req *http.Request, pathParams map[string]string) (ChainBroker_GetMerkleWrapperClient, runtime.ServerMetadata, error) {
-	var protoReq GetMerkleWrapperRequest
-	var metadata runtime.ServerMetadata
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ChainBroker_GetMerkleWrapper_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	stream, err := client.GetMerkleWrapper(ctx, &protoReq)
+	stream, err := client.GetBlockHeader(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -455,14 +427,7 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		return
 	})
 
-	mux.Handle("GET", pattern_ChainBroker_SyncMerkleWrapper_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
-		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-		return
-	})
-
-	mux.Handle("GET", pattern_ChainBroker_GetMerkleWrapper_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ChainBroker_GetBlockHeader_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -690,7 +655,7 @@ func RegisterChainBrokerHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
-	mux.Handle("GET", pattern_ChainBroker_SyncMerkleWrapper_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ChainBroker_GetBlockHeader_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -699,34 +664,14 @@ func RegisterChainBrokerHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ChainBroker_SyncMerkleWrapper_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ChainBroker_GetBlockHeader_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ChainBroker_SyncMerkleWrapper_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
-
-	})
-
-	mux.Handle("GET", pattern_ChainBroker_GetMerkleWrapper_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		ctx, cancel := context.WithCancel(req.Context())
-		defer cancel()
-		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req)
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		resp, md, err := request_ChainBroker_GetMerkleWrapper_0(rctx, inboundMarshaler, client, req, pathParams)
-		ctx = runtime.NewServerMetadataContext(ctx, md)
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-
-		forward_ChainBroker_GetMerkleWrapper_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_ChainBroker_GetBlockHeader_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -896,9 +841,7 @@ func RegisterChainBrokerHandlerClient(ctx context.Context, mux *runtime.ServeMux
 var (
 	pattern_ChainBroker_Subscribe_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "subscription"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_ChainBroker_SyncMerkleWrapper_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "sync_merkle_wrapper"}, "", runtime.AssumeColonVerbOpt(true)))
-
-	pattern_ChainBroker_GetMerkleWrapper_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "merkle_wrapper"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_ChainBroker_GetBlockHeader_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "block_header"}, "", runtime.AssumeColonVerbOpt(true)))
 
 	pattern_ChainBroker_SendTransaction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "transaction"}, "", runtime.AssumeColonVerbOpt(true)))
 
@@ -920,9 +863,7 @@ var (
 var (
 	forward_ChainBroker_Subscribe_0 = runtime.ForwardResponseStream
 
-	forward_ChainBroker_SyncMerkleWrapper_0 = runtime.ForwardResponseStream
-
-	forward_ChainBroker_GetMerkleWrapper_0 = runtime.ForwardResponseStream
+	forward_ChainBroker_GetBlockHeader_0 = runtime.ForwardResponseStream
 
 	forward_ChainBroker_SendTransaction_0 = runtime.ForwardResponseMessage
 

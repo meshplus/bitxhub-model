@@ -15,18 +15,10 @@ service ChainBroker {
             get: "/v1/subscription"
         };
     }
-    // Pier sync merkle wrapper meta from bitxhub
-    // Request includes the appchain id
-    // Response includes MerkleWrapper struct
-    rpc SyncMerkleWrapper (SyncMerkleWrapperRequest) returns (stream Response) {
-        option (google.api.http) = {
-            get: "/v1/sync_merkle_wrapper"
-        };
-    }
 
-    rpc GetMerkleWrapper (GetMerkleWrapperRequest) returns (stream Response) {
+    rpc GetBlockHeader (GetBlockHeaderRequest) returns (stream Response) {
         option (google.api.http) = {
-            get: "/v1/merkle_wrapper"
+            get: "/v1/block_header"
         };
     }
 
@@ -80,10 +72,9 @@ service ChainBroker {
     }
 }
 
-message GetMerkleWrapperRequest {
+message GetBlockHeaderRequest {
     uint64 begin = 1;
     uint64 end = 2;
-    string pid = 3;
 }
 
 message TransactionHashMsg {
@@ -125,10 +116,6 @@ message SendTransactionRequest {
     int64 nonce = 7;
     bytes signature = 8;
     bytes extra = 9;
-}
-
-message SyncMerkleWrapperRequest {
-    string appchain_id = 1;
 }
 
 message GetBlocksRequest {
