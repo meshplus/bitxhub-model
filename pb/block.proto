@@ -23,8 +23,3 @@ message BlockHeader {
     bytes version = 7;
     bytes interchain_index = 8;
 }
-
-message InterchainTxWrapper {
-    repeated bytes transaction_hashes = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
-    repeated Transaction transactions = 3;
-}
