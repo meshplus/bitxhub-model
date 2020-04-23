@@ -77,7 +77,7 @@
           "200": {
             "description": "A successful response.(streaming responses)",
             "schema": {
-              "$ref": "#/x-stream-definitions/pbResponse"
+              "$ref": "#/x-stream-definitions/pbBlockHeader"
             }
           }
         },
@@ -201,7 +201,7 @@
           "200": {
             "description": "A successful response.(streaming responses)",
             "schema": {
-              "$ref": "#/x-stream-definitions/pbGetInterchainTxWrapperResponse"
+              "$ref": "#/x-stream-definitions/pbInterchainTxWrapper"
             }
           }
         },
@@ -468,17 +468,6 @@
         }
       }
     },
-    "pbGetInterchainTxWrapperResponse": {
-      "type": "object",
-      "properties": {
-        "wrapper": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/pbInterchainTxWrapper"
-          }
-        }
-      }
-    },
     "pbGetTransactionResponse": {
       "type": "object",
       "properties": {
@@ -737,17 +726,29 @@
     }
   },
   "x-stream-definitions": {
-    "pbGetInterchainTxWrapperResponse": {
+    "pbBlockHeader": {
       "type": "object",
       "properties": {
         "result": {
-          "$ref": "#/definitions/pbGetInterchainTxWrapperResponse"
+          "$ref": "#/definitions/pbBlockHeader"
         },
         "error": {
           "$ref": "#/definitions/runtimeStreamError"
         }
       },
-      "title": "Stream result of pbGetInterchainTxWrapperResponse"
+      "title": "Stream result of pbBlockHeader"
+    },
+    "pbInterchainTxWrapper": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/pbInterchainTxWrapper"
+        },
+        "error": {
+          "$ref": "#/definitions/runtimeStreamError"
+        }
+      },
+      "title": "Stream result of pbInterchainTxWrapper"
     },
     "pbResponse": {
       "type": "object",
