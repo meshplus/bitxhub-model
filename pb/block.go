@@ -32,17 +32,3 @@ func (m *Block) Height() uint64 {
 
 	return m.BlockHeader.Number
 }
-
-func (w *MerkleWrapper) SignHash() types.Hash {
-	body, err := json.Marshal([]interface{}{
-		w.BlockHeader,
-		w.TransactionHashes,
-	})
-	if err != nil {
-		panic(err)
-	}
-
-	data := sha256.Sum256(body)
-
-	return types.Bytes2Hash(data[:])
-}

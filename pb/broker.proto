@@ -22,6 +22,12 @@ service ChainBroker {
         };
     }
 
+    rpc GetInterchainTxWrapper (GetInterchainTxWrapperRequest) returns (stream GetInterchainTxWrapperResponse) {
+        option (google.api.http) = {
+            get: "/v1/interchain_tx_wrapper"
+        };
+    }
+
     rpc SendTransaction (SendTransactionRequest) returns (TransactionHashMsg) {
         option (google.api.http) = {
             post: "/v1/transaction"
@@ -73,6 +79,11 @@ service ChainBroker {
 }
 
 message GetBlockHeaderRequest {
+    uint64 begin = 1;
+    uint64 end = 2;
+}
+
+message GetInterchainTxWrapperRequest {
     uint64 begin = 1;
     uint64 end = 2;
 }
@@ -133,6 +144,7 @@ message SubscriptionRequest {
         EVENT = 1;
         INTERCHAIN_TX = 2;
         BLOCK_HEADER = 3;
+        INTERCHAIN_TX_WRAPPER = 4;
     }
     Type type = 1;
 }
@@ -140,4 +152,8 @@ message SubscriptionRequest {
 message GetTransactionResponse {
     pb.Transaction tx = 1;
     pb.TransactionMeta tx_meta = 2;
+}
+
+message GetInterchainTxWrapperResponse {
+    repeated pb.InterchainTxWrapper wrapper = 1;
 }
