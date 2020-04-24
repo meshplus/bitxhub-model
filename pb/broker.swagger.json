@@ -219,6 +219,12 @@
             "required": false,
             "type": "string",
             "format": "uint64"
+          },
+          {
+            "name": "pid",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -275,6 +281,13 @@
               "INTERCHAIN_TX_WRAPPER"
             ],
             "default": "BLOCK"
+          },
+          {
+            "name": "extra",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "byte"
           }
         ],
         "tags": [
