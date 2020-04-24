@@ -86,6 +86,7 @@ message GetBlockHeaderRequest {
 message GetInterchainTxWrapperRequest {
     uint64 begin = 1;
     uint64 end = 2;
+    string pid = 3;
 }
 
 message TransactionHashMsg {
@@ -147,6 +148,7 @@ message SubscriptionRequest {
         INTERCHAIN_TX_WRAPPER = 4;
     }
     Type type = 1;
+    bytes extra = 2;
 }
 
 message GetTransactionResponse {
