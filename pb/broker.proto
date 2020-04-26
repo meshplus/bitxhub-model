@@ -159,4 +159,5 @@ message GetTransactionResponse {
 message InterchainTxWrapper {
     repeated bytes transaction_hashes = 1 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
     repeated Transaction transactions = 2;
+    uint64 height = 3;
 }
