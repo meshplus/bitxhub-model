@@ -507,6 +507,10 @@
           "items": {
             "$ref": "#/definitions/pbTransaction"
           }
+        },
+        "height": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
