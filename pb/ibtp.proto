@@ -30,6 +30,11 @@ message IBTP {
 }
 
 message payload {
+    bool encrypted = 1;
+    bytes content = 2;
+}
+
+message content {
     string src_contract_id = 1;
     string dst_contract_id = 2;
     string func = 3;
