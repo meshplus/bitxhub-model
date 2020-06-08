@@ -17,10 +17,8 @@ message BlockHeader {
     uint64 number = 1;
     bytes state_root = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
     bytes tx_root = 3 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
-    bytes interchain_tx_root = 4 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
-    bytes receipt_root = 5 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
-    bytes parent_hash = 6 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
-    int64 timestamp = 7;
-    bytes version = 8;
-    bytes interchain_index = 9;
+    bytes receipt_root = 4 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    bytes parent_hash = 5 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    int64 timestamp = 6;
+    bytes version = 7;
 }

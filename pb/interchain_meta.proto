@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package pb;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+message InterchainMeta {
+  map<string, Uint64Slice> counter = 1;
+  repeated bytes l2Roots = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+}
+
+message Uint64Slice {
+  repeated uint64 slice = 1;
+}
