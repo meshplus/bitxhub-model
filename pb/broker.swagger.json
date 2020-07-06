@@ -13,18 +13,12 @@
   "paths": {
     "/v1/account_balance/{address}": {
       "get": {
-        "operationId": "ChainBroker_GetAccountBalance",
+        "operationId": "GetAccountBalance",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/pbResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
             }
           }
         },
@@ -43,18 +37,12 @@
     },
     "/v1/block": {
       "get": {
-        "operationId": "ChainBroker_GetBlock",
+        "operationId": "GetBlock",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/pbBlock"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
             }
           }
         },
@@ -84,27 +72,12 @@
     },
     "/v1/block_header": {
       "get": {
-        "operationId": "ChainBroker_GetBlockHeader",
+        "operationId": "GetBlockHeader",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
             "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/pbBlockHeader"
-                },
-                "error": {
-                  "$ref": "#/definitions/runtimeStreamError"
-                }
-              },
-              "title": "Stream result of pbBlockHeader"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
+              "$ref": "#/x-stream-definitions/pbBlockHeader"
             }
           }
         },
@@ -131,18 +104,12 @@
     },
     "/v1/blocks": {
       "get": {
-        "operationId": "ChainBroker_GetBlocks",
+        "operationId": "GetBlocks",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/pbGetBlocksResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
             }
           }
         },
@@ -169,18 +136,12 @@
     },
     "/v1/chain_meta": {
       "get": {
-        "operationId": "ChainBroker_GetChainMeta",
+        "operationId": "GetChainMeta",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/pbChainMeta"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
             }
           }
         },
@@ -205,18 +166,12 @@
     },
     "/v1/info": {
       "get": {
-        "operationId": "ChainBroker_GetInfo",
+        "operationId": "GetInfo",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/pbResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
             }
           }
         },
@@ -241,27 +196,12 @@
     },
     "/v1/interchain_tx_wrapper": {
       "get": {
-        "operationId": "ChainBroker_GetInterchainTxWrapper",
+        "operationId": "GetInterchainTxWrapper",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
             "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/pbInterchainTxWrapper"
-                },
-                "error": {
-                  "$ref": "#/definitions/runtimeStreamError"
-                }
-              },
-              "title": "Stream result of pbInterchainTxWrapper"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
+              "$ref": "#/x-stream-definitions/pbInterchainTxWrapper"
             }
           }
         },
@@ -294,18 +234,12 @@
     },
     "/v1/receipt/{tx_hash}": {
       "get": {
-        "operationId": "ChainBroker_GetReceipt",
+        "operationId": "GetReceipt",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/pbReceipt"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
             }
           }
         },
@@ -324,27 +258,12 @@
     },
     "/v1/subscription": {
       "get": {
-        "operationId": "ChainBroker_Subscribe",
+        "operationId": "Subscribe",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
             "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/pbResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/runtimeStreamError"
-                }
-              },
-              "title": "Stream result of pbResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
+              "$ref": "#/x-stream-definitions/pbResponse"
             }
           }
         },
@@ -378,18 +297,12 @@
     },
     "/v1/transaction": {
       "post": {
-        "operationId": "ChainBroker_SendTransaction",
+        "operationId": "SendTransaction",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/pbTransactionHashMsg"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
             }
           }
         },
@@ -410,18 +323,12 @@
     },
     "/v1/transaction/{tx_hash}": {
       "get": {
-        "operationId": "ChainBroker_GetTransaction",
+        "operationId": "GetTransaction",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/pbGetTransactionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
             }
           }
         },
@@ -812,27 +719,6 @@
         }
       }
     },
-    "runtimeError": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "type": "string"
-        },
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/protobufAny"
-          }
-        }
-      }
-    },
     "runtimeStreamError": {
       "type": "object",
       "properties": {
@@ -857,6 +743,44 @@
           }
         }
       }
+    }
+  },
+  "x-stream-definitions": {
+    "pbBlockHeader": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/pbBlockHeader"
+        },
+        "error": {
+          "$ref": "#/definitions/runtimeStreamError"
+        }
+      },
+      "title": "Stream result of pbBlockHeader"
+    },
+    "pbInterchainTxWrapper": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/pbInterchainTxWrapper"
+        },
+        "error": {
+          "$ref": "#/definitions/runtimeStreamError"
+        }
+      },
+      "title": "Stream result of pbInterchainTxWrapper"
+    },
+    "pbResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/pbResponse"
+        },
+        "error": {
+          "$ref": "#/definitions/runtimeStreamError"
+        }
+      },
+      "title": "Stream result of pbResponse"
     }
   }
 }
