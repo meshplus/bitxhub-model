@@ -344,6 +344,32 @@
           "ChainBroker"
         ]
       }
+    },
+    "/v1/view": {
+      "post": {
+        "operationId": "SendView",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbSendTransactionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
     }
   },
   "definitions": {

@@ -35,6 +35,13 @@ service ChainBroker {
         };
     }
 
+    rpc SendView(SendTransactionRequest) returns (Response) {
+        option (google.api.http) = {
+            post: "/v1/view"
+            body: "*"
+        };
+    }
+
     rpc GetTransaction (TransactionHashMsg) returns (GetTransactionResponse) {
         option (google.api.http) = {
             get: "/v1/transaction/{tx_hash}"
