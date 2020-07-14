@@ -6,8 +6,8 @@ package pb;
 message IBTP {
     enum Type {
         INTERCHAIN = 0;
-        RECEIPT = 1;
-        CONFIRM = 2;
+        RECEIPT_SUCCESS = 1;
+        RECEIPT_FAILURE = 2;
     }
     // ID of sending chain
     string from = 1;
@@ -40,4 +40,8 @@ message content {
     string func = 3;
     repeated bytes args = 4;
     string callback = 5;
+}
+
+message IBTPs {
+    repeated IBTP iptp = 1;
 }
