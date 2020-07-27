@@ -83,6 +83,12 @@ service ChainBroker {
             get: "/v1/account_balance/{address}"
         };
     }
+
+    rpc GetAssetExchangeSigns(AssetExchangeSignsRequest) returns (Response) {
+        option (google.api.http) = {
+            get: "/v1/asset_exchange/{id}"
+        };
+    }
 }
 
 message GetBlockHeaderRequest {
@@ -156,6 +162,10 @@ message SubscriptionRequest {
     }
     Type type = 1;
     bytes extra = 2;
+}
+
+message AssetExchangeSignsRequest {
+    string id = 1;
 }
 
 message GetTransactionResponse {
