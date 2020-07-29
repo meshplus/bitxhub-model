@@ -66,3 +66,13 @@ message TransactionSlice {
     uint64 height = 1;
     repeated Transaction txs = 2;
 }
+
+message AssetExchangeInfo {
+    string id = 1;
+    string senderOnSrc = 2;
+    string receiverOnSrc = 3;
+    uint64 assetOnSrc = 4;
+    string senderOnDst = 5;
+    string receiverOnDst = 6;
+    uint64 assetOnDst = 7;
+}
