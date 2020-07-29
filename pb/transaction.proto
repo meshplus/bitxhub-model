@@ -69,10 +69,10 @@ message TransactionSlice {
 
 message AssetExchangeInfo {
     string id = 1;
-    string senderOnSrc = 2;
-    string receiverOnSrc = 3;
-    uint64 assetOnSrc = 4;
-    string senderOnDst = 5;
-    string receiverOnDst = 6;
-    uint64 assetOnDst = 7;
+    string sender_on_src = 2;
+    string receiver_on_src = 3;
+    uint64 asset_on_src = 4;
+    string sender_on_dst = 5;
+    string receiver_on_dst = 6;
+    uint64 asset_on_dst = 7;
 }
