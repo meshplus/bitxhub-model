@@ -76,3 +76,9 @@ message AssetExchangeInfo {
     string receiver_on_dst = 6;
     uint64 asset_on_dst = 7;
 }
+
+enum TransactionStatus {
+    BEGIN = 0;
+    SUCCESS = 1;
+    FAILURE = 2;
+}
