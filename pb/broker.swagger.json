@@ -48,7 +48,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbResponse"
+              "$ref": "#/definitions/pbSignResponse"
             }
           },
           "default": {
@@ -749,6 +749,18 @@
         "extra": {
           "type": "string",
           "format": "byte"
+        }
+      }
+    },
+    "pbSignResponse": {
+      "type": "object",
+      "properties": {
+        "sign": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "byte"
+          }
         }
       }
     },

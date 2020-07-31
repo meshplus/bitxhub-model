@@ -84,7 +84,7 @@ service ChainBroker {
         };
     }
 
-    rpc GetAssetExchangeSigns(AssetExchangeSignsRequest) returns (Response) {
+    rpc GetAssetExchangeSigns(AssetExchangeSignsRequest) returns (SignResponse) {
         option (google.api.http) = {
             get: "/v1/asset_exchange/{id}"
         };
@@ -126,6 +126,10 @@ message Request {
 
 message Response {
     bytes data = 1;
+}
+
+message SignResponse {
+    map<string, bytes> sign = 1;
 }
 
 message Address {
