@@ -88,21 +88,21 @@ func request_ChainBroker_GetBlockHeader_0(ctx context.Context, marshaler runtime
 }
 
 var (
-	filter_ChainBroker_GetInterchainTxWrapper_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+	filter_ChainBroker_GetInterchainTxWrappers_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
 
-func request_ChainBroker_GetInterchainTxWrapper_0(ctx context.Context, marshaler runtime.Marshaler, client ChainBrokerClient, req *http.Request, pathParams map[string]string) (ChainBroker_GetInterchainTxWrapperClient, runtime.ServerMetadata, error) {
-	var protoReq GetInterchainTxWrapperRequest
+func request_ChainBroker_GetInterchainTxWrappers_0(ctx context.Context, marshaler runtime.Marshaler, client ChainBrokerClient, req *http.Request, pathParams map[string]string) (ChainBroker_GetInterchainTxWrappersClient, runtime.ServerMetadata, error) {
+	var protoReq GetInterchainTxWrappersRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ChainBroker_GetInterchainTxWrapper_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ChainBroker_GetInterchainTxWrappers_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	stream, err := client.GetInterchainTxWrapper(ctx, &protoReq)
+	stream, err := client.GetInterchainTxWrappers(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -562,7 +562,7 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		return
 	})
 
-	mux.Handle("GET", pattern_ChainBroker_GetInterchainTxWrapper_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ChainBroker_GetInterchainTxWrappers_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -850,7 +850,7 @@ func RegisterChainBrokerHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
-	mux.Handle("GET", pattern_ChainBroker_GetInterchainTxWrapper_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ChainBroker_GetInterchainTxWrappers_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -859,14 +859,14 @@ func RegisterChainBrokerHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ChainBroker_GetInterchainTxWrapper_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ChainBroker_GetInterchainTxWrappers_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ChainBroker_GetInterchainTxWrapper_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_ChainBroker_GetInterchainTxWrappers_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -1078,7 +1078,7 @@ var (
 
 	pattern_ChainBroker_GetBlockHeader_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "block_header"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_ChainBroker_GetInterchainTxWrapper_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "interchain_tx_wrapper"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_ChainBroker_GetInterchainTxWrappers_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "interchain_tx_wrappers"}, "", runtime.AssumeColonVerbOpt(true)))
 
 	pattern_ChainBroker_SendTransaction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "transaction"}, "", runtime.AssumeColonVerbOpt(true)))
 
@@ -1106,7 +1106,7 @@ var (
 
 	forward_ChainBroker_GetBlockHeader_0 = runtime.ForwardResponseStream
 
-	forward_ChainBroker_GetInterchainTxWrapper_0 = runtime.ForwardResponseStream
+	forward_ChainBroker_GetInterchainTxWrappers_0 = runtime.ForwardResponseStream
 
 	forward_ChainBroker_SendTransaction_0 = runtime.ForwardResponseMessage
 
