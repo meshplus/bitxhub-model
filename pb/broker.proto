@@ -22,9 +22,9 @@ service ChainBroker {
         };
     }
 
-    rpc GetInterchainTxWrapper (GetInterchainTxWrapperRequest) returns (stream InterchainTxWrapper) {
+    rpc GetInterchainTxWrappers (GetInterchainTxWrappersRequest) returns (stream InterchainTxWrappers) {
         option (google.api.http) = {
-            get: "/v1/interchain_tx_wrapper"
+            get: "/v1/interchain_tx_wrappers"
         };
     }
 
@@ -96,7 +96,7 @@ message GetBlockHeaderRequest {
     uint64 end = 2;
 }
 
-message GetInterchainTxWrapperRequest {
+message GetInterchainTxWrappersRequest {
     uint64 begin = 1;
     uint64 end = 2;
     string pid = 3;
@@ -163,6 +163,7 @@ message SubscriptionRequest {
         INTERCHAIN_TX = 2;
         BLOCK_HEADER = 3;
         INTERCHAIN_TX_WRAPPER = 4;
+        UNION_INTERCHAIN_TX_WRAPPER = 5;
     }
     Type type = 1;
     bytes extra = 2;
@@ -182,4 +183,8 @@ message InterchainTxWrapper {
     repeated bytes transaction_hashes = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
     repeated Transaction transactions = 3;
     uint64 height = 4;
+}
+
+message InterchainTxWrappers {
+    repeated InterchainTxWrapper interchainTxWrappers = 1;
 }

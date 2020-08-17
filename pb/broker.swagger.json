@@ -269,9 +269,9 @@
         ]
       }
     },
-    "/v1/interchain_tx_wrapper": {
+    "/v1/interchain_tx_wrappers": {
       "get": {
-        "operationId": "ChainBroker_GetInterchainTxWrapper",
+        "operationId": "ChainBroker_GetInterchainTxWrappers",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -279,13 +279,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/pbInterchainTxWrapper"
+                  "$ref": "#/definitions/pbInterchainTxWrappers"
                 },
                 "error": {
                   "$ref": "#/definitions/runtimeStreamError"
                 }
               },
-              "title": "Stream result of pbInterchainTxWrapper"
+              "title": "Stream result of pbInterchainTxWrappers"
             }
           },
           "default": {
@@ -389,7 +389,8 @@
               "EVENT",
               "INTERCHAIN_TX",
               "BLOCK_HEADER",
-              "INTERCHAIN_TX_WRAPPER"
+              "INTERCHAIN_TX_WRAPPER",
+              "UNION_INTERCHAIN_TX_WRAPPER"
             ],
             "default": "BLOCK"
           },
@@ -672,6 +673,17 @@
         }
       }
     },
+    "pbInterchainTxWrappers": {
+      "type": "object",
+      "properties": {
+        "interchainTxWrappers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbInterchainTxWrapper"
+          }
+        }
+      }
+    },
     "pbReceipt": {
       "type": "object",
       "properties": {
@@ -771,7 +783,8 @@
         "EVENT",
         "INTERCHAIN_TX",
         "BLOCK_HEADER",
-        "INTERCHAIN_TX_WRAPPER"
+        "INTERCHAIN_TX_WRAPPER",
+        "UNION_INTERCHAIN_TX_WRAPPER"
       ],
       "default": "BLOCK"
     },
