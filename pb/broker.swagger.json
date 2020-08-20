@@ -41,36 +41,6 @@
         ]
       }
     },
-    "/v1/asset_exchange/{id}": {
-      "get": {
-        "operationId": "ChainBroker_GetAssetExchangeSigns",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbSignResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ChainBroker"
-        ]
-      }
-    },
     "/v1/block": {
       "get": {
         "operationId": "ChainBroker_GetBlock",
@@ -315,6 +285,47 @@
             "in": "query",
             "required": false,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
+    "/v1/multi_sign/{content}": {
+      "get": {
+        "operationId": "ChainBroker_GetMultiSigns",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbSignResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "content",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ASSET_EXCHANGE",
+              "IBTP"
+            ],
+            "default": "ASSET_EXCHANGE"
           }
         ],
         "tags": [
@@ -632,6 +643,14 @@
           }
         }
       }
+    },
+    "pbGetMultiSignsRequestType": {
+      "type": "string",
+      "enum": [
+        "ASSET_EXCHANGE",
+        "IBTP"
+      ],
+      "default": "ASSET_EXCHANGE"
     },
     "pbGetTransactionResponse": {
       "type": "object",

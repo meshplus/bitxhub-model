@@ -84,9 +84,9 @@ service ChainBroker {
         };
     }
 
-    rpc GetAssetExchangeSigns(AssetExchangeSignsRequest) returns (SignResponse) {
+    rpc GetMultiSigns(GetMultiSignsRequest) returns (SignResponse) {
         option (google.api.http) = {
-            get: "/v1/asset_exchange/{id}"
+            get: "/v1/multi_sign/{content}"
         };
     }
 }
@@ -169,8 +169,13 @@ message SubscriptionRequest {
     bytes extra = 2;
 }
 
-message AssetExchangeSignsRequest {
-    string id = 1;
+message GetMultiSignsRequest {
+    enum Type {
+        ASSET_EXCHANGE = 0;
+        IBTP = 1;
+    }
+    Type type = 1;
+    string content = 2;
 }
 
 message GetTransactionResponse {
