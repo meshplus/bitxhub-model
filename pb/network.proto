@@ -11,8 +11,10 @@ message Message {
         FETCH_CERT_ACK = 4;
         FETCH_BLOCK_SIGN = 5;
         FETCH_BLOCK_SIGN_ACK = 6;
-        FETCH_ASSET_EXCHANEG_SIGN = 7;
-        FETCH_ASSET_EXCHANGE_SIGN_ACK = 8;
+        FETCH_IBTP_SIGN = 7;
+        FETCH_IBTP_SIGN_ACK = 8;
+        FETCH_ASSET_EXCHANEG_SIGN = 9;
+        FETCH_ASSET_EXCHANGE_SIGN_ACK = 10;
     }
     Type type = 1;
     bytes Data = 2;
