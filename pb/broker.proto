@@ -35,7 +35,7 @@ service ChainBroker {
         };
     }
 
-    rpc SendView(SendTransactionRequest) returns (pb.Receipt) {
+    rpc SendView (SendTransactionRequest) returns (pb.Receipt) {
         option (google.api.http) = {
             post: "/v1/view"
             body: "*"
@@ -84,7 +84,7 @@ service ChainBroker {
         };
     }
 
-    rpc GetMultiSigns(GetMultiSignsRequest) returns (SignResponse) {
+    rpc GetMultiSigns (GetMultiSignsRequest) returns (SignResponse) {
         option (google.api.http) = {
             get: "/v1/multi_sign/{content}"
         };
@@ -173,6 +173,7 @@ message GetMultiSignsRequest {
     enum Type {
         ASSET_EXCHANGE = 0;
         IBTP = 1;
+        BLOCK_HEADER = 2;
     }
     Type type = 1;
     string content = 2;
