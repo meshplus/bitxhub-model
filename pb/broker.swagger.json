@@ -13,7 +13,7 @@
   "paths": {
     "/v1/account_balance/{address}": {
       "get": {
-        "operationId": "ChainBroker_GetAccountBalance",
+        "operationId": "GetAccountBalance",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -43,7 +43,7 @@
     },
     "/v1/block": {
       "get": {
-        "operationId": "ChainBroker_GetBlock",
+        "operationId": "GetBlock",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -84,7 +84,7 @@
     },
     "/v1/block_header": {
       "get": {
-        "operationId": "ChainBroker_GetBlockHeader",
+        "operationId": "GetBlockHeader",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -131,7 +131,7 @@
     },
     "/v1/blocks": {
       "get": {
-        "operationId": "ChainBroker_GetBlocks",
+        "operationId": "GetBlocks",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -169,7 +169,7 @@
     },
     "/v1/chain_meta": {
       "get": {
-        "operationId": "ChainBroker_GetChainMeta",
+        "operationId": "GetChainMeta",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -205,7 +205,7 @@
     },
     "/v1/info": {
       "get": {
-        "operationId": "ChainBroker_GetInfo",
+        "operationId": "GetInfo",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -241,7 +241,7 @@
     },
     "/v1/interchain_tx_wrappers": {
       "get": {
-        "operationId": "ChainBroker_GetInterchainTxWrappers",
+        "operationId": "GetInterchainTxWrappers",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -294,7 +294,7 @@
     },
     "/v1/multi_sign/{content}": {
       "get": {
-        "operationId": "ChainBroker_GetMultiSigns",
+        "operationId": "GetMultiSigns",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -323,7 +323,8 @@
             "type": "string",
             "enum": [
               "ASSET_EXCHANGE",
-              "IBTP"
+              "IBTP",
+              "BLOCK_HEADER"
             ],
             "default": "ASSET_EXCHANGE"
           }
@@ -335,7 +336,7 @@
     },
     "/v1/receipt/{tx_hash}": {
       "get": {
-        "operationId": "ChainBroker_GetReceipt",
+        "operationId": "GetReceipt",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -365,7 +366,7 @@
     },
     "/v1/subscription": {
       "get": {
-        "operationId": "ChainBroker_Subscribe",
+        "operationId": "Subscribe",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -420,7 +421,7 @@
     },
     "/v1/transaction": {
       "post": {
-        "operationId": "ChainBroker_SendTransaction",
+        "operationId": "SendTransaction",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -452,7 +453,7 @@
     },
     "/v1/transaction/{tx_hash}": {
       "get": {
-        "operationId": "ChainBroker_GetTransaction",
+        "operationId": "GetTransaction",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -482,7 +483,7 @@
     },
     "/v1/view": {
       "post": {
-        "operationId": "ChainBroker_SendView",
+        "operationId": "SendView",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -648,7 +649,8 @@
       "type": "string",
       "enum": [
         "ASSET_EXCHANGE",
-        "IBTP"
+        "IBTP",
+        "BLOCK_HEADER"
       ],
       "default": "ASSET_EXCHANGE"
     },
