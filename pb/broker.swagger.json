@@ -20,12 +20,6 @@
             "schema": {
               "$ref": "#/definitions/pbResponse"
             }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
           }
         },
         "parameters": [
@@ -49,12 +43,6 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/pbBlock"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
             }
           }
         },
@@ -89,22 +77,7 @@
           "200": {
             "description": "A successful response.(streaming responses)",
             "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/pbBlockHeader"
-                },
-                "error": {
-                  "$ref": "#/definitions/runtimeStreamError"
-                }
-              },
-              "title": "Stream result of pbBlockHeader"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
+              "$ref": "#/x-stream-definitions/pbBlockHeader"
             }
           }
         },
@@ -138,12 +111,6 @@
             "schema": {
               "$ref": "#/definitions/pbGetBlocksResponse"
             }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
           }
         },
         "parameters": [
@@ -176,12 +143,6 @@
             "schema": {
               "$ref": "#/definitions/pbChainMeta"
             }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
           }
         },
         "parameters": [
@@ -212,12 +173,6 @@
             "schema": {
               "$ref": "#/definitions/pbResponse"
             }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
           }
         },
         "parameters": [
@@ -246,22 +201,7 @@
           "200": {
             "description": "A successful response.(streaming responses)",
             "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/pbInterchainTxWrappers"
-                },
-                "error": {
-                  "$ref": "#/definitions/runtimeStreamError"
-                }
-              },
-              "title": "Stream result of pbInterchainTxWrappers"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
+              "$ref": "#/x-stream-definitions/pbInterchainTxWrappers"
             }
           }
         },
@@ -301,12 +241,6 @@
             "schema": {
               "$ref": "#/definitions/pbSignResponse"
             }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
           }
         },
         "parameters": [
@@ -343,12 +277,6 @@
             "schema": {
               "$ref": "#/definitions/pbReceipt"
             }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
           }
         },
         "parameters": [
@@ -371,22 +299,7 @@
           "200": {
             "description": "A successful response.(streaming responses)",
             "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/pbResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/runtimeStreamError"
-                }
-              },
-              "title": "Stream result of pbResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
+              "$ref": "#/x-stream-definitions/pbResponse"
             }
           }
         },
@@ -428,12 +341,6 @@
             "schema": {
               "$ref": "#/definitions/pbTransactionHashMsg"
             }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
           }
         },
         "parameters": [
@@ -460,12 +367,6 @@
             "schema": {
               "$ref": "#/definitions/pbGetTransactionResponse"
             }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
           }
         },
         "parameters": [
@@ -489,12 +390,6 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/pbReceipt"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
             }
           }
         },
@@ -837,7 +732,7 @@
         },
         "nonce": {
           "type": "string",
-          "format": "int64"
+          "format": "uint64"
         },
         "signature": {
           "type": "string",
@@ -920,27 +815,6 @@
         }
       }
     },
-    "runtimeError": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "type": "string"
-        },
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/protobufAny"
-          }
-        }
-      }
-    },
     "runtimeStreamError": {
       "type": "object",
       "properties": {
@@ -965,6 +839,44 @@
           }
         }
       }
+    }
+  },
+  "x-stream-definitions": {
+    "pbBlockHeader": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/pbBlockHeader"
+        },
+        "error": {
+          "$ref": "#/definitions/runtimeStreamError"
+        }
+      },
+      "title": "Stream result of pbBlockHeader"
+    },
+    "pbInterchainTxWrappers": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/pbInterchainTxWrappers"
+        },
+        "error": {
+          "$ref": "#/definitions/runtimeStreamError"
+        }
+      },
+      "title": "Stream result of pbInterchainTxWrappers"
+    },
+    "pbResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/pbResponse"
+        },
+        "error": {
+          "$ref": "#/definitions/runtimeStreamError"
+        }
+      },
+      "title": "Stream result of pbResponse"
     }
   }
 }

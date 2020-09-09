@@ -47,5 +47,5 @@ message content {
 }
 
 message IBTPs {
-    repeated IBTP iptp = 1;
+    repeated IBTP ibtps = 1;
 }
