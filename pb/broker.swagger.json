@@ -268,6 +268,30 @@
         ]
       }
     },
+    "/v1/pendingNonce/{address}": {
+      "get": {
+        "operationId": "GetPendingNonceByAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
     "/v1/receipt/{tx_hash}": {
       "get": {
         "operationId": "GetReceipt",

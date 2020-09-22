@@ -95,6 +95,12 @@ service ChainBroker {
             get: "/v1/tps/{begin}/{end}"
         };
     }
+
+    rpc GetPendingNonceByAccount(Address) returns (Response) {
+        option (google.api.http) = {
+            get: "/v1/pendingNonce/{address}"
+        };
+    }
 }
 
 message GetBlockHeaderRequest {
