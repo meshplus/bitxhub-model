@@ -89,6 +89,12 @@ service ChainBroker {
             get: "/v1/multi_sign/{content}"
         };
     }
+
+    rpc GetTPS(GetTPSRequest) returns (Response) {
+        option (google.api.http) = {
+            get: "/v1/tps/{begin}/{end}"
+        };
+    }
 }
 
 message GetBlockHeaderRequest {
@@ -193,4 +199,9 @@ message InterchainTxWrapper {
 
 message InterchainTxWrappers {
     repeated InterchainTxWrapper interchainTxWrappers = 1;
+}
+
+message GetTPSRequest {
+    uint64 begin = 1;
+    uint64 end = 2;
 }
