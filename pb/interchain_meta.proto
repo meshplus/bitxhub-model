@@ -12,3 +12,10 @@ message InterchainMeta {
 message Uint64Slice {
   repeated uint64 slice = 1;
 }
+
+message Interchain {
+  string ID = 1;
+  map<string, uint64> InterchainCounter = 2;
+  map<string, uint64> ReceiptCounter = 3;
+  map<string, uint64> SourceReceiptCounter = 4;
+}

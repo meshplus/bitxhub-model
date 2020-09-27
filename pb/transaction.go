@@ -3,7 +3,6 @@ package pb
 import (
 	"bytes"
 	"crypto/sha256"
-	"encoding/json"
 	"errors"
 	"fmt"
 
@@ -30,14 +29,16 @@ func (t TransactionHash) Equals(other mt.Content) (bool, error) {
 }
 
 func (m *Transaction) Hash() types.Hash {
-	body, err := json.Marshal([]interface{}{
-		m.From,
-		m.To,
-		m.Timestamp,
-		m.Nonce,
-		m.Signature,
-		m.Data,
-	})
+	tx := &Transaction{
+		From:      m.From,
+		To:        m.To,
+		Timestamp: m.Timestamp,
+		Data:      m.Data,
+		Nonce:     m.Nonce,
+		Signature: m.Signature,
+	}
+
+	body, err := tx.Marshal()
 	if err != nil {
 		panic(err)
 	}
@@ -48,24 +49,20 @@ func (m *Transaction) Hash() types.Hash {
 }
 
 func (m *Transaction) SignHash() types.Hash {
-	var data []byte
-	if m.Data != nil {
-		b, err := m.Data.Marshal()
-		if err != nil {
-			panic(err)
-		}
-		data = b
+	tx := &Transaction{
+		From:      m.From,
+		To:        m.To,
+		Timestamp: m.Timestamp,
+		Data:      m.Data,
+		Nonce:     m.Nonce,
 	}
 
-	c := fmt.Sprintf("from=%s&to=%s&timestamp=%d&nonce=%d&data=%x",
-		m.From.Hex(),
-		m.To.Hex(),
-		m.Timestamp,
-		m.Nonce,
-		data,
-	)
+	body, err := tx.Marshal()
+	if err != nil {
+		panic(err)
+	}
 
-	ret := sha256.Sum256([]byte(c))
+	ret := sha256.Sum256(body)
 
 	return types.Bytes2Hash(ret[:])
 }
