@@ -13,6 +13,13 @@ message IBTP {
         ASSET_EXCHANGE_REFUND = 5;
         ASSET_EXCHANGE_RECEIPT = 6;
     }
+
+    enum Category {
+        REQUEST = 0;
+        RESPONSE = 1;
+        UNKNOWN = 2;
+    }
+
     // ID of sending chain
     string from = 1;
     // ID of receiving chain

@@ -29,3 +29,13 @@ func (m *IBTP) Hash() types.Hash {
 
 	return types.Bytes2Hash(data[:])
 }
+
+func (m *IBTP) Category() IBTP_Category {
+	switch m.Type {
+	case IBTP_INTERCHAIN, IBTP_ASSET_EXCHANGE_INIT, IBTP_ASSET_EXCHANGE_REDEEM, IBTP_ASSET_EXCHANGE_REFUND:
+		return IBTP_REQUEST
+	case IBTP_RECEIPT_SUCCESS, IBTP_RECEIPT_FAILURE, IBTP_ASSET_EXCHANGE_RECEIPT:
+		return IBTP_RESPONSE
+	}
+	return IBTP_UNKNOWN
+}
