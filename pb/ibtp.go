@@ -4,11 +4,16 @@ import (
 	"crypto/sha256"
 	"encoding/json"
 	"fmt"
+
 	"github.com/meshplus/bitxhub-kit/types"
 )
 
 func (m *IBTP) ID() string {
 	return fmt.Sprintf("%s-%s-%d", m.From, m.To, m.Index)
+}
+
+func (m *IBTP) Account() string {
+	return fmt.Sprintf("%s-%s-%d", m.From, m.To, m.Category())
 }
 
 func (m *IBTP) Hash() types.Hash {
