@@ -616,6 +616,74 @@
         }
       }
     },
+    "pbIBTP": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "title": "ID of sending chain"
+        },
+        "to": {
+          "type": "string",
+          "title": "ID of receiving chain"
+        },
+        "index": {
+          "type": "string",
+          "format": "uint64",
+          "title": "Index of inter-chain transaction"
+        },
+        "type": {
+          "$ref": "#/definitions/pbIBTPType",
+          "title": "inter-chain transaction type"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64",
+          "title": "Timestamp of inter-chain events"
+        },
+        "proof": {
+          "type": "string",
+          "format": "byte",
+          "title": "Proof of inter-chain transactions"
+        },
+        "payload": {
+          "type": "string",
+          "format": "byte",
+          "title": "Encoded content used by inter-chain"
+        },
+        "group": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "uint64"
+          },
+          "title": "info about other txs in the same group"
+        },
+        "version": {
+          "type": "string",
+          "title": "Message version"
+        },
+        "extra": {
+          "type": "string",
+          "format": "byte",
+          "title": "Self-defined fields used by app-chain"
+        }
+      },
+      "title": "Inter-blockchain Transfer Protocol"
+    },
+    "pbIBTPType": {
+      "type": "string",
+      "enum": [
+        "INTERCHAIN",
+        "RECEIPT_SUCCESS",
+        "RECEIPT_FAILURE",
+        "ASSET_EXCHANGE_INIT",
+        "ASSET_EXCHANGE_REDEEM",
+        "ASSET_EXCHANGE_REFUND",
+        "ASSET_EXCHANGE_RECEIPT"
+      ],
+      "default": "INTERCHAIN"
+    },
     "pbInterchainTxWrapper": {
       "type": "object",
       "properties": {
@@ -783,10 +851,18 @@
           "type": "string",
           "format": "byte"
         },
-        "data": {
-          "$ref": "#/definitions/pbTransactionData"
+        "payload": {
+          "type": "string",
+          "format": "byte"
+        },
+        "IBTP": {
+          "$ref": "#/definitions/pbIBTP"
         },
         "nonce": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "amount": {
           "type": "string",
           "format": "uint64"
         },

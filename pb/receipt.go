@@ -2,28 +2,28 @@ package pb
 
 import (
 	"crypto/sha256"
-	"encoding/json"
 
 	"github.com/meshplus/bitxhub-kit/types"
 )
 
-func (r *Receipt) Hash() types.Hash {
-	body, err := json.Marshal([]interface{}{
-		r.Status,
-		r.Ret,
-		r.Events,
-		r.TxHash,
-		r.Version,
-	})
+func (m *Receipt) Hash() types.Hash {
+	receipt := &Receipt{
+		Status:  m.Status,
+		Ret:     m.Ret,
+		Events:  m.Events,
+		TxHash:  m.TxHash,
+		Version: m.Version,
+	}
+	body, err := receipt.Marshal()
 	if err != nil {
 		panic(err)
 	}
 
 	data := sha256.Sum256(body)
 
-	return types.Bytes2Hash(data[:])
+	return *types.Bytes2Hash(data[:])
 }
 
-func (r *Receipt) IsSuccess() bool {
-	return r.Status == Receipt_SUCCESS
+func (m *Receipt) IsSuccess() bool {
+	return m.Status == Receipt_SUCCESS
 }

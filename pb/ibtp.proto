@@ -34,10 +34,12 @@ message IBTP {
     bytes proof = 6;
     // Encoded content used by inter-chain
     bytes payload = 7;
+    // info about other txs in the same group
+    map<string, uint64> group = 8;
     // Message version
-    string version = 8;
+    string version = 9;
     // Self-defined fields used by app-chain
-    bytes extra = 9;
+    bytes extra = 10;
 }
 
 message payload {

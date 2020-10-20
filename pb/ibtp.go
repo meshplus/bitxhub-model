@@ -2,8 +2,8 @@ package pb
 
 import (
 	"crypto/sha256"
-	"encoding/json"
 	"fmt"
+
 	"github.com/meshplus/bitxhub-kit/types"
 )
 
@@ -12,22 +12,23 @@ func (m *IBTP) ID() string {
 }
 
 func (m *IBTP) Hash() types.Hash {
-	body, err := json.Marshal([]interface{}{
-		m.From,
-		m.To,
-		m.Index,
-		m.Type,
-		m.Timestamp,
-		m.Payload,
-		m.Extra,
-	})
+	ibtp := &IBTP{
+		From:      m.From,
+		To:        m.To,
+		Index:     m.Index,
+		Type:      m.Type,
+		Timestamp: m.Timestamp,
+		Payload:   m.Payload,
+		Extra:     m.Extra,
+	}
+	body, err := ibtp.Marshal()
 	if err != nil {
 		panic(err)
 	}
 
 	data := sha256.Sum256(body)
 
-	return types.Bytes2Hash(data[:])
+	return *types.Bytes2Hash(data[:])
 }
 
 func (m *IBTP) Category() IBTP_Category {

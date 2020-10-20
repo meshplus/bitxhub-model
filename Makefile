@@ -4,7 +4,7 @@ pb:
 	cd pb && protoc -I=. \
 	-I${GOPATH}/src \
 	-I${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-	--gogofast_out=:. \
+	--gogofaster_out=:. \
 	block.proto ibtp.proto network.proto receipt.proto transaction.proto chain.proto arg.proto interchain_meta.proto plugin.proto
 
 grpc:
@@ -14,7 +14,7 @@ grpc:
 	-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
 	--grpc-gateway_out=logtostderr=true:. \
 	--swagger_out=logtostderr=true:. \
-	--gogofast_out=plugins=grpc:. \
+	--gogofaster_out=plugins=grpc:. \
 	broker.proto plugin.proto
 
 ## make linter: Run golanci-lint
