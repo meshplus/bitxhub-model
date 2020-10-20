@@ -74,6 +74,14 @@
           "format": "byte",
           "title": "Encoded content used by inter-chain"
         },
+        "group": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "uint64"
+          },
+          "title": "info about other txs in the same group"
+        },
         "version": {
           "type": "string",
           "title": "Message version"
