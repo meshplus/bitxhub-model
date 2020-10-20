@@ -2,19 +2,19 @@ package pb
 
 import (
 	"crypto/sha256"
-	"encoding/json"
 
 	"github.com/meshplus/bitxhub-kit/types"
 )
 
 func (m *Receipt) Hash() types.Hash {
-	body, err := json.Marshal([]interface{}{
-		m.Status,
-		m.Ret,
-		m.Events,
-		m.TxHash,
-		m.Version,
-	})
+	receipt := &Receipt{
+		Status:  m.Status,
+		Ret:     m.Ret,
+		Events:  m.Events,
+		TxHash:  m.TxHash,
+		Version: m.Version,
+	}
+	body, err := receipt.Marshal()
 	if err != nil {
 		panic(err)
 	}

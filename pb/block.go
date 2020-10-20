@@ -2,20 +2,20 @@ package pb
 
 import (
 	"crypto/sha256"
-	"encoding/json"
 
 	"github.com/meshplus/bitxhub-kit/types"
 )
 
 func (m *Block) Hash() types.Hash {
-	body, err := json.Marshal([]interface{}{
-		m.BlockHeader.Number,
-		m.BlockHeader.ParentHash,
-		m.BlockHeader.StateRoot,
-		m.BlockHeader.TxRoot,
-		m.BlockHeader.ReceiptRoot,
-		m.BlockHeader.Version,
-	})
+	blockheader := &BlockHeader{
+		Number:      m.BlockHeader.Number,
+		ParentHash:  m.BlockHeader.ParentHash,
+		StateRoot:   m.BlockHeader.StateRoot,
+		TxRoot:      m.BlockHeader.TxRoot,
+		ReceiptRoot: m.BlockHeader.ReceiptRoot,
+		Version:     m.BlockHeader.Version,
+	}
+	body, err := blockheader.Marshal()
 	if err != nil {
 		panic(err)
 	}
