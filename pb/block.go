@@ -22,7 +22,7 @@ func (m *Block) Hash() types.Hash {
 
 	data := sha256.Sum256(body)
 
-	return types.Bytes2Hash(data[:])
+	return *types.Bytes2Hash(data[:])
 }
 
 func (m *Block) Height() uint64 {
