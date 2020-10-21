@@ -8,10 +8,10 @@ import "ibtp.proto";
 
 message Transaction {
     bytes version = 1;
-    bytes from = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address", (gogoproto.nullable) = false];
-    bytes to = 3 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address", (gogoproto.nullable) = false];
+    bytes from = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address"];
+    bytes to = 3 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address"];
     int64 timestamp = 4;
-    bytes transaction_hash = 5 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    bytes transaction_hash = 5 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
     bytes payload = 6;
     pb.IBTP IBTP = 7;
     uint64 nonce = 8;

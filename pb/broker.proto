@@ -186,8 +186,8 @@ message GetTransactionResponse {
 }
 
 message InterchainTxWrapper {
-    repeated bytes l2Roots = 1 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
-    repeated bytes transaction_hashes = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+    repeated bytes l2Roots = 1 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
+    repeated bytes transaction_hashes = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
     repeated Transaction transactions = 3;
     uint64 height = 4;
 }

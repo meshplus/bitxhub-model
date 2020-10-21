@@ -15,8 +15,8 @@ const (
 
 func TestTransaction_SignHash(t *testing.T) {
 	tx := &Transaction{
-		From:      *types.String2Address(formalAccount),
-		To:        *types.String2Address(formalAccount),
+		From:      types.String2Address(formalAccount),
+		To:        types.String2Address(formalAccount),
 		Timestamp: 1567345493,
 		Nonce:     0,
 	}
@@ -27,8 +27,8 @@ func TestTransaction_SignHash(t *testing.T) {
 
 func TestTransaction_MarshalTo(t *testing.T) {
 	tx := &Transaction{
-		From: *types.String2Address(formalAccount),
-		To:   *types.String2Address(formalAccount),
+		From: types.String2Address(formalAccount),
+		To:   types.String2Address(formalAccount),
 	}
 
 	data, err := tx.Marshal()
