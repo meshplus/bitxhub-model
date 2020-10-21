@@ -6,7 +6,7 @@ import (
 	"github.com/meshplus/bitxhub-kit/types"
 )
 
-func (m *Receipt) Hash() types.Hash {
+func (m *Receipt) Hash() *types.Hash {
 	receipt := &Receipt{
 		Status:  m.Status,
 		Ret:     m.Ret,
@@ -21,7 +21,7 @@ func (m *Receipt) Hash() types.Hash {
 
 	data := sha256.Sum256(body)
 
-	return *types.Bytes2Hash(data[:])
+	return types.Bytes2Hash(data[:])
 }
 
 func (m *Receipt) IsSuccess() bool {

@@ -9,7 +9,7 @@ import (
 	"github.com/meshplus/bitxhub-kit/types"
 )
 
-func (m *Transaction) Hash() types.Hash {
+func (m *Transaction) Hash() *types.Hash {
 	tx := &Transaction{
 		From:      m.From,
 		To:        m.To,
@@ -28,10 +28,10 @@ func (m *Transaction) Hash() types.Hash {
 
 	data := sha256.Sum256(body)
 
-	return *types.Bytes2Hash(data[:])
+	return types.Bytes2Hash(data[:])
 }
 
-func (m *Transaction) SignHash() types.Hash {
+func (m *Transaction) SignHash() *types.Hash {
 	tx := &Transaction{
 		From:      m.From,
 		To:        m.To,
@@ -49,7 +49,7 @@ func (m *Transaction) SignHash() types.Hash {
 
 	ret := sha256.Sum256(body)
 
-	return *types.Bytes2Hash(ret[:])
+	return types.Bytes2Hash(ret[:])
 }
 
 func (m *Transaction) Sign(key crypto.PrivateKey) error {
