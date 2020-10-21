@@ -6,7 +6,7 @@ import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 message InterchainMeta {
   map<string, Uint64Slice> counter = 1;
-  repeated bytes l2Roots = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash", (gogoproto.nullable) = false];
+  repeated bytes l2Roots = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
 }
 
 message Uint64Slice {
