@@ -15,20 +15,20 @@ const (
 
 func TestTransaction_SignHash(t *testing.T) {
 	tx := &Transaction{
-		From:      types.String2Address(formalAccount),
-		To:        types.String2Address(formalAccount),
+		From:      types.NewAddressByStr(formalAccount),
+		To:        types.NewAddressByStr(formalAccount),
 		Timestamp: 1567345493,
 		Nonce:     0,
 	}
 	ret := tx.SignHash()
-	fmt.Printf("%s", ret.Hex())
-	require.Equal(t, "0x1E5E61c0e80ccF4A543A0EA0Ac6A0cdBc5f55E596eCd6eB8558ed6B94fE7bF86", ret.Hex())
+	fmt.Printf("%s", ret.String())
+	require.Equal(t, "0x9d51B5a879eb058A88419AE932189273B8AA10B6447806d3e5Cc59f85E09b08E", ret.String())
 }
 
 func TestTransaction_MarshalTo(t *testing.T) {
 	tx := &Transaction{
-		From: types.String2Address(formalAccount),
-		To:   types.String2Address(formalAccount),
+		From: types.NewAddressByStr(formalAccount),
+		To:   types.NewAddressByStr(formalAccount),
 	}
 
 	data, err := tx.Marshal()

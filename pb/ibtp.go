@@ -28,7 +28,7 @@ func (m *IBTP) Hash() *types.Hash {
 
 	data := sha256.Sum256(body)
 
-	return types.Bytes2Hash(data[:])
+	return types.NewHash(data[:])
 }
 
 func (m *IBTP) Category() IBTP_Category {

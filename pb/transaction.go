@@ -28,7 +28,7 @@ func (m *Transaction) Hash() *types.Hash {
 
 	data := sha256.Sum256(body)
 
-	return types.Bytes2Hash(data[:])
+	return types.NewHash(data[:])
 }
 
 func (m *Transaction) SignHash() *types.Hash {
@@ -49,7 +49,7 @@ func (m *Transaction) SignHash() *types.Hash {
 
 	ret := sha256.Sum256(body)
 
-	return types.Bytes2Hash(ret[:])
+	return types.NewHash(ret[:])
 }
 
 func (m *Transaction) Sign(key crypto.PrivateKey) error {
@@ -80,5 +80,5 @@ func (m *Transaction) Account() string {
 	if m.IsIBTP() {
 		return fmt.Sprintf("%s-%s-%d", m.IBTP.From, m.IBTP.To, m.IBTP.Category())
 	}
-	return m.From.Hex()
+	return m.From.String()
 }
