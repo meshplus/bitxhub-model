@@ -28,14 +28,14 @@ service ChainBroker {
         };
     }
 
-    rpc SendTransaction (SendTransactionRequest) returns (TransactionHashMsg) {
+    rpc SendTransaction (pb.Transaction) returns (TransactionHashMsg) {
         option (google.api.http) = {
             post: "/v1/transaction"
             body: "*"
         };
     }
 
-    rpc SendView (SendTransactionRequest) returns (pb.Receipt) {
+    rpc SendView (pb.Transaction) returns (pb.Receipt) {
         option (google.api.http) = {
             post: "/v1/view"
             body: "*"
@@ -146,17 +146,6 @@ message SignResponse {
 
 message Address {
     string address = 1;
-}
-
-message SendTransactionRequest {
-    bytes version = 1;
-    bytes from = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address", (gogoproto.nullable) = false];
-    bytes to = 3 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address", (gogoproto.nullable) = false];
-    int64 timestamp = 4;
-    pb.TransactionData data = 6;
-    uint64 nonce = 7;
-    bytes signature = 8;
-    bytes extra = 9;
 }
 
 message GetBlocksRequest {

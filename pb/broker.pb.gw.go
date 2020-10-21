@@ -116,7 +116,7 @@ func request_ChainBroker_GetInterchainTxWrappers_0(ctx context.Context, marshale
 }
 
 func request_ChainBroker_SendTransaction_0(ctx context.Context, marshaler runtime.Marshaler, client ChainBrokerClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq SendTransactionRequest
+	var protoReq Transaction
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -133,7 +133,7 @@ func request_ChainBroker_SendTransaction_0(ctx context.Context, marshaler runtim
 }
 
 func local_request_ChainBroker_SendTransaction_0(ctx context.Context, marshaler runtime.Marshaler, server ChainBrokerServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq SendTransactionRequest
+	var protoReq Transaction
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -150,7 +150,7 @@ func local_request_ChainBroker_SendTransaction_0(ctx context.Context, marshaler 
 }
 
 func request_ChainBroker_SendView_0(ctx context.Context, marshaler runtime.Marshaler, client ChainBrokerClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq SendTransactionRequest
+	var protoReq Transaction
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -167,7 +167,7 @@ func request_ChainBroker_SendView_0(ctx context.Context, marshaler runtime.Marsh
 }
 
 func local_request_ChainBroker_SendView_0(ctx context.Context, marshaler runtime.Marshaler, server ChainBrokerServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq SendTransactionRequest
+	var protoReq Transaction
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)

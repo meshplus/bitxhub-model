@@ -405,7 +405,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbSendTransactionRequest"
+              "$ref": "#/definitions/pbTransaction"
             }
           }
         ],
@@ -455,7 +455,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbSendTransactionRequest"
+              "$ref": "#/definitions/pbTransaction"
             }
           }
         ],
@@ -473,14 +473,6 @@
         "FAILED"
       ],
       "default": "SUCCESS"
-    },
-    "TransactionDataVMType": {
-      "type": "string",
-      "enum": [
-        "BVM",
-        "XVM"
-      ],
-      "default": "BVM"
     },
     "pbBlock": {
       "type": "object",
@@ -768,42 +760,6 @@
         }
       }
     },
-    "pbSendTransactionRequest": {
-      "type": "object",
-      "properties": {
-        "version": {
-          "type": "string",
-          "format": "byte"
-        },
-        "from": {
-          "type": "string",
-          "format": "byte"
-        },
-        "to": {
-          "type": "string",
-          "format": "byte"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "int64"
-        },
-        "data": {
-          "$ref": "#/definitions/pbTransactionData"
-        },
-        "nonce": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "signature": {
-          "type": "string",
-          "format": "byte"
-        },
-        "extra": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
-    },
     "pbSignResponse": {
       "type": "object",
       "properties": {
@@ -875,40 +831,6 @@
           "format": "byte"
         }
       }
-    },
-    "pbTransactionData": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/pbTransactionDataType"
-        },
-        "amount": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "vm_type": {
-          "$ref": "#/definitions/TransactionDataVMType"
-        },
-        "payload": {
-          "type": "string",
-          "format": "byte"
-        },
-        "extra": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
-    },
-    "pbTransactionDataType": {
-      "type": "string",
-      "enum": [
-        "NORMAL",
-        "INVOKE",
-        "UPDATE",
-        "FREEZE",
-        "UNFREEZE"
-      ],
-      "default": "NORMAL"
     },
     "pbTransactionHashMsg": {
       "type": "object",
