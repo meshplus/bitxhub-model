@@ -6,7 +6,7 @@ import (
 	"github.com/meshplus/bitxhub-kit/types"
 )
 
-func (m *Block) Hash() types.Hash {
+func (m *Block) Hash() *types.Hash {
 	blockheader := &BlockHeader{
 		Number:      m.BlockHeader.Number,
 		ParentHash:  m.BlockHeader.ParentHash,
@@ -22,7 +22,7 @@ func (m *Block) Hash() types.Hash {
 
 	data := sha256.Sum256(body)
 
-	return *types.Bytes2Hash(data[:])
+	return types.Bytes2Hash(data[:])
 }
 
 func (m *Block) Height() uint64 {

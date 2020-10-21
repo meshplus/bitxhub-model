@@ -11,7 +11,7 @@ func (m *IBTP) ID() string {
 	return fmt.Sprintf("%s-%s-%d", m.From, m.To, m.Index)
 }
 
-func (m *IBTP) Hash() types.Hash {
+func (m *IBTP) Hash() *types.Hash {
 	ibtp := &IBTP{
 		From:      m.From,
 		To:        m.To,
@@ -28,7 +28,7 @@ func (m *IBTP) Hash() types.Hash {
 
 	data := sha256.Sum256(body)
 
-	return *types.Bytes2Hash(data[:])
+	return types.Bytes2Hash(data[:])
 }
 
 func (m *IBTP) Category() IBTP_Category {
