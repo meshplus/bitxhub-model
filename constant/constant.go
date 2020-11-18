@@ -13,6 +13,8 @@ const (
 	TransactionMgrContractAddr BoltContractAddress = "0x000000000000000000000000000000000000000f"
 	AssetExchangeContractAddr  BoltContractAddress = "0x0000000000000000000000000000000000000010"
 	ServiceMgrContractAddr     BoltContractAddress = "0x0000000000000000000000000000000000000011"
+	DIDRegistryContractAddr    BoltContractAddress = "0x0000000000000000000000000000000000000012"
+	MethodRegistryContractAddr BoltContractAddress = "0x0000000000000000000000000000000000000013"
 )
 
 func (addr BoltContractAddress) Address() *types.Address {
