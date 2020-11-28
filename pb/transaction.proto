@@ -84,6 +84,7 @@ enum TransactionStatus {
     BEGIN = 0;
     SUCCESS = 1;
     FAILURE = 2;
+    ROLLBACK = 3;
 }
 
 enum AssetExchangeStatus {
