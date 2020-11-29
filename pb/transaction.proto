@@ -92,3 +92,8 @@ enum AssetExchangeStatus {
     REDEEM = 1;
     REFUND = 2;
 }
+
+message TransactionRecord {
+    uint64 height = 1;
+    TransactionStatus status = 2;
+}
