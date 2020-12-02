@@ -190,6 +190,8 @@ message InterchainTxWrapper {
     repeated bytes transaction_hashes = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
     repeated Transaction transactions = 3;
     uint64 height = 4;
+    repeated bytes timeout_l2Roots = 5 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
+    repeated Transaction timeout_txs = 6;
 }
 
 message InterchainTxWrappers {
