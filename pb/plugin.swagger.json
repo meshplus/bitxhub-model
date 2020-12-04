@@ -100,6 +100,7 @@
         "INTERCHAIN",
         "RECEIPT_SUCCESS",
         "RECEIPT_FAILURE",
+        "ROLLBACK",
         "ASSET_EXCHANGE_INIT",
         "ASSET_EXCHANGE_REDEEM",
         "ASSET_EXCHANGE_REFUND",
