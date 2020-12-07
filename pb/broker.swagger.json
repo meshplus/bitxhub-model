@@ -832,10 +832,10 @@
             "format": "byte"
           }
         },
-        "timeout_txs": {
+        "timeout_ibtps": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/pbTransaction"
+            "type": "string"
           }
         }
       }

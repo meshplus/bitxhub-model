@@ -4,8 +4,12 @@
 package pb
 
 import (
+	context "context"
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
+	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -512,6 +516,546 @@ var fileDescriptor_22a625af4bc1cc87 = []byte{
 	0x5a, 0xbf, 0x87, 0xb6, 0xf1, 0x38, 0xb4, 0x8d, 0xbf, 0x43, 0xdb, 0xf8, 0x39, 0xb2, 0x97, 0x1e,
 	0x47, 0xf6, 0xd2, 0x9f, 0x91, 0xbd, 0xe4, 0x57, 0xd5, 0xff, 0xea, 0xe8, 0x5f, 0x00, 0x00, 0x00,
 	0xff, 0xff, 0xf9, 0x78, 0x5e, 0xbc, 0xcf, 0x04, 0x00, 0x00,
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// AppchainPluginClient is the client API for AppchainPlugin service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type AppchainPluginClient interface {
+	Initialize(ctx context.Context, in *InitializeRequest, opts ...grpc.CallOption) (*Empty, error)
+	Start(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
+	Stop(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
+	GetIBTP(ctx context.Context, in *Empty, opts ...grpc.CallOption) (AppchainPlugin_GetIBTPClient, error)
+	SubmitIBTP(ctx context.Context, in *IBTP, opts ...grpc.CallOption) (*SubmitIBTPResponse, error)
+	GetOutMessage(ctx context.Context, in *GetOutMessageRequest, opts ...grpc.CallOption) (*IBTP, error)
+	GetInMessage(ctx context.Context, in *GetInMessageRequest, opts ...grpc.CallOption) (*GetInMessageResponse, error)
+	GetInMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
+	GetOutMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
+	GetCallbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
+	CommitCallback(ctx context.Context, in *IBTP, opts ...grpc.CallOption) (*Empty, error)
+	Name(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NameResponse, error)
+	Type(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*TypeResponse, error)
+}
+
+type appchainPluginClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewAppchainPluginClient(cc *grpc.ClientConn) AppchainPluginClient {
+	return &appchainPluginClient{cc}
+}
+
+func (c *appchainPluginClient) Initialize(ctx context.Context, in *InitializeRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Initialize", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) Start(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Start", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) Stop(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Stop", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetIBTP(ctx context.Context, in *Empty, opts ...grpc.CallOption) (AppchainPlugin_GetIBTPClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_AppchainPlugin_serviceDesc.Streams[0], "/pb.AppchainPlugin/GetIBTP", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &appchainPluginGetIBTPClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type AppchainPlugin_GetIBTPClient interface {
+	Recv() (*IBTP, error)
+	grpc.ClientStream
+}
+
+type appchainPluginGetIBTPClient struct {
+	grpc.ClientStream
+}
+
+func (x *appchainPluginGetIBTPClient) Recv() (*IBTP, error) {
+	m := new(IBTP)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *appchainPluginClient) SubmitIBTP(ctx context.Context, in *IBTP, opts ...grpc.CallOption) (*SubmitIBTPResponse, error) {
+	out := new(SubmitIBTPResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/SubmitIBTP", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetOutMessage(ctx context.Context, in *GetOutMessageRequest, opts ...grpc.CallOption) (*IBTP, error) {
+	out := new(IBTP)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetOutMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetInMessage(ctx context.Context, in *GetInMessageRequest, opts ...grpc.CallOption) (*GetInMessageResponse, error) {
+	out := new(GetInMessageResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetInMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetInMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error) {
+	out := new(GetMetaResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetInMeta", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetOutMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error) {
+	out := new(GetMetaResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetOutMeta", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetCallbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error) {
+	out := new(GetMetaResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetCallbackMeta", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) CommitCallback(ctx context.Context, in *IBTP, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/CommitCallback", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) Name(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NameResponse, error) {
+	out := new(NameResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Name", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) Type(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*TypeResponse, error) {
+	out := new(TypeResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Type", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AppchainPluginServer is the server API for AppchainPlugin service.
+type AppchainPluginServer interface {
+	Initialize(context.Context, *InitializeRequest) (*Empty, error)
+	Start(context.Context, *Empty) (*Empty, error)
+	Stop(context.Context, *Empty) (*Empty, error)
+	GetIBTP(*Empty, AppchainPlugin_GetIBTPServer) error
+	SubmitIBTP(context.Context, *IBTP) (*SubmitIBTPResponse, error)
+	GetOutMessage(context.Context, *GetOutMessageRequest) (*IBTP, error)
+	GetInMessage(context.Context, *GetInMessageRequest) (*GetInMessageResponse, error)
+	GetInMeta(context.Context, *Empty) (*GetMetaResponse, error)
+	GetOutMeta(context.Context, *Empty) (*GetMetaResponse, error)
+	GetCallbackMeta(context.Context, *Empty) (*GetMetaResponse, error)
+	CommitCallback(context.Context, *IBTP) (*Empty, error)
+	Name(context.Context, *Empty) (*NameResponse, error)
+	Type(context.Context, *Empty) (*TypeResponse, error)
+}
+
+// UnimplementedAppchainPluginServer can be embedded to have forward compatible implementations.
+type UnimplementedAppchainPluginServer struct {
+}
+
+func (*UnimplementedAppchainPluginServer) Initialize(ctx context.Context, req *InitializeRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Initialize not implemented")
+}
+func (*UnimplementedAppchainPluginServer) Start(ctx context.Context, req *Empty) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Start not implemented")
+}
+func (*UnimplementedAppchainPluginServer) Stop(ctx context.Context, req *Empty) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Stop not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetIBTP(req *Empty, srv AppchainPlugin_GetIBTPServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetIBTP not implemented")
+}
+func (*UnimplementedAppchainPluginServer) SubmitIBTP(ctx context.Context, req *IBTP) (*SubmitIBTPResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitIBTP not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetOutMessage(ctx context.Context, req *GetOutMessageRequest) (*IBTP, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOutMessage not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetInMessage(ctx context.Context, req *GetInMessageRequest) (*GetInMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInMessage not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetInMeta(ctx context.Context, req *Empty) (*GetMetaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInMeta not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetOutMeta(ctx context.Context, req *Empty) (*GetMetaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOutMeta not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetCallbackMeta(ctx context.Context, req *Empty) (*GetMetaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCallbackMeta not implemented")
+}
+func (*UnimplementedAppchainPluginServer) CommitCallback(ctx context.Context, req *IBTP) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommitCallback not implemented")
+}
+func (*UnimplementedAppchainPluginServer) Name(ctx context.Context, req *Empty) (*NameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Name not implemented")
+}
+func (*UnimplementedAppchainPluginServer) Type(ctx context.Context, req *Empty) (*TypeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Type not implemented")
+}
+
+func RegisterAppchainPluginServer(s *grpc.Server, srv AppchainPluginServer) {
+	s.RegisterService(&_AppchainPlugin_serviceDesc, srv)
+}
+
+func _AppchainPlugin_Initialize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InitializeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).Initialize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/Initialize",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).Initialize(ctx, req.(*InitializeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_Start_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).Start(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/Start",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).Start(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_Stop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).Stop(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/Stop",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).Stop(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetIBTP_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(Empty)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(AppchainPluginServer).GetIBTP(m, &appchainPluginGetIBTPServer{stream})
+}
+
+type AppchainPlugin_GetIBTPServer interface {
+	Send(*IBTP) error
+	grpc.ServerStream
+}
+
+type appchainPluginGetIBTPServer struct {
+	grpc.ServerStream
+}
+
+func (x *appchainPluginGetIBTPServer) Send(m *IBTP) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _AppchainPlugin_SubmitIBTP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IBTP)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).SubmitIBTP(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/SubmitIBTP",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).SubmitIBTP(ctx, req.(*IBTP))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetOutMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOutMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetOutMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetOutMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetOutMessage(ctx, req.(*GetOutMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetInMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetInMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetInMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetInMessage(ctx, req.(*GetInMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetInMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetInMeta(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetInMeta",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetInMeta(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetOutMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetOutMeta(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetOutMeta",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetOutMeta(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetCallbackMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetCallbackMeta(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetCallbackMeta",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetCallbackMeta(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_CommitCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IBTP)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).CommitCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/CommitCallback",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).CommitCallback(ctx, req.(*IBTP))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_Name_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).Name(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/Name",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).Name(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_Type_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).Type(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/Type",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).Type(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AppchainPlugin_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "pb.AppchainPlugin",
+	HandlerType: (*AppchainPluginServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Initialize",
+			Handler:    _AppchainPlugin_Initialize_Handler,
+		},
+		{
+			MethodName: "Start",
+			Handler:    _AppchainPlugin_Start_Handler,
+		},
+		{
+			MethodName: "Stop",
+			Handler:    _AppchainPlugin_Stop_Handler,
+		},
+		{
+			MethodName: "SubmitIBTP",
+			Handler:    _AppchainPlugin_SubmitIBTP_Handler,
+		},
+		{
+			MethodName: "GetOutMessage",
+			Handler:    _AppchainPlugin_GetOutMessage_Handler,
+		},
+		{
+			MethodName: "GetInMessage",
+			Handler:    _AppchainPlugin_GetInMessage_Handler,
+		},
+		{
+			MethodName: "GetInMeta",
+			Handler:    _AppchainPlugin_GetInMeta_Handler,
+		},
+		{
+			MethodName: "GetOutMeta",
+			Handler:    _AppchainPlugin_GetOutMeta_Handler,
+		},
+		{
+			MethodName: "GetCallbackMeta",
+			Handler:    _AppchainPlugin_GetCallbackMeta_Handler,
+		},
+		{
+			MethodName: "CommitCallback",
+			Handler:    _AppchainPlugin_CommitCallback_Handler,
+		},
+		{
+			MethodName: "Name",
+			Handler:    _AppchainPlugin_Name_Handler,
+		},
+		{
+			MethodName: "Type",
+			Handler:    _AppchainPlugin_Type_Handler,
+		},
+	},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "GetIBTP",
+			Handler:       _AppchainPlugin_GetIBTP_Handler,
+			ServerStreams: true,
+		},
+	},
+	Metadata: "plugin.proto",
 }
 
 func (m *Empty) Marshal() (dAtA []byte, err error) {
