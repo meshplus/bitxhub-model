@@ -17,6 +17,11 @@ message SubmitIBTPResponse {
     pb.IBTP result = 3;
 }
 
+message RollbackIBTPResponse {
+    bool status = 1;
+    string message = 2;
+}
+
 message GetOutMessageRequest {
     string to =1;
     uint64 idx =2;
@@ -49,11 +54,14 @@ service AppchainPlugin {
     rpc Stop(Empty) returns (Empty);
     rpc GetIBTP(Empty) returns (stream pb.IBTP);
     rpc SubmitIBTP(pb.IBTP) returns (SubmitIBTPResponse);
+    rpc RollbackIBTP(pb.IBTP) returns (RollbackIBTPResponse);
     rpc GetOutMessage(GetOutMessageRequest) returns (pb.IBTP);
     rpc GetInMessage(GetInMessageRequest) returns (GetInMessageResponse);
     rpc GetInMeta(Empty) returns (GetMetaResponse);
     rpc GetOutMeta(Empty) returns (GetMetaResponse);
     rpc GetCallbackMeta(Empty) returns (GetMetaResponse);
+    rpc GetSrcRollbackMeta(Empty) returns (GetMetaResponse);
+    rpc GetDstRollbackMeta(Empty) returns (GetMetaResponse);
     rpc CommitCallback(pb.IBTP) returns (Empty);
     rpc Name(Empty) returns (NameResponse);
     rpc Type(Empty) returns (TypeResponse);

@@ -182,6 +182,58 @@ func (m *SubmitIBTPResponse) GetResult() *IBTP {
 	return nil
 }
 
+type RollbackIBTPResponse struct {
+	Status  bool   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+}
+
+func (m *RollbackIBTPResponse) Reset()         { *m = RollbackIBTPResponse{} }
+func (m *RollbackIBTPResponse) String() string { return proto.CompactTextString(m) }
+func (*RollbackIBTPResponse) ProtoMessage()    {}
+func (*RollbackIBTPResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_22a625af4bc1cc87, []int{3}
+}
+func (m *RollbackIBTPResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *RollbackIBTPResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_RollbackIBTPResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *RollbackIBTPResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RollbackIBTPResponse.Merge(m, src)
+}
+func (m *RollbackIBTPResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *RollbackIBTPResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_RollbackIBTPResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RollbackIBTPResponse proto.InternalMessageInfo
+
+func (m *RollbackIBTPResponse) GetStatus() bool {
+	if m != nil {
+		return m.Status
+	}
+	return false
+}
+
+func (m *RollbackIBTPResponse) GetMessage() string {
+	if m != nil {
+		return m.Message
+	}
+	return ""
+}
+
 type GetOutMessageRequest struct {
 	To  string `protobuf:"bytes,1,opt,name=to,proto3" json:"to,omitempty"`
 	Idx uint64 `protobuf:"varint,2,opt,name=idx,proto3" json:"idx,omitempty"`
@@ -191,7 +243,7 @@ func (m *GetOutMessageRequest) Reset()         { *m = GetOutMessageRequest{} }
 func (m *GetOutMessageRequest) String() string { return proto.CompactTextString(m) }
 func (*GetOutMessageRequest) ProtoMessage()    {}
 func (*GetOutMessageRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_22a625af4bc1cc87, []int{3}
+	return fileDescriptor_22a625af4bc1cc87, []int{4}
 }
 func (m *GetOutMessageRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -243,7 +295,7 @@ func (m *GetInMessageRequest) Reset()         { *m = GetInMessageRequest{} }
 func (m *GetInMessageRequest) String() string { return proto.CompactTextString(m) }
 func (*GetInMessageRequest) ProtoMessage()    {}
 func (*GetInMessageRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_22a625af4bc1cc87, []int{4}
+	return fileDescriptor_22a625af4bc1cc87, []int{5}
 }
 func (m *GetInMessageRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -294,7 +346,7 @@ func (m *GetInMessageResponse) Reset()         { *m = GetInMessageResponse{} }
 func (m *GetInMessageResponse) String() string { return proto.CompactTextString(m) }
 func (*GetInMessageResponse) ProtoMessage()    {}
 func (*GetInMessageResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_22a625af4bc1cc87, []int{5}
+	return fileDescriptor_22a625af4bc1cc87, []int{6}
 }
 func (m *GetInMessageResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -338,7 +390,7 @@ func (m *GetMetaResponse) Reset()         { *m = GetMetaResponse{} }
 func (m *GetMetaResponse) String() string { return proto.CompactTextString(m) }
 func (*GetMetaResponse) ProtoMessage()    {}
 func (*GetMetaResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_22a625af4bc1cc87, []int{6}
+	return fileDescriptor_22a625af4bc1cc87, []int{7}
 }
 func (m *GetMetaResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -382,7 +434,7 @@ func (m *NameResponse) Reset()         { *m = NameResponse{} }
 func (m *NameResponse) String() string { return proto.CompactTextString(m) }
 func (*NameResponse) ProtoMessage()    {}
 func (*NameResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_22a625af4bc1cc87, []int{7}
+	return fileDescriptor_22a625af4bc1cc87, []int{8}
 }
 func (m *NameResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -426,7 +478,7 @@ func (m *TypeResponse) Reset()         { *m = TypeResponse{} }
 func (m *TypeResponse) String() string { return proto.CompactTextString(m) }
 func (*TypeResponse) ProtoMessage()    {}
 func (*TypeResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_22a625af4bc1cc87, []int{8}
+	return fileDescriptor_22a625af4bc1cc87, []int{9}
 }
 func (m *TypeResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -466,6 +518,7 @@ func init() {
 	proto.RegisterType((*Empty)(nil), "pb.Empty")
 	proto.RegisterType((*InitializeRequest)(nil), "pb.InitializeRequest")
 	proto.RegisterType((*SubmitIBTPResponse)(nil), "pb.SubmitIBTPResponse")
+	proto.RegisterType((*RollbackIBTPResponse)(nil), "pb.RollbackIBTPResponse")
 	proto.RegisterType((*GetOutMessageRequest)(nil), "pb.GetOutMessageRequest")
 	proto.RegisterType((*GetInMessageRequest)(nil), "pb.GetInMessageRequest")
 	proto.RegisterType((*GetInMessageResponse)(nil), "pb.GetInMessageResponse")
@@ -478,44 +531,47 @@ func init() {
 func init() { proto.RegisterFile("plugin.proto", fileDescriptor_22a625af4bc1cc87) }
 
 var fileDescriptor_22a625af4bc1cc87 = []byte{
-	// 586 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x94, 0xcd, 0x4e, 0xdb, 0x40,
-	0x10, 0xc7, 0x71, 0x30, 0x09, 0x19, 0x52, 0x4a, 0x17, 0x0a, 0x56, 0x54, 0xdc, 0xc8, 0xa8, 0x12,
-	0x52, 0x2b, 0xab, 0xc0, 0xa1, 0xa8, 0x3d, 0x01, 0x42, 0x28, 0x07, 0xda, 0xc8, 0x70, 0x47, 0xeb,
-	0xb0, 0x24, 0x2b, 0xfc, 0xb1, 0xb5, 0xc7, 0x15, 0xa9, 0xd4, 0x77, 0xe8, 0x53, 0x55, 0x3d, 0x72,
-	0xec, 0xb1, 0x4a, 0x5e, 0xa4, 0xda, 0xcd, 0xc6, 0x76, 0x3e, 0x2a, 0x71, 0x9b, 0x8f, 0xff, 0xcc,
-	0xce, 0x78, 0x7e, 0x32, 0x34, 0x44, 0x90, 0xf5, 0x78, 0xe4, 0x8a, 0x24, 0xc6, 0x98, 0x54, 0x84,
-	0xdf, 0x04, 0xee, 0xa3, 0x18, 0xfb, 0x4e, 0x0d, 0x56, 0xce, 0x43, 0x81, 0x03, 0xa7, 0x0b, 0x2f,
-	0xda, 0x11, 0x47, 0x4e, 0x03, 0xfe, 0x9d, 0x79, 0xec, 0x6b, 0xc6, 0x52, 0x24, 0xaf, 0x61, 0xad,
-	0x1b, 0x47, 0x77, 0xbc, 0x77, 0x23, 0x28, 0xf6, 0x2d, 0xa3, 0x65, 0xec, 0xd7, 0x3d, 0x18, 0x87,
-	0x3a, 0x14, 0xfb, 0x64, 0x07, 0x6a, 0x82, 0xb3, 0xe4, 0x86, 0xdf, 0x5a, 0x15, 0x95, 0xac, 0x4a,
-	0xb7, 0x7d, 0x4b, 0xb6, 0x60, 0x85, 0x3d, 0x60, 0x42, 0xad, 0xe5, 0x96, 0xb1, 0xdf, 0xf0, 0xc6,
-	0x8e, 0xd3, 0x07, 0x72, 0x95, 0xf9, 0x21, 0xc7, 0xf6, 0xe9, 0x75, 0xc7, 0x63, 0xa9, 0x88, 0xa3,
-	0x94, 0x91, 0x6d, 0xa8, 0xa6, 0x48, 0x31, 0x4b, 0xd5, 0x03, 0xab, 0x9e, 0xf6, 0x88, 0x05, 0xb5,
-	0x90, 0xa5, 0x29, 0xed, 0x31, 0xdd, 0x7c, 0xe2, 0x92, 0x16, 0x54, 0x13, 0x96, 0x66, 0x01, 0xaa,
-	0xf6, 0x6b, 0x87, 0xab, 0xae, 0xf0, 0x5d, 0xd5, 0x53, 0xc7, 0x9d, 0x63, 0xd8, 0xba, 0x60, 0xf8,
-	0x25, 0xc3, 0xcb, 0x71, 0xc9, 0x64, 0xa3, 0x75, 0xa8, 0x60, 0xac, 0x17, 0xa9, 0x60, 0x4c, 0x36,
-	0x60, 0x99, 0xdf, 0x3e, 0xa8, 0xfe, 0xa6, 0x27, 0x4d, 0xe7, 0x13, 0x6c, 0x5e, 0x30, 0x6c, 0x47,
-	0x33, 0x85, 0x04, 0xcc, 0xbb, 0x24, 0x0e, 0x75, 0xa9, 0xb2, 0x17, 0x14, 0xbb, 0xea, 0xd9, 0x52,
-	0x71, 0xb1, 0xa2, 0x1e, 0xd8, 0x68, 0x2d, 0xef, 0x37, 0xf2, 0x31, 0x7f, 0xc0, 0xf3, 0x0b, 0x86,
-	0x97, 0x0c, 0x69, 0x2e, 0x3d, 0x00, 0x33, 0x64, 0x48, 0x95, 0x70, 0xed, 0x70, 0x57, 0x6e, 0x36,
-	0x23, 0x71, 0xa5, 0x73, 0x1e, 0x61, 0x32, 0xf0, 0x94, 0xb4, 0xf9, 0x01, 0xea, 0x79, 0x48, 0x0e,
-	0x75, 0xcf, 0x06, 0x7a, 0x4e, 0x69, 0xca, 0x5b, 0x7c, 0xa3, 0x41, 0xc6, 0xf4, 0xa0, 0x63, 0xe7,
-	0x63, 0xe5, 0xd8, 0x70, 0x1c, 0x68, 0x7c, 0xa6, 0x61, 0x31, 0x26, 0x01, 0x33, 0xa2, 0x21, 0x9b,
-	0x2c, 0x29, 0x6d, 0xa9, 0xb9, 0x1e, 0x88, 0x29, 0x0d, 0x0e, 0x44, 0xae, 0x91, 0xf6, 0xe1, 0x2f,
-	0x13, 0xd6, 0x4f, 0x84, 0xe8, 0xf6, 0x29, 0x8f, 0x3a, 0x0a, 0x37, 0xe2, 0x02, 0x14, 0x3c, 0x91,
-	0x97, 0xea, 0x40, 0xb3, 0x7c, 0x35, 0xeb, 0x32, 0xac, 0xf8, 0x23, 0xbb, 0xb0, 0x72, 0x85, 0x34,
-	0x41, 0x52, 0xc4, 0xca, 0xe9, 0x57, 0x60, 0x5e, 0x61, 0x2c, 0xfe, 0x93, 0x6d, 0x41, 0x4d, 0x7e,
-	0xf6, 0xd3, 0xeb, 0x4e, 0x59, 0x90, 0x53, 0xf1, 0xde, 0x90, 0xe3, 0x14, 0xe4, 0x91, 0x3c, 0xd3,
-	0xdc, 0x96, 0xd6, 0x02, 0x26, 0x8f, 0xe0, 0xd9, 0x14, 0x3f, 0xc4, 0xd2, 0x87, 0x98, 0x43, 0xaa,
-	0x78, 0x86, 0x9c, 0x40, 0xa3, 0x7c, 0x7d, 0xb2, 0xa3, 0x6b, 0x66, 0x61, 0x6a, 0x5a, 0xf3, 0x09,
-	0xfd, 0xee, 0x5b, 0xa8, 0xeb, 0x38, 0xd2, 0xf2, 0x2e, 0x9b, 0x0b, 0x38, 0x20, 0xef, 0x00, 0x26,
-	0x13, 0x3d, 0x41, 0x7d, 0xa0, 0x58, 0x3b, 0xa3, 0x41, 0xe0, 0xd3, 0xee, 0xfd, 0x93, 0x4a, 0xde,
-	0xc0, 0xfa, 0x59, 0x1c, 0x86, 0x3c, 0xaf, 0x2a, 0x7d, 0xb9, 0xd2, 0xe7, 0xdf, 0x03, 0x53, 0x62,
-	0x54, 0x6e, 0xb7, 0x21, 0xcd, 0x29, 0xb6, 0xf6, 0xc0, 0x94, 0x1c, 0xcd, 0x89, 0xca, 0x70, 0x9d,
-	0x5a, 0xbf, 0x87, 0xb6, 0xf1, 0x38, 0xb4, 0x8d, 0xbf, 0x43, 0xdb, 0xf8, 0x39, 0xb2, 0x97, 0x1e,
-	0x47, 0xf6, 0xd2, 0x9f, 0x91, 0xbd, 0xe4, 0x57, 0xd5, 0xff, 0xea, 0xe8, 0x5f, 0x00, 0x00, 0x00,
-	0xff, 0xff, 0xf9, 0x78, 0x5e, 0xbc, 0xcf, 0x04, 0x00, 0x00,
+	// 626 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x94, 0xcf, 0x4e, 0xdb, 0x40,
+	0x10, 0xc6, 0x71, 0x70, 0x12, 0x32, 0xa4, 0x94, 0x2e, 0x14, 0xac, 0xa8, 0xa4, 0x91, 0x51, 0x25,
+	0xa4, 0x56, 0x51, 0x09, 0x95, 0x8a, 0xda, 0x13, 0x50, 0x94, 0xe6, 0x40, 0x1b, 0x39, 0xdc, 0xd1,
+	0x3a, 0x2c, 0x64, 0x85, 0xff, 0x6c, 0xed, 0x71, 0x45, 0x2a, 0xf5, 0x1d, 0xfa, 0x58, 0x3d, 0x72,
+	0xec, 0xb1, 0x02, 0xa9, 0xcf, 0x51, 0xed, 0x7a, 0x63, 0x9b, 0x90, 0x4a, 0xa0, 0xde, 0x66, 0x66,
+	0xbf, 0xcf, 0x3b, 0x33, 0xfb, 0x93, 0xa1, 0x2e, 0xbc, 0xe4, 0x9c, 0x07, 0x6d, 0x11, 0x85, 0x18,
+	0x92, 0x92, 0x70, 0x1b, 0xc0, 0x5d, 0x14, 0x69, 0x6e, 0x57, 0xa1, 0x7c, 0xe8, 0x0b, 0x1c, 0xdb,
+	0x43, 0x78, 0xd2, 0x0b, 0x38, 0x72, 0xea, 0xf1, 0x6f, 0xcc, 0x61, 0x5f, 0x12, 0x16, 0x23, 0x79,
+	0x0e, 0x8b, 0xc3, 0x30, 0x38, 0xe3, 0xe7, 0x27, 0x82, 0xe2, 0xc8, 0x32, 0x5a, 0xc6, 0x56, 0xcd,
+	0x81, 0xb4, 0xd4, 0xa7, 0x38, 0x22, 0xeb, 0x50, 0x15, 0x9c, 0x45, 0x27, 0xfc, 0xd4, 0x2a, 0xa9,
+	0xc3, 0x8a, 0x4c, 0x7b, 0xa7, 0x64, 0x15, 0xca, 0xec, 0x12, 0x23, 0x6a, 0xcd, 0xb7, 0x8c, 0xad,
+	0xba, 0x93, 0x26, 0xf6, 0x08, 0xc8, 0x20, 0x71, 0x7d, 0x8e, 0xbd, 0xfd, 0xe3, 0xbe, 0xc3, 0x62,
+	0x11, 0x06, 0x31, 0x23, 0x6b, 0x50, 0x89, 0x91, 0x62, 0x12, 0xab, 0x0b, 0x16, 0x1c, 0x9d, 0x11,
+	0x0b, 0xaa, 0x3e, 0x8b, 0x63, 0x7a, 0xce, 0xf4, 0xc7, 0x27, 0x29, 0x69, 0x41, 0x25, 0x62, 0x71,
+	0xe2, 0xa1, 0xfa, 0xfc, 0x62, 0x67, 0xa1, 0x2d, 0xdc, 0xb6, 0xfa, 0xa6, 0xae, 0xdb, 0x1f, 0x61,
+	0xd5, 0x09, 0x3d, 0xcf, 0xa5, 0xc3, 0x8b, 0xff, 0xbb, 0xcb, 0xde, 0x85, 0xd5, 0x2e, 0xc3, 0xcf,
+	0x09, 0x1e, 0xa5, 0x85, 0xc9, 0x6e, 0x96, 0xa0, 0x84, 0xa1, 0x5e, 0x49, 0x09, 0x43, 0xb2, 0x0c,
+	0xf3, 0xfc, 0xf4, 0x52, 0xb9, 0x4d, 0x47, 0x86, 0xf6, 0x7b, 0x58, 0xe9, 0x32, 0xec, 0x05, 0x53,
+	0x46, 0x02, 0xe6, 0x59, 0x14, 0xfa, 0xda, 0xaa, 0xe2, 0x19, 0xe6, 0xb6, 0xba, 0xb6, 0x60, 0xce,
+	0x07, 0xd0, 0xa3, 0x1b, 0xad, 0xf9, 0xad, 0x7a, 0x36, 0xf0, 0x77, 0x78, 0xdc, 0x65, 0x78, 0xc4,
+	0x90, 0x66, 0xd2, 0x6d, 0x30, 0x7d, 0x86, 0x54, 0x09, 0x17, 0x3b, 0x1b, 0x72, 0x47, 0x53, 0x92,
+	0xb6, 0x4c, 0x0e, 0x03, 0x8c, 0xc6, 0x8e, 0x92, 0x36, 0xde, 0x42, 0x2d, 0x2b, 0xc9, 0xa6, 0x2e,
+	0xd8, 0x58, 0xf7, 0x29, 0x43, 0xf9, 0xaa, 0x5f, 0xa9, 0x97, 0x30, 0xdd, 0x68, 0x9a, 0xbc, 0x2b,
+	0xed, 0x1a, 0xb6, 0x0d, 0xf5, 0x4f, 0xd4, 0xcf, 0xdb, 0x24, 0x60, 0x06, 0xd4, 0x67, 0x93, 0x21,
+	0x65, 0x2c, 0x35, 0xc7, 0x63, 0x71, 0x4b, 0x83, 0x63, 0x91, 0x69, 0x64, 0xdc, 0xf9, 0x53, 0x86,
+	0xa5, 0x3d, 0x21, 0x86, 0x23, 0xca, 0x83, 0xbe, 0x02, 0x97, 0xb4, 0x01, 0x72, 0x32, 0xc9, 0x53,
+	0xf5, 0xd4, 0xd3, 0xa4, 0x36, 0x6a, 0xb2, 0xac, 0x48, 0x26, 0x1b, 0x50, 0x1e, 0x20, 0x8d, 0x90,
+	0xe4, 0xb5, 0xe2, 0xf1, 0x33, 0x30, 0x07, 0x18, 0x8a, 0x7f, 0x9c, 0xb6, 0xa0, 0x2a, 0xd7, 0xbe,
+	0x7f, 0xdc, 0x2f, 0x0a, 0x32, 0xbe, 0x5e, 0x1b, 0xb2, 0x9d, 0x9c, 0x61, 0x92, 0x9d, 0x34, 0xd6,
+	0x64, 0x34, 0x83, 0xee, 0x0e, 0xd4, 0x8b, 0x24, 0x16, 0x1c, 0x96, 0x8c, 0x66, 0x52, 0xba, 0x03,
+	0x8f, 0x6e, 0x31, 0x47, 0x2c, 0xfd, 0x78, 0x77, 0x30, 0xcc, 0x5b, 0x23, 0x7b, 0x50, 0x2f, 0x12,
+	0x43, 0xd6, 0xb5, 0x67, 0x1a, 0xc0, 0x86, 0x75, 0xf7, 0x40, 0xdf, 0xfb, 0x12, 0x6a, 0xba, 0x8e,
+	0xb4, 0x38, 0xff, 0xca, 0x0c, 0x76, 0xc8, 0x2b, 0x80, 0x49, 0x47, 0xf7, 0x50, 0x6f, 0x2b, 0x3e,
+	0x0f, 0x68, 0x3a, 0xed, 0xbd, 0x2c, 0x6f, 0x80, 0x74, 0x19, 0x0e, 0xa2, 0xe1, 0x64, 0x47, 0x0f,
+	0x70, 0x7d, 0x88, 0xf1, 0x41, 0xae, 0x17, 0xb0, 0x74, 0x10, 0xfa, 0x3e, 0xcf, 0x3a, 0x2c, 0xbc,
+	0x53, 0x01, 0x8f, 0x4d, 0x30, 0x25, 0xe6, 0xc5, 0xcf, 0x2d, 0xcb, 0xf0, 0x16, 0xfb, 0x9b, 0x60,
+	0x4a, 0xce, 0xef, 0x88, 0x8a, 0xf0, 0xef, 0x5b, 0x3f, 0xaf, 0x9b, 0xc6, 0xd5, 0x75, 0xd3, 0xf8,
+	0x7d, 0xdd, 0x34, 0x7e, 0xdc, 0x34, 0xe7, 0xae, 0x6e, 0x9a, 0x73, 0xbf, 0x6e, 0x9a, 0x73, 0x6e,
+	0x45, 0xfd, 0x99, 0x77, 0xfe, 0x06, 0x00, 0x00, 0xff, 0xff, 0xf6, 0x8d, 0xb9, 0x34, 0xb9, 0x05,
+	0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -535,11 +591,14 @@ type AppchainPluginClient interface {
 	Stop(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 	GetIBTP(ctx context.Context, in *Empty, opts ...grpc.CallOption) (AppchainPlugin_GetIBTPClient, error)
 	SubmitIBTP(ctx context.Context, in *IBTP, opts ...grpc.CallOption) (*SubmitIBTPResponse, error)
+	RollbackIBTP(ctx context.Context, in *IBTP, opts ...grpc.CallOption) (*RollbackIBTPResponse, error)
 	GetOutMessage(ctx context.Context, in *GetOutMessageRequest, opts ...grpc.CallOption) (*IBTP, error)
 	GetInMessage(ctx context.Context, in *GetInMessageRequest, opts ...grpc.CallOption) (*GetInMessageResponse, error)
 	GetInMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
 	GetOutMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
 	GetCallbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
+	GetSrcRollbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
+	GetDstRollbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
 	CommitCallback(ctx context.Context, in *IBTP, opts ...grpc.CallOption) (*Empty, error)
 	Name(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NameResponse, error)
 	Type(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*TypeResponse, error)
@@ -621,6 +680,15 @@ func (c *appchainPluginClient) SubmitIBTP(ctx context.Context, in *IBTP, opts ..
 	return out, nil
 }
 
+func (c *appchainPluginClient) RollbackIBTP(ctx context.Context, in *IBTP, opts ...grpc.CallOption) (*RollbackIBTPResponse, error) {
+	out := new(RollbackIBTPResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/RollbackIBTP", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *appchainPluginClient) GetOutMessage(ctx context.Context, in *GetOutMessageRequest, opts ...grpc.CallOption) (*IBTP, error) {
 	out := new(IBTP)
 	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetOutMessage", in, out, opts...)
@@ -666,6 +734,24 @@ func (c *appchainPluginClient) GetCallbackMeta(ctx context.Context, in *Empty, o
 	return out, nil
 }
 
+func (c *appchainPluginClient) GetSrcRollbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error) {
+	out := new(GetMetaResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetSrcRollbackMeta", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetDstRollbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error) {
+	out := new(GetMetaResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetDstRollbackMeta", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *appchainPluginClient) CommitCallback(ctx context.Context, in *IBTP, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/CommitCallback", in, out, opts...)
@@ -700,11 +786,14 @@ type AppchainPluginServer interface {
 	Stop(context.Context, *Empty) (*Empty, error)
 	GetIBTP(*Empty, AppchainPlugin_GetIBTPServer) error
 	SubmitIBTP(context.Context, *IBTP) (*SubmitIBTPResponse, error)
+	RollbackIBTP(context.Context, *IBTP) (*RollbackIBTPResponse, error)
 	GetOutMessage(context.Context, *GetOutMessageRequest) (*IBTP, error)
 	GetInMessage(context.Context, *GetInMessageRequest) (*GetInMessageResponse, error)
 	GetInMeta(context.Context, *Empty) (*GetMetaResponse, error)
 	GetOutMeta(context.Context, *Empty) (*GetMetaResponse, error)
 	GetCallbackMeta(context.Context, *Empty) (*GetMetaResponse, error)
+	GetSrcRollbackMeta(context.Context, *Empty) (*GetMetaResponse, error)
+	GetDstRollbackMeta(context.Context, *Empty) (*GetMetaResponse, error)
 	CommitCallback(context.Context, *IBTP) (*Empty, error)
 	Name(context.Context, *Empty) (*NameResponse, error)
 	Type(context.Context, *Empty) (*TypeResponse, error)
@@ -729,6 +818,9 @@ func (*UnimplementedAppchainPluginServer) GetIBTP(req *Empty, srv AppchainPlugin
 func (*UnimplementedAppchainPluginServer) SubmitIBTP(ctx context.Context, req *IBTP) (*SubmitIBTPResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubmitIBTP not implemented")
 }
+func (*UnimplementedAppchainPluginServer) RollbackIBTP(ctx context.Context, req *IBTP) (*RollbackIBTPResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RollbackIBTP not implemented")
+}
 func (*UnimplementedAppchainPluginServer) GetOutMessage(ctx context.Context, req *GetOutMessageRequest) (*IBTP, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOutMessage not implemented")
 }
@@ -743,6 +835,12 @@ func (*UnimplementedAppchainPluginServer) GetOutMeta(ctx context.Context, req *E
 }
 func (*UnimplementedAppchainPluginServer) GetCallbackMeta(ctx context.Context, req *Empty) (*GetMetaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCallbackMeta not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetSrcRollbackMeta(ctx context.Context, req *Empty) (*GetMetaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSrcRollbackMeta not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetDstRollbackMeta(ctx context.Context, req *Empty) (*GetMetaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDstRollbackMeta not implemented")
 }
 func (*UnimplementedAppchainPluginServer) CommitCallback(ctx context.Context, req *IBTP) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CommitCallback not implemented")
@@ -851,6 +949,24 @@ func _AppchainPlugin_SubmitIBTP_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AppchainPlugin_RollbackIBTP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IBTP)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).RollbackIBTP(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/RollbackIBTP",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).RollbackIBTP(ctx, req.(*IBTP))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AppchainPlugin_GetOutMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetOutMessageRequest)
 	if err := dec(in); err != nil {
@@ -941,6 +1057,42 @@ func _AppchainPlugin_GetCallbackMeta_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AppchainPlugin_GetSrcRollbackMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetSrcRollbackMeta(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetSrcRollbackMeta",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetSrcRollbackMeta(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetDstRollbackMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetDstRollbackMeta(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetDstRollbackMeta",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetDstRollbackMeta(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AppchainPlugin_CommitCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IBTP)
 	if err := dec(in); err != nil {
@@ -1016,6 +1168,10 @@ var _AppchainPlugin_serviceDesc = grpc.ServiceDesc{
 			Handler:    _AppchainPlugin_SubmitIBTP_Handler,
 		},
 		{
+			MethodName: "RollbackIBTP",
+			Handler:    _AppchainPlugin_RollbackIBTP_Handler,
+		},
+		{
 			MethodName: "GetOutMessage",
 			Handler:    _AppchainPlugin_GetOutMessage_Handler,
 		},
@@ -1034,6 +1190,14 @@ var _AppchainPlugin_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCallbackMeta",
 			Handler:    _AppchainPlugin_GetCallbackMeta_Handler,
+		},
+		{
+			MethodName: "GetSrcRollbackMeta",
+			Handler:    _AppchainPlugin_GetSrcRollbackMeta_Handler,
+		},
+		{
+			MethodName: "GetDstRollbackMeta",
+			Handler:    _AppchainPlugin_GetDstRollbackMeta_Handler,
 		},
 		{
 			MethodName: "CommitCallback",
@@ -1157,6 +1321,46 @@ func (m *SubmitIBTPResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x1a
 	}
+	if len(m.Message) > 0 {
+		i -= len(m.Message)
+		copy(dAtA[i:], m.Message)
+		i = encodeVarintPlugin(dAtA, i, uint64(len(m.Message)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.Status {
+		i--
+		if m.Status {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *RollbackIBTPResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *RollbackIBTPResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *RollbackIBTPResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
 	if len(m.Message) > 0 {
 		i -= len(m.Message)
 		copy(dAtA[i:], m.Message)
@@ -1435,6 +1639,22 @@ func (m *SubmitIBTPResponse) Size() (n int) {
 	}
 	if m.Result != nil {
 		l = m.Result.Size()
+		n += 1 + l + sovPlugin(uint64(l))
+	}
+	return n
+}
+
+func (m *RollbackIBTPResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Status {
+		n += 2
+	}
+	l = len(m.Message)
+	if l > 0 {
 		n += 1 + l + sovPlugin(uint64(l))
 	}
 	return n
@@ -1856,6 +2076,111 @@ func (m *SubmitIBTPResponse) Unmarshal(dAtA []byte) error {
 			if err := m.Result.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPlugin(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *RollbackIBTPResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPlugin
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: RollbackIBTPResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: RollbackIBTPResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPlugin
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Status = bool(v != 0)
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Message", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPlugin
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Message = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

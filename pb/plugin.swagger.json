@@ -116,6 +116,18 @@
         }
       }
     },
+    "pbRollbackIBTPResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "pbSubmitIBTPResponse": {
       "type": "object",
       "properties": {
