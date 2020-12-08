@@ -691,6 +691,60 @@ func local_request_ChainBroker_GetPendingNonceByAccount_0(ctx context.Context, m
 
 }
 
+func request_ChainBroker_DelVPNode_0(ctx context.Context, marshaler runtime.Marshaler, client ChainBrokerClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq DelVPNodeRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["pid"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "pid")
+	}
+
+	protoReq.Pid, err = runtime.String(val)
+
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "pid", err)
+	}
+
+	msg, err := client.DelVPNode(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_ChainBroker_DelVPNode_0(ctx context.Context, marshaler runtime.Marshaler, server ChainBrokerServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq DelVPNodeRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["pid"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "pid")
+	}
+
+	protoReq.Pid, err = runtime.String(val)
+
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "pid", err)
+	}
+
+	msg, err := server.DelVPNode(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
 // RegisterChainBrokerHandlerServer registers the http handlers for service ChainBroker to "mux".
 // UnaryRPC     :call ChainBrokerServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -954,6 +1008,26 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		}
 
 		forward_ChainBroker_GetPendingNonceByAccount_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_ChainBroker_DelVPNode_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_ChainBroker_DelVPNode_0(rctx, inboundMarshaler, server, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_ChainBroker_DelVPNode_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -1298,6 +1372,26 @@ func RegisterChainBrokerHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
+	mux.Handle("GET", pattern_ChainBroker_DelVPNode_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_ChainBroker_DelVPNode_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_ChainBroker_DelVPNode_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -1331,6 +1425,8 @@ var (
 	pattern_ChainBroker_GetTPS_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "tps", "begin", "end"}, "", runtime.AssumeColonVerbOpt(true)))
 
 	pattern_ChainBroker_GetPendingNonceByAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "pendingNonce", "address"}, "", runtime.AssumeColonVerbOpt(true)))
+
+	pattern_ChainBroker_DelVPNode_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "delvpnode", "pid"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (
@@ -1363,4 +1459,6 @@ var (
 	forward_ChainBroker_GetTPS_0 = runtime.ForwardResponseMessage
 
 	forward_ChainBroker_GetPendingNonceByAccount_0 = runtime.ForwardResponseMessage
+
+	forward_ChainBroker_DelVPNode_0 = runtime.ForwardResponseMessage
 )
