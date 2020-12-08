@@ -101,6 +101,12 @@ service ChainBroker {
             get: "/v1/pendingNonce/{address}"
         };
     }
+
+    rpc DelVPNode(DelVPNodeRequest) returns (Response) {
+        option (google.api.http) = {
+            get: "/v1/delvpnode/{pid}"
+        };
+    }
 }
 
 message GetBlockHeaderRequest {
@@ -199,4 +205,8 @@ message InterchainTxWrappers {
 message GetTPSRequest {
     uint64 begin = 1;
     uint64 end = 2;
+}
+
+message DelVPNodeRequest {
+    string pid = 1;
 }
