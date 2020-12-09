@@ -6,4 +6,5 @@ message VpInfo {
   uint64 id = 1;
   string pid = 2;
   string account = 3;
+  repeated string hosts = 4;
 }
