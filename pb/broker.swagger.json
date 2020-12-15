@@ -204,7 +204,7 @@
       }
     },
     "/v1/delvpnode/{pid}": {
-      "get": {
+      "post": {
         "operationId": "ChainBroker_DelVPNode",
         "responses": {
           "200": {
@@ -226,6 +226,14 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbDelVPNodeRequest"
+            }
           }
         ],
         "tags": [
@@ -694,6 +702,14 @@
         "interchain_tx_count": {
           "type": "string",
           "format": "uint64"
+        }
+      }
+    },
+    "pbDelVPNodeRequest": {
+      "type": "object",
+      "properties": {
+        "pid": {
+          "type": "string"
         }
       }
     },
