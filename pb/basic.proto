@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package pb;
+
+message Uint64Slice {
+  repeated uint64 slice = 1;
+}
+
+message StringUint64Map {
+  repeated string keys = 1;
+  repeated uint64 vals = 2;
+}
+
+message StringUint64SliceMap {
+  repeated string keys = 1;
+  repeated Uint64Slice vals = 2;
+}

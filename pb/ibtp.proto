@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package pb;
 
+import "basic.proto";
+
 // Inter-blockchain Transfer Protocol
 message IBTP {
     enum Type {
@@ -35,7 +37,7 @@ message IBTP {
     // Encoded content used by inter-chain
     bytes payload = 7;
     // info about other txs in the same group
-    map<string, uint64> group = 8;
+    StringUint64Map group = 8;
     // Message version
     string version = 9;
     // Self-defined fields used by app-chain
