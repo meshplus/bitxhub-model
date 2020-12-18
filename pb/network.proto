@@ -17,6 +17,10 @@ message Message {
         FETCH_ASSET_EXCHANGE_SIGN_ACK = 10;
         GET_ADDRESS = 11;
         GET_ADDRESS_ACK = 12;
+        GET_BLOCK_HEADERS = 13;
+        GET_BLOCK_HEADERS_ACK = 14;
+        GET_BLOCKS = 15;
+        GET_BLOCKS_ACK = 16;
     }
     Type type = 1;
     bytes Data = 2;

@@ -66,6 +66,12 @@ service ChainBroker {
         };
     }
 
+    rpc GetBlockHeaders (GetBlockHeadersRequest) returns (GetBlockHeadersResponse) {
+        option (google.api.http) = {
+            get: "/v1/block_headers"
+        };
+    }
+
     rpc GetChainMeta (Request) returns (pb.ChainMeta) {
         option (google.api.http) = {
             get: "/v1/chain_meta"
@@ -162,6 +168,15 @@ message GetBlocksRequest {
 
 message GetBlocksResponse {
     repeated pb.Block blocks = 1;
+}
+
+message GetBlockHeadersRequest {
+    uint64 start = 1;
+    uint64 end = 2;
+}
+
+message GetBlockHeadersResponse {
+    repeated pb.BlockHeader blockHeaders = 1;
 }
 
 message SubscriptionRequest {
