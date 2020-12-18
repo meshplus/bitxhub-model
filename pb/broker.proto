@@ -104,7 +104,7 @@ service ChainBroker {
 
     rpc DelVPNode(DelVPNodeRequest) returns (Response) {
         option (google.api.http) = {
-            post: "/v1/delvpnode/{pid}"
+            post: "/v1/delvpnode"
             body: "*"
         };
     }

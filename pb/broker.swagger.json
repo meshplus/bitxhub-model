@@ -203,7 +203,7 @@
         ]
       }
     },
-    "/v1/delvpnode/{pid}": {
+    "/v1/delvpnode": {
       "post": {
         "operationId": "ChainBroker_DelVPNode",
         "responses": {
@@ -221,12 +221,6 @@
           }
         },
         "parameters": [
-          {
-            "name": "pid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "body",
             "in": "body",
