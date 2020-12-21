@@ -24,23 +24,23 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-type InterchainMeta struct {
-	Counter map[string]*Uint64Slice                      `protobuf:"bytes,1,rep,name=counter,proto3" json:"counter,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+type InterchainMetaS struct {
+	Counter *StringUint64SliceMap                        `protobuf:"bytes,1,opt,name=counter,proto3" json:"counter,omitempty"`
 	L2Roots []github_com_meshplus_bitxhub_kit_types.Hash `protobuf:"bytes,2,rep,name=l2Roots,proto3,customtype=github.com/meshplus/bitxhub-kit/types.Hash" json:"l2Roots,omitempty"`
 }
 
-func (m *InterchainMeta) Reset()         { *m = InterchainMeta{} }
-func (m *InterchainMeta) String() string { return proto.CompactTextString(m) }
-func (*InterchainMeta) ProtoMessage()    {}
-func (*InterchainMeta) Descriptor() ([]byte, []int) {
+func (m *InterchainMetaS) Reset()         { *m = InterchainMetaS{} }
+func (m *InterchainMetaS) String() string { return proto.CompactTextString(m) }
+func (*InterchainMetaS) ProtoMessage()    {}
+func (*InterchainMetaS) Descriptor() ([]byte, []int) {
 	return fileDescriptor_d2602fcc2fbd6b2a, []int{0}
 }
-func (m *InterchainMeta) XXX_Unmarshal(b []byte) error {
+func (m *InterchainMetaS) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *InterchainMeta) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *InterchainMetaS) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_InterchainMeta.Marshal(b, m, deterministic)
+		return xxx_messageInfo_InterchainMetaS.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -50,41 +50,44 @@ func (m *InterchainMeta) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 		return b[:n], nil
 	}
 }
-func (m *InterchainMeta) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_InterchainMeta.Merge(m, src)
+func (m *InterchainMetaS) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterchainMetaS.Merge(m, src)
 }
-func (m *InterchainMeta) XXX_Size() int {
+func (m *InterchainMetaS) XXX_Size() int {
 	return m.Size()
 }
-func (m *InterchainMeta) XXX_DiscardUnknown() {
-	xxx_messageInfo_InterchainMeta.DiscardUnknown(m)
+func (m *InterchainMetaS) XXX_DiscardUnknown() {
+	xxx_messageInfo_InterchainMetaS.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_InterchainMeta proto.InternalMessageInfo
+var xxx_messageInfo_InterchainMetaS proto.InternalMessageInfo
 
-func (m *InterchainMeta) GetCounter() map[string]*Uint64Slice {
+func (m *InterchainMetaS) GetCounter() *StringUint64SliceMap {
 	if m != nil {
 		return m.Counter
 	}
 	return nil
 }
 
-type Uint64Slice struct {
-	Slice []uint64 `protobuf:"varint,1,rep,packed,name=slice,proto3" json:"slice,omitempty"`
+type InterchainS struct {
+	ID                   string           `protobuf:"bytes,1,opt,name=ID,proto3" json:"ID,omitempty"`
+	InterchainCounter    *StringUint64Map `protobuf:"bytes,2,opt,name=InterchainCounter,proto3" json:"InterchainCounter,omitempty"`
+	ReceiptCounter       *StringUint64Map `protobuf:"bytes,3,opt,name=ReceiptCounter,proto3" json:"ReceiptCounter,omitempty"`
+	SourceReceiptCounter *StringUint64Map `protobuf:"bytes,4,opt,name=SourceReceiptCounter,proto3" json:"SourceReceiptCounter,omitempty"`
 }
 
-func (m *Uint64Slice) Reset()         { *m = Uint64Slice{} }
-func (m *Uint64Slice) String() string { return proto.CompactTextString(m) }
-func (*Uint64Slice) ProtoMessage()    {}
-func (*Uint64Slice) Descriptor() ([]byte, []int) {
+func (m *InterchainS) Reset()         { *m = InterchainS{} }
+func (m *InterchainS) String() string { return proto.CompactTextString(m) }
+func (*InterchainS) ProtoMessage()    {}
+func (*InterchainS) Descriptor() ([]byte, []int) {
 	return fileDescriptor_d2602fcc2fbd6b2a, []int{1}
 }
-func (m *Uint64Slice) XXX_Unmarshal(b []byte) error {
+func (m *InterchainS) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *Uint64Slice) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *InterchainS) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_Uint64Slice.Marshal(b, m, deterministic)
+		return xxx_messageInfo_InterchainS.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -94,87 +97,40 @@ func (m *Uint64Slice) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (m *Uint64Slice) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Uint64Slice.Merge(m, src)
+func (m *InterchainS) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InterchainS.Merge(m, src)
 }
-func (m *Uint64Slice) XXX_Size() int {
+func (m *InterchainS) XXX_Size() int {
 	return m.Size()
 }
-func (m *Uint64Slice) XXX_DiscardUnknown() {
-	xxx_messageInfo_Uint64Slice.DiscardUnknown(m)
+func (m *InterchainS) XXX_DiscardUnknown() {
+	xxx_messageInfo_InterchainS.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Uint64Slice proto.InternalMessageInfo
+var xxx_messageInfo_InterchainS proto.InternalMessageInfo
 
-func (m *Uint64Slice) GetSlice() []uint64 {
-	if m != nil {
-		return m.Slice
-	}
-	return nil
-}
-
-type Interchain struct {
-	ID                   string            `protobuf:"bytes,1,opt,name=ID,proto3" json:"ID,omitempty"`
-	InterchainCounter    map[string]uint64 `protobuf:"bytes,2,rep,name=InterchainCounter,proto3" json:"InterchainCounter,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	ReceiptCounter       map[string]uint64 `protobuf:"bytes,3,rep,name=ReceiptCounter,proto3" json:"ReceiptCounter,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	SourceReceiptCounter map[string]uint64 `protobuf:"bytes,4,rep,name=SourceReceiptCounter,proto3" json:"SourceReceiptCounter,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-}
-
-func (m *Interchain) Reset()         { *m = Interchain{} }
-func (m *Interchain) String() string { return proto.CompactTextString(m) }
-func (*Interchain) ProtoMessage()    {}
-func (*Interchain) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d2602fcc2fbd6b2a, []int{2}
-}
-func (m *Interchain) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *Interchain) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Interchain.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *Interchain) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Interchain.Merge(m, src)
-}
-func (m *Interchain) XXX_Size() int {
-	return m.Size()
-}
-func (m *Interchain) XXX_DiscardUnknown() {
-	xxx_messageInfo_Interchain.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Interchain proto.InternalMessageInfo
-
-func (m *Interchain) GetID() string {
+func (m *InterchainS) GetID() string {
 	if m != nil {
 		return m.ID
 	}
 	return ""
 }
 
-func (m *Interchain) GetInterchainCounter() map[string]uint64 {
+func (m *InterchainS) GetInterchainCounter() *StringUint64Map {
 	if m != nil {
 		return m.InterchainCounter
 	}
 	return nil
 }
 
-func (m *Interchain) GetReceiptCounter() map[string]uint64 {
+func (m *InterchainS) GetReceiptCounter() *StringUint64Map {
 	if m != nil {
 		return m.ReceiptCounter
 	}
 	return nil
 }
 
-func (m *Interchain) GetSourceReceiptCounter() map[string]uint64 {
+func (m *InterchainS) GetSourceReceiptCounter() *StringUint64Map {
 	if m != nil {
 		return m.SourceReceiptCounter
 	}
@@ -182,49 +138,37 @@ func (m *Interchain) GetSourceReceiptCounter() map[string]uint64 {
 }
 
 func init() {
-	proto.RegisterType((*InterchainMeta)(nil), "pb.InterchainMeta")
-	proto.RegisterMapType((map[string]*Uint64Slice)(nil), "pb.InterchainMeta.CounterEntry")
-	proto.RegisterType((*Uint64Slice)(nil), "pb.Uint64Slice")
-	proto.RegisterType((*Interchain)(nil), "pb.Interchain")
-	proto.RegisterMapType((map[string]uint64)(nil), "pb.Interchain.InterchainCounterEntry")
-	proto.RegisterMapType((map[string]uint64)(nil), "pb.Interchain.ReceiptCounterEntry")
-	proto.RegisterMapType((map[string]uint64)(nil), "pb.Interchain.SourceReceiptCounterEntry")
+	proto.RegisterType((*InterchainMetaS)(nil), "pb.InterchainMetaS")
+	proto.RegisterType((*InterchainS)(nil), "pb.InterchainS")
 }
 
 func init() { proto.RegisterFile("interchain_meta.proto", fileDescriptor_d2602fcc2fbd6b2a) }
 
 var fileDescriptor_d2602fcc2fbd6b2a = []byte{
-	// 419 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x93, 0x41, 0x8f, 0x93, 0x40,
-	0x14, 0xc7, 0x3b, 0xd0, 0x75, 0xe3, 0x63, 0x53, 0x75, 0xac, 0x06, 0x39, 0xb0, 0x04, 0xb3, 0x09,
-	0x31, 0xd9, 0x21, 0x41, 0x63, 0xd4, 0x9b, 0x6b, 0x8d, 0x5b, 0x8d, 0x17, 0x1a, 0x6f, 0x26, 0x06,
-	0xc8, 0x58, 0x26, 0x4b, 0x19, 0x02, 0x83, 0xb1, 0xdf, 0xc2, 0x8f, 0xe5, 0x71, 0x8f, 0xc6, 0x83,
-	0x31, 0xf4, 0xec, 0x77, 0x30, 0x0c, 0xad, 0xa5, 0x14, 0x0f, 0xbd, 0xbd, 0xc7, 0xfb, 0xbf, 0xdf,
-	0x7b, 0xff, 0x79, 0x01, 0xee, 0xb1, 0x54, 0xd0, 0x3c, 0x8a, 0x03, 0x96, 0x7e, 0x5a, 0x50, 0x11,
-	0x90, 0x2c, 0xe7, 0x82, 0x63, 0x25, 0x0b, 0x8d, 0xf3, 0x39, 0x13, 0x71, 0x19, 0x92, 0x88, 0x2f,
-	0xdc, 0x39, 0x9f, 0x73, 0x57, 0x96, 0xc2, 0xf2, 0xb3, 0xcc, 0x64, 0x22, 0xa3, 0xa6, 0xc5, 0xae,
-	0x10, 0x8c, 0xa6, 0xff, 0x60, 0xef, 0xa9, 0x08, 0xf0, 0x73, 0x38, 0x8e, 0x78, 0x59, 0x7f, 0xd3,
-	0x91, 0xa5, 0x3a, 0x9a, 0x77, 0x4a, 0xb2, 0x90, 0xec, 0x8a, 0xc8, 0xab, 0x46, 0xf1, 0x3a, 0x15,
-	0xf9, 0xd2, 0xdf, 0xe8, 0xf1, 0x25, 0x1c, 0x27, 0x9e, 0xcf, 0xb9, 0x28, 0x74, 0xc5, 0x52, 0x9d,
-	0x93, 0x0b, 0xf2, 0xf3, 0xd7, 0xe9, 0xa3, 0xd6, 0x46, 0x0b, 0x5a, 0xc4, 0x59, 0x52, 0x16, 0x6e,
-	0xc8, 0xc4, 0xd7, 0xb8, 0x0c, 0xcf, 0xaf, 0x98, 0x70, 0xc5, 0x32, 0xa3, 0x05, 0xb9, 0x0c, 0x8a,
-	0xd8, 0xdf, 0xb4, 0x1b, 0xef, 0xe0, 0xa4, 0x3d, 0x02, 0xdf, 0x06, 0xf5, 0x8a, 0x2e, 0x75, 0x64,
-	0x21, 0xe7, 0xa6, 0x5f, 0x87, 0xf8, 0x0c, 0x8e, 0xbe, 0x04, 0x49, 0x49, 0x75, 0xc5, 0x42, 0x8e,
-	0xe6, 0xdd, 0xaa, 0x97, 0xfc, 0xc0, 0x52, 0xf1, 0xf4, 0xc9, 0x2c, 0x61, 0x11, 0xf5, 0x9b, 0xea,
-	0x0b, 0xe5, 0x19, 0xb2, 0x1f, 0x82, 0xd6, 0xaa, 0xe0, 0x31, 0x1c, 0x15, 0x75, 0x20, 0xed, 0x0d,
-	0xfd, 0x26, 0xb1, 0xff, 0xa8, 0x00, 0x5b, 0x93, 0x78, 0x04, 0xca, 0x74, 0xb2, 0x9e, 0xa7, 0x4c,
-	0x27, 0x78, 0x06, 0x77, 0xb6, 0xd5, 0xf5, 0x6a, 0xd2, 0xa4, 0xe6, 0x9d, 0xed, 0xbe, 0x0f, 0xd9,
-	0xd3, 0x35, 0xaf, 0xb4, 0xdf, 0x8f, 0xdf, 0xc2, 0xc8, 0xa7, 0x11, 0x65, 0x99, 0xd8, 0x10, 0x55,
-	0x49, 0xb4, 0x3b, 0xc4, 0x5d, 0x51, 0x83, 0xeb, 0x74, 0xe2, 0x8f, 0x30, 0x9e, 0xf1, 0x32, 0x8f,
-	0x68, 0x87, 0x38, 0x94, 0x44, 0xa7, 0x43, 0xec, 0x93, 0x36, 0xdc, 0x5e, 0x8a, 0x31, 0x81, 0xfb,
-	0xfd, 0xb6, 0x7a, 0x2e, 0x33, 0x6e, 0x5f, 0x66, 0xd8, 0x3a, 0x84, 0xf1, 0x12, 0xee, 0xf6, 0x8c,
-	0x3c, 0x08, 0xf1, 0x06, 0x1e, 0xfc, 0x77, 0xf7, 0x43, 0x40, 0x17, 0xfa, 0xf7, 0xca, 0x44, 0xd7,
-	0x95, 0x89, 0x7e, 0x57, 0x26, 0xfa, 0xb6, 0x32, 0x07, 0xd7, 0x2b, 0x73, 0xf0, 0x63, 0x65, 0x0e,
-	0xc2, 0x1b, 0xf2, 0xd7, 0x78, 0xfc, 0x37, 0x00, 0x00, 0xff, 0xff, 0xc8, 0x7b, 0x32, 0xa6, 0x66,
-	0x03, 0x00, 0x00,
+	// 314 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x91, 0x41, 0x4b, 0x02, 0x41,
+	0x18, 0x86, 0x9d, 0x35, 0x92, 0xc6, 0x30, 0x9a, 0x0a, 0x16, 0x0f, 0x9b, 0x78, 0x92, 0xc0, 0x5d,
+	0xb0, 0xe8, 0xd2, 0x29, 0x13, 0xd2, 0x83, 0x97, 0x5d, 0x3a, 0xc7, 0xcc, 0x30, 0xed, 0x0e, 0xe9,
+	0xce, 0xb0, 0xf3, 0x0d, 0xd4, 0xaf, 0xa8, 0x9f, 0xd5, 0xd1, 0x63, 0x74, 0x88, 0x50, 0xe8, 0x77,
+	0x84, 0x63, 0x66, 0x58, 0xde, 0xf6, 0xdd, 0xef, 0x7d, 0x5e, 0x1e, 0x18, 0x7c, 0x24, 0x73, 0x10,
+	0x05, 0xcf, 0xa8, 0xcc, 0x6f, 0xc7, 0x02, 0x68, 0xa8, 0x0b, 0x05, 0x8a, 0x78, 0x9a, 0xd5, 0xdb,
+	0xa9, 0x84, 0xcc, 0xb2, 0x90, 0xab, 0x71, 0x94, 0xaa, 0x54, 0x45, 0xee, 0xc4, 0xec, 0x9d, 0x4b,
+	0x2e, 0xb8, 0xaf, 0x05, 0x52, 0xaf, 0x32, 0x6a, 0x24, 0x5f, 0x84, 0xe6, 0x13, 0xc2, 0x7b, 0x83,
+	0x9f, 0xe5, 0xa1, 0x00, 0x9a, 0x90, 0x0e, 0xae, 0x70, 0x65, 0xe7, 0x3f, 0x7d, 0xd4, 0x40, 0xad,
+	0x6a, 0xc7, 0x0f, 0x35, 0x0b, 0x13, 0x28, 0x64, 0x9e, 0xde, 0xc8, 0x1c, 0xce, 0xcf, 0x92, 0x91,
+	0xe4, 0x62, 0x48, 0x75, 0xbc, 0x2c, 0x92, 0x3e, 0xae, 0x8c, 0x3a, 0xb1, 0x52, 0x60, 0x7c, 0xaf,
+	0x51, 0x6e, 0xed, 0x76, 0xc3, 0xb7, 0xf7, 0xe3, 0x93, 0x5f, 0x62, 0x63, 0x61, 0x32, 0x3d, 0xb2,
+	0x26, 0x62, 0x12, 0x1e, 0x32, 0xcb, 0xda, 0xf7, 0x12, 0x22, 0x78, 0xd4, 0xc2, 0x84, 0x7d, 0x6a,
+	0xb2, 0x78, 0x89, 0x37, 0x3f, 0x11, 0xae, 0xae, 0x8c, 0x12, 0x52, 0xc3, 0xde, 0xa0, 0xe7, 0x44,
+	0x76, 0x62, 0x6f, 0xd0, 0x23, 0x97, 0x78, 0x7f, 0x75, 0xbe, 0xfa, 0xf6, 0xf4, 0x9c, 0xe7, 0xc1,
+	0xba, 0xe7, 0x5c, 0xf1, 0x6f, 0x9b, 0x5c, 0xe0, 0x5a, 0x2c, 0xb8, 0x90, 0x1a, 0x96, 0x7c, 0x79,
+	0x33, 0xbf, 0x56, 0x25, 0xd7, 0xf8, 0x30, 0x51, 0xb6, 0xe0, 0x62, 0x6d, 0x62, 0x6b, 0xf3, 0xc4,
+	0xbf, 0x40, 0xd7, 0x7f, 0x99, 0x06, 0x68, 0x32, 0x0d, 0xd0, 0xc7, 0x34, 0x40, 0xcf, 0xb3, 0xa0,
+	0x34, 0x99, 0x05, 0xa5, 0xd7, 0x59, 0x50, 0x62, 0xdb, 0xee, 0x6d, 0x4e, 0xbf, 0x02, 0x00, 0x00,
+	0xff, 0xff, 0xb6, 0xe3, 0xba, 0x0d, 0xf4, 0x01, 0x00, 0x00,
 }
 
-func (m *InterchainMeta) Marshal() (dAtA []byte, err error) {
+func (m *InterchainMetaS) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -234,12 +178,12 @@ func (m *InterchainMeta) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *InterchainMeta) MarshalTo(dAtA []byte) (int, error) {
+func (m *InterchainMetaS) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *InterchainMeta) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *InterchainMetaS) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -258,77 +202,22 @@ func (m *InterchainMeta) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			dAtA[i] = 0x12
 		}
 	}
-	if len(m.Counter) > 0 {
-		for k := range m.Counter {
-			v := m.Counter[k]
-			baseI := i
-			if v != nil {
-				{
-					size, err := v.MarshalToSizedBuffer(dAtA[:i])
-					if err != nil {
-						return 0, err
-					}
-					i -= size
-					i = encodeVarintInterchainMeta(dAtA, i, uint64(size))
-				}
-				i--
-				dAtA[i] = 0x12
+	if m.Counter != nil {
+		{
+			size, err := m.Counter.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
 			}
-			i -= len(k)
-			copy(dAtA[i:], k)
-			i = encodeVarintInterchainMeta(dAtA, i, uint64(len(k)))
-			i--
-			dAtA[i] = 0xa
-			i = encodeVarintInterchainMeta(dAtA, i, uint64(baseI-i))
-			i--
-			dAtA[i] = 0xa
+			i -= size
+			i = encodeVarintInterchainMeta(dAtA, i, uint64(size))
 		}
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *Uint64Slice) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Uint64Slice) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *Uint64Slice) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.Slice) > 0 {
-		dAtA3 := make([]byte, len(m.Slice)*10)
-		var j2 int
-		for _, num := range m.Slice {
-			for num >= 1<<7 {
-				dAtA3[j2] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j2++
-			}
-			dAtA3[j2] = uint8(num)
-			j2++
-		}
-		i -= j2
-		copy(dAtA[i:], dAtA3[:j2])
-		i = encodeVarintInterchainMeta(dAtA, i, uint64(j2))
 		i--
 		dAtA[i] = 0xa
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *Interchain) Marshal() (dAtA []byte, err error) {
+func (m *InterchainS) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -338,66 +227,51 @@ func (m *Interchain) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *Interchain) MarshalTo(dAtA []byte) (int, error) {
+func (m *InterchainS) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *Interchain) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *InterchainS) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.SourceReceiptCounter) > 0 {
-		for k := range m.SourceReceiptCounter {
-			v := m.SourceReceiptCounter[k]
-			baseI := i
-			i = encodeVarintInterchainMeta(dAtA, i, uint64(v))
-			i--
-			dAtA[i] = 0x10
-			i -= len(k)
-			copy(dAtA[i:], k)
-			i = encodeVarintInterchainMeta(dAtA, i, uint64(len(k)))
-			i--
-			dAtA[i] = 0xa
-			i = encodeVarintInterchainMeta(dAtA, i, uint64(baseI-i))
-			i--
-			dAtA[i] = 0x22
+	if m.SourceReceiptCounter != nil {
+		{
+			size, err := m.SourceReceiptCounter.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintInterchainMeta(dAtA, i, uint64(size))
 		}
+		i--
+		dAtA[i] = 0x22
 	}
-	if len(m.ReceiptCounter) > 0 {
-		for k := range m.ReceiptCounter {
-			v := m.ReceiptCounter[k]
-			baseI := i
-			i = encodeVarintInterchainMeta(dAtA, i, uint64(v))
-			i--
-			dAtA[i] = 0x10
-			i -= len(k)
-			copy(dAtA[i:], k)
-			i = encodeVarintInterchainMeta(dAtA, i, uint64(len(k)))
-			i--
-			dAtA[i] = 0xa
-			i = encodeVarintInterchainMeta(dAtA, i, uint64(baseI-i))
-			i--
-			dAtA[i] = 0x1a
+	if m.ReceiptCounter != nil {
+		{
+			size, err := m.ReceiptCounter.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintInterchainMeta(dAtA, i, uint64(size))
 		}
+		i--
+		dAtA[i] = 0x1a
 	}
-	if len(m.InterchainCounter) > 0 {
-		for k := range m.InterchainCounter {
-			v := m.InterchainCounter[k]
-			baseI := i
-			i = encodeVarintInterchainMeta(dAtA, i, uint64(v))
-			i--
-			dAtA[i] = 0x10
-			i -= len(k)
-			copy(dAtA[i:], k)
-			i = encodeVarintInterchainMeta(dAtA, i, uint64(len(k)))
-			i--
-			dAtA[i] = 0xa
-			i = encodeVarintInterchainMeta(dAtA, i, uint64(baseI-i))
-			i--
-			dAtA[i] = 0x12
+	if m.InterchainCounter != nil {
+		{
+			size, err := m.InterchainCounter.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintInterchainMeta(dAtA, i, uint64(size))
 		}
+		i--
+		dAtA[i] = 0x12
 	}
 	if len(m.ID) > 0 {
 		i -= len(m.ID)
@@ -420,24 +294,15 @@ func encodeVarintInterchainMeta(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *InterchainMeta) Size() (n int) {
+func (m *InterchainMetaS) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if len(m.Counter) > 0 {
-		for k, v := range m.Counter {
-			_ = k
-			_ = v
-			l = 0
-			if v != nil {
-				l = v.Size()
-				l += 1 + sovInterchainMeta(uint64(l))
-			}
-			mapEntrySize := 1 + len(k) + sovInterchainMeta(uint64(len(k))) + l
-			n += mapEntrySize + 1 + sovInterchainMeta(uint64(mapEntrySize))
-		}
+	if m.Counter != nil {
+		l = m.Counter.Size()
+		n += 1 + l + sovInterchainMeta(uint64(l))
 	}
 	if len(m.L2Roots) > 0 {
 		for _, e := range m.L2Roots {
@@ -448,23 +313,7 @@ func (m *InterchainMeta) Size() (n int) {
 	return n
 }
 
-func (m *Uint64Slice) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if len(m.Slice) > 0 {
-		l = 0
-		for _, e := range m.Slice {
-			l += sovInterchainMeta(uint64(e))
-		}
-		n += 1 + sovInterchainMeta(uint64(l)) + l
-	}
-	return n
-}
-
-func (m *Interchain) Size() (n int) {
+func (m *InterchainS) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -474,29 +323,17 @@ func (m *Interchain) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovInterchainMeta(uint64(l))
 	}
-	if len(m.InterchainCounter) > 0 {
-		for k, v := range m.InterchainCounter {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + len(k) + sovInterchainMeta(uint64(len(k))) + 1 + sovInterchainMeta(uint64(v))
-			n += mapEntrySize + 1 + sovInterchainMeta(uint64(mapEntrySize))
-		}
+	if m.InterchainCounter != nil {
+		l = m.InterchainCounter.Size()
+		n += 1 + l + sovInterchainMeta(uint64(l))
 	}
-	if len(m.ReceiptCounter) > 0 {
-		for k, v := range m.ReceiptCounter {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + len(k) + sovInterchainMeta(uint64(len(k))) + 1 + sovInterchainMeta(uint64(v))
-			n += mapEntrySize + 1 + sovInterchainMeta(uint64(mapEntrySize))
-		}
+	if m.ReceiptCounter != nil {
+		l = m.ReceiptCounter.Size()
+		n += 1 + l + sovInterchainMeta(uint64(l))
 	}
-	if len(m.SourceReceiptCounter) > 0 {
-		for k, v := range m.SourceReceiptCounter {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + len(k) + sovInterchainMeta(uint64(len(k))) + 1 + sovInterchainMeta(uint64(v))
-			n += mapEntrySize + 1 + sovInterchainMeta(uint64(mapEntrySize))
-		}
+	if m.SourceReceiptCounter != nil {
+		l = m.SourceReceiptCounter.Size()
+		n += 1 + l + sovInterchainMeta(uint64(l))
 	}
 	return n
 }
@@ -507,7 +344,7 @@ func sovInterchainMeta(x uint64) (n int) {
 func sozInterchainMeta(x uint64) (n int) {
 	return sovInterchainMeta(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *InterchainMeta) Unmarshal(dAtA []byte) error {
+func (m *InterchainMetaS) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -530,10 +367,10 @@ func (m *InterchainMeta) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: InterchainMeta: wiretype end group for non-group")
+			return fmt.Errorf("proto: InterchainMetaS: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: InterchainMeta: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: InterchainMetaS: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -566,104 +403,11 @@ func (m *InterchainMeta) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Counter == nil {
-				m.Counter = make(map[string]*Uint64Slice)
+				m.Counter = &StringUint64SliceMap{}
 			}
-			var mapkey string
-			var mapvalue *Uint64Slice
-			for iNdEx < postIndex {
-				entryPreIndex := iNdEx
-				var wire uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowInterchainMeta
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					wire |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				fieldNum := int32(wire >> 3)
-				if fieldNum == 1 {
-					var stringLenmapkey uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowInterchainMeta
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						stringLenmapkey |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					intStringLenmapkey := int(stringLenmapkey)
-					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthInterchainMeta
-					}
-					postStringIndexmapkey := iNdEx + intStringLenmapkey
-					if postStringIndexmapkey < 0 {
-						return ErrInvalidLengthInterchainMeta
-					}
-					if postStringIndexmapkey > l {
-						return io.ErrUnexpectedEOF
-					}
-					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
-					iNdEx = postStringIndexmapkey
-				} else if fieldNum == 2 {
-					var mapmsglen int
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowInterchainMeta
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						mapmsglen |= int(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					if mapmsglen < 0 {
-						return ErrInvalidLengthInterchainMeta
-					}
-					postmsgIndex := iNdEx + mapmsglen
-					if postmsgIndex < 0 {
-						return ErrInvalidLengthInterchainMeta
-					}
-					if postmsgIndex > l {
-						return io.ErrUnexpectedEOF
-					}
-					mapvalue = &Uint64Slice{}
-					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
-						return err
-					}
-					iNdEx = postmsgIndex
-				} else {
-					iNdEx = entryPreIndex
-					skippy, err := skipInterchainMeta(dAtA[iNdEx:])
-					if err != nil {
-						return err
-					}
-					if skippy < 0 {
-						return ErrInvalidLengthInterchainMeta
-					}
-					if (iNdEx + skippy) > postIndex {
-						return io.ErrUnexpectedEOF
-					}
-					iNdEx += skippy
-				}
+			if err := m.Counter.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
 			}
-			m.Counter[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
@@ -724,7 +468,7 @@ func (m *InterchainMeta) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *Uint64Slice) Unmarshal(dAtA []byte) error {
+func (m *InterchainS) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -747,139 +491,10 @@ func (m *Uint64Slice) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: Uint64Slice: wiretype end group for non-group")
+			return fmt.Errorf("proto: InterchainS: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Uint64Slice: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType == 0 {
-				var v uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowInterchainMeta
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					v |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				m.Slice = append(m.Slice, v)
-			} else if wireType == 2 {
-				var packedLen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowInterchainMeta
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					packedLen |= int(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				if packedLen < 0 {
-					return ErrInvalidLengthInterchainMeta
-				}
-				postIndex := iNdEx + packedLen
-				if postIndex < 0 {
-					return ErrInvalidLengthInterchainMeta
-				}
-				if postIndex > l {
-					return io.ErrUnexpectedEOF
-				}
-				var elementCount int
-				var count int
-				for _, integer := range dAtA[iNdEx:postIndex] {
-					if integer < 128 {
-						count++
-					}
-				}
-				elementCount = count
-				if elementCount != 0 && len(m.Slice) == 0 {
-					m.Slice = make([]uint64, 0, elementCount)
-				}
-				for iNdEx < postIndex {
-					var v uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowInterchainMeta
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						v |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					m.Slice = append(m.Slice, v)
-				}
-			} else {
-				return fmt.Errorf("proto: wrong wireType = %d for field Slice", wireType)
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipInterchainMeta(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthInterchainMeta
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthInterchainMeta
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Interchain) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowInterchainMeta
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Interchain: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Interchain: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: InterchainS: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -944,88 +559,11 @@ func (m *Interchain) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.InterchainCounter == nil {
-				m.InterchainCounter = make(map[string]uint64)
+				m.InterchainCounter = &StringUint64Map{}
 			}
-			var mapkey string
-			var mapvalue uint64
-			for iNdEx < postIndex {
-				entryPreIndex := iNdEx
-				var wire uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowInterchainMeta
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					wire |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				fieldNum := int32(wire >> 3)
-				if fieldNum == 1 {
-					var stringLenmapkey uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowInterchainMeta
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						stringLenmapkey |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					intStringLenmapkey := int(stringLenmapkey)
-					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthInterchainMeta
-					}
-					postStringIndexmapkey := iNdEx + intStringLenmapkey
-					if postStringIndexmapkey < 0 {
-						return ErrInvalidLengthInterchainMeta
-					}
-					if postStringIndexmapkey > l {
-						return io.ErrUnexpectedEOF
-					}
-					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
-					iNdEx = postStringIndexmapkey
-				} else if fieldNum == 2 {
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowInterchainMeta
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						mapvalue |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-				} else {
-					iNdEx = entryPreIndex
-					skippy, err := skipInterchainMeta(dAtA[iNdEx:])
-					if err != nil {
-						return err
-					}
-					if skippy < 0 {
-						return ErrInvalidLengthInterchainMeta
-					}
-					if (iNdEx + skippy) > postIndex {
-						return io.ErrUnexpectedEOF
-					}
-					iNdEx += skippy
-				}
+			if err := m.InterchainCounter.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
 			}
-			m.InterchainCounter[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
@@ -1057,88 +595,11 @@ func (m *Interchain) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.ReceiptCounter == nil {
-				m.ReceiptCounter = make(map[string]uint64)
+				m.ReceiptCounter = &StringUint64Map{}
 			}
-			var mapkey string
-			var mapvalue uint64
-			for iNdEx < postIndex {
-				entryPreIndex := iNdEx
-				var wire uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowInterchainMeta
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					wire |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				fieldNum := int32(wire >> 3)
-				if fieldNum == 1 {
-					var stringLenmapkey uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowInterchainMeta
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						stringLenmapkey |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					intStringLenmapkey := int(stringLenmapkey)
-					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthInterchainMeta
-					}
-					postStringIndexmapkey := iNdEx + intStringLenmapkey
-					if postStringIndexmapkey < 0 {
-						return ErrInvalidLengthInterchainMeta
-					}
-					if postStringIndexmapkey > l {
-						return io.ErrUnexpectedEOF
-					}
-					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
-					iNdEx = postStringIndexmapkey
-				} else if fieldNum == 2 {
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowInterchainMeta
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						mapvalue |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-				} else {
-					iNdEx = entryPreIndex
-					skippy, err := skipInterchainMeta(dAtA[iNdEx:])
-					if err != nil {
-						return err
-					}
-					if skippy < 0 {
-						return ErrInvalidLengthInterchainMeta
-					}
-					if (iNdEx + skippy) > postIndex {
-						return io.ErrUnexpectedEOF
-					}
-					iNdEx += skippy
-				}
+			if err := m.ReceiptCounter.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
 			}
-			m.ReceiptCounter[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 4:
 			if wireType != 2 {
@@ -1170,88 +631,11 @@ func (m *Interchain) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.SourceReceiptCounter == nil {
-				m.SourceReceiptCounter = make(map[string]uint64)
+				m.SourceReceiptCounter = &StringUint64Map{}
 			}
-			var mapkey string
-			var mapvalue uint64
-			for iNdEx < postIndex {
-				entryPreIndex := iNdEx
-				var wire uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowInterchainMeta
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					wire |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				fieldNum := int32(wire >> 3)
-				if fieldNum == 1 {
-					var stringLenmapkey uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowInterchainMeta
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						stringLenmapkey |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					intStringLenmapkey := int(stringLenmapkey)
-					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthInterchainMeta
-					}
-					postStringIndexmapkey := iNdEx + intStringLenmapkey
-					if postStringIndexmapkey < 0 {
-						return ErrInvalidLengthInterchainMeta
-					}
-					if postStringIndexmapkey > l {
-						return io.ErrUnexpectedEOF
-					}
-					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
-					iNdEx = postStringIndexmapkey
-				} else if fieldNum == 2 {
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowInterchainMeta
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						mapvalue |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-				} else {
-					iNdEx = entryPreIndex
-					skippy, err := skipInterchainMeta(dAtA[iNdEx:])
-					if err != nil {
-						return err
-					}
-					if skippy < 0 {
-						return ErrInvalidLengthInterchainMeta
-					}
-					if (iNdEx + skippy) > postIndex {
-						return io.ErrUnexpectedEOF
-					}
-					iNdEx += skippy
-				}
+			if err := m.SourceReceiptCounter.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
 			}
-			m.SourceReceiptCounter[mapkey] = mapvalue
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

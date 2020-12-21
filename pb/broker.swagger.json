@@ -849,11 +849,7 @@
           "title": "Encoded content used by inter-chain"
         },
         "group": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "format": "uint64"
-          },
+          "$ref": "#/definitions/pbStringUint64Map",
           "title": "info about other txs in the same group"
         },
         "version": {
@@ -973,6 +969,24 @@
           "additionalProperties": {
             "type": "string",
             "format": "byte"
+          }
+        }
+      }
+    },
+    "pbStringUint64Map": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uint64"
           }
         }
       }

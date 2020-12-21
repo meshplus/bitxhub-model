@@ -5,7 +5,7 @@ pb:
 	-I${GOPATH}/src \
 	-I${GOPATH}/src/github.com/gogo/protobuf/protobuf \
 	--gogofaster_out=:. \
-	block.proto ibtp.proto network.proto receipt.proto transaction.proto chain.proto arg.proto interchain_meta.proto plugin.proto vp_info.proto
+	block.proto ibtp.proto network.proto receipt.proto transaction.proto chain.proto arg.proto interchain_meta.proto plugin.proto vp_info.proto basic.proto
 
 grpc:
 	cd pb && protoc -I=. \
