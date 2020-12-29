@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package pb;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "block.proto";
+
+message commit_event {
+	Block block = 1;
+	repeated bool local_list = 2;
+}
