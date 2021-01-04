@@ -133,7 +133,8 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "boolean"
+          "type": "boolean",
+          "format": "boolean"
         },
         "message": {
           "type": "string"

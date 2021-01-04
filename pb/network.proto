@@ -21,6 +21,8 @@ message Message {
         GET_BLOCK_HEADERS_ACK = 14;
         GET_BLOCKS = 15;
         GET_BLOCKS_ACK = 16;
+        CHECK_MASTER_PIER = 17;
+        CHECK_MASTER_PIER_ACK = 18;
     }
     Type type = 1;
     bytes Data = 2;
