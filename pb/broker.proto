@@ -114,6 +114,26 @@ service ChainBroker {
             body: "*"
         };
     }
+
+    rpc CheckMasterPier (Address) returns (Response) {
+        option (google.api.http) = {
+            get: "/v1/check_master_pier/{address}"
+        };
+    }
+
+    rpc SetMasterPier (PierInfo) returns (Response) {
+        option (google.api.http) = {
+            post: "/v1/set_master_pier"
+            body: "*"
+        };
+    }
+
+    rpc HeartBeat (PierInfo) returns (Response) {
+        option (google.api.http) = {
+            post: "/v1/heart_beat"
+            body: "*"
+        };
+    }
 }
 
 message GetBlockHeaderRequest {
@@ -225,4 +245,28 @@ message GetTPSRequest {
 
 message DelVPNodeRequest {
     string pid = 1;
+}
+
+message PierInfo {
+    string address = 1;
+    string index = 2;
+    int64  timeout = 3;
+}
+
+message CheckPierResponse {
+    enum Status {
+        ERROR_MASTER = 0;
+        HAS_MASTER = 1;
+        NO_MASTER = 2;
+    }
+    Status status = 1;
+    string address = 2;
+}
+
+message HeartBeatRespones {
+    enum Status {
+        ALIVE = 0;
+        DEAD = 1;
+    }
+    Status status = 1;
 }

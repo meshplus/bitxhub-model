@@ -22,7 +22,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -52,7 +52,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -102,7 +102,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -140,7 +140,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -178,7 +178,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -216,7 +216,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -241,6 +241,36 @@
         ]
       }
     },
+    "/v1/check_master_pier/{address}": {
+      "get": {
+        "operationId": "ChainBroker_CheckMasterPier",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
     "/v1/delvpnode": {
       "post": {
         "operationId": "ChainBroker_DelVPNode",
@@ -252,7 +282,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -273,6 +303,38 @@
         ]
       }
     },
+    "/v1/heart_beat": {
+      "post": {
+        "operationId": "ChainBroker_HeartBeat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbPierInfo"
+            }
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
     "/v1/info": {
       "get": {
         "operationId": "ChainBroker_GetInfo",
@@ -284,7 +346,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -329,7 +391,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -373,7 +435,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -415,7 +477,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -445,7 +507,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -457,6 +519,38 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
+    "/v1/set_master_pier": {
+      "post": {
+        "operationId": "ChainBroker_SetMasterPier",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbPierInfo"
+            }
           }
         ],
         "tags": [
@@ -484,7 +578,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -530,7 +624,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -568,7 +662,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -600,7 +694,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -630,7 +724,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -653,14 +747,6 @@
     }
   },
   "definitions": {
-    "ReceiptStatus": {
-      "type": "string",
-      "enum": [
-        "SUCCESS",
-        "FAILED"
-      ],
-      "default": "SUCCESS"
-    },
     "pbBlock": {
       "type": "object",
       "properties": {
@@ -759,6 +845,7 @@
         },
         "interchain": {
           "type": "boolean",
+          "format": "boolean",
           "title": "The interchain flag used by interchain contract"
         }
       }
@@ -917,6 +1004,21 @@
         }
       }
     },
+    "pbPierInfo": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "index": {
+          "type": "string"
+        },
+        "timeout": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "pbReceipt": {
       "type": "object",
       "properties": {
@@ -933,7 +1035,7 @@
           "format": "byte"
         },
         "status": {
-          "$ref": "#/definitions/ReceiptStatus"
+          "$ref": "#/definitions/pbReceiptStatus"
         },
         "events": {
           "type": "array",
@@ -942,6 +1044,14 @@
           }
         }
       }
+    },
+    "pbReceiptStatus": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "FAILED"
+      ],
+      "default": "SUCCESS"
     },
     "pbRequestType": {
       "type": "string",
