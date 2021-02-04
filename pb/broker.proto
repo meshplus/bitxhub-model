@@ -54,6 +54,12 @@ service ChainBroker {
         };
     }
 
+    rpc ConfirmReceipt (TransactionHashMsg) returns (pb.Receipt) {
+        option (google.api.http) = {
+            get: "/v1/confirm/{tx_hash}"
+        };
+    }
+
     rpc GetBlock (GetBlockRequest) returns (pb.Block) {
         option (google.api.http) = {
             get: "/v1/block"
