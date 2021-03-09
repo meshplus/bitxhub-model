@@ -55,6 +55,9 @@ message content {
     string func = 3;
     repeated bytes args = 4;
     string callback = 5;
+    repeated bytes argsCb = 6;
+    string rollback = 7;
+    repeated bytes argsRb = 8;
 }
 
 message IBTPs {
