@@ -55,6 +55,7 @@ service AppchainPlugin {
     rpc GetOutMeta(Empty) returns (GetMetaResponse);
     rpc GetCallbackMeta(Empty) returns (GetMetaResponse);
     rpc CommitCallback(pb.IBTP) returns (Empty);
+    rpc GetReceipt(pb.IBTP) returns (pb.IBTP);
     rpc Name(Empty) returns (NameResponse);
     rpc Type(Empty) returns (TypeResponse);
 }
