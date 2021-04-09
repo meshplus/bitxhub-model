@@ -17,6 +17,7 @@ const (
 	MethodRegistryContractAddr   BoltContractAddress = "0x0000000000000000000000000000000000000013"
 	InterRelayBrokerContractAddr BoltContractAddress = "0x0000000000000000000000000000000000000014"
 	GovernanceContractAddr       BoltContractAddress = "0x0000000000000000000000000000000000000015"
+	VCRegistryContractAddr       BoltContractAddress = "0x0000000000000000000000000000000000000016"
 )
 
 func (addr BoltContractAddress) Address() *types.Address {
