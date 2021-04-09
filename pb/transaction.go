@@ -2,8 +2,6 @@ package pb
 
 import (
 	"crypto/sha256"
-	"fmt"
-
 	"github.com/gogo/protobuf/proto"
 	"github.com/meshplus/bitxhub-kit/crypto"
 	"github.com/meshplus/bitxhub-kit/types"
@@ -77,8 +75,5 @@ func (m *Transaction) IsIBTP() bool {
 }
 
 func (m *Transaction) Account() string {
-	if m.IsIBTP() {
-		return fmt.Sprintf("%s-%s-%d", m.IBTP.From, m.IBTP.To, m.IBTP.Category())
-	}
 	return m.From.String()
 }
