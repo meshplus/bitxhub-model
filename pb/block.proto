@@ -2,12 +2,12 @@ syntax = "proto3";
 
 package pb;
 
-import "transaction.proto";
+import "bxh_transaction.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 message Block {
     BlockHeader block_header = 1;
-    repeated Transaction transactions = 2; // transaction set
+    bytes transactions = 2 [(gogoproto.customtype) = "Transactions"]; // transaction set
     bytes block_hash = 3 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
     bytes signature = 4;
     bytes extra = 5;
@@ -21,4 +21,5 @@ message BlockHeader {
     bytes parent_hash = 5 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
     int64 timestamp = 6;
     bytes version = 7;
+    bytes Bloom = 8 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Bloom"];
 }

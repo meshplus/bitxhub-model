@@ -7,13 +7,25 @@ import (
 )
 
 func (m *Block) Hash() *types.Hash {
+	return m.BlockHeader.Hash()
+}
+
+func (m *Block) Height() uint64 {
+	if m == nil || m.BlockHeader == nil {
+		return 0
+	}
+
+	return m.BlockHeader.Number
+}
+
+func (m *BlockHeader) Hash() *types.Hash {
 	blockheader := &BlockHeader{
-		Number:      m.BlockHeader.Number,
-		ParentHash:  m.BlockHeader.ParentHash,
-		StateRoot:   m.BlockHeader.StateRoot,
-		TxRoot:      m.BlockHeader.TxRoot,
-		ReceiptRoot: m.BlockHeader.ReceiptRoot,
-		Version:     m.BlockHeader.Version,
+		Number:      m.Number,
+		ParentHash:  m.ParentHash,
+		StateRoot:   m.StateRoot,
+		TxRoot:      m.TxRoot,
+		ReceiptRoot: m.ReceiptRoot,
+		Version:     m.Version,
 	}
 	body, err := blockheader.Marshal()
 	if err != nil {
@@ -23,12 +35,4 @@ func (m *Block) Hash() *types.Hash {
 	data := sha256.Sum256(body)
 
 	return types.NewHash(data[:])
-}
-
-func (m *Block) Height() uint64 {
-	if m == nil || m.BlockHeader == nil {
-		return 0
-	}
-
-	return m.BlockHeader.Number
 }

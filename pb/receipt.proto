@@ -14,6 +14,10 @@ message Receipt {
     bytes ret = 3;
     Status status = 4;
     repeated Event events = 5;
+    uint64 gas_used = 6;
+    repeated EvmLog evm_logs = 7;
+    bytes bloom = 8 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Bloom"];
+    bytes contract_address = 9 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address"];
 }
 
 message Receipts {
@@ -26,4 +30,24 @@ message Event {
     bytes data = 2;
     // The interchain flag used by interchain contract
     bool interchain = 3;
+}
+
+message EvmLog {
+    bytes address = 1 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address"];
+
+    repeated bytes topics = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
+
+    bytes data = 3;
+
+    uint64 block_number = 4;
+
+    bytes tx_hash = 5 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
+
+    uint64 tx_index = 6;
+
+    bytes block_hash = 7 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
+
+    uint64 index = 8;
+
+    bool removed = 9;
 }
