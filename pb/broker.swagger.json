@@ -22,7 +22,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -52,7 +52,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -102,7 +102,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -140,7 +140,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -178,7 +178,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -216,7 +216,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -252,7 +252,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -282,7 +282,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -314,7 +314,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -346,7 +346,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -391,7 +391,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -435,7 +435,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -477,7 +477,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -507,7 +507,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -537,7 +537,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -578,7 +578,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -624,7 +624,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -662,7 +662,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -674,7 +674,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbTransaction"
+              "$ref": "#/definitions/pbBxhTransaction"
             }
           }
         ],
@@ -694,7 +694,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -724,7 +724,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -736,7 +736,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbTransaction"
+              "$ref": "#/definitions/pbBxhTransaction"
             }
           }
         ],
@@ -754,10 +754,8 @@
           "$ref": "#/definitions/pbBlockHeader"
         },
         "transactions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/pbTransaction"
-          }
+          "type": "string",
+          "format": "byte"
         },
         "block_hash": {
           "type": "string",
@@ -803,6 +801,58 @@
         "version": {
           "type": "string",
           "format": "byte"
+        },
+        "Bloom": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "pbBxhTransaction": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "format": "byte"
+        },
+        "from": {
+          "type": "string",
+          "format": "byte"
+        },
+        "to": {
+          "type": "string",
+          "format": "byte"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        },
+        "transaction_hash": {
+          "type": "string",
+          "format": "byte"
+        },
+        "payload": {
+          "type": "string",
+          "format": "byte"
+        },
+        "IBTP": {
+          "$ref": "#/definitions/pbIBTP"
+        },
+        "nonce": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "amount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "signature": {
+          "type": "string",
+          "format": "byte"
+        },
+        "extra": {
+          "type": "string",
+          "format": "byte"
         }
       }
     },
@@ -845,8 +895,50 @@
         },
         "interchain": {
           "type": "boolean",
-          "format": "boolean",
           "title": "The interchain flag used by interchain contract"
+        }
+      }
+    },
+    "pbEvmLog": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "format": "byte"
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "data": {
+          "type": "string",
+          "format": "byte"
+        },
+        "block_number": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "tx_hash": {
+          "type": "string",
+          "format": "byte"
+        },
+        "tx_index": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "block_hash": {
+          "type": "string",
+          "format": "byte"
+        },
+        "index": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "removed": {
+          "type": "boolean"
         }
       }
     },
@@ -893,7 +985,7 @@
       "type": "object",
       "properties": {
         "tx": {
-          "$ref": "#/definitions/pbTransaction"
+          "$ref": "#/definitions/pbBxhTransaction"
         },
         "tx_meta": {
           "$ref": "#/definitions/pbTransactionMeta"
@@ -984,7 +1076,7 @@
         "transactions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/pbTransaction"
+            "$ref": "#/definitions/pbBxhTransaction"
           }
         },
         "height": {
@@ -1042,6 +1134,24 @@
           "items": {
             "$ref": "#/definitions/pbEvent"
           }
+        },
+        "gas_used": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "evm_logs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbEvmLog"
+          }
+        },
+        "bloom": {
+          "type": "string",
+          "format": "byte"
+        },
+        "contract_address": {
+          "type": "string",
+          "format": "byte"
         }
       }
     },
@@ -1112,54 +1222,6 @@
         "UNION_INTERCHAIN_TX_WRAPPER"
       ],
       "default": "BLOCK"
-    },
-    "pbTransaction": {
-      "type": "object",
-      "properties": {
-        "version": {
-          "type": "string",
-          "format": "byte"
-        },
-        "from": {
-          "type": "string",
-          "format": "byte"
-        },
-        "to": {
-          "type": "string",
-          "format": "byte"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "int64"
-        },
-        "transaction_hash": {
-          "type": "string",
-          "format": "byte"
-        },
-        "payload": {
-          "type": "string",
-          "format": "byte"
-        },
-        "IBTP": {
-          "$ref": "#/definitions/pbIBTP"
-        },
-        "nonce": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "amount": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "signature": {
-          "type": "string",
-          "format": "byte"
-        },
-        "extra": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
     },
     "pbTransactionHashMsg": {
       "type": "object",

@@ -6,7 +6,7 @@ import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "arg.proto";
 import "ibtp.proto";
 
-message Transaction {
+message BxhTransaction {
     bytes version = 1;
     bytes from = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address"];
     bytes to = 3 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address"];
@@ -44,10 +44,6 @@ message InvokePayload {
     repeated Arg args = 2;
 }
 
-message Transactions {
-    repeated Transaction transactions = 1;
-}
-
 message TransactionMeta {
     bytes block_hash = 1;
     uint64 block_height = 2;
@@ -67,7 +63,7 @@ message TransactionTracingMeta {
 
 message TransactionSlice {
     uint64 height = 1;
-    repeated Transaction txs = 2;
+    repeated BxhTransaction txs = 2;
 }
 
 message AssetExchangeInfo {
