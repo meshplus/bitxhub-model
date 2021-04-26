@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
 	types2 "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/rlp"
@@ -29,9 +30,15 @@ var encodeBufferPool = sync.Pool{
 	New: func() interface{} { return new(bytes.Buffer) },
 }
 
-type sigCache struct {
-	signer EIP155Signer
-	from   common.Address
+// CallArgs represents the arguments for a call.
+type CallArgs struct {
+	From       *common.Address    `json:"from"`
+	To         *common.Address    `json:"to"`
+	Gas        *hexutil.Uint64    `json:"gas"`
+	GasPrice   *hexutil.Big       `json:"gasPrice"`
+	Value      *hexutil.Big       `json:"value"`
+	Data       *hexutil.Bytes     `json:"data"`
+	AccessList *types2.AccessList `json:"accessList"`
 }
 
 var signer EIP155Signer
@@ -633,4 +640,38 @@ func prefixedRlpHash(prefix byte, x interface{}) *types.Hash {
 	rlp.Encode(sha, x)
 	sha.Read(h.RawHash[:])
 	return &h
+}
+
+func (e *EthTransaction) FromCallArgs(callArgs CallArgs) {
+	if callArgs.From != nil {
+		e.from.Store(types.NewAddress(callArgs.From.Bytes()))
+	}
+
+	inner := &AccessListTx{
+		GasPrice: (*big.Int)(callArgs.GasPrice),
+		To:       callArgs.To,
+		Value:    (*big.Int)(callArgs.Value),
+	}
+
+	if callArgs.Gas != nil {
+		inner.Gas = (uint64)(*callArgs.Gas)
+	}
+
+	if callArgs.GasPrice == nil {
+		inner.GasPrice = big.NewInt(0)
+	}
+
+	if callArgs.Value == nil {
+		inner.Value = big.NewInt(0)
+	}
+
+	if callArgs.Data != nil {
+		inner.Data = ([]byte)(*callArgs.Data)
+	}
+
+	if callArgs.AccessList != nil {
+		inner.AccessList = *callArgs.AccessList
+	}
+
+	e.inner = inner
 }
