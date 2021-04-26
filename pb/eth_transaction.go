@@ -333,6 +333,9 @@ func (e *EthTransaction) sender() (*types.Address, error) {
 }
 
 func (e *EthTransaction) GetTo() *types.Address {
+	if e.inner.to() == nil {
+		return nil
+	}
 	return types.NewAddress(e.inner.to().Bytes())
 }
 
