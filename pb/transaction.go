@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math/big"
 
+	proto "github.com/gogo/protobuf/proto"
 	"github.com/meshplus/bitxhub-kit/types"
 )
 
@@ -40,6 +41,10 @@ type Transaction interface {
 type Transactions struct {
 	Transactions []Transaction
 }
+
+func (txs *Transactions) Reset()         { *txs = Transactions{} }
+func (txs *Transactions) String() string { return proto.CompactTextString(txs) }
+func (txs *Transactions) ProtoMessage()  {}
 
 func (txs *Transactions) MarshalTo(data []byte) (int, error) {
 	txsData, err := txs.Marshal()
