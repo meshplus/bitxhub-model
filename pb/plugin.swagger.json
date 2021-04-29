@@ -103,6 +103,19 @@
       ],
       "default": "INTERCHAIN"
     },
+    "pbLockEvent": {
+      "type": "object",
+      "properties": {
+        "receipt": {
+          "type": "string",
+          "format": "byte"
+        },
+        "proof": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
     "pbNameResponse": {
       "type": "object",
       "properties": {
@@ -115,8 +128,7 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "boolean",
-          "format": "boolean"
+          "type": "boolean"
         },
         "message": {
           "type": "string"
@@ -145,8 +157,7 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "boolean",
-          "format": "boolean"
+          "type": "boolean"
         },
         "message": {
           "type": "string"
@@ -164,6 +175,15 @@
         }
       }
     },
+    "pbUpdateMeta": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -173,6 +193,27 @@
         "value": {
           "type": "string",
           "format": "byte"
+        }
+      }
+    },
+    "runtimeError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
         }
       }
     },
@@ -200,20 +241,6 @@
           }
         }
       }
-    }
-  },
-  "x-stream-definitions": {
-    "pbIBTP": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/pbIBTP"
-        },
-        "error": {
-          "$ref": "#/definitions/runtimeStreamError"
-        }
-      },
-      "title": "Stream result of pbIBTP"
     }
   }
 }

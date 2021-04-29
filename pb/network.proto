@@ -13,7 +13,7 @@ message Message {
         FETCH_BLOCK_SIGN_ACK = 6;
         FETCH_IBTP_SIGN = 7;
         FETCH_IBTP_SIGN_ACK = 8;
-        FETCH_ASSET_EXCHANEG_SIGN = 9;
+        FETCH_ASSET_EXCHANGE_SIGN = 9;
         FETCH_ASSET_EXCHANGE_SIGN_ACK = 10;
         GET_ADDRESS = 11;
         GET_ADDRESS_ACK = 12;
@@ -23,6 +23,8 @@ message Message {
         GET_BLOCKS_ACK = 16;
         CHECK_MASTER_PIER = 17;
         CHECK_MASTER_PIER_ACK = 18;
+        FETCH_BURN_SIGN = 21;
+        FETCH_BURN_SIGN_ACK = 22;
     }
     Type type = 1;
     bytes Data = 2;

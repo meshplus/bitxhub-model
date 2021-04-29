@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package pb;
 
-import "bxh_transaction.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 message Block {
