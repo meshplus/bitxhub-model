@@ -20,7 +20,6 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 )
 
@@ -31,7 +30,6 @@ var _ status.Status
 var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = descriptor.ForMessage
-var _ = metadata.Join
 
 var (
 	filter_ChainBroker_Subscribe_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
@@ -317,10 +315,7 @@ func local_request_ChainBroker_GetBlock_0(ctx context.Context, marshaler runtime
 	var protoReq GetBlockRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ChainBroker_GetBlock_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.URL.Query(), filter_ChainBroker_GetBlock_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -353,10 +348,7 @@ func local_request_ChainBroker_GetBlocks_0(ctx context.Context, marshaler runtim
 	var protoReq GetBlocksRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ChainBroker_GetBlocks_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.URL.Query(), filter_ChainBroker_GetBlocks_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -389,10 +381,7 @@ func local_request_ChainBroker_GetBlockHeaders_0(ctx context.Context, marshaler 
 	var protoReq GetBlockHeadersRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ChainBroker_GetBlockHeaders_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.URL.Query(), filter_ChainBroker_GetBlockHeaders_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -425,10 +414,7 @@ func local_request_ChainBroker_GetChainMeta_0(ctx context.Context, marshaler run
 	var protoReq Request
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ChainBroker_GetChainMeta_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.URL.Query(), filter_ChainBroker_GetChainMeta_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -461,10 +447,7 @@ func local_request_ChainBroker_GetInfo_0(ctx context.Context, marshaler runtime.
 	var protoReq Request
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ChainBroker_GetInfo_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.URL.Query(), filter_ChainBroker_GetInfo_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -587,10 +570,7 @@ func local_request_ChainBroker_GetMultiSigns_0(ctx context.Context, marshaler ru
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "content", err)
 	}
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ChainBroker_GetMultiSigns_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.URL.Query(), filter_ChainBroker_GetMultiSigns_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -888,7 +868,6 @@ func local_request_ChainBroker_HeartBeat_0(ctx context.Context, marshaler runtim
 // RegisterChainBrokerHandlerServer registers the http handlers for service ChainBroker to "mux".
 // UnaryRPC     :call ChainBrokerServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterChainBrokerHandlerFromEndpoint instead.
 func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux, server ChainBrokerServer) error {
 
 	mux.Handle("GET", pattern_ChainBroker_Subscribe_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -915,8 +894,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("POST", pattern_ChainBroker_SendTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -924,7 +901,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_SendTransaction_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -938,8 +914,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("POST", pattern_ChainBroker_SendView_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -947,7 +921,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_SendView_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -961,8 +934,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("GET", pattern_ChainBroker_GetTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -970,7 +941,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_GetTransaction_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -984,8 +954,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("GET", pattern_ChainBroker_GetReceipt_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -993,7 +961,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_GetReceipt_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1007,8 +974,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("GET", pattern_ChainBroker_GetBlock_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -1016,7 +981,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_GetBlock_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1030,8 +994,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("GET", pattern_ChainBroker_GetBlocks_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -1039,7 +1001,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_GetBlocks_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1053,8 +1014,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("GET", pattern_ChainBroker_GetBlockHeaders_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -1062,7 +1021,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_GetBlockHeaders_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1076,8 +1034,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("GET", pattern_ChainBroker_GetChainMeta_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -1085,7 +1041,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_GetChainMeta_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1099,8 +1054,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("GET", pattern_ChainBroker_GetInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -1108,7 +1061,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_GetInfo_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1122,8 +1074,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("GET", pattern_ChainBroker_GetAccountBalance_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -1131,7 +1081,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_GetAccountBalance_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1145,8 +1094,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("GET", pattern_ChainBroker_GetMultiSigns_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -1154,7 +1101,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_GetMultiSigns_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1168,8 +1114,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("GET", pattern_ChainBroker_GetTPS_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -1177,7 +1121,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_GetTPS_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1191,8 +1134,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("GET", pattern_ChainBroker_GetPendingNonceByAccount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -1200,7 +1141,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_GetPendingNonceByAccount_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1214,8 +1154,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("POST", pattern_ChainBroker_DelVPNode_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -1223,7 +1161,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_DelVPNode_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1237,8 +1174,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("GET", pattern_ChainBroker_CheckMasterPier_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -1246,7 +1181,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_CheckMasterPier_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1260,8 +1194,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("POST", pattern_ChainBroker_SetMasterPier_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -1269,7 +1201,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_SetMasterPier_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1283,8 +1214,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	mux.Handle("POST", pattern_ChainBroker_HeartBeat_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
 		if err != nil {
@@ -1292,7 +1221,6 @@ func RegisterChainBrokerHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 		resp, md, err := local_request_ChainBroker_HeartBeat_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)

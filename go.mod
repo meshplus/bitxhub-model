@@ -7,7 +7,6 @@ require (
 	github.com/gogo/protobuf v1.3.2
 	github.com/golang/protobuf v1.4.3
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0
-	github.com/kr/pretty v0.2.0 // indirect
 	github.com/meshplus/bitxhub-kit v1.2.0
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/crypto v0.0.0-20201117144127-c1f2f97bffc9
