@@ -10,263 +10,267 @@ import "block.proto";
 import "chain.proto";
 
 service ChainBroker {
-    rpc Subscribe (SubscriptionRequest) returns (stream Response) {
-        option (google.api.http) = {
-            get: "/v1/subscription"
-        };
-    }
+  rpc Subscribe (SubscriptionRequest) returns (stream Response) {
+    option (google.api.http) = {
+      get: "/v1/subscription"
+    };
+  }
 
-    rpc GetBlockHeader (GetBlockHeaderRequest) returns (stream pb.BlockHeader) {
-        option (google.api.http) = {
-            get: "/v1/block_header"
-        };
-    }
+  rpc GetBlockHeader (GetBlockHeaderRequest) returns (stream pb.BlockHeader) {
+    option (google.api.http) = {
+      get: "/v1/block_header"
+    };
+  }
 
-    rpc GetInterchainTxWrappers (GetInterchainTxWrappersRequest) returns (stream InterchainTxWrappers) {
-        option (google.api.http) = {
-            get: "/v1/interchain_tx_wrappers"
-        };
-    }
+  rpc GetInterchainTxWrappers (GetInterchainTxWrappersRequest) returns (stream InterchainTxWrappers) {
+    option (google.api.http) = {
+      get: "/v1/interchain_tx_wrappers"
+    };
+  }
 
-    rpc SendTransaction (pb.BxhTransaction) returns (TransactionHashMsg) {
-        option (google.api.http) = {
-            post: "/v1/transaction"
-            body: "*"
-        };
-    }
+  rpc SendTransaction (pb.BxhTransaction) returns (TransactionHashMsg) {
+    option (google.api.http) = {
+      post: "/v1/transaction"
+      body: "*"
+    };
+  }
 
-    rpc SendView (pb.BxhTransaction) returns (pb.Receipt) {
-        option (google.api.http) = {
-            post: "/v1/view"
-            body: "*"
-        };
-    }
+  rpc SendView (pb.BxhTransaction) returns (pb.Receipt) {
+    option (google.api.http) = {
+      post: "/v1/view"
+      body: "*"
+    };
+  }
 
-    rpc GetTransaction (TransactionHashMsg) returns (GetTransactionResponse) {
-        option (google.api.http) = {
-            get: "/v1/transaction/{tx_hash}"
-        };
-    }
+  rpc GetTransaction (TransactionHashMsg) returns (GetTransactionResponse) {
+    option (google.api.http) = {
+      get: "/v1/transaction/{tx_hash}"
+    };
+  }
 
-    rpc GetReceipt (TransactionHashMsg) returns (pb.Receipt) {
-        option (google.api.http) = {
-            get: "/v1/receipt/{tx_hash}"
-        };
-    }
+  rpc GetReceipt (TransactionHashMsg) returns (pb.Receipt) {
+    option (google.api.http) = {
+      get: "/v1/receipt/{tx_hash}"
+    };
+  }
 
-    rpc GetBlock (GetBlockRequest) returns (pb.Block) {
-        option (google.api.http) = {
-            get: "/v1/block"
-        };
-    }
+  rpc GetBlock (GetBlockRequest) returns (pb.Block) {
+    option (google.api.http) = {
+      get: "/v1/block"
+    };
+  }
 
-    rpc GetBlocks (GetBlocksRequest) returns (GetBlocksResponse) {
-        option (google.api.http) = {
-            get: "/v1/blocks"
-        };
-    }
+  rpc GetBlocks (GetBlocksRequest) returns (GetBlocksResponse) {
+    option (google.api.http) = {
+      get: "/v1/blocks"
+    };
+  }
 
-    rpc GetBlockHeaders (GetBlockHeadersRequest) returns (GetBlockHeadersResponse) {
-        option (google.api.http) = {
-            get: "/v1/block_headers"
-        };
-    }
+  rpc GetBlockHeaders (GetBlockHeadersRequest) returns (GetBlockHeadersResponse) {
+    option (google.api.http) = {
+      get: "/v1/block_headers"
+    };
+  }
 
-    rpc GetChainMeta (Request) returns (pb.ChainMeta) {
-        option (google.api.http) = {
-            get: "/v1/chain_meta"
-        };
-    }
+  rpc GetChainMeta (Request) returns (pb.ChainMeta) {
+    option (google.api.http) = {
+      get: "/v1/chain_meta"
+    };
+  }
 
-    rpc GetInfo (Request) returns (Response) {
-        option (google.api.http) = {
-            get: "/v1/info"
-        };
-    }
+  rpc GetInfo (Request) returns (Response) {
+    option (google.api.http) = {
+      get: "/v1/info"
+    };
+  }
 
-    rpc GetAccountBalance (Address) returns (Response) {
-        option (google.api.http) = {
-            get: "/v1/account_balance/{address}"
-        };
-    }
+  rpc GetAccountBalance (Address) returns (Response) {
+    option (google.api.http) = {
+      get: "/v1/account_balance/{address}"
+    };
+  }
 
-    rpc GetMultiSigns (GetMultiSignsRequest) returns (SignResponse) {
-        option (google.api.http) = {
-            get: "/v1/multi_sign/{content}"
-        };
-    }
+  rpc GetMultiSigns (GetMultiSignsRequest) returns (SignResponse) {
+    option (google.api.http) = {
+      get: "/v1/multi_sign/{content}"
+    };
+  }
 
-    rpc GetTPS(GetTPSRequest) returns (Response) {
-        option (google.api.http) = {
-            get: "/v1/tps/{begin}/{end}"
-        };
-    }
+  rpc GetTPS(GetTPSRequest) returns (Response) {
+    option (google.api.http) = {
+      get: "/v1/tps/{begin}/{end}"
+    };
+  }
 
-    rpc GetPendingNonceByAccount(Address) returns (Response) {
-        option (google.api.http) = {
-            get: "/v1/pendingNonce/{address}"
-        };
-    }
+  rpc GetPendingNonceByAccount(Address) returns (Response) {
+    option (google.api.http) = {
+      get: "/v1/pendingNonce/{address}"
+    };
+  }
 
-    rpc DelVPNode(DelVPNodeRequest) returns (Response) {
-        option (google.api.http) = {
-            post: "/v1/delvpnode"
-            body: "*"
-        };
-    }
+  rpc DelVPNode(DelVPNodeRequest) returns (Response) {
+    option (google.api.http) = {
+      post: "/v1/delvpnode"
+      body: "*"
+    };
+  }
 
-    rpc CheckMasterPier (Address) returns (Response) {
-        option (google.api.http) = {
-            get: "/v1/check_master_pier/{address}"
-        };
-    }
+  rpc CheckMasterPier (Address) returns (Response) {
+    option (google.api.http) = {
+      get: "/v1/check_master_pier/{address}"
+    };
+  }
 
-    rpc SetMasterPier (PierInfo) returns (Response) {
-        option (google.api.http) = {
-            post: "/v1/set_master_pier"
-            body: "*"
-        };
-    }
+  rpc SetMasterPier (PierInfo) returns (Response) {
+    option (google.api.http) = {
+      post: "/v1/set_master_pier"
+      body: "*"
+    };
+  }
 
-    rpc HeartBeat (PierInfo) returns (Response) {
-        option (google.api.http) = {
-            post: "/v1/heart_beat"
-            body: "*"
-        };
-    }
+  rpc HeartBeat (PierInfo) returns (Response) {
+    option (google.api.http) = {
+      post: "/v1/heart_beat"
+      body: "*"
+    };
+  }
 }
 
 message GetBlockHeaderRequest {
-    uint64 begin = 1;
-    uint64 end = 2;
+  uint64 begin = 1;
+  uint64 end = 2;
 }
 
 message GetInterchainTxWrappersRequest {
-    uint64 begin = 1;
-    uint64 end = 2;
-    string pid = 3;
+  uint64 begin = 1;
+  uint64 end = 2;
+  string pid = 3;
 }
 
 message TransactionHashMsg {
-    string tx_hash = 1;
+  string tx_hash = 1;
 }
 
 message GetBlockRequest {
-    enum Type {
-        HEIGHT = 0;
-        HASH = 1;
-    }
-    Type type = 1;
-    string value = 2;
+  enum Type {
+    HEIGHT = 0;
+    HASH = 1;
+  }
+  Type type = 1;
+  string value = 2;
 }
 
 message Request {
-    enum Type {
-        CHAIN_STATUS = 0;
-        NETWORK = 1;
-        VALIDATORS = 2;
-    }
-    Type type = 1;
+  enum Type {
+    CHAIN_STATUS = 0;
+    NETWORK = 1;
+    VALIDATORS = 2;
+  }
+  Type type = 1;
 }
 
 message Response {
-    bytes data = 1;
+  bytes data = 1;
 }
 
 message SignResponse {
-    map<string, bytes> sign = 1;
+  map<string, bytes> sign = 1;
 }
 
 message Address {
-    string address = 1;
+  string address = 1;
 }
 
 message GetBlocksRequest {
-    uint64 start = 1;
-    uint64 end = 2;
+  uint64 start = 1;
+  uint64 end = 2;
 }
 
 message GetBlocksResponse {
-    repeated pb.Block blocks = 1;
+  repeated pb.Block blocks = 1;
 }
 
 message GetBlockHeadersRequest {
-    uint64 start = 1;
-    uint64 end = 2;
+  uint64 start = 1;
+  uint64 end = 2;
 }
 
 message GetBlockHeadersResponse {
-    repeated pb.BlockHeader blockHeaders = 1;
+  repeated pb.BlockHeader blockHeaders = 1;
 }
 
 message SubscriptionRequest {
-    enum Type {
-        BLOCK = 0;
-        EVENT = 1;
-        INTERCHAIN_TX = 2;
-        BLOCK_HEADER = 3;
-        INTERCHAIN_TX_WRAPPER = 4;
-        UNION_INTERCHAIN_TX_WRAPPER = 5;
-    }
-    Type type = 1;
-    bytes extra = 2;
+  enum Type {
+    BLOCK = 0;
+    EVENT = 1;
+    INTERCHAIN_TX = 2;
+    BLOCK_HEADER = 3;
+    INTERCHAIN_TX_WRAPPER = 4;
+    UNION_INTERCHAIN_TX_WRAPPER = 5;
+  }
+  Type type = 1;
+  bytes extra = 2;
 }
 
 message GetMultiSignsRequest {
-    enum Type {
-        ASSET_EXCHANGE = 0;
-        IBTP = 1;
-        BLOCK_HEADER = 2;
-    }
-    Type type = 1;
-    string content = 2;
+  enum Type {
+    ASSET_EXCHANGE = 0;
+    IBTP = 1;
+    BLOCK_HEADER = 2;
+  }
+  Type type = 1;
+  string content = 2;
 }
 
 message GetTransactionResponse {
-    pb.BxhTransaction tx = 1;
-    pb.TransactionMeta tx_meta = 2;
+  pb.BxhTransaction tx = 1;
+  pb.TransactionMeta tx_meta = 2;
+}
+
+message VerifiedTx {
+  pb.BxhTransaction tx = 1;
+  bool valid = 2;
 }
 
 message InterchainTxWrapper {
-    repeated bytes l2Roots = 1 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
-    repeated bytes transaction_hashes = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
-    repeated BxhTransaction transactions = 3;
-    uint64 height = 4;
+  repeated bytes l2Roots = 1 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
+  repeated VerifiedTx transactions = 2;
+  uint64 height = 3;
 }
 
 message InterchainTxWrappers {
-    repeated InterchainTxWrapper interchainTxWrappers = 1;
+  repeated InterchainTxWrapper interchainTxWrappers = 1;
 }
 
 message GetTPSRequest {
-    uint64 begin = 1;
-    uint64 end = 2;
+  uint64 begin = 1;
+  uint64 end = 2;
 }
 
 message DelVPNodeRequest {
-    string pid = 1;
+  string pid = 1;
 }
 
 message PierInfo {
-    string address = 1;
-    string index = 2;
-    int64  timeout = 3;
+  string address = 1;
+  string index = 2;
+  int64  timeout = 3;
 }
 
 message CheckPierResponse {
-    enum Status {
-        ERROR_MASTER = 0;
-        HAS_MASTER = 1;
-        NO_MASTER = 2;
-    }
-    Status status = 1;
-    string address = 2;
+  enum Status {
+    ERROR_MASTER = 0;
+    HAS_MASTER = 1;
+    NO_MASTER = 2;
+  }
+  Status status = 1;
+  string address = 2;
 }
 
 message HeartBeatRespones {
-    enum Status {
-        ALIVE = 0;
-        DEAD = 1;
-    }
-    Status status = 1;
+  enum Status {
+    ALIVE = 0;
+    DEAD = 1;
+  }
+  Status status = 1;
 }
