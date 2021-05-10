@@ -31,8 +31,8 @@ message TransactionData {
     Type type = 1;
     uint64 amount = 2;
     enum VMType {
-        BVM = 0;
-        XVM = 1;
+        XVM = 0;
+        BVM = 1;
     }
     VMType vm_type = 3;
     bytes payload = 4;
