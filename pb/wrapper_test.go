@@ -1,9 +1,10 @@
 package pb
 
 import (
+	"testing"
+
 	"github.com/meshplus/bitxhub-kit/types"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestInterchain_Marshal(t *testing.T) {
@@ -31,7 +32,7 @@ func TestInterchain_Marshal(t *testing.T) {
 
 func TestInterchainMeta_Marshal(t *testing.T) {
 	icm := &InterchainMeta{
-		Counter: make(map[string]*Uint64Slice),
+		Counter: make(map[string]*VerifiedIndexSlice),
 	}
 
 	data, err := icm.Marshal()
@@ -44,7 +45,10 @@ func TestInterchainMeta_Marshal(t *testing.T) {
 	assert.Equal(t, icm.Counter, icm1.Counter)
 	assert.Equal(t, icm.L2Roots, icm1.L2Roots)
 
-	icm.Counter["1"] = &Uint64Slice{Slice: []uint64{1, 2, 3}}
+	icm.Counter["1"] = &VerifiedIndexSlice{Slice: []*VerifiedIndex{
+		{Index: 1, Valid: true},
+		{Index: 2, Valid: false},
+	}}
 	icm.L2Roots = append(icm.L2Roots, types.Hash{})
 
 	data, err = icm.Marshal()

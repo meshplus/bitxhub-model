@@ -15,3 +15,22 @@ message StringUint64SliceMap {
   repeated string keys = 1;
   repeated Uint64Slice vals = 2;
 }
+
+message VerifiedIndex {
+  uint64 index = 1;
+  bool valid = 2;
+}
+
+message VerifiedIndexSlice {
+  repeated VerifiedIndex slice = 1;
+}
+
+message StringVerifiedIndexMap {
+  repeated string keys = 1;
+  repeated VerifiedIndex vals = 2;
+}
+
+message StringVerifiedIndexSliceMap {
+  repeated string keys = 1;
+  repeated VerifiedIndexSlice vals = 2;
+}
