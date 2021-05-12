@@ -227,6 +227,11 @@ message GetTransactionResponse {
     pb.TransactionMeta tx_meta = 2;
 }
 
+message VerifiedTx {
+  pb.Transaction tx = 1;
+  bool valid = 2;
+}
+
 message InterchainTxWrapper {
     repeated bytes l2Roots = 1 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
     repeated bytes transaction_hashes = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
