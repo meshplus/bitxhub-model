@@ -1,12 +1,13 @@
 package pb
 
 import (
-	"github.com/meshplus/bitxhub-kit/types"
 	"sort"
+
+	"github.com/meshplus/bitxhub-kit/types"
 )
 
 type InterchainMeta struct {
-	Counter map[string]*Uint64Slice
+	Counter map[string]*VerifiedIndexSlice
 	L2Roots []types.Hash
 }
 
@@ -19,7 +20,7 @@ type Interchain struct {
 
 func (m *InterchainMeta) Marshal() ([]byte, error) {
 	ims := &InterchainMetaS{
-		Counter: stringUint64SliceMapToSlice(m.Counter),
+		Counter: stringVerifiedIndexSliceMapToSlice(m.Counter),
 		L2Roots: m.L2Roots,
 	}
 
@@ -118,8 +119,28 @@ func stringUint64MapToSlice(m map[string]uint64) *StringUint64Map {
 	return sum
 }
 
-func stringUint64SliceMapToSlice(m map[string]*Uint64Slice) *StringUint64SliceMap {
-	sum := &StringUint64SliceMap{}
+func (sum *StringVerifiedIndexMap) toMap() map[string]*VerifiedIndex {
+	m := make(map[string]*VerifiedIndex)
+
+	for i := range sum.Keys {
+		m[sum.Keys[i]] = sum.Vals[i]
+	}
+
+	return m
+}
+
+func (sum *StringVerifiedIndexSliceMap) toMap() map[string]*VerifiedIndexSlice {
+	m := make(map[string]*VerifiedIndexSlice)
+
+	for i := range sum.Keys {
+		m[sum.Keys[i]] = sum.Vals[i]
+	}
+
+	return m
+}
+
+func stringVerifiedIndexSliceMapToSlice(m map[string]*VerifiedIndexSlice) *StringVerifiedIndexSliceMap {
+	sum := &StringVerifiedIndexSliceMap{}
 
 	var keys []string
 	for k := range m {
