@@ -6,7 +6,7 @@ import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "basic.proto";
 
 message InterchainMetaS {
-  StringUint64SliceMap counter = 1;
+  StringVerifiedIndexSliceMap counter = 1;
   repeated bytes l2Roots = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
 }
 
