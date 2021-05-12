@@ -115,7 +115,8 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "boolean"
+          "type": "boolean",
+          "format": "boolean"
         },
         "message": {
           "type": "string"
@@ -144,7 +145,8 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "boolean"
+          "type": "boolean",
+          "format": "boolean"
         },
         "message": {
           "type": "string"
@@ -174,27 +176,6 @@
         }
       }
     },
-    "runtimeError": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "type": "string"
-        },
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/protobufAny"
-          }
-        }
-      }
-    },
     "runtimeStreamError": {
       "type": "object",
       "properties": {
@@ -219,6 +200,20 @@
           }
         }
       }
+    }
+  },
+  "x-stream-definitions": {
+    "pbIBTP": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/pbIBTP"
+        },
+        "error": {
+          "$ref": "#/definitions/runtimeStreamError"
+        }
+      },
+      "title": "Stream result of pbIBTP"
     }
   }
 }

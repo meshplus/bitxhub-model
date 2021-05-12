@@ -60,6 +60,7 @@ service AppchainPlugin {
     rpc GetIBTP(Empty) returns (stream pb.IBTP);
     rpc SubmitIBTP(pb.IBTP) returns (SubmitIBTPResponse);
     rpc RollbackIBTP(RollbackIBTPRequest) returns (RollbackIBTPResponse);
+    rpc IncreaseInMeta(pb.IBTP) returns (pb.IBTP);
     rpc GetOutMessage(GetOutMessageRequest) returns (pb.IBTP);
     rpc GetInMessage(GetInMessageRequest) returns (GetInMessageResponse);
     rpc GetInMeta(Empty) returns (GetMetaResponse);

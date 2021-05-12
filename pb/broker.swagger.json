@@ -921,17 +921,10 @@
             "format": "byte"
           }
         },
-        "transaction_hashes": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        },
         "transactions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/pbBxhTransaction"
+            "$ref": "#/definitions/pbVerifiedTx"
           }
         },
         "height": {
@@ -1100,6 +1093,18 @@
         "index": {
           "type": "string",
           "format": "uint64"
+        }
+      }
+    },
+    "pbVerifiedTx": {
+      "type": "object",
+      "properties": {
+        "tx": {
+          "$ref": "#/definitions/pbBxhTransaction"
+        },
+        "valid": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },

@@ -3,6 +3,7 @@ module github.com/meshplus/bitxhub-model
 go 1.13
 
 require (
+	github.com/cbergoon/merkletree v0.2.0
 	github.com/ethereum/go-ethereum v1.10.2
 	github.com/gogo/protobuf v1.3.2
 	github.com/golang/protobuf v1.4.3
