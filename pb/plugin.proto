@@ -43,12 +43,24 @@ message TypeResponse {
     string type = 1;
 }
 
+message RollbackIBTPRequest {
+    pb.IBTP ibtp = 1;
+    bool srcChain = 2;
+}
+
+message RollbackIBTPResponse {
+    bool status = 1;
+    string message = 2;
+}
+
 service AppchainPlugin {
     rpc Initialize(InitializeRequest) returns (Empty);
     rpc Start(Empty) returns (Empty);
     rpc Stop(Empty) returns (Empty);
     rpc GetIBTP(Empty) returns (stream pb.IBTP);
     rpc SubmitIBTP(pb.IBTP) returns (SubmitIBTPResponse);
+    rpc RollbackIBTP(RollbackIBTPRequest) returns (RollbackIBTPResponse);
+    rpc IncreaseInMeta(pb.IBTP) returns (pb.IBTP);
     rpc GetOutMessage(GetOutMessageRequest) returns (pb.IBTP);
     rpc GetInMessage(GetInMessageRequest) returns (GetInMessageResponse);
     rpc GetInMeta(Empty) returns (GetMetaResponse);
