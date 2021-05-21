@@ -3,40 +3,30 @@ package pb
 import (
 	"encoding/json"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/meshplus/eth-kit/types"
 )
 
 // MarshalJSON marshals as JSON.
 func (l EvmLog) MarshalJSON() ([]byte, error) {
-	type Log struct {
-		Address     common.Address `json:"address" gencodec:"required"`
-		Topics      []common.Hash  `json:"topics" gencodec:"required"`
-		Data        hexutil.Bytes  `json:"data" gencodec:"required"`
-		BlockNumber hexutil.Uint64 `json:"blockNumber"`
-		TxHash      common.Hash    `json:"transactionHash" gencodec:"required"`
-		TxIndex     hexutil.Uint   `json:"transactionIndex"`
-		BlockHash   common.Hash    `json:"blockHash"`
-		Index       hexutil.Uint   `json:"logIndex"`
-		Removed     bool           `json:"removed"`
-	}
-	var enc Log
+	var enc types.Log
+
 	if l.Address != nil {
-		enc.Address = common.BytesToAddress(l.Address.Bytes())
+		enc.Address = types.BytesToAddress(l.Address.Bytes())
 	}
 	for _, topic := range l.Topics {
-		enc.Topics = append(enc.Topics, common.BytesToHash(topic.Bytes()))
+		enc.Topics = append(enc.Topics, types.BytesToHash(topic.Bytes()))
 	}
 	enc.Data = l.Data
-	enc.BlockNumber = hexutil.Uint64(l.BlockNumber)
+	enc.BlockNumber = types.Uint64(l.BlockNumber)
 	if l.TxHash != nil {
-		enc.TxHash = common.BytesToHash(l.TxHash.Bytes())
+		enc.TxHash = types.BytesToHash(l.TxHash.Bytes())
 	}
-	enc.TxIndex = hexutil.Uint(l.TxIndex)
+	enc.TxIndex = types.Uint(l.TxIndex)
 	if l.BlockHash != nil {
-		enc.BlockHash = common.BytesToHash(l.BlockHash.Bytes())
+		enc.BlockHash = types.BytesToHash(l.BlockHash.Bytes())
 	}
-	enc.Index = hexutil.Uint(l.Index)
+	enc.Index = types.Uint(l.Index)
 	enc.Removed = l.Removed
+
 	return json.Marshal(&enc)
 }
