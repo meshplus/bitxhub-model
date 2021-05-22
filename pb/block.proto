@@ -21,5 +21,5 @@ message BlockHeader {
     bytes parent_hash = 5 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
     int64 timestamp = 6;
     bytes version = 7;
-    bytes Bloom = 8 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Bloom"];
+    bytes Bloom = 8 [(gogoproto.customtype) = "github.com/meshplus/eth-kit/types.Bloom"];
 }

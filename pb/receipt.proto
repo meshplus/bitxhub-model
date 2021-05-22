@@ -16,7 +16,7 @@ message Receipt {
     repeated Event events = 5;
     uint64 gas_used = 6;
     repeated EvmLog evm_logs = 7;
-    bytes bloom = 8 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Bloom"];
+    bytes bloom = 8 [(gogoproto.customtype) = "github.com/meshplus/eth-kit/types.Bloom"];
     bytes contract_address = 9 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address"];
 }
 
