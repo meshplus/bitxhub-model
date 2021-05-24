@@ -11,6 +11,18 @@ import (
 
 const BxhTxType = 2
 
+type TxConstructer func() Transaction
+
+var supportedTx map[uint64]TxConstructer
+
+func RegisterTxConstructor(flag uint64, txConstructer TxConstructer) {
+	if supportedTx == nil {
+		supportedTx = make(map[uint64]TxConstructer)
+	}
+
+	supportedTx[flag] = txConstructer
+}
+
 type Transaction interface {
 	GetVersion() []byte
 	GetFrom() *types.Address
@@ -115,20 +127,15 @@ func UnmarshalTx(data []byte) (Transaction, error) {
 		return nil, nil
 	}
 
-	if data[0] == 0 {
-		tx := &BxhTransaction{}
-		if err := tx.Unmarshal(data[1:]); err != nil {
-			return nil, err
-		}
-		return tx, nil
-	} else if data[0] == 1 {
-		tx := &EthTransaction{}
-		if err := tx.Unmarshal(data[1:]); err != nil {
-			return nil, err
-		}
-
-		return tx, nil
+	constrcutor, ok := supportedTx[uint64(data[0])]
+	if !ok {
+		return nil, fmt.Errorf("unexpected tx type: %d", data[0])
 	}
 
-	return nil, fmt.Errorf("unexpected tx type: %d", data[0])
+	tx := constrcutor()
+	if err := tx.Unmarshal(data[1:]); err != nil {
+		return nil, err
+	}
+
+	return tx, nil
 }
