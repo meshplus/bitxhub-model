@@ -13,6 +13,12 @@ import (
 
 var _ Transaction = (*BxhTransaction)(nil)
 
+func init() {
+	RegisterTxConstructor(0, func() Transaction {
+		return &BxhTransaction{}
+	})
+}
+
 func (m *BxhTransaction) Hash() *types.Hash {
 	tx := &BxhTransaction{
 		From:      m.From,
