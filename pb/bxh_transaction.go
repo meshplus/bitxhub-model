@@ -237,3 +237,15 @@ func (m *BxhTransaction) ethSignMsg() []byte {
 
 	return []byte(fmt.Sprintf("\x19Ethereum Signed Message:\n%d%s", len(bodyHash), bodyHash))
 }
+
+func (m *BxhTransaction) GetValue() *big.Int {
+	if m.Amount == "" {
+		return big.NewInt(0)
+	}
+
+	if val, ok := new(big.Int).SetString(m.Amount, 10); ok {
+		return val
+	}
+
+	return big.NewInt(0)
+}
