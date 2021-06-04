@@ -29,7 +29,7 @@ type Transaction interface {
 	GetTo() *types.Address
 	GetPayload() []byte
 	GetNonce() uint64
-	GetAmount() uint64
+	GetValue() *big.Int
 	GetTimeStamp() int64
 	GetHash() *types.Hash
 	GetIBTP() *IBTP
