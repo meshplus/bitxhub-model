@@ -176,3 +176,15 @@ func (m *BxhTransaction) VerifySignature() error {
 
 	return nil
 }
+
+func (m *BxhTransaction) GetValue() *big.Int {
+	if m.Amount == "" {
+		return big.NewInt(0)
+	}
+
+	if val, ok := new(big.Int).SetString(m.Amount, 10); ok {
+		return val
+	}
+
+	return big.NewInt(0)
+}
