@@ -597,7 +597,8 @@
               "INTERCHAIN_TX",
               "BLOCK_HEADER",
               "INTERCHAIN_TX_WRAPPER",
-              "UNION_INTERCHAIN_TX_WRAPPER"
+              "UNION_INTERCHAIN_TX_WRAPPER",
+              "EVM_LOG"
             ],
             "default": "BLOCK"
           },
@@ -844,8 +845,7 @@
           "format": "uint64"
         },
         "amount": {
-          "type": "string",
-          "format": "uint64"
+          "type": "string"
         },
         "signature": {
           "type": "string",
@@ -1214,7 +1214,8 @@
         "INTERCHAIN_TX",
         "BLOCK_HEADER",
         "INTERCHAIN_TX_WRAPPER",
-        "UNION_INTERCHAIN_TX_WRAPPER"
+        "UNION_INTERCHAIN_TX_WRAPPER",
+        "EVM_LOG"
       ],
       "default": "BLOCK"
     },

@@ -207,6 +207,7 @@ message SubscriptionRequest {
     BLOCK_HEADER = 3;
     INTERCHAIN_TX_WRAPPER = 4;
     UNION_INTERCHAIN_TX_WRAPPER = 5;
+    EVM_LOG = 6;
   }
   Type type = 1;
   bytes extra = 2;
