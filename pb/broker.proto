@@ -217,6 +217,7 @@ message GetMultiSignsRequest {
     ASSET_EXCHANGE = 0;
     IBTP = 1;
     BLOCK_HEADER = 2;
+    BURN = 3;
   }
   Type type = 1;
   string content = 2;
