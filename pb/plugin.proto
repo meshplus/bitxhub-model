@@ -63,7 +63,13 @@ message UpdateMeta {
 }
 
 message UnLock {
-  bytes unlock=1;
+  string token = 1;
+  string from = 2;
+  string receipt = 3;
+  uint64 amount =4;
+  string txId = 5;
+  uint64 relayIndex =6;
+  repeated bytes multiSigns = 7;
 }
 
 service AppchainPlugin {
