@@ -124,6 +124,33 @@
         }
       }
     },
+    "pbQueryAppchainIndexResponse": {
+      "type": "object",
+      "properties": {
+        "appchainIndex": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "pbQueryFilterLockStartResponse": {
+      "type": "object",
+      "properties": {
+        "lockStart": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "pbQueryRelayIndexResponse": {
+      "type": "object",
+      "properties": {
+        "relayIndex": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "pbRollbackIBTPResponse": {
       "type": "object",
       "properties": {
