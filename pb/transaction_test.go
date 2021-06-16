@@ -2,9 +2,13 @@ package pb
 
 import (
 	"fmt"
+	"math/big"
 	"testing"
 
+	"github.com/meshplus/bitxhub-kit/crypto/asym/ecdsa"
+	"github.com/meshplus/bitxhub-kit/hexutil"
 	"github.com/meshplus/bitxhub-kit/types"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -69,4 +73,25 @@ func TestUnmarshalTx(t *testing.T) {
 	require.Nil(t, err)
 
 	require.Equal(t, txData, tx3Data)
+}
+
+func TestBxhTransaction_VerifySignature(t *testing.T) {
+	addrStr := "0x7a0b4Fa7fe66074C3cf19002D414c754261c54DE"
+	msg := "data"
+	sig := "0x73b0f712892e6014fe33e1291ae392525c5404a680f71f4f0e1ee6757d0e0e9f3b4d5b00334c5f73b436bfb29216f8e6ba69d204b3cbf94503c2879c37ac9ea41b"
+
+	msgWithPrefix := fmt.Sprintf("\x19Ethereum Signed Message:\n%d%s", len(msg), msg)
+	msgHash := ecdsa.Keccak256([]byte(msgWithPrefix))
+
+	sigBytes := hexutil.Decode(sig)
+	r := &big.Int{}
+	r.SetBytes(sigBytes[:32])
+	s := &big.Int{}
+	s.SetBytes(sigBytes[32:64])
+	v := &big.Int{}
+	v.SetBytes(sigBytes[64:])
+
+	addr, err := ecdsa.RecoverPlain(msgHash, r, s, v, true)
+	assert.Nil(t, err)
+	assert.Equal(t, addrStr, types.NewAddress(addr).String())
 }
