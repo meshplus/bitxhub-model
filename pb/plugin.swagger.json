@@ -113,6 +113,10 @@
         "proof": {
           "type": "string",
           "format": "byte"
+        },
+        "appchainIndex": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
