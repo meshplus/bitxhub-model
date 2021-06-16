@@ -28,18 +28,28 @@ message RollbackIBTPResponse {
 }
 
 message GetOutMessageRequest {
-  string to = 1;
-  uint64 idx = 2;
+  string to =1;
+  uint64 idx =2;
 }
 
 message GetInMessageRequest {
-  string from = 1;
-  uint64 idx = 2;
+  string from =1;
+  uint64 idx =2;
 }
 
 message GetInMessageResponse {
   repeated bytes result = 1;
 }
+
+message CheckHashRequest{
+  string hash=1;
+}
+
+message CheckHashResponse {
+  bytes receiptData=1;
+  bytes headerData=2;
+}
+
 
 message GetMetaResponse {
   map<string, uint64> meta = 1;
@@ -51,19 +61,6 @@ message NameResponse {
 
 message TypeResponse {
   string type = 1;
-}
-
-message LockEvent {
-  bytes receipt = 1;
-  bytes proof = 2;
-}
-
-message UpdateMeta {
-  bytes meta = 1;
-}
-
-message UnLock {
-  bytes unlock=1;
 }
 
 service AppchainPlugin {
@@ -81,9 +78,7 @@ service AppchainPlugin {
   rpc GetCallbackMeta(Empty) returns (GetMetaResponse);
   rpc CommitCallback(pb.IBTP) returns (Empty);
   rpc GetReceipt(pb.IBTP) returns (pb.IBTP);
-  rpc GetLockEvent(Empty) returns (stream LockEvent);
-  rpc GetUpdateMeta(Empty) returns (stream UpdateMeta);
-  rpc UnEscrow(UnLock) returns (Empty);
+  rpc CheckHash(CheckHashRequest) returns (CheckHashResponse);
   rpc Name(Empty) returns (NameResponse);
   rpc Type(Empty) returns (TypeResponse);
 }

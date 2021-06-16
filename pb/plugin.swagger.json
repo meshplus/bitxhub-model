@@ -12,6 +12,19 @@
   ],
   "paths": {},
   "definitions": {
+    "pbCheckHashResponse": {
+      "type": "object",
+      "properties": {
+        "receiptData": {
+          "type": "string",
+          "format": "byte"
+        },
+        "headerData": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
     "pbEmpty": {
       "type": "object"
     },
@@ -103,19 +116,6 @@
       ],
       "default": "INTERCHAIN"
     },
-    "pbLockEvent": {
-      "type": "object",
-      "properties": {
-        "receipt": {
-          "type": "string",
-          "format": "byte"
-        },
-        "proof": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
-    },
     "pbNameResponse": {
       "type": "object",
       "properties": {
@@ -172,15 +172,6 @@
       "properties": {
         "type": {
           "type": "string"
-        }
-      }
-    },
-    "pbUpdateMeta": {
-      "type": "object",
-      "properties": {
-        "meta": {
-          "type": "string",
-          "format": "byte"
         }
       }
     },
