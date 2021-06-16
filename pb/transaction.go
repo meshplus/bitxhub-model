@@ -9,8 +9,6 @@ import (
 	"github.com/meshplus/bitxhub-kit/types"
 )
 
-const BxhTxType = 2
-
 type TxConstructer func() Transaction
 
 var supportedTx map[uint64]TxConstructer
