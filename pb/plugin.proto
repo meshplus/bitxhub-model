@@ -64,6 +64,7 @@ message TypeResponse {
 message LockEvent {
   bytes receipt = 1;
   bytes proof = 2;
+  uint64 appchainIndex = 3;
 }
 
 message UpdateMeta {
