@@ -1813,7 +1813,10 @@ func (m *BxhTransaction) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthBxhTransaction
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthBxhTransaction
 			}
 			if (iNdEx + skippy) > l {
@@ -2001,7 +2004,10 @@ func (m *TransactionData) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthBxhTransaction
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthBxhTransaction
 			}
 			if (iNdEx + skippy) > l {
@@ -2117,7 +2123,10 @@ func (m *InvokePayload) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthBxhTransaction
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthBxhTransaction
 			}
 			if (iNdEx + skippy) > l {
@@ -2239,7 +2248,10 @@ func (m *TransactionMeta) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthBxhTransaction
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthBxhTransaction
 			}
 			if (iNdEx + skippy) > l {
@@ -2362,7 +2374,10 @@ func (m *CrosschainTransactionExtra) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthBxhTransaction
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthBxhTransaction
 			}
 			if (iNdEx + skippy) > l {
@@ -2480,7 +2495,10 @@ func (m *TransactionTracingMeta) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthBxhTransaction
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthBxhTransaction
 			}
 			if (iNdEx + skippy) > l {
@@ -2583,7 +2601,10 @@ func (m *TransactionSlice) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthBxhTransaction
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthBxhTransaction
 			}
 			if (iNdEx + skippy) > l {
@@ -2831,7 +2852,10 @@ func (m *AssetExchangeInfo) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthBxhTransaction
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthBxhTransaction
 			}
 			if (iNdEx + skippy) > l {

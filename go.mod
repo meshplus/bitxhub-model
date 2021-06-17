@@ -5,7 +5,7 @@ go 1.13
 require (
 	github.com/cbergoon/merkletree v0.2.0
 	github.com/gogo/protobuf v1.3.2
-	github.com/golang/protobuf v1.4.3
+	github.com/golang/protobuf v1.5.2
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0
 	github.com/meshplus/bitxhub-kit v1.2.1-0.20210524063043-9afae78ac098
 	github.com/stretchr/testify v1.7.0

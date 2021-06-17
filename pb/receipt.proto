@@ -25,11 +25,16 @@ message Receipts {
 }
 
 message Event {
+    enum EventType {
+        OTHER = 0;
+        INTERCHAIN = 1;
+        NODEMGR = 2;
+    }
     // Transaction Hash
     bytes tx_hash = 1 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
     bytes data = 2;
-    // The interchain flag used by interchain contract
-    bool interchain = 3;
+    // Event Type: interchain, nodemgr
+    EventType event_type = 3;
 }
 
 message EvmLog {
