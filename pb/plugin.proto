@@ -53,6 +53,16 @@ message RollbackIBTPResponse {
     string message = 2;
 }
 
+message CheckHashRequest{
+    string hash=1;
+}
+
+message CheckHashResponse {
+    bytes receiptData=1;
+    bytes headerData=2;
+}
+
+
 service AppchainPlugin {
     rpc Initialize(InitializeRequest) returns (Empty);
     rpc Start(Empty) returns (Empty);
@@ -67,6 +77,7 @@ service AppchainPlugin {
     rpc GetOutMeta(Empty) returns (GetMetaResponse);
     rpc GetCallbackMeta(Empty) returns (GetMetaResponse);
     rpc CommitCallback(pb.IBTP) returns (Empty);
+    rpc CheckHash(CheckHashRequest) returns (CheckHashResponse);
     rpc GetReceipt(pb.IBTP) returns (pb.IBTP);
     rpc Name(Empty) returns (NameResponse);
     rpc Type(Empty) returns (TypeResponse);
