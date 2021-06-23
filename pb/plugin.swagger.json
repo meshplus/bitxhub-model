@@ -116,7 +116,7 @@
         },
         "appchainIndex": {
           "type": "string",
-          "format": "uint64"
+          "format": "byte"
         }
       }
     },
