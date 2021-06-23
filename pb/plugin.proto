@@ -64,7 +64,7 @@ message TypeResponse {
 message LockEvent {
   bytes receipt = 1;
   bytes proof = 2;
-  bytes appchainIndex = 3;
+  uint64 appchainIndex = 3;
 }
 
 message UpdateMeta {
@@ -77,7 +77,7 @@ message UnLock {
   string receipt = 3;
   bytes  amount =4;
   string txId = 5;
-  bytes  relayIndex =6;
+  uint64 relayIndex =6;
   repeated bytes multiSigns = 7;
 }
 
