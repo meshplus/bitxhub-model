@@ -65,6 +65,7 @@ message LockEvent {
   bytes receipt = 1;
   bytes proof = 2;
   uint64 appchainIndex = 3;
+  uint64 blockNumber = 4;
 }
 
 message UpdateMeta {
