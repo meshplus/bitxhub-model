@@ -117,6 +117,10 @@
         "appchainIndex": {
           "type": "string",
           "format": "uint64"
+        },
+        "blockNumber": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
