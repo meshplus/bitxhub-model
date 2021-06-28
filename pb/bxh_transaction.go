@@ -186,14 +186,7 @@ func (m *BxhTransaction) VerifySignature() error {
 	} else if m.Typ == EthSignedBxhTx {
 		msg := m.ethSignMsg()
 		hash := ecdsa.Keccak256(msg)
-		r, s, v := m.GetRawSignature()
-
-		addr, err := ecdsa.RecoverPlain(hash, r, s, v, true)
-		if err != nil {
-			return err
-		}
-
-		if !bytes.Equal(addr, m.GetFrom().Bytes()) {
+		if !bytes.Equal(hash, m.GetSignature()) {
 			return fmt.Errorf("invalid signature")
 		}
 
@@ -232,6 +225,7 @@ func (m *BxhTransaction) ethSignMsg() []byte {
 	if err != nil {
 		panic(err)
 	}
+	hash := ecdsa.Keccak256(body)
 
-	return []byte(fmt.Sprintf("\x19Ethereum Signed Message:\n%d%s", len(body), body))
+	return []byte(fmt.Sprintf("\x19Ethereum Signed Message:\n%d%s", len(hash), hash))
 }
