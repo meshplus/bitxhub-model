@@ -1,6 +1,7 @@
 package pb
 
 import (
+	"bytes"
 	"crypto/sha256"
 	"fmt"
 	"math/big"
@@ -8,10 +9,16 @@ import (
 	"github.com/gogo/protobuf/proto"
 	"github.com/meshplus/bitxhub-kit/crypto"
 	"github.com/meshplus/bitxhub-kit/crypto/asym"
+	"github.com/meshplus/bitxhub-kit/crypto/asym/ecdsa"
 	"github.com/meshplus/bitxhub-kit/types"
 )
 
 var _ Transaction = (*BxhTransaction)(nil)
+
+const (
+	NormalBxhTx    = 0
+	EthSignedBxhTx = 1
+)
 
 func init() {
 	RegisterTxConstructor(0, func() Transaction {
@@ -28,6 +35,7 @@ func (m *BxhTransaction) Hash() *types.Hash {
 		IBTP:      m.IBTP,
 		Nonce:     m.Nonce,
 		Amount:    m.Amount,
+		Typ:       m.Typ,
 		Signature: m.Signature,
 	}
 
@@ -50,6 +58,7 @@ func (m *BxhTransaction) SignHash() *types.Hash {
 		IBTP:      m.IBTP,
 		Nonce:     m.Nonce,
 		Amount:    m.Amount,
+		Typ:       m.Typ,
 	}
 
 	body, err := tx.Marshal()
@@ -161,17 +170,35 @@ func (m *BxhTransaction) GetRawSignature() (v, r, s *big.Int) {
 // RawSignatureValues returns the V, R, S signature values of the transaction.
 // The return values should not be modified by the caller.
 func (m *BxhTransaction) GetType() byte {
-	return BxhTxType
+	return byte(m.Typ)
 }
 
 func (m *BxhTransaction) VerifySignature() error {
-	ok, err := asym.Verify(crypto.Secp256k1, m.GetSignature(), m.GetSignHash().Bytes(), *m.GetFrom())
-	if err != nil {
-		return err
-	}
+	if m.Typ == NormalBxhTx {
+		ok, err := asym.Verify(crypto.Secp256k1, m.GetSignature(), m.GetSignHash().Bytes(), *m.GetFrom())
+		if err != nil {
+			return err
+		}
 
-	if !ok {
-		return fmt.Errorf("invalid signature")
+		if !ok {
+			return fmt.Errorf("invalid signature")
+		}
+	} else if m.Typ == EthSignedBxhTx {
+		msg := m.ethSignMsg()
+		hash := ecdsa.Keccak256(msg)
+		v, r, s := m.GetRawSignature()
+
+		addr, err := ecdsa.RecoverPlain(hash, r, s, v, true)
+		if err != nil {
+			return err
+		}
+
+		if !bytes.Equal(addr, m.GetFrom().Bytes()) {
+			return fmt.Errorf("invalid signature")
+		}
+
+	} else {
+		return fmt.Errorf("unknown bxh tx type: %d", m.Typ)
 	}
 
 	return nil
@@ -187,4 +214,26 @@ func (m *BxhTransaction) GetValue() *big.Int {
 	}
 
 	return big.NewInt(0)
+}
+
+func (m *BxhTransaction) ethSignMsg() []byte {
+	tx := &BxhTransaction{
+		From:      m.From,
+		To:        m.To,
+		Timestamp: m.Timestamp,
+		Payload:   m.Payload,
+		IBTP:      m.IBTP,
+		Nonce:     m.Nonce,
+		Amount:    m.Amount,
+		Typ:       m.Typ,
+	}
+
+	body, err := tx.Marshal()
+	if err != nil {
+		panic(err)
+	}
+
+	bodyHash := ecdsa.Keccak256(body)
+
+	return []byte(fmt.Sprintf("\x19Ethereum Signed Message:\n%d%s", len(bodyHash), bodyHash))
 }
