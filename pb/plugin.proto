@@ -6,79 +6,78 @@ import "ibtp.proto";
 message Empty {}
 
 message InitializeRequest {
-    string config_path = 1;
-    string pier_id = 2;
-    bytes extra = 3;
+  string config_path = 1;
+  string pier_id = 2;
+  bytes extra = 3;
 }
 
 message SubmitIBTPResponse {
-    bool status = 1;
-    string message = 2;
-    pb.IBTP result = 3;
+  bool status = 1;
+  string message = 2;
+  pb.IBTP result = 3;
 }
 
 message GetOutMessageRequest {
-    string to =1;
-    uint64 idx =2;
+  string to = 1;
+  uint64 idx = 2;
 }
 
 message GetInMessageRequest {
-    string from =1;
-    uint64 idx =2;
+  string from = 1;
+  uint64 idx = 2;
 }
 
 message GetInMessageResponse {
-    repeated bytes result = 1;
+  repeated bytes result = 1;
 }
 
 message GetMetaResponse {
-    map<string, uint64> meta = 1;
+  map<string, uint64> meta = 1;
 }
 
 message NameResponse {
-    string name = 1;
+  string name = 1;
 }
 
 message TypeResponse {
-    string type = 1;
+  string type = 1;
 }
 
 message RollbackIBTPRequest {
-    pb.IBTP ibtp = 1;
-    bool srcChain = 2;
+  pb.IBTP ibtp = 1;
+  bool srcChain = 2;
 }
 
 message RollbackIBTPResponse {
-    bool status = 1;
-    string message = 2;
+  bool status = 1;
+  string message = 2;
 }
 
 message CheckHashRequest{
-    string hash=1;
+  string hash = 1;
 }
 
 message CheckHashResponse {
-    bytes receiptData=1;
-    bytes headerData=2;
+  bool res = 1;
 }
 
 
 service AppchainPlugin {
-    rpc Initialize(InitializeRequest) returns (Empty);
-    rpc Start(Empty) returns (Empty);
-    rpc Stop(Empty) returns (Empty);
-    rpc GetIBTP(Empty) returns (stream pb.IBTP);
-    rpc SubmitIBTP(pb.IBTP) returns (SubmitIBTPResponse);
-    rpc RollbackIBTP(RollbackIBTPRequest) returns (RollbackIBTPResponse);
-    rpc IncreaseInMeta(pb.IBTP) returns (pb.IBTP);
-    rpc GetOutMessage(GetOutMessageRequest) returns (pb.IBTP);
-    rpc GetInMessage(GetInMessageRequest) returns (GetInMessageResponse);
-    rpc GetInMeta(Empty) returns (GetMetaResponse);
-    rpc GetOutMeta(Empty) returns (GetMetaResponse);
-    rpc GetCallbackMeta(Empty) returns (GetMetaResponse);
-    rpc CommitCallback(pb.IBTP) returns (Empty);
-    rpc CheckHash(CheckHashRequest) returns (CheckHashResponse);
-    rpc GetReceipt(pb.IBTP) returns (pb.IBTP);
-    rpc Name(Empty) returns (NameResponse);
-    rpc Type(Empty) returns (TypeResponse);
+  rpc Initialize(InitializeRequest) returns (Empty);
+  rpc Start(Empty) returns (Empty);
+  rpc Stop(Empty) returns (Empty);
+  rpc GetIBTP(Empty) returns (stream pb.IBTP);
+  rpc SubmitIBTP(pb.IBTP) returns (SubmitIBTPResponse);
+  rpc RollbackIBTP(RollbackIBTPRequest) returns (RollbackIBTPResponse);
+  rpc IncreaseInMeta(pb.IBTP) returns (pb.IBTP);
+  rpc GetOutMessage(GetOutMessageRequest) returns (pb.IBTP);
+  rpc GetInMessage(GetInMessageRequest) returns (GetInMessageResponse);
+  rpc GetInMeta(Empty) returns (GetMetaResponse);
+  rpc GetOutMeta(Empty) returns (GetMetaResponse);
+  rpc GetCallbackMeta(Empty) returns (GetMetaResponse);
+  rpc CommitCallback(pb.IBTP) returns (Empty);
+  rpc CheckHash(CheckHashRequest) returns (CheckHashResponse);
+  rpc GetReceipt(pb.IBTP) returns (pb.IBTP);
+  rpc Name(Empty) returns (NameResponse);
+  rpc Type(Empty) returns (TypeResponse);
 }

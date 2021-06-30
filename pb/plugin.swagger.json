@@ -15,13 +15,8 @@
     "pbCheckHashResponse": {
       "type": "object",
       "properties": {
-        "receiptData": {
-          "type": "string",
-          "format": "byte"
-        },
-        "headerData": {
-          "type": "string",
-          "format": "byte"
+        "res": {
+          "type": "boolean"
         }
       }
     },
