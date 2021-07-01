@@ -23,11 +23,11 @@ message RollbackIBTPRequest {
 }
 
 message QueryFilterLockStartRequest {
-  int64 appchainIndex = 1;
+  uint64 appchainIndex = 1;
 }
 
 message QueryFilterLockStartResponse {
-  int64 lockStart = 1;
+  uint64 lockStart = 1;
 }
 
 message RollbackIBTPResponse {
@@ -84,13 +84,13 @@ message UnLock {
 }
 
 message QueryRelayIndexResponse {
-  int64 relayIndex = 1;
+  uint64 relayIndex = 1;
 }
 message QueryAppchainIndexResponse {
-  int64 appchainIndex = 1;
+  uint64 appchainIndex = 1;
 }
 message QueryLockEventByIndexRequest {
-  int64 index = 1;
+  uint64 index = 1;
 }
 
 service AppchainPlugin {
