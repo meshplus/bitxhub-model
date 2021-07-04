@@ -113,6 +113,14 @@
         "proof": {
           "type": "string",
           "format": "byte"
+        },
+        "appchainIndex": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "blockNumber": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
@@ -121,6 +129,33 @@
       "properties": {
         "name": {
           "type": "string"
+        }
+      }
+    },
+    "pbQueryAppchainIndexResponse": {
+      "type": "object",
+      "properties": {
+        "appchainIndex": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "pbQueryFilterLockStartResponse": {
+      "type": "object",
+      "properties": {
+        "lockStart": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "pbQueryRelayIndexResponse": {
+      "type": "object",
+      "properties": {
+        "relayIndex": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
@@ -183,6 +218,10 @@
         "meta": {
           "type": "string",
           "format": "byte"
+        },
+        "endHeader": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
