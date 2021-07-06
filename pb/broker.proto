@@ -35,6 +35,13 @@ service ChainBroker {
         };
     }
 
+    rpc SendTransactionSync (pb.Transaction) returns (pb.Receipt) {
+        option (google.api.http) = {
+            post: "/v1/transaction_sync"
+            body: "*"
+        };
+    }
+
     rpc SendView (pb.Transaction) returns (pb.Receipt) {
         option (google.api.http) = {
             post: "/v1/view"
