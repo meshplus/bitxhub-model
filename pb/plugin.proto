@@ -22,6 +22,14 @@ message RollbackIBTPRequest {
   bool srcChain = 2;
 }
 
+message QueryFilterLockStartRequest {
+  uint64 appchainIndex = 1;
+}
+
+message QueryFilterLockStartResponse {
+  uint64 lockStart = 1;
+}
+
 message RollbackIBTPResponse {
   bool status = 1;
   string message = 2;
@@ -56,14 +64,33 @@ message TypeResponse {
 message LockEvent {
   bytes receipt = 1;
   bytes proof = 2;
+  uint64 appchainIndex = 3;
+  uint64 blockNumber = 4;
 }
 
 message UpdateMeta {
   bytes meta = 1;
+  uint64 endHeader = 2;
 }
 
 message UnLock {
-  bytes unlock=1;
+  string token = 1;
+  string from = 2;
+  string receipt = 3;
+  bytes  amount =4;
+  string txId = 5;
+  uint64 relayIndex =6;
+  repeated bytes multiSigns = 7;
+}
+
+message QueryRelayIndexResponse {
+  uint64 relayIndex = 1;
+}
+message QueryAppchainIndexResponse {
+  uint64 appchainIndex = 1;
+}
+message QueryLockEventByIndexRequest {
+  uint64 index = 1;
 }
 
 service AppchainPlugin {
@@ -86,4 +113,8 @@ service AppchainPlugin {
   rpc UnEscrow(UnLock) returns (Empty);
   rpc Name(Empty) returns (NameResponse);
   rpc Type(Empty) returns (TypeResponse);
+  rpc QueryFilterLockStart(QueryFilterLockStartRequest) returns (QueryFilterLockStartResponse);
+  rpc QueryLockEventByIndex(QueryLockEventByIndexRequest) returns (pb.LockEvent);
+  rpc QueryAppchainIndex(Empty) returns (QueryAppchainIndexResponse);
+  rpc QueryRelayIndex(Empty) returns (QueryRelayIndexResponse);
 }

@@ -113,6 +113,14 @@
         "proof": {
           "type": "string",
           "format": "byte"
+        },
+        "appchainIndex": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "blockNumber": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
@@ -124,12 +132,38 @@
         }
       }
     },
+    "pbQueryAppchainIndexResponse": {
+      "type": "object",
+      "properties": {
+        "appchainIndex": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "pbQueryFilterLockStartResponse": {
+      "type": "object",
+      "properties": {
+        "lockStart": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "pbQueryRelayIndexResponse": {
+      "type": "object",
+      "properties": {
+        "relayIndex": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
     "pbRollbackIBTPResponse": {
       "type": "object",
       "properties": {
         "status": {
-          "type": "boolean",
-          "format": "boolean"
+          "type": "boolean"
         },
         "message": {
           "type": "string"
@@ -158,8 +192,7 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "boolean",
-          "format": "boolean"
+          "type": "boolean"
         },
         "message": {
           "type": "string"
@@ -183,6 +216,10 @@
         "meta": {
           "type": "string",
           "format": "byte"
+        },
+        "endHeader": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
