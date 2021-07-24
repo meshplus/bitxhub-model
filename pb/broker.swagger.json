@@ -824,6 +824,10 @@
           "type": "string",
           "format": "byte"
         },
+        "timeout_root": {
+          "type": "string",
+          "format": "byte"
+        },
         "parent_hash": {
           "type": "string",
           "format": "byte"
@@ -988,6 +992,8 @@
         "INTERCHAIN",
         "RECEIPT_SUCCESS",
         "RECEIPT_FAILURE",
+        "ROLLBACK",
+        "RECEIPT_ROLLBACK",
         "ASSET_EXCHANGE_INIT",
         "ASSET_EXCHANGE_REDEEM",
         "ASSET_EXCHANGE_REFUND",
@@ -1014,6 +1020,19 @@
         "height": {
           "type": "string",
           "format": "uint64"
+        },
+        "timeout_l2Roots": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "timeout_ibtps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

@@ -84,10 +84,16 @@ enum TransactionStatus {
     BEGIN = 0;
     SUCCESS = 1;
     FAILURE = 2;
+    ROLLBACK = 3;
 }
 
 enum AssetExchangeStatus {
     INIT = 0;
     REDEEM = 1;
     REFUND = 2;
+}
+
+message TransactionRecord {
+    uint64 height = 1;
+    TransactionStatus status = 2;
 }

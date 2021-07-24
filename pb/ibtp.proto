@@ -10,10 +10,12 @@ message IBTP {
         INTERCHAIN = 0;
         RECEIPT_SUCCESS = 1;
         RECEIPT_FAILURE = 2;
-        ASSET_EXCHANGE_INIT = 3;
-        ASSET_EXCHANGE_REDEEM = 4;
-        ASSET_EXCHANGE_REFUND = 5;
-        ASSET_EXCHANGE_RECEIPT = 6;
+        ROLLBACK = 3;
+        RECEIPT_ROLLBACK = 4;
+        ASSET_EXCHANGE_INIT = 5;
+        ASSET_EXCHANGE_REDEEM = 6;
+        ASSET_EXCHANGE_REFUND = 7;
+        ASSET_EXCHANGE_RECEIPT = 8;
     }
 
     enum Category {

@@ -370,6 +370,102 @@ func (m *StringVerifiedIndexSliceMap) GetVals() []*VerifiedIndexSlice {
 	return nil
 }
 
+type StringSlice struct {
+	Slice []string `protobuf:"bytes,1,rep,name=slice,proto3" json:"slice,omitempty"`
+}
+
+func (m *StringSlice) Reset()         { *m = StringSlice{} }
+func (m *StringSlice) String() string { return proto.CompactTextString(m) }
+func (*StringSlice) ProtoMessage()    {}
+func (*StringSlice) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0cc45f6ac745dd88, []int{7}
+}
+func (m *StringSlice) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *StringSlice) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_StringSlice.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *StringSlice) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StringSlice.Merge(m, src)
+}
+func (m *StringSlice) XXX_Size() int {
+	return m.Size()
+}
+func (m *StringSlice) XXX_DiscardUnknown() {
+	xxx_messageInfo_StringSlice.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_StringSlice proto.InternalMessageInfo
+
+func (m *StringSlice) GetSlice() []string {
+	if m != nil {
+		return m.Slice
+	}
+	return nil
+}
+
+type StringStringSliceMap struct {
+	Keys []string       `protobuf:"bytes,1,rep,name=keys,proto3" json:"keys,omitempty"`
+	Vals []*StringSlice `protobuf:"bytes,2,rep,name=vals,proto3" json:"vals,omitempty"`
+}
+
+func (m *StringStringSliceMap) Reset()         { *m = StringStringSliceMap{} }
+func (m *StringStringSliceMap) String() string { return proto.CompactTextString(m) }
+func (*StringStringSliceMap) ProtoMessage()    {}
+func (*StringStringSliceMap) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0cc45f6ac745dd88, []int{8}
+}
+func (m *StringStringSliceMap) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *StringStringSliceMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_StringStringSliceMap.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *StringStringSliceMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StringStringSliceMap.Merge(m, src)
+}
+func (m *StringStringSliceMap) XXX_Size() int {
+	return m.Size()
+}
+func (m *StringStringSliceMap) XXX_DiscardUnknown() {
+	xxx_messageInfo_StringStringSliceMap.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_StringStringSliceMap proto.InternalMessageInfo
+
+func (m *StringStringSliceMap) GetKeys() []string {
+	if m != nil {
+		return m.Keys
+	}
+	return nil
+}
+
+func (m *StringStringSliceMap) GetVals() []*StringSlice {
+	if m != nil {
+		return m.Vals
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*Uint64Slice)(nil), "pb.Uint64Slice")
 	proto.RegisterType((*StringUint64Map)(nil), "pb.StringUint64Map")
@@ -378,12 +474,14 @@ func init() {
 	proto.RegisterType((*VerifiedIndexSlice)(nil), "pb.VerifiedIndexSlice")
 	proto.RegisterType((*StringVerifiedIndexMap)(nil), "pb.StringVerifiedIndexMap")
 	proto.RegisterType((*StringVerifiedIndexSliceMap)(nil), "pb.StringVerifiedIndexSliceMap")
+	proto.RegisterType((*StringSlice)(nil), "pb.StringSlice")
+	proto.RegisterType((*StringStringSliceMap)(nil), "pb.StringStringSliceMap")
 }
 
 func init() { proto.RegisterFile("basic.proto", fileDescriptor_0cc45f6ac745dd88) }
 
 var fileDescriptor_0cc45f6ac745dd88 = []byte{
-	// 270 bytes of a gzipped FileDescriptorProto
+	// 292 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4e, 0x4a, 0x2c, 0xce,
 	0x4c, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x2a, 0x48, 0x52, 0x52, 0xe6, 0xe2, 0x0e,
 	0xcd, 0xcc, 0x2b, 0x31, 0x33, 0x09, 0xce, 0xc9, 0x4c, 0x4e, 0x15, 0x12, 0xe1, 0x62, 0x2d, 0x06,
@@ -397,10 +495,12 @@ var fileDescriptor_0cc45f6ac745dd88 = []byte{
 	0x29, 0x30, 0x6a, 0x70, 0x04, 0x41, 0x38, 0x4a, 0xb6, 0x5c, 0x42, 0x28, 0x9a, 0x21, 0x9e, 0x56,
 	0x47, 0xf6, 0x34, 0xb7, 0x91, 0x20, 0xc8, 0x62, 0x14, 0x65, 0xb0, 0x70, 0x08, 0xe6, 0x12, 0x83,
 	0x78, 0x06, 0x45, 0x16, 0x97, 0x77, 0x54, 0x51, 0xbc, 0x83, 0xc5, 0x54, 0x88, 0x87, 0x62, 0xb9,
-	0xa4, 0xb1, 0x18, 0x8a, 0x37, 0xa0, 0xb4, 0x50, 0x4c, 0x16, 0xc3, 0x30, 0x19, 0x29, 0xbc, 0x9c,
-	0x24, 0x4e, 0x3c, 0x92, 0x63, 0xbc, 0xf0, 0x48, 0x8e, 0xf1, 0xc1, 0x23, 0x39, 0xc6, 0x09, 0x8f,
-	0xe5, 0x18, 0x2e, 0x3c, 0x96, 0x63, 0xb8, 0xf1, 0x58, 0x8e, 0x21, 0x89, 0x0d, 0x9c, 0x0a, 0x8c,
-	0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0x2a, 0x76, 0xf3, 0x4d, 0x14, 0x02, 0x00, 0x00,
+	0xa4, 0xb1, 0x18, 0x8a, 0x37, 0xa0, 0xb4, 0x50, 0x4c, 0x16, 0xc3, 0x30, 0x19, 0x39, 0xbc, 0x94,
+	0xb9, 0xb8, 0x21, 0xc6, 0x63, 0x89, 0x60, 0x4e, 0x98, 0xc7, 0xe0, 0xb1, 0x84, 0xa4, 0x94, 0x84,
+	0x58, 0x42, 0xd2, 0x05, 0xb1, 0xd5, 0x49, 0xe2, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18,
+	0x1f, 0x3c, 0x92, 0x63, 0x9c, 0xf0, 0x58, 0x8e, 0xe1, 0xc2, 0x63, 0x39, 0x86, 0x1b, 0x8f, 0xe5,
+	0x18, 0x92, 0xd8, 0xc0, 0x69, 0xcf, 0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0xa2, 0xf2, 0xb2, 0xfa,
+	0x8a, 0x02, 0x00, 0x00,
 }
 
 func (m *Uint64Slice) Marshal() (dAtA []byte, err error) {
@@ -707,6 +807,84 @@ func (m *StringVerifiedIndexSliceMap) MarshalToSizedBuffer(dAtA []byte) (int, er
 	return len(dAtA) - i, nil
 }
 
+func (m *StringSlice) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *StringSlice) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *StringSlice) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Slice) > 0 {
+		for iNdEx := len(m.Slice) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Slice[iNdEx])
+			copy(dAtA[i:], m.Slice[iNdEx])
+			i = encodeVarintBasic(dAtA, i, uint64(len(m.Slice[iNdEx])))
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *StringStringSliceMap) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *StringStringSliceMap) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *StringStringSliceMap) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Vals) > 0 {
+		for iNdEx := len(m.Vals) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Vals[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintBasic(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+		}
+	}
+	if len(m.Keys) > 0 {
+		for iNdEx := len(m.Keys) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Keys[iNdEx])
+			copy(dAtA[i:], m.Keys[iNdEx])
+			i = encodeVarintBasic(dAtA, i, uint64(len(m.Keys[iNdEx])))
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintBasic(dAtA []byte, offset int, v uint64) int {
 	offset -= sovBasic(v)
 	base := offset
@@ -849,6 +1027,42 @@ func (m *StringVerifiedIndexSliceMap) Size() (n int) {
 	return n
 }
 
+func (m *StringSlice) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Slice) > 0 {
+		for _, s := range m.Slice {
+			l = len(s)
+			n += 1 + l + sovBasic(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *StringStringSliceMap) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Keys) > 0 {
+		for _, s := range m.Keys {
+			l = len(s)
+			n += 1 + l + sovBasic(uint64(l))
+		}
+	}
+	if len(m.Vals) > 0 {
+		for _, e := range m.Vals {
+			l = e.Size()
+			n += 1 + l + sovBasic(uint64(l))
+		}
+	}
+	return n
+}
+
 func sovBasic(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
@@ -966,10 +1180,7 @@ func (m *Uint64Slice) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthBasic
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthBasic
 			}
 			if (iNdEx + skippy) > l {
@@ -1127,10 +1338,7 @@ func (m *StringUint64Map) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthBasic
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthBasic
 			}
 			if (iNdEx + skippy) > l {
@@ -1246,10 +1454,7 @@ func (m *StringUint64SliceMap) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthBasic
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthBasic
 			}
 			if (iNdEx + skippy) > l {
@@ -1338,10 +1543,7 @@ func (m *VerifiedIndex) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthBasic
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthBasic
 			}
 			if (iNdEx + skippy) > l {
@@ -1425,10 +1627,7 @@ func (m *VerifiedIndexSlice) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthBasic
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthBasic
 			}
 			if (iNdEx + skippy) > l {
@@ -1544,10 +1743,7 @@ func (m *StringVerifiedIndexMap) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthBasic
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthBasic
 			}
 			if (iNdEx + skippy) > l {
@@ -1663,10 +1859,205 @@ func (m *StringVerifiedIndexSliceMap) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthBasic
 			}
-			if (iNdEx + skippy) < 0 {
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *StringSlice) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowBasic
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: StringSlice: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: StringSlice: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Slice", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowBasic
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthBasic
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthBasic
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Slice = append(m.Slice, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipBasic(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthBasic
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *StringStringSliceMap) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowBasic
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: StringStringSliceMap: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: StringStringSliceMap: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Keys", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowBasic
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthBasic
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthBasic
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Keys = append(m.Keys, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Vals", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowBasic
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthBasic
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthBasic
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Vals = append(m.Vals, &StringSlice{})
+			if err := m.Vals[len(m.Vals)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipBasic(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthBasic
 			}
 			if (iNdEx + skippy) > l {

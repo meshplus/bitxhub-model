@@ -66,6 +66,8 @@ service AppchainPlugin {
     rpc GetInMeta(Empty) returns (GetMetaResponse);
     rpc GetOutMeta(Empty) returns (GetMetaResponse);
     rpc GetCallbackMeta(Empty) returns (GetMetaResponse);
+    rpc GetSrcRollbackMeta(Empty) returns (GetMetaResponse);
+    rpc GetDstRollbackMeta(Empty) returns (GetMetaResponse);
     rpc CommitCallback(pb.IBTP) returns (Empty);
     rpc GetReceipt(pb.IBTP) returns (pb.IBTP);
     rpc Name(Empty) returns (NameResponse);
