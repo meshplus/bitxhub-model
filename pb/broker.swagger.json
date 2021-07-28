@@ -22,7 +22,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -52,7 +52,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -102,7 +102,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -140,7 +140,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -178,7 +178,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -216,7 +216,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -252,7 +252,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -282,7 +282,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -314,7 +314,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -359,7 +359,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -403,7 +403,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -446,7 +446,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -476,7 +476,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -506,7 +506,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -547,7 +547,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -594,7 +594,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -632,7 +632,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -664,7 +664,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -694,7 +694,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -824,6 +824,10 @@
         "amount": {
           "type": "string"
         },
+        "typ": {
+          "type": "integer",
+          "format": "int64"
+        },
         "signature": {
           "type": "string",
           "format": "byte"
@@ -908,8 +912,7 @@
           "format": "uint64"
         },
         "removed": {
-          "type": "boolean",
-          "format": "boolean"
+          "type": "boolean"
         }
       }
     },
@@ -969,11 +972,11 @@
       "properties": {
         "from": {
           "type": "string",
-          "title": "ID of sending chain"
+          "title": "ID of sending chain and sending service"
         },
         "to": {
           "type": "string",
-          "title": "ID of receiving chain"
+          "title": "ID of receiving chain and receiving service"
         },
         "index": {
           "type": "string",
@@ -984,10 +987,10 @@
           "$ref": "#/definitions/pbIBTPType",
           "title": "inter-chain transaction type"
         },
-        "timestamp": {
+        "timeoutHeight": {
           "type": "string",
           "format": "int64",
-          "title": "Timestamp of inter-chain events"
+          "title": "timeout height of inter-chain transaction on BitXHub"
         },
         "proof": {
           "type": "string",
@@ -1021,10 +1024,8 @@
         "INTERCHAIN",
         "RECEIPT_SUCCESS",
         "RECEIPT_FAILURE",
-        "ASSET_EXCHANGE_INIT",
-        "ASSET_EXCHANGE_REDEEM",
-        "ASSET_EXCHANGE_REFUND",
-        "ASSET_EXCHANGE_RECEIPT"
+        "ROLLBACK",
+        "RECEIPT_ROLLBACK"
       ],
       "default": "INTERCHAIN"
     },
@@ -1221,8 +1222,7 @@
           "$ref": "#/definitions/pbBxhTransaction"
         },
         "valid": {
-          "type": "boolean",
-          "format": "boolean"
+          "type": "boolean"
         }
       }
     },

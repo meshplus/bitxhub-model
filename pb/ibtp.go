@@ -13,13 +13,13 @@ func (m *IBTP) ID() string {
 
 func (m *IBTP) Hash() *types.Hash {
 	ibtp := &IBTP{
-		From:      m.From,
-		To:        m.To,
-		Index:     m.Index,
-		Type:      m.Type,
-		Timestamp: m.Timestamp,
-		Payload:   m.Payload,
-		Extra:     m.Extra,
+		From:          m.From,
+		To:            m.To,
+		Index:         m.Index,
+		Type:          m.Type,
+		TimeoutHeight: m.TimeoutHeight,
+		Payload:       m.Payload,
+		Extra:         m.Extra,
 	}
 	body, err := ibtp.Marshal()
 	if err != nil {
@@ -33,9 +33,9 @@ func (m *IBTP) Hash() *types.Hash {
 
 func (m *IBTP) Category() IBTP_Category {
 	switch m.Type {
-	case IBTP_INTERCHAIN, IBTP_ASSET_EXCHANGE_INIT, IBTP_ASSET_EXCHANGE_REDEEM, IBTP_ASSET_EXCHANGE_REFUND:
+	case IBTP_INTERCHAIN, IBTP_ROLLBACK:
 		return IBTP_REQUEST
-	case IBTP_RECEIPT_SUCCESS, IBTP_RECEIPT_FAILURE, IBTP_ASSET_EXCHANGE_RECEIPT:
+	case IBTP_RECEIPT_SUCCESS, IBTP_RECEIPT_FAILURE, IBTP_RECEIPT_ROLLBACK:
 		return IBTP_RESPONSE
 	}
 	return IBTP_UNKNOWN
