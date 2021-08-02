@@ -7,8 +7,10 @@ import (
 )
 
 type InterchainMeta struct {
-	Counter map[string]*VerifiedIndexSlice
-	L2Roots []types.Hash
+	Counter        map[string]*VerifiedIndexSlice
+	L2Roots        []types.Hash
+	TimeoutCounter map[string]*StringSlice
+	TimeoutL2Roots []types.Hash
 }
 
 type Interchain struct {
@@ -20,8 +22,10 @@ type Interchain struct {
 
 func (m *InterchainMeta) Marshal() ([]byte, error) {
 	ims := &InterchainMetaS{
-		Counter: stringVerifiedIndexSliceMapToSlice(m.Counter),
-		L2Roots: m.L2Roots,
+		Counter:        stringVerifiedIndexSliceMapToSlice(m.Counter),
+		L2Roots:        m.L2Roots,
+		TimeoutCounter: stringStringSliceMapToSlice(m.TimeoutCounter),
+		TimeoutL2Roots: m.TimeoutL2Roots,
 	}
 
 	return ims.Marshal()
@@ -37,6 +41,11 @@ func (m *InterchainMeta) Unmarshal(data []byte) error {
 		m.Counter = ims.Counter.toMap()
 	}
 	m.L2Roots = ims.L2Roots
+
+	if ims.TimeoutCounter != nil {
+		m.TimeoutCounter = ims.TimeoutCounter.toMap()
+	}
+	m.TimeoutL2Roots = ims.TimeoutL2Roots
 
 	return nil
 }
@@ -139,8 +148,36 @@ func (sum *StringVerifiedIndexSliceMap) toMap() map[string]*VerifiedIndexSlice {
 	return m
 }
 
+func (sum *StringStringSliceMap) toMap() map[string]*StringSlice {
+	m := make(map[string]*StringSlice)
+
+	for i := range sum.Keys {
+		m[sum.Keys[i]] = sum.Vals[i]
+	}
+
+	return m
+}
+
 func stringVerifiedIndexSliceMapToSlice(m map[string]*VerifiedIndexSlice) *StringVerifiedIndexSliceMap {
 	sum := &StringVerifiedIndexSliceMap{}
+
+	var keys []string
+	for k := range m {
+		keys = append(keys, k)
+	}
+
+	sort.Strings(keys)
+
+	for _, k := range keys {
+		sum.Keys = append(sum.Keys, k)
+		sum.Vals = append(sum.Vals, m[k])
+	}
+
+	return sum
+}
+
+func stringStringSliceMapToSlice(m map[string]*StringSlice) *StringStringSliceMap {
+	sum := &StringStringSliceMap{}
 
 	var keys []string
 	for k := range m {

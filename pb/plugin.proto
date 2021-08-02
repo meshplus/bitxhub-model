@@ -117,4 +117,6 @@ service AppchainPlugin {
   rpc QueryLockEventByIndex(QueryLockEventByIndexRequest) returns (pb.LockEvent);
   rpc QueryAppchainIndex(Empty) returns (QueryAppchainIndexResponse);
   rpc QueryRelayIndex(Empty) returns (QueryRelayIndexResponse);
+    rpc GetSrcRollbackMeta(Empty) returns (GetMetaResponse);
+    rpc GetDstRollbackMeta(Empty) returns (GetMetaResponse);
 }

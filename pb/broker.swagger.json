@@ -769,6 +769,10 @@
           "type": "string",
           "format": "byte"
         },
+        "timeout_root": {
+          "type": "string",
+          "format": "byte"
+        },
         "parent_hash": {
           "type": "string",
           "format": "byte"
@@ -1048,6 +1052,19 @@
         "height": {
           "type": "string",
           "format": "uint64"
+        },
+        "timeout_l2Roots": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "timeout_ibtps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
