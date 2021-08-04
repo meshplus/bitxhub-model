@@ -10,6 +10,7 @@ message Block {
     bytes block_hash = 3 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
     bytes signature = 4;
     bytes extra = 5;
+    bytes pow_block_hash = 6 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
 }
 
 message BlockHeader {
@@ -21,4 +22,6 @@ message BlockHeader {
     int64 timestamp = 6;
     bytes version = 7;
     bytes Bloom = 8 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Bloom"];
+    uint64 difficulty = 9;
+    uint64 blockNonce = 10;
 }
