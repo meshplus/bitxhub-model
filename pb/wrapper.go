@@ -14,10 +14,11 @@ type InterchainMeta struct {
 }
 
 type Interchain struct {
-	ID                   string
-	InterchainCounter    map[string]uint64
-	ReceiptCounter       map[string]uint64
-	SourceReceiptCounter map[string]uint64
+	ID                      string
+	InterchainCounter       map[string]uint64
+	ReceiptCounter          map[string]uint64
+	SourceInterchainCounter map[string]uint64
+	SourceReceiptCounter    map[string]uint64
 }
 
 func (m *InterchainMeta) Marshal() ([]byte, error) {
@@ -52,10 +53,11 @@ func (m *InterchainMeta) Unmarshal(data []byte) error {
 
 func (m *Interchain) Marshal() ([]byte, error) {
 	ics := &InterchainS{
-		ID:                   m.ID,
-		InterchainCounter:    stringUint64MapToSlice(m.InterchainCounter),
-		ReceiptCounter:       stringUint64MapToSlice(m.ReceiptCounter),
-		SourceReceiptCounter: stringUint64MapToSlice(m.SourceReceiptCounter),
+		ID:                      m.ID,
+		InterchainCounter:       stringUint64MapToSlice(m.InterchainCounter),
+		ReceiptCounter:          stringUint64MapToSlice(m.ReceiptCounter),
+		SourceInterchainCounter: stringUint64MapToSlice(m.SourceInterchainCounter),
+		SourceReceiptCounter:    stringUint64MapToSlice(m.SourceReceiptCounter),
 	}
 
 	return ics.Marshal()
@@ -79,6 +81,12 @@ func (m *Interchain) Unmarshal(data []byte) error {
 		m.ReceiptCounter = ics.ReceiptCounter.toMap()
 	} else {
 		m.ReceiptCounter = make(map[string]uint64)
+	}
+
+	if ics.SourceInterchainCounter != nil {
+		m.SourceInterchainCounter = ics.SourceInterchainCounter.toMap()
+	} else {
+		m.SourceInterchainCounter = make(map[string]uint64)
 	}
 
 	if ics.SourceReceiptCounter != nil {

@@ -12,6 +12,17 @@
   ],
   "paths": {},
   "definitions": {
+    "pbChainIDResponse": {
+      "type": "object",
+      "properties": {
+        "bxhID": {
+          "type": "string"
+        },
+        "appchainID": {
+          "type": "string"
+        }
+      }
+    },
     "pbEmpty": {
       "type": "object"
     },
@@ -165,6 +176,17 @@
         },
         "message": {
           "type": "string"
+        }
+      }
+    },
+    "pbServicesResponse": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

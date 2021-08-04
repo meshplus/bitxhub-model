@@ -16,5 +16,6 @@ message InterchainS {
   string ID = 1;
   StringUint64Map InterchainCounter = 2;
   StringUint64Map ReceiptCounter = 3;
-  StringUint64Map SourceReceiptCounter = 4;
+  StringUint64Map SourceInterchainCounter = 4;
+  StringUint64Map SourceReceiptCounter = 5;
 }

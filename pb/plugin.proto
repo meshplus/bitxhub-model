@@ -53,6 +53,15 @@ message GetMetaResponse {
   map<string, uint64> meta = 1;
 }
 
+message ServicesResponse {
+  repeated string service = 1;
+}
+
+message ChainIDResponse {
+  string bxhID = 1;
+  string appchainID = 2;
+}
+
 message NameResponse {
   string name = 1;
 }
@@ -111,6 +120,8 @@ service AppchainPlugin {
   rpc GetLockEvent(Empty) returns (stream LockEvent);
   rpc GetUpdateMeta(Empty) returns (stream UpdateMeta);
   rpc UnEscrow(UnLock) returns (Empty);
+  rpc GetServices(Empty) returns (ServicesResponse);
+  rpc GetChainID(Empty) returns (ChainIDResponse);
   rpc Name(Empty) returns (NameResponse);
   rpc Type(Empty) returns (TypeResponse);
   rpc QueryFilterLockStart(QueryFilterLockStartRequest) returns (QueryFilterLockStartResponse);

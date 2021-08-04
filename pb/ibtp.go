@@ -11,6 +11,10 @@ func (m *IBTP) ID() string {
 	return fmt.Sprintf("%s-%s-%d", m.From, m.To, m.Index)
 }
 
+func (m *IBTP) ServicePair() string {
+	return fmt.Sprintf("%s-%s", m.From, m.To)
+}
+
 func (m *IBTP) Hash() *types.Hash {
 	ibtp := &IBTP{
 		From:          m.From,
