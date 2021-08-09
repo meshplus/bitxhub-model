@@ -3,6 +3,7 @@ package pb
 import (
 	"crypto/sha256"
 	"fmt"
+	"strings"
 
 	"github.com/meshplus/bitxhub-kit/types"
 )
@@ -13,6 +14,35 @@ func (m *IBTP) ID() string {
 
 func (m *IBTP) ServicePair() string {
 	return fmt.Sprintf("%s-%s", m.From, m.To)
+}
+
+// SrcChainID should be called after CheckServiceID is called
+func (m *IBTP) SrcChainID() string {
+	_, chainID, _, _ := parseFullServiceID(m.From)
+	return chainID
+}
+
+// DstChainID should be called after CheckServiceID is called
+func (m *IBTP) DstChainID() string {
+	_, chainID, _, _ := parseFullServiceID(m.To)
+	return chainID
+}
+
+func (m *IBTP) CheckServiceID() error {
+	_, _, _, err := parseFullServiceID(m.From)
+	if err != nil {
+		return err
+	}
+	_, _, _, err = parseFullServiceID(m.To)
+	return err
+}
+
+func parseFullServiceID(id string) (string, string, string, error) {
+	splits := strings.Split(id, ":")
+	if len(splits) != 3 {
+		return "", "", "", fmt.Errorf("invalid full service ID: %s", id)
+	}
+	return splits[0], splits[1], splits[2], nil
 }
 
 func (m *IBTP) Hash() *types.Hash {
