@@ -26,6 +26,10 @@ func Bytes(content []byte) *Arg {
 	return generateArg(Arg_Bytes, content)
 }
 
+func Bool(content bool) *Arg {
+	return generateArg(Arg_Bool, []byte(fmt.Sprintf("%v", content)))
+}
+
 func generateArg(typ Arg_Type, content []byte) *Arg {
 	return &Arg{
 		Type:  typ,
