@@ -10,10 +10,8 @@ message IBTP {
         INTERCHAIN = 0;
         RECEIPT_SUCCESS = 1;
         RECEIPT_FAILURE = 2;
-        ASSET_EXCHANGE_INIT = 3;
-        ASSET_EXCHANGE_REDEEM = 4;
-        ASSET_EXCHANGE_REFUND = 5;
-        ASSET_EXCHANGE_RECEIPT = 6;
+        ROLLBACK = 3;
+        RECEIPT_ROLLBACK = 4;
     }
 
     enum Category {
@@ -22,16 +20,16 @@ message IBTP {
         UNKNOWN = 2;
     }
 
-    // ID of sending chain
+    // ID of sending chain and sending service
     string from = 1;
-    // ID of receiving chain
+    // ID of receiving chain and receiving service
     string to = 2;
     // Index of inter-chain transaction
     uint64 index = 3;
     // inter-chain transaction type
     Type type = 4;
-    // Timestamp of inter-chain events
-    int64 timestamp = 5;
+    // timeout height of inter-chain transaction on BitXHub
+    int64 timeoutHeight = 5;
     // Proof of inter-chain transactions
     bytes proof = 6;
     // Encoded content used by inter-chain
@@ -50,14 +48,12 @@ message payload {
 }
 
 message content {
-    string src_contract_id = 1;
-    string dst_contract_id = 2;
-    string func = 3;
-    repeated bytes args = 4;
-    string callback = 5;
-    repeated bytes argsCb = 6;
-    string rollback = 7;
-    repeated bytes argsRb = 8;
+    string func = 1;
+    repeated bytes args = 2;
+    string callback = 3;
+    repeated bytes argsCb = 4;
+    string rollback = 5;
+    repeated bytes argsRb = 6;
 }
 
 message IBTPs {

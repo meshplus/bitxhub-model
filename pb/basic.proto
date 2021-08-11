@@ -34,3 +34,12 @@ message StringVerifiedIndexSliceMap {
   repeated string keys = 1;
   repeated VerifiedIndexSlice vals = 2;
 }
+
+message StringSlice {
+  repeated string slice = 1;
+}
+
+message StringStringSliceMap {
+  repeated string keys = 1;
+  repeated StringSlice vals = 2;
+}

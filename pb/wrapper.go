@@ -7,21 +7,26 @@ import (
 )
 
 type InterchainMeta struct {
-	Counter map[string]*VerifiedIndexSlice
-	L2Roots []types.Hash
+	Counter        map[string]*VerifiedIndexSlice
+	L2Roots        []types.Hash
+	TimeoutCounter map[string]*StringSlice
+	TimeoutL2Roots []types.Hash
 }
 
 type Interchain struct {
-	ID                   string
-	InterchainCounter    map[string]uint64
-	ReceiptCounter       map[string]uint64
-	SourceReceiptCounter map[string]uint64
+	ID                      string
+	InterchainCounter       map[string]uint64
+	ReceiptCounter          map[string]uint64
+	SourceInterchainCounter map[string]uint64
+	SourceReceiptCounter    map[string]uint64
 }
 
 func (m *InterchainMeta) Marshal() ([]byte, error) {
 	ims := &InterchainMetaS{
-		Counter: stringVerifiedIndexSliceMapToSlice(m.Counter),
-		L2Roots: m.L2Roots,
+		Counter:        stringVerifiedIndexSliceMapToSlice(m.Counter),
+		L2Roots:        m.L2Roots,
+		TimeoutCounter: stringStringSliceMapToSlice(m.TimeoutCounter),
+		TimeoutL2Roots: m.TimeoutL2Roots,
 	}
 
 	return ims.Marshal()
@@ -38,15 +43,21 @@ func (m *InterchainMeta) Unmarshal(data []byte) error {
 	}
 	m.L2Roots = ims.L2Roots
 
+	if ims.TimeoutCounter != nil {
+		m.TimeoutCounter = ims.TimeoutCounter.toMap()
+	}
+	m.TimeoutL2Roots = ims.TimeoutL2Roots
+
 	return nil
 }
 
 func (m *Interchain) Marshal() ([]byte, error) {
 	ics := &InterchainS{
-		ID:                   m.ID,
-		InterchainCounter:    stringUint64MapToSlice(m.InterchainCounter),
-		ReceiptCounter:       stringUint64MapToSlice(m.ReceiptCounter),
-		SourceReceiptCounter: stringUint64MapToSlice(m.SourceReceiptCounter),
+		ID:                      m.ID,
+		InterchainCounter:       stringUint64MapToSlice(m.InterchainCounter),
+		ReceiptCounter:          stringUint64MapToSlice(m.ReceiptCounter),
+		SourceInterchainCounter: stringUint64MapToSlice(m.SourceInterchainCounter),
+		SourceReceiptCounter:    stringUint64MapToSlice(m.SourceReceiptCounter),
 	}
 
 	return ics.Marshal()
@@ -70,6 +81,12 @@ func (m *Interchain) Unmarshal(data []byte) error {
 		m.ReceiptCounter = ics.ReceiptCounter.toMap()
 	} else {
 		m.ReceiptCounter = make(map[string]uint64)
+	}
+
+	if ics.SourceInterchainCounter != nil {
+		m.SourceInterchainCounter = ics.SourceInterchainCounter.toMap()
+	} else {
+		m.SourceInterchainCounter = make(map[string]uint64)
 	}
 
 	if ics.SourceReceiptCounter != nil {
@@ -139,8 +156,36 @@ func (sum *StringVerifiedIndexSliceMap) toMap() map[string]*VerifiedIndexSlice {
 	return m
 }
 
+func (sum *StringStringSliceMap) toMap() map[string]*StringSlice {
+	m := make(map[string]*StringSlice)
+
+	for i := range sum.Keys {
+		m[sum.Keys[i]] = sum.Vals[i]
+	}
+
+	return m
+}
+
 func stringVerifiedIndexSliceMapToSlice(m map[string]*VerifiedIndexSlice) *StringVerifiedIndexSliceMap {
 	sum := &StringVerifiedIndexSliceMap{}
+
+	var keys []string
+	for k := range m {
+		keys = append(keys, k)
+	}
+
+	sort.Strings(keys)
+
+	for _, k := range keys {
+		sum.Keys = append(sum.Keys, k)
+		sum.Vals = append(sum.Vals, m[k])
+	}
+
+	return sum
+}
+
+func stringStringSliceMapToSlice(m map[string]*StringSlice) *StringStringSliceMap {
+	sum := &StringStringSliceMap{}
 
 	var keys []string
 	for k := range m {

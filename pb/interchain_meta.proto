@@ -8,11 +8,14 @@ import "basic.proto";
 message InterchainMetaS {
   StringVerifiedIndexSliceMap counter = 1;
   repeated bytes l2Roots = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
+  StringStringSliceMap timeoutCounter = 3;
+  repeated bytes timeoutL2Roots = 4 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
 }
 
 message InterchainS {
   string ID = 1;
   StringUint64Map InterchainCounter = 2;
   StringUint64Map ReceiptCounter = 3;
-  StringUint64Map SourceReceiptCounter = 4;
+  StringUint64Map SourceInterchainCounter = 4;
+  StringUint64Map SourceReceiptCounter = 5;
 }
