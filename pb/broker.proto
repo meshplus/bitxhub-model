@@ -218,8 +218,8 @@ message GetMultiSignsRequest {
 }
 
 message GetTransactionResponse {
-  pb.BxhTransaction tx = 1;
-  pb.TransactionMeta tx_meta = 2;
+  bytes txs = 1 [(gogoproto.customtype) = "Transactions"];
+  repeated bytes tx_meta = 2[(gogoproto.customtype) = "TransactionMeta"];
 }
 
 message VerifiedTx {
