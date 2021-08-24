@@ -72,7 +72,7 @@ func (m *BxhTransaction) SignHash() *types.Hash {
 }
 
 func (m *BxhTransaction) Sign(key crypto.PrivateKey) error {
-	sign, err := key.Sign(m.SignHash().Bytes())
+	sign, err := asym.SignWithType(key, m.SignHash().Bytes())
 	if err != nil {
 		return err
 	}
