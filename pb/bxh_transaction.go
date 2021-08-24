@@ -175,7 +175,9 @@ func (m *BxhTransaction) GetType() byte {
 
 func (m *BxhTransaction) VerifySignature() error {
 	if m.Typ == NormalBxhTx {
-		ok, err := asym.Verify(crypto.Secp256k1, m.GetSignature(), m.GetSignHash().Bytes(), *m.GetFrom())
+		sign := m.GetSignature()
+		typ := crypto.KeyType(sign[0])
+		ok, err := asym.Verify(typ, sign[1:], m.GetSignHash().Bytes(), *m.GetFrom())
 		if err != nil {
 			return err
 		}
