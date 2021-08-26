@@ -16,16 +16,16 @@ func (m *IBTP) ServicePair() string {
 	return fmt.Sprintf("%s-%s", m.From, m.To)
 }
 
-// SrcChainID should be called after CheckServiceID is called
-func (m *IBTP) SrcChainID() string {
-	_, chainID, _, _ := parseFullServiceID(m.From)
-	return chainID
+// ParseFrom should be called after CheckServiceID is called
+func (m *IBTP) ParseFrom() (string, string, string) {
+	bxhID, chainID, serviceID, _ := parseFullServiceID(m.From)
+	return bxhID, chainID, serviceID
 }
 
-// DstChainID should be called after CheckServiceID is called
-func (m *IBTP) DstChainID() string {
-	_, chainID, _, _ := parseFullServiceID(m.To)
-	return chainID
+// ParseTo should be called after CheckServiceID is called
+func (m *IBTP) ParseTo() (string, string, string) {
+	bxhID, chainID, serviceID, _ := parseFullServiceID(m.To)
+	return bxhID, chainID, serviceID
 }
 
 func (m *IBTP) CheckServiceID() error {
