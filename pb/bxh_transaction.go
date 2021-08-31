@@ -72,7 +72,7 @@ func (m *BxhTransaction) SignHash() *types.Hash {
 }
 
 func (m *BxhTransaction) Sign(key crypto.PrivateKey) error {
-	sign, err := key.Sign(m.SignHash().Bytes())
+	sign, err := asym.SignWithType(key, m.SignHash().Bytes())
 	if err != nil {
 		return err
 	}
@@ -175,7 +175,8 @@ func (m *BxhTransaction) GetType() byte {
 
 func (m *BxhTransaction) VerifySignature() error {
 	if m.Typ == NormalBxhTx {
-		ok, err := asym.Verify(crypto.Secp256k1, m.GetSignature(), m.GetSignHash().Bytes(), *m.GetFrom())
+		sign := m.GetSignature()
+		ok, err := asym.VerifyWithType(sign, m.GetSignHash().Bytes(), *m.GetFrom())
 		if err != nil {
 			return err
 		}
