@@ -21,6 +21,7 @@ const (
 	EthHeaderMgrContractAddr     BoltContractAddress = "0x0000000000000000000000000000000000000017"
 	NodeManagerContractAddr      BoltContractAddress = "0x0000000000000000000000000000000000000018"
 	InterBrokerContractAddr      BoltContractAddress = "0x0000000000000000000000000000000000000019"
+	DappMgrContractAddr          BoltContractAddress = "0x0000000000000000000000000000000000000020"
 )
 
 func (addr BoltContractAddress) Address() *types.Address {
