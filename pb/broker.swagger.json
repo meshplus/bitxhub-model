@@ -271,6 +271,38 @@
         ]
       }
     },
+    "/v1/get_chain_id": {
+      "post": {
+        "operationId": "ChainBroker_GetChainID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbEmpty"
+            }
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
     "/v1/heart_beat": {
       "post": {
         "operationId": "ChainBroker_HeartBeat",
@@ -858,6 +890,9 @@
           "format": "uint64"
         }
       }
+    },
+    "pbEmpty": {
+      "type": "object"
     },
     "pbEvent": {
       "type": "object",
