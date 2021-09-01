@@ -8,6 +8,7 @@ import "bxh_transaction.proto";
 import "receipt.proto";
 import "block.proto";
 import "chain.proto";
+import "plugin.proto";
 
 service ChainBroker {
   rpc Subscribe (SubscriptionRequest) returns (stream Response) {
@@ -124,6 +125,13 @@ service ChainBroker {
   rpc HeartBeat (PierInfo) returns (Response) {
     option (google.api.http) = {
       post: "/v1/heart_beat"
+      body: "*"
+    };
+  }
+
+  rpc GetChainID (Empty) returns (Response) {
+    option (google.api.http) = {
+      post: "/v1/get_chain_id"
       body: "*"
     };
   }
