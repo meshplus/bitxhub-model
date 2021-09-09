@@ -18,6 +18,10 @@ func Uint64(i uint64) *Arg {
 	return generateArg(Arg_U64, []byte(fmt.Sprintf("%d", i)))
 }
 
+func Float64(i float64) *Arg {
+	return generateArg(Arg_F64, []byte(fmt.Sprintf("%f", i)))
+}
+
 func String(content string) *Arg {
 	return generateArg(Arg_String, []byte(content))
 }
