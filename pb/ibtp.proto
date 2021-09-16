@@ -45,15 +45,12 @@ message IBTP {
 message payload {
     bool encrypted = 1;
     bytes content = 2;
+    bytes hash = 3;
 }
 
 message content {
     string func = 1;
     repeated bytes args = 2;
-    string callback = 3;
-    repeated bytes argsCb = 4;
-    string rollback = 5;
-    repeated bytes argsRb = 6;
 }
 
 message IBTPs {

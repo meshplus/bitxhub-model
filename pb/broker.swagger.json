@@ -455,7 +455,8 @@
             "type": "string",
             "enum": [
               "ASSET_EXCHANGE",
-              "IBTP",
+              "IBTP_REQUEST",
+              "IBTP_RESPONSE",
               "BLOCK_HEADER",
               "BURN"
             ],
@@ -989,7 +990,8 @@
       "type": "string",
       "enum": [
         "ASSET_EXCHANGE",
-        "IBTP",
+        "IBTP_REQUEST",
+        "IBTP_RESPONSE",
         "BLOCK_HEADER",
         "BURN"
       ],

@@ -217,9 +217,10 @@ message SubscriptionRequest {
 message GetMultiSignsRequest {
   enum Type {
     ASSET_EXCHANGE = 0;
-    IBTP = 1;
-    BLOCK_HEADER = 2;
-    BURN = 3;
+    IBTP_REQUEST = 1;
+    IBTP_RESPONSE = 2;
+    BLOCK_HEADER = 3;
+    BURN = 4;
   }
   Type type = 1;
   string content = 2;
