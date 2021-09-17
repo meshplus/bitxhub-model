@@ -94,3 +94,8 @@ message TransactionRecord {
     uint64 height = 1;
     TransactionStatus status = 2;
 }
+
+message bxhProof {
+    TransactionStatus txStatus = 1;
+    repeated bytes multiSign =2;
+}
