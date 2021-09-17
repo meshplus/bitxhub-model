@@ -26,18 +26,6 @@
     "pbEmpty": {
       "type": "object"
     },
-    "pbGetInMessageResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        }
-      }
-    },
     "pbGetMetaResponse": {
       "type": "object",
       "properties": {
@@ -165,17 +153,6 @@
         "relayIndex": {
           "type": "string",
           "format": "uint64"
-        }
-      }
-    },
-    "pbRollbackIBTPResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "boolean"
-        },
-        "message": {
-          "type": "string"
         }
       }
     },
