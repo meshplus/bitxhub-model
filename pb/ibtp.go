@@ -18,31 +18,43 @@ func (m *IBTP) ServicePair() string {
 
 // ParseFrom should be called after CheckServiceID is called
 func (m *IBTP) ParseFrom() (string, string, string) {
-	bxhID, chainID, serviceID, _ := parseFullServiceID(m.From)
+	bxhID, chainID, serviceID, _ := ParseFullServiceID(m.From)
 	return bxhID, chainID, serviceID
 }
 
 // ParseTo should be called after CheckServiceID is called
 func (m *IBTP) ParseTo() (string, string, string) {
-	bxhID, chainID, serviceID, _ := parseFullServiceID(m.To)
+	bxhID, chainID, serviceID, _ := ParseFullServiceID(m.To)
 	return bxhID, chainID, serviceID
 }
 
 func (m *IBTP) CheckServiceID() error {
-	_, _, _, err := parseFullServiceID(m.From)
+	_, _, _, err := ParseFullServiceID(m.From)
 	if err != nil {
 		return err
 	}
-	_, _, _, err = parseFullServiceID(m.To)
+	_, _, _, err = ParseFullServiceID(m.To)
 	return err
 }
 
-func parseFullServiceID(id string) (string, string, string, error) {
+func ParseFullServiceID(id string) (string, string, string, error) {
 	splits := strings.Split(id, ":")
 	if len(splits) != 3 {
 		return "", "", "", fmt.Errorf("invalid full service ID: %s", id)
 	}
 	return splits[0], splits[1], splits[2], nil
+}
+
+func ParseServicePair(servicePair string) (string, string, error) {
+	splits := strings.Split(servicePair, "-")
+	if len(splits) != 1 {
+		return "", "", fmt.Errorf("invalid service pair: %s", servicePair)
+	}
+	return splits[0], splits[1], nil
+}
+
+func GenServicePair(from, to string) string {
+	return fmt.Sprintf("%s-%s", from, to)
 }
 
 func (m *IBTP) Hash() *types.Hash {

@@ -53,6 +53,10 @@ message content {
     repeated bytes args = 2;
 }
 
+message result {
+    repeated bytes data = 1;
+}
+
 message IBTPs {
     repeated IBTP ibtps = 1;
 }
