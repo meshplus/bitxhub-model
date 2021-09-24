@@ -3,6 +3,7 @@ package pb
 import (
 	"crypto/sha256"
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/meshplus/bitxhub-kit/types"
@@ -47,10 +48,24 @@ func ParseFullServiceID(id string) (string, string, string, error) {
 
 func ParseServicePair(servicePair string) (string, string, error) {
 	splits := strings.Split(servicePair, "-")
-	if len(splits) != 1 {
+	if len(splits) != 2 {
 		return "", "", fmt.Errorf("invalid service pair: %s", servicePair)
 	}
 	return splits[0], splits[1], nil
+}
+
+func ParseIBTPID(id string) (string, string, uint64, error) {
+	splits := strings.Split(id, "-")
+	if len(splits) != 3 {
+		return "", "", 0, fmt.Errorf("invalid IBTP ID: %s", id)
+	}
+
+	index, err := strconv.Atoi(splits[2])
+	if err != nil {
+		return "", "", 0, fmt.Errorf("invalid  IBTP ID: %s", id)
+	}
+
+	return splits[0], splits[1], uint64(index), nil
 }
 
 func GenServicePair(from, to string) string {
