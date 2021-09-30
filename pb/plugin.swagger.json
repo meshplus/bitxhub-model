@@ -154,6 +154,8 @@
       "type": "string",
       "enum": [
         "BEGIN",
+        "BEGIN_FAILURE",
+        "BEGIN_ROLLBACK",
         "SUCCESS",
         "FAILURE",
         "ROLLBACK"

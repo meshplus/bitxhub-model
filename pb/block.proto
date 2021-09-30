@@ -3,6 +3,7 @@ syntax = "proto3";
 package pb;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "bxh_transaction.proto";
 
 message Block {
     BlockHeader block_header = 1;
@@ -22,4 +23,14 @@ message BlockHeader {
     int64 timestamp = 7;
     bytes version = 8;
     bytes Bloom = 9 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Bloom"];
+}
+
+message HappyBlock {
+    BlockHeader block_header = 1;
+    repeated pb.BxhTransaction bxh_txs = 2;
+    repeated bytes eth_txs = 3;
+    bytes block_hash = 4 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
+    bytes signature = 5;
+    bytes extra = 6;
+    repeated uint64 index = 7;
 }

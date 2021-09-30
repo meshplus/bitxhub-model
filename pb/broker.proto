@@ -67,6 +67,12 @@ service ChainBroker {
     };
   }
 
+  rpc GetHappyBlocks (GetBlocksRequest) returns (GetHappyBlocksResponse) {
+    option (google.api.http) = {
+      get: "/v1/happy_block"
+    };
+  }
+
   rpc GetBlockHeaders (GetBlockHeadersRequest) returns (GetBlockHeadersResponse) {
     option (google.api.http) = {
       get: "/v1/block_headers"
@@ -189,6 +195,10 @@ message GetBlocksRequest {
 
 message GetBlocksResponse {
   repeated pb.Block blocks = 1;
+}
+
+message GetHappyBlocksResponse {
+  repeated pb.HappyBlock blocks = 1;
 }
 
 message GetBlockHeadersRequest {

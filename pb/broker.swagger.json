@@ -303,6 +303,44 @@
         ]
       }
     },
+    "/v1/happy_block": {
+      "get": {
+        "operationId": "ChainBroker_GetHappyBlocks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetHappyBlocksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
     "/v1/heart_beat": {
       "post": {
         "operationId": "ChainBroker_HeartBeat",
@@ -986,6 +1024,17 @@
         }
       }
     },
+    "pbGetHappyBlocksResponse": {
+      "type": "object",
+      "properties": {
+        "blocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbHappyBlock"
+          }
+        }
+      }
+    },
     "pbGetMultiSignsRequestType": {
       "type": "string",
       "enum": [
@@ -1005,6 +1054,46 @@
         },
         "tx_meta": {
           "$ref": "#/definitions/pbTransactionMeta"
+        }
+      }
+    },
+    "pbHappyBlock": {
+      "type": "object",
+      "properties": {
+        "block_header": {
+          "$ref": "#/definitions/pbBlockHeader"
+        },
+        "bxh_txs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbBxhTransaction"
+          }
+        },
+        "eth_txs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "block_hash": {
+          "type": "string",
+          "format": "byte"
+        },
+        "signature": {
+          "type": "string",
+          "format": "byte"
+        },
+        "extra": {
+          "type": "string",
+          "format": "byte"
+        },
+        "index": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uint64"
+          }
         }
       }
     },
