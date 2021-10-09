@@ -95,7 +95,6 @@
         "INTERCHAIN",
         "RECEIPT_SUCCESS",
         "RECEIPT_FAILURE",
-        "ROLLBACK",
         "RECEIPT_ROLLBACK"
       ],
       "default": "INTERCHAIN"

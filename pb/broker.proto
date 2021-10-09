@@ -242,6 +242,7 @@ message InterchainTxWrapper {
   uint64 height = 3;
   repeated bytes timeout_l2Roots = 4 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
   repeated string timeout_ibtps = 5;
+  repeated string multi_tx_ibtps = 6;
 }
 
 message InterchainTxWrappers {

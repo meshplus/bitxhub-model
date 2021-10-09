@@ -1065,7 +1065,6 @@
         "INTERCHAIN",
         "RECEIPT_SUCCESS",
         "RECEIPT_FAILURE",
-        "ROLLBACK",
         "RECEIPT_ROLLBACK"
       ],
       "default": "INTERCHAIN"
@@ -1098,6 +1097,12 @@
           }
         },
         "timeout_ibtps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "multi_tx_ibtps": {
           "type": "array",
           "items": {
             "type": "string"

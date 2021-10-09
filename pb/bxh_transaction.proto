@@ -67,27 +67,13 @@ message TransactionSlice {
     repeated BxhTransaction txs = 2;
 }
 
-message AssetExchangeInfo {
-    string id = 1;
-    string sender_on_src = 2;
-    string receiver_on_src = 3;
-    uint64 asset_on_src = 4;
-    string sender_on_dst = 5;
-    string receiver_on_dst = 6;
-    uint64 asset_on_dst = 7;
-}
-
 enum TransactionStatus {
     BEGIN = 0;
-    SUCCESS = 1;
-    FAILURE = 2;
-    ROLLBACK = 3;
-}
-
-enum AssetExchangeStatus {
-    INIT = 0;
-    REDEEM = 1;
-    REFUND = 2;
+    BEGIN_FAILURE = 1;
+    BEGIN_ROLLBACK = 2;
+    SUCCESS = 3;
+    FAILURE = 4;
+    ROLLBACK = 5;
 }
 
 message TransactionRecord {

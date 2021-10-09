@@ -94,7 +94,7 @@ func (m *IBTP) Hash() *types.Hash {
 
 func (m *IBTP) Category() IBTP_Category {
 	switch m.Type {
-	case IBTP_INTERCHAIN, IBTP_ROLLBACK:
+	case IBTP_INTERCHAIN:
 		return IBTP_REQUEST
 	case IBTP_RECEIPT_SUCCESS, IBTP_RECEIPT_FAILURE, IBTP_RECEIPT_ROLLBACK:
 		return IBTP_RESPONSE
