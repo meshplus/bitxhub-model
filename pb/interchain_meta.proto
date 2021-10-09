@@ -10,6 +10,7 @@ message InterchainMetaS {
   repeated bytes l2Roots = 2 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
   StringStringSliceMap timeoutCounter = 3;
   repeated bytes timeoutL2Roots = 4 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
+  StringStringSliceMap multiTxCounter = 5;
 }
 
 message InterchainS {

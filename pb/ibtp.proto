@@ -10,8 +10,7 @@ message IBTP {
         INTERCHAIN = 0;
         RECEIPT_SUCCESS = 1;
         RECEIPT_FAILURE = 2;
-        ROLLBACK = 3;
-        RECEIPT_ROLLBACK = 4;
+        RECEIPT_ROLLBACK = 3;
     }
 
     enum Category {

@@ -11,6 +11,7 @@ type InterchainMeta struct {
 	L2Roots        []types.Hash
 	TimeoutCounter map[string]*StringSlice
 	TimeoutL2Roots []types.Hash
+	MultiTxCounter map[string]*StringSlice
 }
 
 type Interchain struct {
@@ -27,6 +28,7 @@ func (m *InterchainMeta) Marshal() ([]byte, error) {
 		L2Roots:        m.L2Roots,
 		TimeoutCounter: stringStringSliceMapToSlice(m.TimeoutCounter),
 		TimeoutL2Roots: m.TimeoutL2Roots,
+		MultiTxCounter: stringStringSliceMapToSlice(m.MultiTxCounter),
 	}
 
 	return ims.Marshal()
@@ -47,6 +49,10 @@ func (m *InterchainMeta) Unmarshal(data []byte) error {
 		m.TimeoutCounter = ims.TimeoutCounter.toMap()
 	}
 	m.TimeoutL2Roots = ims.TimeoutL2Roots
+
+	if ims.MultiTxCounter != nil {
+		m.MultiTxCounter = ims.MultiTxCounter.toMap()
+	}
 
 	return nil
 }
