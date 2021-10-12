@@ -99,59 +99,11 @@
       ],
       "default": "INTERCHAIN"
     },
-    "pbLockEvent": {
-      "type": "object",
-      "properties": {
-        "receipt": {
-          "type": "string",
-          "format": "byte"
-        },
-        "proof": {
-          "type": "string",
-          "format": "byte"
-        },
-        "appchainIndex": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "blockNumber": {
-          "type": "string",
-          "format": "uint64"
-        }
-      }
-    },
     "pbNameResponse": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string"
-        }
-      }
-    },
-    "pbQueryAppchainIndexResponse": {
-      "type": "object",
-      "properties": {
-        "appchainIndex": {
-          "type": "string",
-          "format": "uint64"
-        }
-      }
-    },
-    "pbQueryFilterLockStartResponse": {
-      "type": "object",
-      "properties": {
-        "lockStart": {
-          "type": "string",
-          "format": "uint64"
-        }
-      }
-    },
-    "pbQueryRelayIndexResponse": {
-      "type": "object",
-      "properties": {
-        "relayIndex": {
-          "type": "string",
-          "format": "uint64"
         }
       }
     },
@@ -198,6 +150,16 @@
         }
       }
     },
+    "pbTransactionStatus": {
+      "type": "string",
+      "enum": [
+        "BEGIN",
+        "SUCCESS",
+        "FAILURE",
+        "ROLLBACK"
+      ],
+      "default": "BEGIN"
+    },
     "pbTypeResponse": {
       "type": "object",
       "properties": {
@@ -212,10 +174,48 @@
         "meta": {
           "type": "string",
           "format": "byte"
+        }
+      }
+    },
+    "pbbxhProof": {
+      "type": "object",
+      "properties": {
+        "txStatus": {
+          "$ref": "#/definitions/pbTransactionStatus"
         },
-        "endHeader": {
-          "type": "string",
-          "format": "uint64"
+        "multiSign": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      }
+    },
+    "pbcontent": {
+      "type": "object",
+      "properties": {
+        "func": {
+          "type": "string"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      }
+    },
+    "pbresult": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
         }
       }
     },

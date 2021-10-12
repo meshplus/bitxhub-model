@@ -2,6 +2,7 @@ syntax = "proto3";
 package pb;
 
 import "ibtp.proto";
+import "bxh_transaction.proto";
 
 message Empty {}
 
@@ -14,6 +15,25 @@ message SubmitIBTPResponse {
   bool status = 1;
   string message = 2;
   pb.IBTP result = 3;
+}
+
+message SubmitIBTPRequest {
+  string from = 1;
+  uint64 index =2;
+  string serviceId = 3;
+  pb.IBTP.Type type = 4;
+  pb.content content = 5;
+  pb.bxhProof bxhProof = 6;
+  bool isEncrypted = 7;
+}
+
+message SubmitReceiptRequest {
+  string to = 1;
+  uint64 index =2;
+  string serviceId = 3;
+  pb.IBTP.Type type = 4;
+  pb.result result = 5;
+  pb.bxhProof bxhProof = 6;
 }
 
 message QueryFilterLockStartRequest {
@@ -59,7 +79,6 @@ message LockEvent {
 
 message UpdateMeta {
   bytes meta = 1;
-  uint64 endHeader = 2;
 }
 
 message UnLock {
@@ -86,25 +105,18 @@ service AppchainPlugin {
   rpc Initialize(InitializeRequest) returns (Empty);
   rpc Start(Empty) returns (Empty);
   rpc Stop(Empty) returns (Empty);
-  rpc GetIBTP(Empty) returns (stream pb.IBTP);
-  rpc SubmitIBTP(pb.IBTP) returns (SubmitIBTPResponse);
-  rpc SubmitReceipt(pb.IBTP) returns (SubmitIBTPResponse);
+  rpc GetIBTPCh(Empty) returns (stream pb.IBTP);
+  rpc GetUpdateMeta(Empty) returns (stream UpdateMeta);
+  rpc SubmitIBTP(SubmitIBTPRequest) returns (SubmitIBTPResponse);
+  rpc SubmitReceipt(SubmitReceiptRequest) returns (SubmitIBTPResponse);
   rpc GetOutMessage(GetMessageRequest) returns (pb.IBTP);
   rpc GetReceiptMessage(GetMessageRequest) returns (pb.IBTP);
   rpc GetInMeta(Empty) returns (GetMetaResponse);
   rpc GetOutMeta(Empty) returns (GetMetaResponse);
   rpc GetCallbackMeta(Empty) returns (GetMetaResponse);
-  rpc CommitCallback(pb.IBTP) returns (Empty);
-  rpc GetLockEvent(Empty) returns (stream LockEvent);
-  rpc GetUpdateMeta(Empty) returns (stream UpdateMeta);
-  rpc UnEscrow(UnLock) returns (Empty);
+  rpc GetDstRollbackMeta(Empty) returns (GetMetaResponse);
   rpc GetServices(Empty) returns (ServicesResponse);
   rpc GetChainID(Empty) returns (ChainIDResponse);
   rpc Name(Empty) returns (NameResponse);
   rpc Type(Empty) returns (TypeResponse);
-  rpc QueryFilterLockStart(QueryFilterLockStartRequest) returns (QueryFilterLockStartResponse);
-  rpc QueryLockEventByIndex(QueryLockEventByIndexRequest) returns (pb.LockEvent);
-  rpc QueryAppchainIndex(Empty) returns (QueryAppchainIndexResponse);
-  rpc QueryRelayIndex(Empty) returns (QueryRelayIndexResponse);
-  rpc GetDstRollbackMeta(Empty) returns (GetMetaResponse);
 }
