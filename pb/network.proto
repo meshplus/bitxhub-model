@@ -35,12 +35,13 @@ message Message {
         IBTP_GET = 28;
         IBTP_SEND = 29;
         IBTP_RECEIPT_SEND = 30;
-        ROUTER_IBTP_SEND = 31;
-        ROUTER_IBTP_GET = 32;
-        ROUTER_IBTP_RECEIPT_GET = 33;
-        ROUTER_INTERCHAIN_GET = 34;
-        ADDRESS_GET = 35;
-        ACK = 36;
+        IBTP_RECEIPT_GET = 31;
+        ROUTER_IBTP_SEND = 32;
+        ROUTER_IBTP_GET = 33;
+        ROUTER_IBTP_RECEIPT_GET = 34;
+        ROUTER_INTERCHAIN_GET = 35;
+        ADDRESS_GET = 36;
+        ACK = 37;
     }
     Type type = 1;
     bytes Data = 2;
