@@ -27,21 +27,26 @@ message Message {
         FETCH_BURN_SIGN_ACK = 22;
 
         //pier message
-        APPCHAIN_REGISTER = 23;
-        APPCHAIN_UPDATE = 24;
-        APPCHAIN_GET = 25;
-        INTERCHAIN_META_GET = 26;
-        RULE_DEPLOY = 27;
-        IBTP_GET = 28;
-        IBTP_SEND = 29;
-        IBTP_RECEIPT_SEND = 30;
-        IBTP_RECEIPT_GET = 31;
-        ROUTER_IBTP_SEND = 32;
-        ROUTER_IBTP_GET = 33;
-        ROUTER_IBTP_RECEIPT_GET = 34;
-        ROUTER_INTERCHAIN_GET = 35;
-        ADDRESS_GET = 36;
-        ACK = 37;
+        APPCHAIN_REGISTER = 31;
+        APPCHAIN_UPDATE = 32;
+        APPCHAIN_GET = 33;
+        RULE_DEPLOY = 34;
+
+        INTERCHAIN_META_GET = 41;
+        IBTP_GET = 42;
+        IBTP_SEND = 43;
+        IBTP_RECEIPT_GET = 44;
+        IBTP_RECEIPT_SEND = 45;
+        ROUTER_IBTP_SEND = 46;
+        ROUTER_IBTP_GET = 47;
+        ROUTER_IBTP_RECEIPT_GET = 48;
+        ROUTER_INTERCHAIN_GET = 49;
+
+        ADDRESS_GET = 51;
+        PUBKEY_GET = 52;
+        PUBKEY_GET_ACK = 53;
+
+        ACK = 61;
     }
     Type type = 1;
     bytes Data = 2;
