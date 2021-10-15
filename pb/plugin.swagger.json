@@ -23,6 +23,21 @@
         }
       }
     },
+    "pbChainInfoResponse": {
+      "type": "object",
+      "properties": {
+        "broker": {
+          "type": "string"
+        },
+        "trustedRoot": {
+          "type": "string",
+          "format": "byte"
+        },
+        "ruleAddr": {
+          "type": "string"
+        }
+      }
+    },
     "pbEmpty": {
       "type": "object"
     },
@@ -154,6 +169,8 @@
       "type": "string",
       "enum": [
         "BEGIN",
+        "BEGIN_FAILURE",
+        "BEGIN_ROLLBACK",
         "SUCCESS",
         "FAILURE",
         "ROLLBACK"
