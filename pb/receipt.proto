@@ -29,6 +29,7 @@ message Event {
         OTHER = 0;
         INTERCHAIN = 1;
         NODEMGR = 2;
+        WASM = 3;
     }
     // Transaction Hash
     bytes tx_hash = 1 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
