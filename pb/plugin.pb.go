@@ -4,12 +4,8 @@
 package pb
 
 import (
-	context "context"
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
-	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -1258,753 +1254,6 @@ var fileDescriptor_22a625af4bc1cc87 = []byte{
 	0x71, 0xdd, 0x71, 0xde, 0x5c, 0x77, 0x9c, 0xbf, 0xaf, 0x3b, 0xce, 0x6f, 0x37, 0x9d, 0x47, 0x6f,
 	0x6e, 0x3a, 0x8f, 0xfe, 0xba, 0xe9, 0x3c, 0x0a, 0x6a, 0xf8, 0x0b, 0xfb, 0xc9, 0xbf, 0x01, 0x00,
 	0x00, 0xff, 0xff, 0x11, 0xec, 0x1a, 0xbf, 0xf9, 0x0a, 0x00, 0x00,
-}
-
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConn
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
-
-// AppchainPluginClient is the client API for AppchainPlugin service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type AppchainPluginClient interface {
-	Initialize(ctx context.Context, in *InitializeRequest, opts ...grpc.CallOption) (*Empty, error)
-	Start(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
-	Stop(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
-	GetIBTPCh(ctx context.Context, in *Empty, opts ...grpc.CallOption) (AppchainPlugin_GetIBTPChClient, error)
-	GetUpdateMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (AppchainPlugin_GetUpdateMetaClient, error)
-	SubmitIBTP(ctx context.Context, in *SubmitIBTPRequest, opts ...grpc.CallOption) (*SubmitIBTPResponse, error)
-	SubmitReceipt(ctx context.Context, in *SubmitReceiptRequest, opts ...grpc.CallOption) (*SubmitIBTPResponse, error)
-	GetOutMessage(ctx context.Context, in *GetMessageRequest, opts ...grpc.CallOption) (*IBTP, error)
-	GetReceiptMessage(ctx context.Context, in *GetMessageRequest, opts ...grpc.CallOption) (*IBTP, error)
-	GetInMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
-	GetOutMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
-	GetCallbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
-	GetDstRollbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
-	GetServices(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ServicesResponse, error)
-	GetChainID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ChainIDResponse, error)
-	GetAppchainInfo(ctx context.Context, in *ChainInfoRequest, opts ...grpc.CallOption) (*ChainInfoResponse, error)
-	Name(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NameResponse, error)
-	Type(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*TypeResponse, error)
-}
-
-type appchainPluginClient struct {
-	cc *grpc.ClientConn
-}
-
-func NewAppchainPluginClient(cc *grpc.ClientConn) AppchainPluginClient {
-	return &appchainPluginClient{cc}
-}
-
-func (c *appchainPluginClient) Initialize(ctx context.Context, in *InitializeRequest, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Initialize", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) Start(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Start", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) Stop(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Stop", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) GetIBTPCh(ctx context.Context, in *Empty, opts ...grpc.CallOption) (AppchainPlugin_GetIBTPChClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_AppchainPlugin_serviceDesc.Streams[0], "/pb.AppchainPlugin/GetIBTPCh", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &appchainPluginGetIBTPChClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type AppchainPlugin_GetIBTPChClient interface {
-	Recv() (*IBTP, error)
-	grpc.ClientStream
-}
-
-type appchainPluginGetIBTPChClient struct {
-	grpc.ClientStream
-}
-
-func (x *appchainPluginGetIBTPChClient) Recv() (*IBTP, error) {
-	m := new(IBTP)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *appchainPluginClient) GetUpdateMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (AppchainPlugin_GetUpdateMetaClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_AppchainPlugin_serviceDesc.Streams[1], "/pb.AppchainPlugin/GetUpdateMeta", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &appchainPluginGetUpdateMetaClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type AppchainPlugin_GetUpdateMetaClient interface {
-	Recv() (*UpdateMeta, error)
-	grpc.ClientStream
-}
-
-type appchainPluginGetUpdateMetaClient struct {
-	grpc.ClientStream
-}
-
-func (x *appchainPluginGetUpdateMetaClient) Recv() (*UpdateMeta, error) {
-	m := new(UpdateMeta)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *appchainPluginClient) SubmitIBTP(ctx context.Context, in *SubmitIBTPRequest, opts ...grpc.CallOption) (*SubmitIBTPResponse, error) {
-	out := new(SubmitIBTPResponse)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/SubmitIBTP", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) SubmitReceipt(ctx context.Context, in *SubmitReceiptRequest, opts ...grpc.CallOption) (*SubmitIBTPResponse, error) {
-	out := new(SubmitIBTPResponse)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/SubmitReceipt", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) GetOutMessage(ctx context.Context, in *GetMessageRequest, opts ...grpc.CallOption) (*IBTP, error) {
-	out := new(IBTP)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetOutMessage", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) GetReceiptMessage(ctx context.Context, in *GetMessageRequest, opts ...grpc.CallOption) (*IBTP, error) {
-	out := new(IBTP)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetReceiptMessage", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) GetInMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error) {
-	out := new(GetMetaResponse)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetInMeta", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) GetOutMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error) {
-	out := new(GetMetaResponse)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetOutMeta", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) GetCallbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error) {
-	out := new(GetMetaResponse)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetCallbackMeta", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) GetDstRollbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error) {
-	out := new(GetMetaResponse)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetDstRollbackMeta", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) GetServices(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ServicesResponse, error) {
-	out := new(ServicesResponse)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetServices", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) GetChainID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ChainIDResponse, error) {
-	out := new(ChainIDResponse)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetChainID", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) GetAppchainInfo(ctx context.Context, in *ChainInfoRequest, opts ...grpc.CallOption) (*ChainInfoResponse, error) {
-	out := new(ChainInfoResponse)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetAppchainInfo", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) Name(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NameResponse, error) {
-	out := new(NameResponse)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Name", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *appchainPluginClient) Type(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*TypeResponse, error) {
-	out := new(TypeResponse)
-	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Type", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// AppchainPluginServer is the server API for AppchainPlugin service.
-type AppchainPluginServer interface {
-	Initialize(context.Context, *InitializeRequest) (*Empty, error)
-	Start(context.Context, *Empty) (*Empty, error)
-	Stop(context.Context, *Empty) (*Empty, error)
-	GetIBTPCh(*Empty, AppchainPlugin_GetIBTPChServer) error
-	GetUpdateMeta(*Empty, AppchainPlugin_GetUpdateMetaServer) error
-	SubmitIBTP(context.Context, *SubmitIBTPRequest) (*SubmitIBTPResponse, error)
-	SubmitReceipt(context.Context, *SubmitReceiptRequest) (*SubmitIBTPResponse, error)
-	GetOutMessage(context.Context, *GetMessageRequest) (*IBTP, error)
-	GetReceiptMessage(context.Context, *GetMessageRequest) (*IBTP, error)
-	GetInMeta(context.Context, *Empty) (*GetMetaResponse, error)
-	GetOutMeta(context.Context, *Empty) (*GetMetaResponse, error)
-	GetCallbackMeta(context.Context, *Empty) (*GetMetaResponse, error)
-	GetDstRollbackMeta(context.Context, *Empty) (*GetMetaResponse, error)
-	GetServices(context.Context, *Empty) (*ServicesResponse, error)
-	GetChainID(context.Context, *Empty) (*ChainIDResponse, error)
-	GetAppchainInfo(context.Context, *ChainInfoRequest) (*ChainInfoResponse, error)
-	Name(context.Context, *Empty) (*NameResponse, error)
-	Type(context.Context, *Empty) (*TypeResponse, error)
-}
-
-// UnimplementedAppchainPluginServer can be embedded to have forward compatible implementations.
-type UnimplementedAppchainPluginServer struct {
-}
-
-func (*UnimplementedAppchainPluginServer) Initialize(ctx context.Context, req *InitializeRequest) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Initialize not implemented")
-}
-func (*UnimplementedAppchainPluginServer) Start(ctx context.Context, req *Empty) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Start not implemented")
-}
-func (*UnimplementedAppchainPluginServer) Stop(ctx context.Context, req *Empty) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Stop not implemented")
-}
-func (*UnimplementedAppchainPluginServer) GetIBTPCh(req *Empty, srv AppchainPlugin_GetIBTPChServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetIBTPCh not implemented")
-}
-func (*UnimplementedAppchainPluginServer) GetUpdateMeta(req *Empty, srv AppchainPlugin_GetUpdateMetaServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetUpdateMeta not implemented")
-}
-func (*UnimplementedAppchainPluginServer) SubmitIBTP(ctx context.Context, req *SubmitIBTPRequest) (*SubmitIBTPResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubmitIBTP not implemented")
-}
-func (*UnimplementedAppchainPluginServer) SubmitReceipt(ctx context.Context, req *SubmitReceiptRequest) (*SubmitIBTPResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SubmitReceipt not implemented")
-}
-func (*UnimplementedAppchainPluginServer) GetOutMessage(ctx context.Context, req *GetMessageRequest) (*IBTP, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOutMessage not implemented")
-}
-func (*UnimplementedAppchainPluginServer) GetReceiptMessage(ctx context.Context, req *GetMessageRequest) (*IBTP, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetReceiptMessage not implemented")
-}
-func (*UnimplementedAppchainPluginServer) GetInMeta(ctx context.Context, req *Empty) (*GetMetaResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetInMeta not implemented")
-}
-func (*UnimplementedAppchainPluginServer) GetOutMeta(ctx context.Context, req *Empty) (*GetMetaResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOutMeta not implemented")
-}
-func (*UnimplementedAppchainPluginServer) GetCallbackMeta(ctx context.Context, req *Empty) (*GetMetaResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCallbackMeta not implemented")
-}
-func (*UnimplementedAppchainPluginServer) GetDstRollbackMeta(ctx context.Context, req *Empty) (*GetMetaResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDstRollbackMeta not implemented")
-}
-func (*UnimplementedAppchainPluginServer) GetServices(ctx context.Context, req *Empty) (*ServicesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetServices not implemented")
-}
-func (*UnimplementedAppchainPluginServer) GetChainID(ctx context.Context, req *Empty) (*ChainIDResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetChainID not implemented")
-}
-func (*UnimplementedAppchainPluginServer) GetAppchainInfo(ctx context.Context, req *ChainInfoRequest) (*ChainInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAppchainInfo not implemented")
-}
-func (*UnimplementedAppchainPluginServer) Name(ctx context.Context, req *Empty) (*NameResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Name not implemented")
-}
-func (*UnimplementedAppchainPluginServer) Type(ctx context.Context, req *Empty) (*TypeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Type not implemented")
-}
-
-func RegisterAppchainPluginServer(s *grpc.Server, srv AppchainPluginServer) {
-	s.RegisterService(&_AppchainPlugin_serviceDesc, srv)
-}
-
-func _AppchainPlugin_Initialize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InitializeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).Initialize(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/Initialize",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).Initialize(ctx, req.(*InitializeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_Start_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).Start(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/Start",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).Start(ctx, req.(*Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_Stop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).Stop(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/Stop",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).Stop(ctx, req.(*Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_GetIBTPCh_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(Empty)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(AppchainPluginServer).GetIBTPCh(m, &appchainPluginGetIBTPChServer{stream})
-}
-
-type AppchainPlugin_GetIBTPChServer interface {
-	Send(*IBTP) error
-	grpc.ServerStream
-}
-
-type appchainPluginGetIBTPChServer struct {
-	grpc.ServerStream
-}
-
-func (x *appchainPluginGetIBTPChServer) Send(m *IBTP) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _AppchainPlugin_GetUpdateMeta_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(Empty)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(AppchainPluginServer).GetUpdateMeta(m, &appchainPluginGetUpdateMetaServer{stream})
-}
-
-type AppchainPlugin_GetUpdateMetaServer interface {
-	Send(*UpdateMeta) error
-	grpc.ServerStream
-}
-
-type appchainPluginGetUpdateMetaServer struct {
-	grpc.ServerStream
-}
-
-func (x *appchainPluginGetUpdateMetaServer) Send(m *UpdateMeta) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _AppchainPlugin_SubmitIBTP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubmitIBTPRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).SubmitIBTP(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/SubmitIBTP",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).SubmitIBTP(ctx, req.(*SubmitIBTPRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_SubmitReceipt_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SubmitReceiptRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).SubmitReceipt(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/SubmitReceipt",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).SubmitReceipt(ctx, req.(*SubmitReceiptRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_GetOutMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMessageRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).GetOutMessage(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/GetOutMessage",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).GetOutMessage(ctx, req.(*GetMessageRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_GetReceiptMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMessageRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).GetReceiptMessage(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/GetReceiptMessage",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).GetReceiptMessage(ctx, req.(*GetMessageRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_GetInMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).GetInMeta(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/GetInMeta",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).GetInMeta(ctx, req.(*Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_GetOutMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).GetOutMeta(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/GetOutMeta",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).GetOutMeta(ctx, req.(*Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_GetCallbackMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).GetCallbackMeta(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/GetCallbackMeta",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).GetCallbackMeta(ctx, req.(*Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_GetDstRollbackMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).GetDstRollbackMeta(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/GetDstRollbackMeta",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).GetDstRollbackMeta(ctx, req.(*Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_GetServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).GetServices(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/GetServices",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).GetServices(ctx, req.(*Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_GetChainID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).GetChainID(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/GetChainID",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).GetChainID(ctx, req.(*Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_GetAppchainInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ChainInfoRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).GetAppchainInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/GetAppchainInfo",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).GetAppchainInfo(ctx, req.(*ChainInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_Name_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).Name(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/Name",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).Name(ctx, req.(*Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AppchainPlugin_Type_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AppchainPluginServer).Type(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.AppchainPlugin/Type",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AppchainPluginServer).Type(ctx, req.(*Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _AppchainPlugin_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "pb.AppchainPlugin",
-	HandlerType: (*AppchainPluginServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Initialize",
-			Handler:    _AppchainPlugin_Initialize_Handler,
-		},
-		{
-			MethodName: "Start",
-			Handler:    _AppchainPlugin_Start_Handler,
-		},
-		{
-			MethodName: "Stop",
-			Handler:    _AppchainPlugin_Stop_Handler,
-		},
-		{
-			MethodName: "SubmitIBTP",
-			Handler:    _AppchainPlugin_SubmitIBTP_Handler,
-		},
-		{
-			MethodName: "SubmitReceipt",
-			Handler:    _AppchainPlugin_SubmitReceipt_Handler,
-		},
-		{
-			MethodName: "GetOutMessage",
-			Handler:    _AppchainPlugin_GetOutMessage_Handler,
-		},
-		{
-			MethodName: "GetReceiptMessage",
-			Handler:    _AppchainPlugin_GetReceiptMessage_Handler,
-		},
-		{
-			MethodName: "GetInMeta",
-			Handler:    _AppchainPlugin_GetInMeta_Handler,
-		},
-		{
-			MethodName: "GetOutMeta",
-			Handler:    _AppchainPlugin_GetOutMeta_Handler,
-		},
-		{
-			MethodName: "GetCallbackMeta",
-			Handler:    _AppchainPlugin_GetCallbackMeta_Handler,
-		},
-		{
-			MethodName: "GetDstRollbackMeta",
-			Handler:    _AppchainPlugin_GetDstRollbackMeta_Handler,
-		},
-		{
-			MethodName: "GetServices",
-			Handler:    _AppchainPlugin_GetServices_Handler,
-		},
-		{
-			MethodName: "GetChainID",
-			Handler:    _AppchainPlugin_GetChainID_Handler,
-		},
-		{
-			MethodName: "GetAppchainInfo",
-			Handler:    _AppchainPlugin_GetAppchainInfo_Handler,
-		},
-		{
-			MethodName: "Name",
-			Handler:    _AppchainPlugin_Name_Handler,
-		},
-		{
-			MethodName: "Type",
-			Handler:    _AppchainPlugin_Type_Handler,
-		},
-	},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "GetIBTPCh",
-			Handler:       _AppchainPlugin_GetIBTPCh_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetUpdateMeta",
-			Handler:       _AppchainPlugin_GetUpdateMeta_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "plugin.proto",
 }
 
 func (m *Empty) Marshal() (dAtA []byte, err error) {
@@ -3260,7 +2509,10 @@ func (m *Empty) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -3376,7 +2628,10 @@ func (m *InitializeRequest) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -3514,7 +2769,10 @@ func (m *SubmitIBTPResponse) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -3758,7 +3016,10 @@ func (m *SubmitIBTPRequest) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -3982,7 +3243,10 @@ func (m *SubmitReceiptRequest) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -4051,7 +3315,10 @@ func (m *QueryFilterLockStartRequest) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -4120,7 +3387,10 @@ func (m *QueryFilterLockStartResponse) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -4221,7 +3491,10 @@ func (m *GetMessageRequest) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -4367,7 +3640,7 @@ func (m *GetMetaResponse) Unmarshal(dAtA []byte) error {
 					if err != nil {
 						return err
 					}
-					if (skippy < 0) || (iNdEx+skippy) < 0 {
+					if skippy < 0 {
 						return ErrInvalidLengthPlugin
 					}
 					if (iNdEx + skippy) > postIndex {
@@ -4384,7 +3657,10 @@ func (m *GetMetaResponse) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -4466,7 +3742,10 @@ func (m *ServicesResponse) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -4580,7 +3859,10 @@ func (m *ChainIDResponse) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -4662,7 +3944,10 @@ func (m *ChainInfoRequest) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -4810,7 +4095,10 @@ func (m *ChainInfoResponse) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -4892,7 +4180,10 @@ func (m *NameResponse) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -4974,7 +4265,10 @@ func (m *TypeResponse) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -5130,7 +4424,10 @@ func (m *LockEvent) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -5214,7 +4511,10 @@ func (m *UpdateMeta) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -5477,7 +4777,10 @@ func (m *UnLock) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -5546,7 +4849,10 @@ func (m *QueryRelayIndexResponse) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -5615,7 +4921,10 @@ func (m *QueryAppchainIndexResponse) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
@@ -5684,7 +4993,10 @@ func (m *QueryLockEventByIndexRequest) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthPlugin
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPlugin
 			}
 			if (iNdEx + skippy) > l {
