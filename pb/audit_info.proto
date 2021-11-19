@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package pb;
+
+import "bxh_transaction.proto";
+import "receipt.proto";
+
+message AuditTxInfo {
+  pb.BxhTransaction tx = 1;
+  pb.Receipt rec = 2;
+  map<string, bytes> RelatedChainIDList = 3;
+  map<string, bytes> RelatedNodeIDList = 4;
+}
+
+message AuditRelatedObjInfo {
+  bytes AuditObj = 1;
+  map<string, bytes> RelatedChainIDList = 2;
+  map<string, bytes> RelatedNodeIDList = 3;
+}
+
+message AuditSubscriptionRequest {
+  enum Type {
+    AUDIT_NODE = 0;
+    ALL = 1;
+  }
+  Type type = 1;
+  string audit_node_id = 2;
+  uint64 block_height = 3;
+  bytes extra = 4;
+}
