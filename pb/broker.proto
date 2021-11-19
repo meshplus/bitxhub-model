@@ -9,11 +9,18 @@ import "receipt.proto";
 import "block.proto";
 import "chain.proto";
 import "plugin.proto";
+import "audit_info.proto";
 
 service ChainBroker {
   rpc Subscribe (SubscriptionRequest) returns (stream Response) {
     option (google.api.http) = {
       get: "/v1/subscription"
+    };
+  }
+
+  rpc SubscribeAuditInfo (AuditSubscriptionRequest) returns (stream Response) {
+    option (google.api.http) = {
+      get: "/v1/audit_subscription"
     };
   }
 
