@@ -64,3 +64,12 @@ func (l EvmLog) MarshalJSON() ([]byte, error) {
 
 	return json.Marshal(&enc)
 }
+
+func (e *Event) IsAuditEvent() bool {
+	switch e.EventType {
+	case Event_AUDIT_PROPOSAL, Event_AUDIT_APPCHAIN, Event_AUDIT_RULE, Event_AUDIT_SERVICE, Event_AUDIT_NODE, Event_AUDIT_ROLE, Event_AUDIT_INTERCHAIN, Event_AUDIT_DAPP:
+		return true
+	default:
+		return false
+	}
+}
