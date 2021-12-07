@@ -8,8 +8,9 @@ import "receipt.proto";
 message AuditTxInfo {
   pb.BxhTransaction tx = 1;
   pb.Receipt rec = 2;
-  map<string, bytes> RelatedChainIDList = 3;
-  map<string, bytes> RelatedNodeIDList = 4;
+  uint64 block_height = 3;
+  map<string, bytes> RelatedChainIDList = 4;
+  map<string, bytes> RelatedNodeIDList = 5;
 }
 
 message AuditRelatedObjInfo {
