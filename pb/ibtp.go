@@ -2,11 +2,17 @@ package pb
 
 import (
 	"crypto/sha256"
+	"crypto/x509/pkix"
+	"encoding/asn1"
+	"encoding/pem"
 	"fmt"
 	"strconv"
 	"strings"
 
+	"github.com/meshplus/bitxhub-kit/crypto"
+	"github.com/meshplus/bitxhub-kit/crypto/asym/ecdsa"
 	"github.com/meshplus/bitxhub-kit/types"
+	"github.com/meshplus/bitxid"
 )
 
 func (m *IBTP) ID() string {
@@ -19,23 +25,114 @@ func (m *IBTP) ServicePair() string {
 
 // ParseFrom should be called after CheckServiceID is called
 func (m *IBTP) ParseFrom() (string, string, string) {
+	if isDID, _ := m.CheckFormat(); isDID {
+		methodID, serviceID, _ := ParseFullDID(m.From)
+		return "did:bitxhub", methodID, serviceID
+	}
 	bxhID, chainID, serviceID, _ := ParseFullServiceID(m.From)
 	return bxhID, chainID, serviceID
 }
 
 // ParseTo should be called after CheckServiceID is called
 func (m *IBTP) ParseTo() (string, string, string) {
+	if isDID, _ := m.CheckFormat(); isDID {
+		methodID, serviceID, _ := ParseFullDID(m.To)
+		return "did:bitxhub", methodID, serviceID
+	}
 	bxhID, chainID, serviceID, _ := ParseFullServiceID(m.To)
 	return bxhID, chainID, serviceID
 }
 
 func (m *IBTP) CheckServiceID() error {
-	_, _, _, err := ParseFullServiceID(m.From)
+	isDID, err := m.CheckFormat()
+	if err != nil {
+		return err
+	}
+	if isDID {
+		return m.CheckDID()
+	}
+	_, _, _, err = ParseFullServiceID(m.From)
 	if err != nil {
 		return err
 	}
 	_, _, _, err = ParseFullServiceID(m.To)
 	return err
+}
+
+func (m *IBTP) CheckFormat() (bool, error) {
+	fromSplits := strings.Split(m.From, ":")
+	toSplits := strings.Split(m.To, ":")
+	if len(fromSplits) != len(toSplits) {
+		return false, fmt.Errorf("(%s) is not the same format to (%s)", m.From, m.To)
+	}
+	if len(fromSplits) == 4 {
+		return true, nil
+	}
+	if len(fromSplits) == 3 {
+		return false, nil
+	}
+	return false, fmt.Errorf("invalid format (from: %s, to: %s)", m.From, m.To)
+}
+
+func (m *IBTP) CheckDID() error {
+	_, _, err := ParseFullDID(m.From)
+	if err != nil {
+		return err
+	}
+	_, _, err = ParseFullDID(m.To)
+	return err
+}
+
+func (m *IBTP) ParseDIDFrom() (string, string) {
+	methodID, serviceID, _ := ParseFullDID(m.From)
+	return methodID, serviceID
+}
+
+func (m *IBTP) ParseDIDTo() (string, string) {
+	methodID, serviceID, _ := ParseFullDID(m.To)
+	return methodID, serviceID
+}
+
+func ParseFullDID(id string) (string, string, error) {
+	splits := strings.Split(id, ":")
+	if len(splits) != 4 || splits[0] != "did" || splits[1] != "bitxhub" {
+		return "", "", fmt.Errorf("invalid DID format: %s", id)
+	}
+	return splits[2], splits[3], nil
+}
+
+func GetAddrFromDoc(doc *bitxid.MethodDoc) (string, error) {
+	type publicKeyInfo struct {
+		Raw       asn1.RawContent
+		Algorithm pkix.AlgorithmIdentifier
+		PublicKey asn1.BitString
+	}
+
+	key := doc.PublicKey[0].PublicKeyPem
+	keyType, err := crypto.CryptoNameToType(doc.PublicKey[0].Type)
+	if err != nil {
+		return "", fmt.Errorf("get key type failed: %w", err)
+	}
+
+	b, _ := pem.Decode([]byte(key))
+	if b == nil {
+		return "", fmt.Errorf("decode public key pem failed")
+	}
+
+	var pki publicKeyInfo
+	if _, err := asn1.Unmarshal(b.Bytes, &pki); err != nil {
+		return "", fmt.Errorf("asn1 unmarshal public key error: %w", err)
+	}
+	pub, err := ecdsa.UnmarshalPublicKey(pki.PublicKey.RightAlign(), keyType)
+	if err != nil {
+		return "", fmt.Errorf("unmarshal public key error: %w", err)
+	}
+	addr, err := pub.Address()
+	if err != nil {
+		return "", fmt.Errorf("get address from public key failed: %w", err)
+	}
+
+	return addr.String(), nil
 }
 
 func ParseFullServiceID(id string) (string, string, string, error) {
