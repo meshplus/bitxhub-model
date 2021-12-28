@@ -56,6 +56,12 @@ service ChainBroker {
     };
   }
 
+  rpc GetPendingTransaction (TransactionHashMsg) returns (GetTransactionResponse) {
+    option (google.api.http) = {
+      get: "/v1/pending_transaction/{tx_hash}"
+    };
+  }
+
   rpc GetReceipt (TransactionHashMsg) returns (pb.Receipt) {
     option (google.api.http) = {
       get: "/v1/receipt/{tx_hash}"
