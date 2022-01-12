@@ -74,7 +74,7 @@ service AppchainPlugin {
   rpc Stop(Empty) returns (Empty);
   rpc GetIBTP(Empty) returns (stream pb.IBTP);
   rpc GetData(GetDataRequest) returns (GetDataResponse);
-  rpc GetDataReq(stream GetDataResponse) returns (stream GetDataRequest);
+  rpc GetDataReq(Empty) returns (stream GetDataRequest);
   rpc SubmitData(GetDataResponse) returns (Empty);
   rpc SubmitIBTP(pb.IBTP) returns (SubmitIBTPResponse);
   rpc RollbackIBTP(RollbackIBTPRequest) returns (RollbackIBTPResponse);
