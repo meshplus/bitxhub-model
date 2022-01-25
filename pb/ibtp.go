@@ -83,6 +83,28 @@ func (m *IBTP) CheckDID() error {
 	return err
 }
 
+func (m *IBTP) SetExtra() error {
+	pd := Payload{}
+	if err := pd.Unmarshal(m.Payload); err != nil {
+		return fmt.Errorf("unmarshal payload error: %w", err)
+	}
+	ct := Content{}
+	if err := ct.Unmarshal(pd.Content); err != nil {
+		return fmt.Errorf("unmarshal content error: %w", err)
+	}
+	if ct.GetFunc() == "interchainInstructionIssue" || ct.GetFunc() == "interchainRuleIssue" {
+		m.Extra = ct.GetArgs()[1]
+	}
+	if ct.GetFunc() == "interchainUpload" {
+		index := string(ct.GetArgs()[0])
+		splits := strings.Split(index, ":")
+		id := splits[0] + ":" + splits[1] + ":" + splits[2] + ":" + "result-" + strings.Split(splits[3], "-")[1]
+		m.Extra = []byte(id)
+	}
+
+	return nil
+}
+
 func (m *IBTP) ParseDIDFrom() (string, string) {
 	methodID, serviceID, _ := ParseFullDID(m.From)
 	return methodID, serviceID
