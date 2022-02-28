@@ -66,10 +66,20 @@ message ChainInfoRequest {
   string chainID = 1;
 }
 
+message TransactionMetaRequest {
+  string IBTPid = 1;
+}
+
 message ChainInfoResponse {
   string broker = 1;
   bytes trustedRoot = 2;
   string ruleAddr = 3;
+}
+
+// transaction meta in direct mode
+message TransactionMetaResponse {
+  uint64 startTimestamp = 1;
+  uint64 timeoutPeriod = 2;
 }
 
 message NameResponse {
@@ -128,6 +138,7 @@ service AppchainPlugin {
   rpc GetServices(Empty) returns (ServicesResponse);
   rpc GetChainID(Empty) returns (ChainIDResponse);
   rpc GetAppchainInfo(ChainInfoRequest) returns (ChainInfoResponse);
+  rpc GetTransactionMeta(TransactionMetaRequest) returns (TransactionMetaResponse);
   rpc Name(Empty) returns (NameResponse);
   rpc Type(Empty) returns (TypeResponse);
 }

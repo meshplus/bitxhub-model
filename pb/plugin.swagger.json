@@ -110,9 +110,11 @@
         "INTERCHAIN",
         "RECEIPT_SUCCESS",
         "RECEIPT_FAILURE",
-        "RECEIPT_ROLLBACK"
+        "RECEIPT_ROLLBACK",
+        "RECEIPT_ROLLBACK_END"
       ],
-      "default": "INTERCHAIN"
+      "default": "INTERCHAIN",
+      "title": "- RECEIPT_ROLLBACK_END: notify src chain rollback end in direct mode"
     },
     "pbNameResponse": {
       "type": "object",
@@ -155,7 +157,8 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "boolean"
+          "type": "boolean",
+          "format": "boolean"
         },
         "message": {
           "type": "string"
@@ -164,6 +167,20 @@
           "$ref": "#/definitions/pbIBTP"
         }
       }
+    },
+    "pbTransactionMetaResponse": {
+      "type": "object",
+      "properties": {
+        "startTimestamp": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "timeoutPeriod": {
+          "type": "string",
+          "format": "uint64"
+        }
+      },
+      "title": "transaction meta in direct mode"
     },
     "pbTransactionStatus": {
       "type": "string",
