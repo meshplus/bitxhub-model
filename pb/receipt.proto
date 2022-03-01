@@ -3,6 +3,7 @@ syntax = "proto3";
 package pb;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "bxh_transaction.proto";
 
 message Receipt {
     enum Status {
@@ -18,6 +19,7 @@ message Receipt {
     repeated EvmLog evm_logs = 7;
     bytes bloom = 8 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Bloom"];
     bytes contract_address = 9 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Address"];
+    TransactionStatus tx_status = 10;
 }
 
 message Receipts {
