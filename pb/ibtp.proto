@@ -11,6 +11,8 @@ message IBTP {
         RECEIPT_SUCCESS = 1;
         RECEIPT_FAILURE = 2;
         RECEIPT_ROLLBACK = 3;
+        // notify src chain rollback end in direct mode
+        RECEIPT_ROLLBACK_END = 4;
     }
 
     enum Category {
