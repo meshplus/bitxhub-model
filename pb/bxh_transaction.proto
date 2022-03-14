@@ -16,9 +16,14 @@ message BxhTransaction {
     pb.IBTP IBTP = 7;
     uint64 nonce = 8;
     string amount  = 9;
-    uint32 typ = 10;
+    TxType typ = 10;
     bytes signature = 11;
     bytes extra = 12;
+}
+
+enum TxType {
+    NormalBxhTx = 0;
+    EthSignedBxhTx = 1;
 }
 
 message TransactionData {

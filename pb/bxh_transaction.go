@@ -15,11 +15,6 @@ import (
 
 var _ Transaction = (*BxhTransaction)(nil)
 
-const (
-	NormalBxhTx    = 0
-	EthSignedBxhTx = 1
-)
-
 func init() {
 	RegisterTxConstructor(0, func() Transaction {
 		return &BxhTransaction{}
@@ -174,7 +169,7 @@ func (m *BxhTransaction) GetType() byte {
 }
 
 func (m *BxhTransaction) VerifySignature() error {
-	if m.Typ == NormalBxhTx {
+	if m.Typ == TxType_NormalBxhTx {
 		sign := m.GetSignature()
 		ok, err := asym.VerifyWithType(sign, m.GetSignHash().Bytes(), *m.GetFrom())
 		if err != nil {
@@ -184,7 +179,7 @@ func (m *BxhTransaction) VerifySignature() error {
 		if !ok {
 			return fmt.Errorf("invalid signature")
 		}
-	} else if m.Typ == EthSignedBxhTx {
+	} else if m.Typ == TxType_EthSignedBxhTx {
 		msg := m.ethSignMsg()
 		hash := ecdsa.Keccak256(msg)
 		v, r, s := m.GetRawSignature()
