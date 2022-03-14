@@ -112,7 +112,7 @@ service ChainBroker {
 
   rpc GetMultiSigns (GetMultiSignsRequest) returns (SignResponse) {
     option (google.api.http) = {
-      get: "/v1/multi_sign/{content}"
+      get: "/v1/multi_sign"
     };
   }
 

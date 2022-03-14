@@ -644,30 +644,12 @@ func local_request_ChainBroker_GetAccountBalance_0(ctx context.Context, marshale
 }
 
 var (
-	filter_ChainBroker_GetMultiSigns_0 = &utilities.DoubleArray{Encoding: map[string]int{"content": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_ChainBroker_GetMultiSigns_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
 
 func request_ChainBroker_GetMultiSigns_0(ctx context.Context, marshaler runtime.Marshaler, client ChainBrokerClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetMultiSignsRequest
 	var metadata runtime.ServerMetadata
-
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["content"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "content")
-	}
-
-	protoReq.Content, err = runtime.String(val)
-
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "content", err)
-	}
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -684,24 +666,6 @@ func request_ChainBroker_GetMultiSigns_0(ctx context.Context, marshaler runtime.
 func local_request_ChainBroker_GetMultiSigns_0(ctx context.Context, marshaler runtime.Marshaler, server ChainBrokerServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetMultiSignsRequest
 	var metadata runtime.ServerMetadata
-
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["content"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "content")
-	}
-
-	protoReq.Content, err = runtime.String(val)
-
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "content", err)
-	}
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -1951,7 +1915,7 @@ var (
 
 	pattern_ChainBroker_GetAccountBalance_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "account_balance", "address"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_ChainBroker_GetMultiSigns_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "multi_sign", "content"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_ChainBroker_GetMultiSigns_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "multi_sign"}, "", runtime.AssumeColonVerbOpt(true)))
 
 	pattern_ChainBroker_GetTPS_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "tps", "begin", "end"}, "", runtime.AssumeColonVerbOpt(true)))
 

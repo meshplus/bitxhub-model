@@ -526,7 +526,7 @@
         ]
       }
     },
-    "/v1/multi_sign/{content}": {
+    "/v1/multi_sign": {
       "get": {
         "operationId": "ChainBroker_GetMultiSigns",
         "responses": {
@@ -545,12 +545,6 @@
         },
         "parameters": [
           {
-            "name": "content",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "type",
             "in": "query",
             "required": false,
@@ -563,6 +557,12 @@
               "BURN"
             ],
             "default": "ASSET_EXCHANGE"
+          },
+          {
+            "name": "content",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
