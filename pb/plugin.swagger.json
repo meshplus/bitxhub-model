@@ -38,6 +38,24 @@
         }
       }
     },
+    "pbDirectTransactionMetaResponse": {
+      "type": "object",
+      "properties": {
+        "startTimestamp": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "timeoutPeriod": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "transactionStatus": {
+          "type": "string",
+          "format": "uint64"
+        }
+      },
+      "title": "transaction meta in direct mode"
+    },
     "pbEmpty": {
       "type": "object"
     },
@@ -167,20 +185,6 @@
           "$ref": "#/definitions/pbIBTP"
         }
       }
-    },
-    "pbTransactionMetaResponse": {
-      "type": "object",
-      "properties": {
-        "startTimestamp": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "timeoutPeriod": {
-          "type": "string",
-          "format": "uint64"
-        }
-      },
-      "title": "transaction meta in direct mode"
     },
     "pbTransactionStatus": {
       "type": "string",

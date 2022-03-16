@@ -66,7 +66,7 @@ message ChainInfoRequest {
   string chainID = 1;
 }
 
-message TransactionMetaRequest {
+message DirectTransactionMetaRequest {
   string IBTPid = 1;
 }
 
@@ -77,9 +77,10 @@ message ChainInfoResponse {
 }
 
 // transaction meta in direct mode
-message TransactionMetaResponse {
+message DirectTransactionMetaResponse {
   uint64 startTimestamp = 1;
   uint64 timeoutPeriod = 2;
+  uint64 transactionStatus = 3;
 }
 
 message NameResponse {
@@ -138,7 +139,7 @@ service AppchainPlugin {
   rpc GetServices(Empty) returns (ServicesResponse);
   rpc GetChainID(Empty) returns (ChainIDResponse);
   rpc GetAppchainInfo(ChainInfoRequest) returns (ChainInfoResponse);
-  rpc GetTransactionMeta(TransactionMetaRequest) returns (TransactionMetaResponse);
+  rpc GetDirectTransactionMeta(DirectTransactionMetaRequest) returns (DirectTransactionMetaResponse);
   rpc Name(Empty) returns (NameResponse);
   rpc Type(Empty) returns (TypeResponse);
 }
