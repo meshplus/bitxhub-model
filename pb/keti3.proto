@@ -1,0 +1,150 @@
+syntax = "proto3";
+package pb;
+
+option java_multiple_files = true;
+
+// 网关直连传输
+message GetDataResponseResult {
+    message ResponseDataInfo {
+        string crsDataSN = 1; //跨链数据在当前跨链协同事务的数据集中的唯一编码
+        string type = 2; //数据类型，取值“struct”、“file”。跨链网关依据此类型决定使用哪种类型的区块链API获取链上数据
+        bytes body = 3; // 存证原文
+        string bodyName = 4; // 存证文件名
+        bool result = 5; // 下载成功与否
+        string downErrMsg = 6;
+    }
+    repeated DataInfo dataInfo = 1;
+    repeated ResponseDataInfo dataResult = 2;
+}
+
+// req请求时填入FJS字段
+message ReqFJS {
+    RequestInfo reqInfo = 1;
+    ArrivalNoticeInfo arrivalNoticeInfo = 2;
+    // 还需要TxCfg,与unicode有关
+    CrossChainTxCfg crossChainTxCfg = 3;
+}
+
+message RequestInfo {
+    string unicode = 1; //跨链协同事务编码
+    string crsChnTxType = 2; //跨链协同事务类型。取值为“CrossData”：数据跨链；“CrossSC”：跨链合约调用
+    string crsBizFlowID = 3; //跨链协同业务流程实例唯一标识。如果本次跨链协同事务发起请求是因为前一个协同事务实例触发，则发起方业务系统应将前序协同事务实例中crsBizFlowID的取值复制到此字段中，从而表示当前协同事务实例与前序协同事务实例处于同一个协同流程实例；如果发起方业务系统确定当前协同事务发起请求没有前序触发实例时，则使用UUID的生成规则，自行创建一个全局唯一的流程实例编码
+    repeated DataInfo dataInfo = 4; //需要跨链协同的数据(独立保存于发起链账本中的)在发起链上的获取信息，发起方跨链网关依据此处的信息获取发起链上数据，转发至目标链
+    repeated SCCallInfo scCallInfo = 5; //目标链上的跨链协同业务合约调用信息，接收方业务系统依据此处的信息获取详细合约调用交易数据
+}
+
+message DataInfo {
+    string crsDataSN = 1; //跨链数据在当前跨链协同事务的数据集中的唯一编码
+    string type = 2; //数据类型，取值“struct”、“file”。跨链网关依据此类型决定使用哪种类型的区块链API获取链上数据
+    string srcDataID = 3; //跨链数据在发起链上的唯一标识，此参数由发起方业务系统负责填写
+    repeated ConfigInfo srcLocation = 4; //跨链数据定位信息，发起方跨链网关使用srcLocation + srcDataID组合信息，从发起链上获取到指定的跨链存证数据，此参数由发起方业务系统负责填写
+    string dataHash= 5; //数据本体哈希值，用于标识跨链数据的一致性
+    int64 size= 6; //数据本体尺寸，单位为byte，由发起业务系统设置
+    CipherInfo cipher = 7; //密文解密信息，跨链数据自身为加密数据，此处保存解密密钥信息，传送到调度合约后，由接收方业务系统使用此密钥对跨链密文数据进行解密
+}
+
+message CipherInfo {
+    string encryptedKey =1; //使用接收方业务系统身份公钥对解密密钥进行非对称加密后的密文。发起方业务系统需要获得发起链对应的加密库和接收方业务系统身份公钥。
+    string keyCrypType = 2; // encryptedKey使用的加密算法，便于接收方使用相应的加密库进行解密
+    string dataCrypType = 3; //跨链数据加密算法，便于接收方使用相应的加密库进行解密
+}
+
+message SCCallInfo {
+    string scCallSN = 1; //跨链业务合约方法调用请求在当前跨链协同事务的合约调用请求集中的唯一编码
+    string destSCAddress = 2; //目标链业务合约地址信息
+    repeated ConfigInfo destLocation= 3; //目标链业务合约定位信息，destLocation + destSCAddress组合信息，告知接收方跨链网关调用哪个业务合约
+    string scMethod = 4; //目标链业务合约方法名称，告知接收方跨链网关调用业务合约的哪个方法
+    repeated SCCallParam param = 5; //跨链业务合约方法参数列表，接收跨链网关依据param中出现顺序构建合约方法调用请求交易体
+}
+
+message SCCallParam {
+    string name = 1; //参数名称
+    string type= 2; //参数类型，告知接收方跨链网关value中的参数值实际的数据类型
+    bytes value= 3; //参数值，发起方业务系统按照目标链业务合约方法传参规则，将相应的数据类型转化成bytes。接收方跨链网关负责将其转还原回正确的参数类型
+}
+
+// -------------------------------------------目标链need------------------------------------
+message ArrivalNoticeInfo {
+    int64 reqTs = 1;       //调度合约的“设置发起请求”合约方法调用交易执行时间戳
+    string reqTxHash = 2;  //调度合约的“设置发起请求”合约方法调用交易哈希。发起方跨链网关通过在发起链上的合约事件查询接口可以获得，事后可以用来确认设置发起请求合约方法调用的真实
+    repeated CrossDataDestRef dataDestRef = 3; //跨链协同的数据在目标链上的获取信息，接收方业务系统依据此处的信息获取目标链上数据
+    repeated CrsGWLinkInfo crsGW = 4; //跨链网关链路处理信息，包含本次跨链协同请求处理经过的跨链网关以及每个网关的处理时间
+}
+
+message CrsGWLinkInfo {
+    int32 seqNo = 1; //跨链网关链路顺序编号，从发起链开始，目标链结束，从 1 开始，依次递增
+    // ibtp.Index
+    string gwID = 2; //跨链网关身份标识，由协同管理平台统一颁发的数字身份标识
+    // ibtp.To or From
+    int64 startForwardTs = 3; //跨链网关开始向后转发跨链信息的时间戳。即跨链网关从发起链获取到链上数据或业务合约调用请求数据，并开始向下一个跨链网关转发或向目标链保存跨链数据、调用业务合约的时间
+    // 目的链插件发起调用的时间戳
+}
+// -------------------------------------------目标链need------------------------------------
+
+
+// -------------------------------------------来源链回执need------------------------------------
+// resq时请求的字段
+message ResInfo {
+    ResponseInfo responseInfo = 1;
+    ResultInfo resultInfo = 2;
+}
+message ResponseInfo{
+    int32 retCode = 1; //跨链协同请求的处理结果编码。取值为“1”表示处理成功，没有出现任何异常； 取值为“-1”表示处理失败
+    // todo 能进入业务合约执行说明已经是1，-1的情况无法触达
+    string retErrMsg = 2; //处理异常信息，异常信息组成结构自行协商定义
+    // todo 目的链执行失败信息，同样失败时无法触达
+    int64 arrNoticeTs = 3; //目标链上调度合约的“设置送达通知”合约方法调用交易执行时间戳
+    string arrNtcTxHash = 4; //“设置送达通知”合约方法调用交易哈希。接收方跨链网关调用调度合约的“设置送达通知”合约方法的链上交易哈希值（Tx Hash），事后可以用来确认“设置送达通知”合约方法调用的真实性
+    // todo 以上两个信息由目的链插件gengraCallback生成
+    repeated CrsGWLinkInfo crsGW = 5; //跨链网关链路处理信息，包含本次跨链协同请求处理经过的跨链网关以及每个网关的处理时间
+}
+message ResultInfo{
+    repeated DataSaveResult dataResult = 1; //跨链数据 处理结果信息。
+    repeated SCCallResult scResult = 2; //跨链业务合约 调用结果信息。
+}
+message DataSaveResult{
+    string crsDataSN = 1; //跨链数据在当前跨链协同事务 的数据集中的唯一编码，复制设置 发起请求中的 RequestInfo.data.crsDataSN 取值
+    int32 retCode = 2; //跨链协同请求的处理结果编码。 取值为“ 1”表示处理成功，没有出现 任何异常； “-1” 表示处理失败
+    string retErrMsg = 3; //处理异常信息，异常信息组成 结构自行协商定义
+}
+
+message SCCallResult{
+    string scCallSN = 1; //跨链业务合约方法调用请求在当 前跨链协同事务的合约调用请求集 中的唯一编码，复制设置发起请求 中的 RequestInfo.scCall.scCallSN 取 值
+    int32 retCode = 2; //跨链协同请求的处理结果编码。 取值为“ 1”表示处理成功，没有出现 任何异常； “-1” 表示处理失败
+    string retErrMsg = 3; //处理异常信息，异常信息组成 结构自行协商定义
+    string crsCallResult = 4; //跨链业务合约方法调用返回 结果信息。业务合约返回结果内容 解析规则由发起方业务系统和接收 方业务系统自行协商确定。
+}
+// -------------------------------------------来源链回执need------------------------------------
+
+
+
+message CrossDataDestRef {
+    string crsDataSN = 1; //跨链数据在当前跨链协同事务的数据集中的唯一编码，与 reqInfo参数中对应的RequestInfo.dataRef.crsDataSN 相一致
+    string destDataID = 2; //跨链数据在目标链上的唯一标识，此参数由接收方跨链网关负责填写
+    repeated ConfigInfo destLocation = 3; //跨链数据定destLocation + destDataID 组合信息，从目标链上获取到指定的跨链存证数据，此参数由接收方跨链网关负责填写
+}
+
+message ConfigInfo {
+    string name = 1; //定位信息配置项名称
+    string value= 2; //配置项取值
+}
+
+message CrossChainTxCfg {
+    string unicode = 1; //跨链协同事务编码，由协同管理平台统一编码并颁发。
+    string crsChnTxType = 2; //跨链协同事务类型。取值为“CrossData”：数据跨链；“CrossSC”：跨链合约调用
+    string srcChainID = 3; //发起链身份标识，由协同管理平台统一颁发的数字身份标识
+    string destChainID = 4; //目标链身份标识，由协同管理平台统一颁发的数字身份标识
+    string sendSystemID = 5; //发起方业务系统身份标识，由协同管理平台统一颁发的数字身份标识
+    string recvSystemID = 6; //接收方业务系统身份标识，由协同管理平台统一颁发的数字身份标识
+    SaveRuleConfig destDataSaveRule = 7; //跨链协同事务中跨链数据在目标链上的存证规则，此参数信息只用在目标链调度合约中保存
+}
+message SaveRuleConfig {
+    repeated ConfigInfo location = 1; //存证位置信息，依据目标链数据存证规则，由接收方跨链网关自行定义location中的数据结构。接收方跨链网关将依据此处定义上链存证数据
+    repeated DataRightInfo right = 2; //存证数据权限设置信息
+}
+
+message DataRightInfo {
+    string rightName = 1; //权限名称，依据目标链数据权限规则，由目标链和接收方跨链网关自行协商定义。如“Owner”，“Reader”等
+    repeated string ids = 2; //权限对应的数字身份标识列表，依据目标链的数据权限规则设定
+}
+

@@ -5,7 +5,7 @@ pb:
 	-I${GOPATH}/src \
 	-I${GOPATH}/src/github.com/gogo/protobuf/protobuf \
 	--gogofaster_out=:. \
-	block.proto ibtp.proto network.proto receipt.proto transaction.proto chain.proto arg.proto interchain_meta.proto plugin.proto vp_info.proto basic.proto
+	keti3.proto block.proto ibtp.proto network.proto receipt.proto transaction.proto chain.proto arg.proto interchain_meta.proto plugin.proto vp_info.proto basic.proto
 
 grpc:
 	cd pb && protoc -I=. \
@@ -17,6 +17,8 @@ grpc:
 	--gogofaster_out=plugins=grpc:. \
 	broker.proto plugin.proto
 
+rust:
+	cd pb && mkdir -p src && protoc --rust_out=src plugin.proto && protoc --rust-grpc_out=src plugin.proto && protoc --rust_out=src ibtp.proto && protoc --rust_out=src basic.proto
 ## make linter: Run golanci-lint
 linter:
 	golangci-lint run -E goimports -E bodyclose --skip-dirs-use-default

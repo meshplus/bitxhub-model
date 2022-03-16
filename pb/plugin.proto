@@ -43,7 +43,7 @@ message GetDataResponse {
   string from = 2;
   string to = 3;
   uint64 idx = 4;
-  bool ok = 5;
+  uint32 code = 5;
 }
 
 message GetMetaResponse {
