@@ -21,8 +21,6 @@ message GetDataResponseResult {
 message ReqFJS {
     RequestInfo reqInfo = 1;
     ArrivalNoticeInfo arrivalNoticeInfo = 2;
-    // 还需要TxCfg,与unicode有关
-    CrossChainTxCfg crossChainTxCfg = 3;
 }
 
 message RequestInfo {
@@ -132,11 +130,13 @@ message ConfigInfo {
 message CrossChainTxCfg {
     string unicode = 1; //跨链协同事务编码，由协同管理平台统一编码并颁发。
     string crsChnTxType = 2; //跨链协同事务类型。取值为“CrossData”：数据跨链；“CrossSC”：跨链合约调用
-    string srcChainID = 3; //发起链身份标识，由协同管理平台统一颁发的数字身份标识
-    string destChainID = 4; //目标链身份标识，由协同管理平台统一颁发的数字身份标识
-    string sendSystemID = 5; //发起方业务系统身份标识，由协同管理平台统一颁发的数字身份标识
-    string recvSystemID = 6; //接收方业务系统身份标识，由协同管理平台统一颁发的数字身份标识
-    SaveRuleConfig destDataSaveRule = 7; //跨链协同事务中跨链数据在目标链上的存证规则，此参数信息只用在目标链调度合约中保存
+    int32 openLicense = 3; //跨链协同开通许可，取值为“1”表示协同管理平台准许跨链协同开通运行；取值为“-1”表示协同管理平台禁止跨链协同开通运行。
+    string srcChainID = 4; //发起链身份标识，由协同管理平台统一颁发的数字身份标识
+    string destChainID = 5; //目标链身份标识，由协同管理平台统一颁发的数字身份标识
+    string sendSystemID = 6; //发起方业务系统身份标识，由协同管理平台统一颁发的数字身份标识
+    string recvSystemID = 7; //接收方业务系统身份标识，由协同管理平台统一颁发的数字身份标识
+    SaveRuleConfig destDataSaveRule = 8; //跨链协同事务中跨链数据在目标链上的存证规则，此参数信息只用在目标链调度合约中保存
+    int32 runState = 9; //跨链协同事务运行状态，取值为“1”表示跨链协同事务正式对外提供服务。取值为 “-1”表示跨链协同事务不再响应外部调用，对外提供服务。
 }
 message SaveRuleConfig {
     repeated ConfigInfo location = 1; //存证位置信息，依据目标链数据存证规则，由接收方跨链网关自行定义location中的数据结构。接收方跨链网关将依据此处定义上链存证数据
