@@ -22,7 +22,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -61,7 +61,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -116,7 +116,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -166,7 +166,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -204,7 +204,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -242,7 +242,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -280,7 +280,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -316,7 +316,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -346,7 +346,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -378,7 +378,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -416,7 +416,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -448,7 +448,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -493,7 +493,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -537,7 +537,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -550,19 +550,28 @@
             "required": false,
             "type": "string",
             "enum": [
-              "ASSET_EXCHANGE",
-              "IBTP_REQUEST",
-              "IBTP_RESPONSE",
-              "BLOCK_HEADER",
-              "BURN"
+              "MULTI_ASSET_EXCHANGE",
+              "MULTI_IBTP_REQUEST",
+              "MULTI_IBTP_RESPONSE",
+              "MULTI_BLOCK_HEADER",
+              "MULTI_BURN",
+              "TSS_IBTP_REQUEST",
+              "TSS_IBTP_RESPONSE"
             ],
-            "default": "ASSET_EXCHANGE"
+            "default": "MULTI_ASSET_EXCHANGE"
           },
           {
             "name": "content",
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "extra",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "byte"
           }
         ],
         "tags": [
@@ -581,7 +590,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -611,7 +620,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -641,7 +650,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -671,7 +680,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -712,7 +721,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -759,7 +768,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -797,7 +806,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -829,7 +838,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -859,7 +868,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -880,6 +889,59 @@
         ]
       }
     },
+    "/v1/tss_sign": {
+      "get": {
+        "operationId": "ChainBroker_GetTssSigns",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbSignResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "MULTI_ASSET_EXCHANGE",
+              "MULTI_IBTP_REQUEST",
+              "MULTI_IBTP_RESPONSE",
+              "MULTI_BLOCK_HEADER",
+              "MULTI_BURN",
+              "TSS_IBTP_REQUEST",
+              "TSS_IBTP_RESPONSE"
+            ],
+            "default": "MULTI_ASSET_EXCHANGE"
+          },
+          {
+            "name": "content",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "extra",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "byte"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
     "/v1/view": {
       "post": {
         "operationId": "ChainBroker_SendView",
@@ -891,7 +953,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "An unexpected error response",
             "schema": {
               "$ref": "#/definitions/runtimeError"
             }
@@ -1043,8 +1105,7 @@
           "type": "string"
         },
         "typ": {
-          "type": "integer",
-          "format": "int64"
+          "$ref": "#/definitions/pbTxType"
         },
         "signature": {
           "type": "string",
@@ -1133,7 +1194,8 @@
           "format": "uint64"
         },
         "removed": {
-          "type": "boolean"
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
@@ -1178,16 +1240,18 @@
         }
       }
     },
-    "pbGetMultiSignsRequestType": {
+    "pbGetSignsRequestType": {
       "type": "string",
       "enum": [
-        "ASSET_EXCHANGE",
-        "IBTP_REQUEST",
-        "IBTP_RESPONSE",
-        "BLOCK_HEADER",
-        "BURN"
+        "MULTI_ASSET_EXCHANGE",
+        "MULTI_IBTP_REQUEST",
+        "MULTI_IBTP_RESPONSE",
+        "MULTI_BLOCK_HEADER",
+        "MULTI_BURN",
+        "TSS_IBTP_REQUEST",
+        "TSS_IBTP_RESPONSE"
       ],
-      "default": "ASSET_EXCHANGE"
+      "default": "MULTI_ASSET_EXCHANGE"
     },
     "pbGetTransactionResponse": {
       "type": "object",
@@ -1545,6 +1609,14 @@
       ],
       "default": "BEGIN"
     },
+    "pbTxType": {
+      "type": "string",
+      "enum": [
+        "NormalBxhTx",
+        "EthSignedBxhTx"
+      ],
+      "default": "NormalBxhTx"
+    },
     "pbVerifiedTx": {
       "type": "object",
       "properties": {
@@ -1552,7 +1624,8 @@
           "$ref": "#/definitions/pbBxhTransaction"
         },
         "valid": {
-          "type": "boolean"
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
