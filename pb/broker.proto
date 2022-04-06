@@ -43,6 +43,13 @@ service ChainBroker {
     };
   }
 
+  rpc SendTransactions (MultiTransaction) returns (MultiTransactionHash) {
+    option (google.api.http) = {
+      post: "/v1/transactions"
+      body: "*"
+    };
+  }
+
   rpc SendView (pb.BxhTransaction) returns (pb.Receipt) {
     option (google.api.http) = {
       post: "/v1/view"
@@ -297,4 +304,12 @@ message HeartBeatRespones {
     DEAD = 1;
   }
   Status status = 1;
+}
+
+message MultiTransaction {
+  repeated pb.BxhTransaction txs = 1;
+}
+
+message MultiTransactionHash {
+  repeated pb.TransactionHashMsg txHashList = 1;
 }
