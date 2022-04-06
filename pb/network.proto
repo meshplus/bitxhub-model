@@ -25,6 +25,39 @@ message Message {
         CHECK_MASTER_PIER_ACK = 18;
         FETCH_BURN_SIGN = 21;
         FETCH_BURN_SIGN_ACK = 22;
+
+        //pier message
+        APPCHAIN_REGISTER = 23;
+        APPCHAIN_UPDATE = 24;
+        APPCHAIN_GET = 25;
+        INTERCHAIN_META_GET = 26;
+        RULE_DEPLOY = 27;
+        IBTP_GET = 28;
+        IBTP_SEND = 29;
+        IBTP_RECEIPT_SEND = 30;
+        ROUTER_IBTP_SEND = 31;
+        ROUTER_IBTP_RECEIPT_SEND = 32;
+        ADDRESS_GET = 33;
+        ROUTER_INTERCHAIN_SEND = 34;
+        ACK = 35;
+
+        // pier pangolin message
+        PIER_SEND_TRANSACTION = 36;
+        PIER_SEND_TRANSACTION_ACK = 37;
+        PIER_GET_TRANSACTION = 38;
+        PIER_GET_TRANSACTION_ACK = 39;
+        PIER_SEND_VIEW = 40;
+        PIER_SEND_VIEW_ACK = 41;
+        PIER_GET_RECEIPT = 42;
+        PIER_GET_RECEIPT_ACK = 43;
+        PIER_GET_MULTI_SIGNS = 44;
+        PIER_GET_MULTI_SIGNS_ACK = 45;
+        PIER_SUBSCRIBE = 46;
+        PIER_SUBSCRIBE_ACK = 47;
+        PIER_GET_CHAIN_META = 48;
+        PIER_GET_CHAIN_META_ACK = 49;
+        PIER_GET_INTERCHAIN_TX_WRAPPERS=50;
+        PIER_GET_INTERCHAIN_TX_WRAPPERS_ACK=51;
     }
     Type type = 1;
     bytes Data = 2;
