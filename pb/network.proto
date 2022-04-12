@@ -14,6 +14,7 @@ message Message {
         FETCH_IBTP_REQUEST_SIGN = 7;
         FETCH_IBTP_RESPONSE_SIGN = 8;
         FETCH_IBTP_SIGN_ACK = 9;
+        FETCH_IBTP_TSS_SIGN_ACK = 10;
 
         GET_ADDRESS = 11;
         GET_ADDRESS_ACK = 12;
@@ -25,6 +26,8 @@ message Message {
         CHECK_MASTER_PIER_ACK = 18;
         FETCH_BURN_SIGN = 21;
         FETCH_BURN_SIGN_ACK = 22;
+        FETCH_P2P_PUBKEY = 23;
+        FETCH_P2P_PUBKEY_ACK = 24;
 
         //pier message
         APPCHAIN_REGISTER = 31;
@@ -47,6 +50,16 @@ message Message {
         PUBKEY_GET_ACK = 53;
 
         ACK = 61;
+
+        FETCH_IBTP_REQUEST_TSS_SIGN = 71;
+        FETCH_IBTP_RESPONSE_TSS_SIGN = 72;
+        TSS_KEY_GEN = 73;
+        TSS_KEY_SIGN = 74;
+        TSS_KEY_GEN_VER = 75;
+        TSS_KEY_SIGN_VER = 76;
+        TSS_CONTROL = 77;
+        TSS_TASK_DONE = 78;
+        TSS_UNKNOW = 79;
     }
     Type type = 1;
     bytes Data = 2;

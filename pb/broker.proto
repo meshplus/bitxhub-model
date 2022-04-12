@@ -117,9 +117,15 @@ service ChainBroker {
     };
   }
 
-  rpc GetMultiSigns (GetMultiSignsRequest) returns (SignResponse) {
+  rpc GetMultiSigns (GetSignsRequest) returns (SignResponse) {
     option (google.api.http) = {
       get: "/v1/multi_sign"
+    };
+  }
+
+  rpc GetTssSigns (GetSignsRequest) returns (SignResponse) {
+    option (google.api.http) = {
+      get: "/v1/tss_sign"
     };
   }
 
@@ -244,16 +250,20 @@ message SubscriptionRequest {
   bytes extra = 2;
 }
 
-message GetMultiSignsRequest {
+message GetSignsRequest {
   enum Type {
-    ASSET_EXCHANGE = 0;
-    IBTP_REQUEST = 1;
-    IBTP_RESPONSE = 2;
-    BLOCK_HEADER = 3;
-    BURN = 4;
+    MULTI_ASSET_EXCHANGE = 0;
+    MULTI_IBTP_REQUEST = 1;
+    MULTI_IBTP_RESPONSE = 2;
+    MULTI_BLOCK_HEADER = 3;
+    MULTI_BURN = 4;
+    TSS_IBTP_REQUEST = 5;
+    TSS_IBTP_RESPONSE = 6;
+
   }
   Type type = 1;
   string content = 2;
+  bytes extra = 3;
 }
 
 message GetTransactionResponse {
