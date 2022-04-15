@@ -28,6 +28,8 @@ message Message {
         FETCH_BURN_SIGN_ACK = 22;
         FETCH_P2P_PUBKEY = 23;
         FETCH_P2P_PUBKEY_ACK = 24;
+        FETCH_TSS_PUBKEY = 25;
+        FETCH_TSS_PUBKEY_ACK = 26;
 
         //pier message
         APPCHAIN_REGISTER = 31;
