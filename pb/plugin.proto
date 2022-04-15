@@ -3,6 +3,7 @@ package pb;
 
 import "ibtp.proto";
 import "bxh_transaction.proto";
+import "offchain_transmission.proto";
 
 message Empty {}
 
@@ -142,4 +143,7 @@ service AppchainPlugin {
   rpc GetDirectTransactionMeta(DirectTransactionMetaRequest) returns (DirectTransactionMetaResponse);
   rpc Name(Empty) returns (NameResponse);
   rpc Type(Empty) returns (TypeResponse);
+  rpc GetOffChainData(pb.GetDataRequest) returns (pb.GetDataResponse);
+  rpc GetOffChainDataReq(Empty) returns (stream pb.GetDataRequest);
+  rpc SubmitOffChainData(pb.GetDataResponse) returns (Empty);
 }

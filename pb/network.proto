@@ -62,6 +62,8 @@ message Message {
         TSS_CONTROL = 77;
         TSS_TASK_DONE = 78;
         TSS_UNKNOW = 79;
+
+        OFFCHAIN_DATA_GET = 81;
     }
     Type type = 1;
     bytes Data = 2;

@@ -59,6 +59,57 @@
     "pbEmpty": {
       "type": "object"
     },
+    "pbGetDataRequest": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "req": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "pbGetDataResponse": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/pbGetDataResponseType"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "pbGetDataResponseType": {
+      "type": "string",
+      "enum": [
+        "DATA_GET_SUCCESS",
+        "DATA_OUT_OF_SIZE"
+      ],
+      "default": "DATA_GET_SUCCESS"
+    },
     "pbGetMetaResponse": {
       "type": "object",
       "properties": {
