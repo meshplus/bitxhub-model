@@ -59,7 +59,8 @@ message Message {
         PIER_GET_INTERCHAIN_TX_WRAPPERS=50;
         PIER_GET_INTERCHAIN_TX_WRAPPERS_ACK=51;
     }
-    Type type = 1;
-    bytes Data = 2;
-    bytes Version = 3;
+    string From = 1;
+    Type type = 2;
+    bytes Data = 3;
+    bytes Version = 4;
 }
