@@ -1061,6 +1061,10 @@
     "pbInterchainTxWrappers": {
       "type": "object",
       "properties": {
+        "height": {
+          "type": "string",
+          "format": "uint64"
+        },
         "interchainTxWrappers": {
           "type": "array",
           "items": {

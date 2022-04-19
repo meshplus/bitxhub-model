@@ -22,3 +22,7 @@ message BlockHeader {
     bytes version = 7;
     bytes Bloom = 8 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Bloom"];
 }
+
+message MultiBlockHeader {
+    repeated BlockHeader blockHeaders = 1;
+}

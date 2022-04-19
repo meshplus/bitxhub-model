@@ -234,7 +234,12 @@ message InterchainTxWrapper {
 }
 
 message InterchainTxWrappers {
-  repeated InterchainTxWrapper interchainTxWrappers = 1;
+  uint64 height = 1;
+  repeated InterchainTxWrapper interchainTxWrappers = 2;
+}
+
+message MultiInterchainTxWrappers {
+  repeated InterchainTxWrappers multiWrappers = 1;
 }
 
 message GetTPSRequest {
