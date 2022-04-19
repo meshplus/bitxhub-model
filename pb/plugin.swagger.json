@@ -63,13 +63,18 @@
       "type": "object",
       "properties": {
         "index": {
-          "type": "string"
+          "type": "string",
+          "format": "uint64"
         },
         "from": {
           "type": "string"
         },
         "to": {
           "type": "string"
+        },
+        "isSrc": {
+          "type": "boolean",
+          "format": "boolean"
         },
         "req": {
           "type": "string",
