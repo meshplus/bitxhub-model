@@ -71,3 +71,8 @@ message Message {
     bytes Data = 3;
     bytes Version = 4;
 }
+
+message PierPayload {
+    bool Ok = 1;
+    bytes Data = 2;
+}
