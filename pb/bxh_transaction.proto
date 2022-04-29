@@ -85,3 +85,8 @@ message bxhProof {
     TransactionStatus txStatus = 1;
     repeated bytes multiSign =2;
 }
+
+message ExtraWrapper {
+    bytes proof = 1;
+    int64 apiTimestamp = 2;
+}
