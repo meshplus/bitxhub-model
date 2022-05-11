@@ -6,14 +6,14 @@ message GetDataRequest{
   uint64 index = 1;
   string from = 2;
   string to = 3;
-  bool isSrc = 4;
-  bytes req = 5;
+  bytes req = 4;
 }
 
 message GetDataResponse{
   enum Type {
     DATA_GET_SUCCESS = 0;
     DATA_OUT_OF_SIZE = 1;
+    DATA_GET_INTERNAL_ERR = 2;
   }
   uint64 index = 1;
   string from = 2;
