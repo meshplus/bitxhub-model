@@ -44,6 +44,8 @@ message GetDataResponse {
   string to = 3;
   uint64 idx = 4;
   uint32 code = 5;
+  int64 endTs = 6;
+  int64 endRecvTs = 7;
 }
 
 message GetMetaResponse {

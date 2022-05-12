@@ -12,6 +12,19 @@
   ],
   "paths": {},
   "definitions": {
+    "IBTPType": {
+      "type": "string",
+      "enum": [
+        "INTERCHAIN",
+        "RECEIPT_SUCCESS",
+        "RECEIPT_FAILURE",
+        "ASSET_EXCHANGE_INIT",
+        "ASSET_EXCHANGE_REDEEM",
+        "ASSET_EXCHANGE_REFUND",
+        "ASSET_EXCHANGE_RECEIPT"
+      ],
+      "default": "INTERCHAIN"
+    },
     "pbEmpty": {
       "type": "object"
     },
@@ -51,8 +64,17 @@
           "type": "string",
           "format": "uint64"
         },
-        "ok": {
-          "type": "boolean"
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "endTs": {
+          "type": "string",
+          "format": "int64"
+        },
+        "endRecvTs": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -97,7 +119,7 @@
           "title": "Index of inter-chain transaction"
         },
         "type": {
-          "$ref": "#/definitions/pbIBTPType",
+          "$ref": "#/definitions/IBTPType",
           "title": "inter-chain transaction type"
         },
         "timestamp": {
@@ -127,22 +149,14 @@
           "type": "string",
           "format": "byte",
           "title": "Self-defined fields used by app-chain"
+        },
+        "fjs": {
+          "type": "string",
+          "format": "byte",
+          "title": "adapt for fjs"
         }
       },
       "title": "Inter-blockchain Transfer Protocol"
-    },
-    "pbIBTPType": {
-      "type": "string",
-      "enum": [
-        "INTERCHAIN",
-        "RECEIPT_SUCCESS",
-        "RECEIPT_FAILURE",
-        "ASSET_EXCHANGE_INIT",
-        "ASSET_EXCHANGE_REDEEM",
-        "ASSET_EXCHANGE_REFUND",
-        "ASSET_EXCHANGE_RECEIPT"
-      ],
-      "default": "INTERCHAIN"
     },
     "pbNameResponse": {
       "type": "object",
@@ -156,7 +170,8 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "boolean"
+          "type": "boolean",
+          "format": "boolean"
         },
         "message": {
           "type": "string"
@@ -185,7 +200,8 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "boolean"
+          "type": "boolean",
+          "format": "boolean"
         },
         "message": {
           "type": "string"
