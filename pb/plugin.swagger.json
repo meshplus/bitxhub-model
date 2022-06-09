@@ -72,10 +72,6 @@
         "to": {
           "type": "string"
         },
-        "isSrc": {
-          "type": "boolean",
-          "format": "boolean"
-        },
         "req": {
           "type": "string",
           "format": "byte"
@@ -111,7 +107,8 @@
       "type": "string",
       "enum": [
         "DATA_GET_SUCCESS",
-        "DATA_OUT_OF_SIZE"
+        "DATA_OUT_OF_SIZE",
+        "DATA_GET_INTERNAL_ERR"
       ],
       "default": "DATA_GET_SUCCESS"
     },
