@@ -52,14 +52,14 @@ func (l EvmLog) MarshalJSON() ([]byte, error) {
 	enc.Topics = l.Topics
 	enc.Data = l.Data
 	enc.BlockNumber = hexutil.Uint64(l.BlockNumber)
-	if l.TxHash != nil {
-		enc.TxHash = *l.TxHash
+	if l.TransactionHash != nil {
+		enc.TxHash = *l.TransactionHash
 	}
-	enc.TxIndex = hexutil.Uint(l.TxIndex)
+	enc.TxIndex = hexutil.Uint(l.TransactionIndex)
 	if l.BlockHash != nil {
 		enc.BlockHash = *l.BlockHash
 	}
-	enc.Index = hexutil.Uint(l.Index)
+	enc.Index = hexutil.Uint(l.LogIndex)
 	enc.Removed = l.Removed
 
 	return json.Marshal(&enc)
