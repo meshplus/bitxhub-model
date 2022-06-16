@@ -22,3 +22,8 @@ message GetDataResponse{
   string msg = 5;
   bytes data = 6;
 }
+
+message ConnectInfo{
+  string pierId = 1;
+  bytes addrInfo = 2;
+}
