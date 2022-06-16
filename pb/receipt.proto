@@ -41,6 +41,8 @@ message Event {
         AUDIT_ROLE = 9;
         AUDIT_INTERCHAIN = 10;
         AUDIT_DAPP = 11;
+
+        SERVICE = 12;
     }
     // Transaction Hash
     bytes tx_hash = 1 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
