@@ -56,15 +56,15 @@ message EvmLog {
 
     bytes data = 3;
 
-    uint64 block_number = 4;
+    uint64 blockNumber = 4;
 
-    bytes tx_hash = 5 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
+    bytes transactionHash = 5 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
 
-    uint64 tx_index = 6;
+    uint64 transactionIndex = 6;
 
-    bytes block_hash = 7 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
+    bytes blockHash = 7 [(gogoproto.customtype) = "github.com/meshplus/bitxhub-kit/types.Hash"];
 
-    uint64 index = 8;
+    uint64 logIndex = 8;
 
     bool removed = 9;
 }
