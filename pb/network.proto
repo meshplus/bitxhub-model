@@ -32,6 +32,7 @@ message Message {
         FETCH_TSS_PUBKEY_ACK = 26;
         FETCH_TSS_INFO = 27;
         FETCH_TSS_INFO_ACK = 28;
+        FERCH_TSS_NODES = 29;
 
         //pier message
         APPCHAIN_REGISTER = 31;
@@ -57,13 +58,9 @@ message Message {
 
         FETCH_IBTP_REQUEST_TSS_SIGN = 71;
         FETCH_IBTP_RESPONSE_TSS_SIGN = 72;
-        TSS_KEY_GEN = 73;
-        TSS_KEY_SIGN = 74;
-        TSS_KEY_GEN_VER = 75;
-        TSS_KEY_SIGN_VER = 76;
-        TSS_CONTROL = 77;
-        TSS_TASK_DONE = 78;
-        TSS_UNKNOW = 79;
+        TSS_TASK = 73;
+        TSS_CULPRITS = 74;
+        TSS_KEYGEN_REQ = 75;
 
         OFFCHAIN_DATA_GET = 81;
     }
