@@ -32,7 +32,7 @@ message Message {
         FETCH_TSS_PUBKEY_ACK = 26;
         FETCH_TSS_INFO = 27;
         FETCH_TSS_INFO_ACK = 28;
-        FERCH_TSS_NODES = 29;
+        FETCH_TSS_NODES = 29;
 
         //pier message
         APPCHAIN_REGISTER = 31;
