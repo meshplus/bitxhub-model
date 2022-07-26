@@ -274,6 +274,7 @@ message GetTransactionResponse {
 message VerifiedTx {
   pb.BxhTransaction tx = 1;
   bool valid = 2;
+  bool isBatch = 3;
 }
 
 message InterchainTxWrapper {

@@ -19,6 +19,7 @@ message StringUint64SliceMap {
 message VerifiedIndex {
   uint64 index = 1;
   bool valid = 2;
+  bool isBatch = 3;
 }
 
 message VerifiedIndexSlice {

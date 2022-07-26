@@ -239,6 +239,17 @@
         }
       }
     },
+    "pbSubmitIBTPResponses": {
+      "type": "object",
+      "properties": {
+        "response": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbSubmitIBTPResponse"
+          }
+        }
+      }
+    },
     "pbTransactionStatus": {
       "type": "string",
       "enum": [

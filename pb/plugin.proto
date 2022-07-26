@@ -18,6 +18,10 @@ message SubmitIBTPResponse {
   pb.IBTP result = 3;
 }
 
+message SubmitIBTPResponses {
+  repeated SubmitIBTPResponse response = 1;
+}
+
 message SubmitIBTPRequest {
   string from = 1;
   uint64 index =2;
@@ -28,6 +32,16 @@ message SubmitIBTPRequest {
   bool isEncrypted = 7;
 }
 
+message SubmitIBTPRequestBatch {
+  repeated string from = 1;
+  repeated uint64 index =2;
+  repeated string serviceId = 3;
+  repeated pb.IBTP.Type type = 4;
+  repeated pb.content content = 5;
+  repeated pb.bxhProof bxhProof = 6;
+  repeated bool isEncrypted = 7;
+}
+
 message SubmitReceiptRequest {
   string to = 1;
   uint64 index =2;
@@ -35,6 +49,15 @@ message SubmitReceiptRequest {
   pb.IBTP.Type type = 4;
   pb.result result = 5;
   pb.bxhProof bxhProof = 6;
+}
+
+message SubmitReceiptRequestBatch {
+  repeated string to = 1;
+  repeated uint64 index =2;
+  repeated string serviceId = 3;
+  repeated pb.IBTP.Type type = 4;
+  repeated pb.result result = 5;
+  repeated pb.bxhProof bxhProof = 6;
 }
 
 message QueryFilterLockStartRequest {
@@ -130,7 +153,9 @@ service AppchainPlugin {
   rpc GetIBTPCh(Empty) returns (stream pb.IBTP);
   rpc GetUpdateMeta(Empty) returns (stream UpdateMeta);
   rpc SubmitIBTP(SubmitIBTPRequest) returns (SubmitIBTPResponse);
+  rpc SubmitIBTPBatch(SubmitIBTPRequestBatch) returns (SubmitIBTPResponses);
   rpc SubmitReceipt(SubmitReceiptRequest) returns (SubmitIBTPResponse);
+  rpc SubmitReceiptBatch(SubmitReceiptRequestBatch) returns (SubmitIBTPResponses);
   rpc GetOutMessage(GetMessageRequest) returns (pb.IBTP);
   rpc GetReceiptMessage(GetMessageRequest) returns (pb.IBTP);
   rpc GetInMeta(Empty) returns (GetMetaResponse);

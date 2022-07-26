@@ -990,7 +990,8 @@
         "AUDIT_NODE",
         "AUDIT_ROLE",
         "AUDIT_INTERCHAIN",
-        "AUDIT_DAPP"
+        "AUDIT_DAPP",
+        "SERVICE"
       ],
       "default": "OTHER"
     },
@@ -1173,23 +1174,23 @@
           "type": "string",
           "format": "byte"
         },
-        "block_number": {
+        "blockNumber": {
           "type": "string",
           "format": "uint64"
         },
-        "tx_hash": {
+        "transactionHash": {
           "type": "string",
           "format": "byte"
         },
-        "tx_index": {
+        "transactionIndex": {
           "type": "string",
           "format": "uint64"
         },
-        "block_hash": {
+        "blockHash": {
           "type": "string",
           "format": "byte"
         },
-        "index": {
+        "logIndex": {
           "type": "string",
           "format": "uint64"
         },
@@ -1624,6 +1625,10 @@
           "$ref": "#/definitions/pbBxhTransaction"
         },
         "valid": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "isBatch": {
           "type": "boolean",
           "format": "boolean"
         }

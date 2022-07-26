@@ -90,3 +90,8 @@ message bxhProof {
     TransactionStatus txStatus = 1;
     repeated bytes multiSign =2;
 }
+
+message eventWrapper {
+    bool isBatch = 1;
+    uint64 index = 2;
+}
