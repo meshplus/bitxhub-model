@@ -10,6 +10,7 @@ message Empty {}
 message InitializeRequest {
   string config_path = 1;
   bytes extra = 2;
+  string mode = 3;
 }
 
 message SubmitIBTPResponse {

@@ -95,3 +95,22 @@ message eventWrapper {
     bool isBatch = 1;
     uint64 index = 2;
 }
+
+message batchRequest {
+    repeated string froms = 1;
+    repeated uint64 indexs = 2;
+    repeated string serviceIDs = 3;
+    repeated IBTP.Type ibtpTypes = 4;
+    repeated content contents = 5;
+    repeated bxhProof proofs = 6;
+    repeated bool isEncrypted =7;
+}
+
+message batchReceipt {
+    repeated string tos = 1;
+    repeated uint64 indexs = 2;
+    repeated string serviceIDs = 3;
+    repeated IBTP.Type ibtpTypes = 4;
+    repeated result results = 5;
+    repeated bxhProof proofs = 6;
+}
