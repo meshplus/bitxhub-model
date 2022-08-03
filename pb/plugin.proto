@@ -19,9 +19,9 @@ message SubmitIBTPResponse {
   pb.IBTP result = 3;
 }
 
-message SubmitIBTPResponses {
-  repeated SubmitIBTPResponse response = 1;
-}
+//message SubmitIBTPResponses {
+//  repeated SubmitIBTPResponse response = 1;
+//}
 
 message SubmitIBTPRequest {
   string from = 1;
@@ -154,9 +154,9 @@ service AppchainPlugin {
   rpc GetIBTPCh(Empty) returns (stream pb.IBTP);
   rpc GetUpdateMeta(Empty) returns (stream UpdateMeta);
   rpc SubmitIBTP(SubmitIBTPRequest) returns (SubmitIBTPResponse);
-  rpc SubmitIBTPBatch(SubmitIBTPRequestBatch) returns (SubmitIBTPResponses);
+  rpc SubmitIBTPBatch(SubmitIBTPRequestBatch) returns (SubmitIBTPResponse);
   rpc SubmitReceipt(SubmitReceiptRequest) returns (SubmitIBTPResponse);
-  rpc SubmitReceiptBatch(SubmitReceiptRequestBatch) returns (SubmitIBTPResponses);
+  rpc SubmitReceiptBatch(SubmitReceiptRequestBatch) returns (SubmitIBTPResponse);
   rpc GetOutMessage(GetMessageRequest) returns (pb.IBTP);
   rpc GetReceiptMessage(GetMessageRequest) returns (pb.IBTP);
   rpc GetInMeta(Empty) returns (GetMetaResponse);
