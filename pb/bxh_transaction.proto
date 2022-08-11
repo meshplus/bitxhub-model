@@ -19,6 +19,7 @@ message BxhTransaction {
     TxType typ = 10;
     bytes signature = 11;
     bytes extra = 12;
+    int64 receiveTimestamp = 13;
 }
 
 enum TxType {
