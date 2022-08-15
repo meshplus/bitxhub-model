@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package pb;
+
+import "bxh_transaction.proto";
+
+//=========transaction_manager=========
+message TransactionInfo {
+  pb.TransactionStatus GlobalState = 1;
+  uint64 Height = 2;
+  map<string, pb.TransactionStatus> ChildTxInfo = 3;
+  uint64 ChildTxCount = 4;
+}
+
+message StatusChange {
+  pb.TransactionStatus PrevStatus = 1;
+  pb.TransactionStatus CurStatus = 2;
+  repeated string OtherIBTPIDs = 3;
+}
+
+//=========dapp_manager=========
+message TransferRecord {
+  string From = 1;
+  string To = 2;
+  string Reason = 3;
+  bool Confirm = 4;
+  int64 CreateTime = 5;
+}
+
+//=========governance=========
+message Ballot {
+  string VoterAddr = 1;
+  string Approve = 2;
+  uint64 Num = 3;
+  string Reason = 4;
+  int64 VoteTime = 5;
+}
+
+//=========trust_chain=========
+message TrustMeta {
+  string ChainId = 1;
+  string TrustContractAddr = 2;
+  string Method = 3;
+  bytes Data = 4;
+}
