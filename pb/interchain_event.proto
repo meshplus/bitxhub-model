@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package pb;
+
+message InterchainStatus {
+  string From = 1;
+  string To = 2;
+  string Hash = 3;
+}
+
+message InterchainEvent {
+  repeated InterchainStatus InterchainTx = 1;
+  repeated InterchainStatus InterchainReceipt = 2;
+  repeated InterchainStatus InterchainConfirm = 3;
+  uint64 InterchainTxCount = 4;
+  uint64 BlockHeight = 5;
+}
