@@ -20,6 +20,9 @@ func (c *StatusChange) NotifyFlags() (bool, bool) {
 		}
 		return false, false
 	case TransactionStatus_ROLLBACK:
+		if c.PrevStatus == TransactionStatus_BEGIN {
+			return true, false
+		}
 		return false, false
 	}
 
