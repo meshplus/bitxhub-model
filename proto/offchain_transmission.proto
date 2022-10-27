@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package pb;
 
+option go_package = "../pb";
 message GetDataRequest{
   uint64 index = 1;
   string from = 2;

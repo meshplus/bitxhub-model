@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package pb;
 
+option go_package = "../pb";
 import "bxh_transaction.proto";
 import "receipt.proto";
 

@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package pb;
 
+option go_package = "../pb";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "bxh_transaction.proto";
@@ -188,9 +189,11 @@ message GetBlockRequest {
   enum Type {
     HEIGHT = 0;
     HASH = 1;
+    LATEST = 2;
   }
   Type type = 1;
   string value = 2;
+  bool full_tx = 3;
 }
 
 message Request {
@@ -217,6 +220,7 @@ message Address {
 message GetBlocksRequest {
   uint64 start = 1;
   uint64 end = 2;
+  bool full_tx = 3;
 }
 
 message GetBlocksResponse {

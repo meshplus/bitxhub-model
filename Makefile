@@ -1,15 +1,15 @@
 all: pb grpc
 
 pb:
-	cd pb && protoc -I=. \
+	cd proto && protoc -I=. \
 	-I${GOPATH}/src \
 	--gogofaster_out=:. \
 	block.proto ibtp.proto network.proto receipt.proto bxh_transaction.proto chain.proto arg.proto \
 	interchain_meta.proto plugin.proto vp_info.proto basic.proto audit_info.proto tss_info.proto \
-	interchain_event.proto bxh_contract.proto
+	interchain_event.proto bxh_contract.proto offchain_transmission.proto commit.proto
 
 grpc:
-	cd pb && protoc -I=. \
+	cd proto && protoc -I=. \
 	-I=${GOPATH}/src \
 	-I=${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 	-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \

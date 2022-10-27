@@ -130,7 +130,8 @@
             "type": "string",
             "enum": [
               "HEIGHT",
-              "HASH"
+              "HASH",
+              "LATEST"
             ],
             "default": "HEIGHT"
           },
@@ -139,6 +140,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "full_tx",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
           }
         ],
         "tags": [
@@ -262,6 +270,13 @@
             "required": false,
             "type": "string",
             "format": "uint64"
+          },
+          {
+            "name": "full_tx",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
           }
         ],
         "tags": [
@@ -398,6 +413,13 @@
             "required": false,
             "type": "string",
             "format": "uint64"
+          },
+          {
+            "name": "full_tx",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
           }
         ],
         "tags": [
@@ -1115,6 +1137,10 @@
         "extra": {
           "type": "string",
           "format": "byte"
+        },
+        "receiveTimestamp": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -1215,7 +1241,8 @@
       "type": "string",
       "enum": [
         "HEIGHT",
-        "HASH"
+        "HASH",
+        "LATEST"
       ],
       "default": "HEIGHT"
     },
