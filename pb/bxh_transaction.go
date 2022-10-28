@@ -15,6 +15,8 @@ import (
 
 var _ Transaction = (*BxhTransaction)(nil)
 
+const SignatureLen = 65
+
 func init() {
 	RegisterTxConstructor(0, func() Transaction {
 		return &BxhTransaction{}
@@ -148,18 +150,18 @@ func (m *BxhTransaction) GetSignHash() *types.Hash {
 // RawSignatureValues returns the V, R, S signature values of the transaction.
 // The return values should not be modified by the caller.
 func (m *BxhTransaction) GetRawSignature() (v, r, s *big.Int) {
-	if len(m.Signature) != 65 {
-		return nil, nil, nil
+	// including sign type flag and sign
+	return decodeSignature(m.Signature[1:])
+}
+
+func decodeSignature(sig []byte) (r, s, v *big.Int) {
+	if len(sig) != SignatureLen {
+		panic(fmt.Sprintf("wrong size for signature: got %d, want %d", len(sig), SignatureLen))
 	}
-
-	r = &big.Int{}
-	r.SetBytes(m.Signature[:32])
-	s = &big.Int{}
-	s.SetBytes(m.Signature[32:64])
-	v = &big.Int{}
-	v.SetBytes(m.Signature[64:])
-
-	return v, r, s
+	r = new(big.Int).SetBytes(sig[:32])
+	s = new(big.Int).SetBytes(sig[32:64])
+	v = new(big.Int).SetBytes([]byte{sig[64] + 27})
+	return r, s, v
 }
 
 // RawSignatureValues returns the V, R, S signature values of the transaction.
