@@ -64,6 +64,18 @@ service ChainBroker {
     };
   }
 
+  rpc GetTransactionByBlockHashAndIndex (TransactionBlockHashAndIndexMsg) returns (GetTransactionResponse) {
+    option (google.api.http) = {
+      get: "/v1/transaction_by_block_hash_index/{block_hash}/{index}"
+    };
+  }
+
+  rpc GetTransactionByBlockNumberAndIndex (TransactionBlockNumberAndIndexMsg) returns (GetTransactionResponse) {
+    option (google.api.http) = {
+      get: "/v1/transaction_by_block_number_index/{block_number}/{index}"
+    };
+  }
+
   rpc GetPendingTransaction (TransactionHashMsg) returns (GetTransactionResponse) {
     option (google.api.http) = {
       get: "/v1/pending_transaction/{tx_hash}"
@@ -183,6 +195,16 @@ message GetInterchainTxWrappersRequest {
 
 message TransactionHashMsg {
   string tx_hash = 1;
+}
+
+message TransactionBlockNumberAndIndexMsg {
+  uint64 block_number = 1;
+  uint64 index = 2;
+}
+
+message TransactionBlockHashAndIndexMsg {
+  string block_hash = 1;
+  uint64 index = 2;
 }
 
 message GetBlockRequest {
