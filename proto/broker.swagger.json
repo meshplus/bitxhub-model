@@ -130,7 +130,8 @@
             "type": "string",
             "enum": [
               "HEIGHT",
-              "HASH"
+              "HASH",
+              "LATEST"
             ],
             "default": "HEIGHT"
           },
@@ -139,6 +140,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "full_tx",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
           }
         ],
         "tags": [
@@ -262,6 +270,13 @@
             "required": false,
             "type": "string",
             "format": "uint64"
+          },
+          {
+            "name": "full_tx",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
           }
         ],
         "tags": [
@@ -398,6 +413,13 @@
             "required": false,
             "type": "string",
             "format": "uint64"
+          },
+          {
+            "name": "full_tx",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "format": "boolean"
           }
         ],
         "tags": [
@@ -857,6 +879,81 @@
         ]
       }
     },
+    "/v1/transaction_by_block_hash_index/{block_hash}/{index}": {
+      "get": {
+        "operationId": "ChainBroker_GetTransactionByBlockHashAndIndex",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetTransactionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "block_hash",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
+    "/v1/transaction_by_block_number_index/{block_number}/{index}": {
+      "get": {
+        "operationId": "ChainBroker_GetTransactionByBlockNumberAndIndex",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetTransactionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "block_number",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "ChainBroker"
+        ]
+      }
+    },
     "/v1/transactions": {
       "post": {
         "operationId": "ChainBroker_SendTransactions",
@@ -1115,6 +1212,10 @@
         "extra": {
           "type": "string",
           "format": "byte"
+        },
+        "receiveTimestamp": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -1215,7 +1316,8 @@
       "type": "string",
       "enum": [
         "HEIGHT",
-        "HASH"
+        "HASH",
+        "LATEST"
       ],
       "default": "HEIGHT"
     },

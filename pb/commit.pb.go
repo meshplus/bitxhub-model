@@ -9,6 +9,7 @@ import (
 	proto "github.com/gogo/protobuf/proto"
 	io "io"
 	math "math"
+	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -20,7 +21,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type CommitEvent struct {
 	Block     *Block `protobuf:"bytes,1,opt,name=block,proto3" json:"block,omitempty"`
@@ -41,7 +42,7 @@ func (m *CommitEvent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return xxx_messageInfo_CommitEvent.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -81,7 +82,7 @@ func init() {
 func init() { proto.RegisterFile("commit.proto", fileDescriptor_db7163399a465f48) }
 
 var fileDescriptor_db7163399a465f48 = []byte{
-	// 175 bytes of a gzipped FileDescriptorProto
+	// 182 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x49, 0xce, 0xcf, 0xcd,
 	0xcd, 0x2c, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x2a, 0x48, 0x92, 0xd2, 0x4d, 0xcf,
 	0x2c, 0xc9, 0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0x4f, 0xcf, 0x4f, 0xcf, 0xd7, 0x07, 0x4b,
@@ -90,15 +91,16 @@ var fileDescriptor_db7163399a465f48 = []byte{
 	0x62, 0x05, 0x4b, 0x4b, 0x30, 0x2a, 0x30, 0x6a, 0x70, 0x1b, 0x71, 0xea, 0x15, 0x24, 0xe9, 0x39,
 	0x81, 0x04, 0x82, 0x20, 0xe2, 0x42, 0xb2, 0x5c, 0x5c, 0x39, 0xf9, 0xc9, 0x89, 0x39, 0xf1, 0x39,
 	0x99, 0xc5, 0x25, 0x12, 0x4c, 0x0a, 0xcc, 0x1a, 0x1c, 0x41, 0x9c, 0x60, 0x11, 0x9f, 0xcc, 0xe2,
-	0x12, 0x27, 0x89, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x71,
-	0xc2, 0x63, 0x39, 0x86, 0x0b, 0x8f, 0xe5, 0x18, 0x6e, 0x3c, 0x96, 0x63, 0x48, 0x62, 0x03, 0x5b,
-	0x68, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0x77, 0xeb, 0x72, 0x1d, 0xc0, 0x00, 0x00, 0x00,
+	0x12, 0x27, 0xf9, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x71,
+	0xc2, 0x63, 0x39, 0x86, 0x0b, 0x8f, 0xe5, 0x18, 0x6e, 0x3c, 0x96, 0x63, 0x88, 0x62, 0xd5, 0xd3,
+	0xd3, 0x2f, 0x48, 0x4a, 0x62, 0x03, 0xdb, 0x6b, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0x88, 0x66,
+	0xa6, 0x97, 0xc7, 0x00, 0x00, 0x00,
 }
 
 func (m *CommitEvent) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -106,44 +108,53 @@ func (m *CommitEvent) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *CommitEvent) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *CommitEvent) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.Block != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintCommit(dAtA, i, uint64(m.Block.Size()))
-		n1, err := m.Block.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n1
-	}
 	if len(m.LocalList) > 0 {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintCommit(dAtA, i, uint64(len(m.LocalList)))
-		for _, b := range m.LocalList {
-			if b {
+		for iNdEx := len(m.LocalList) - 1; iNdEx >= 0; iNdEx-- {
+			i--
+			if m.LocalList[iNdEx] {
 				dAtA[i] = 1
 			} else {
 				dAtA[i] = 0
 			}
-			i++
 		}
+		i = encodeVarintCommit(dAtA, i, uint64(len(m.LocalList)))
+		i--
+		dAtA[i] = 0x12
 	}
-	return i, nil
+	if m.Block != nil {
+		{
+			size, err := m.Block.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintCommit(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintCommit(dAtA []byte, offset int, v uint64) int {
+	offset -= sovCommit(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func (m *CommitEvent) Size() (n int) {
 	if m == nil {
@@ -162,14 +173,7 @@ func (m *CommitEvent) Size() (n int) {
 }
 
 func sovCommit(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozCommit(x uint64) (n int) {
 	return sovCommit(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -315,10 +319,7 @@ func (m *CommitEvent) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthCommit
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthCommit
 			}
 			if (iNdEx + skippy) > l {
@@ -336,6 +337,7 @@ func (m *CommitEvent) Unmarshal(dAtA []byte) error {
 func skipCommit(dAtA []byte) (n int, err error) {
 	l := len(dAtA)
 	iNdEx := 0
+	depth := 0
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
@@ -367,10 +369,8 @@ func skipCommit(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			return iNdEx, nil
 		case 1:
 			iNdEx += 8
-			return iNdEx, nil
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
@@ -391,55 +391,30 @@ func skipCommit(dAtA []byte) (n int, err error) {
 				return 0, ErrInvalidLengthCommit
 			}
 			iNdEx += length
-			if iNdEx < 0 {
-				return 0, ErrInvalidLengthCommit
-			}
-			return iNdEx, nil
 		case 3:
-			for {
-				var innerWire uint64
-				var start int = iNdEx
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return 0, ErrIntOverflowCommit
-					}
-					if iNdEx >= l {
-						return 0, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					innerWire |= (uint64(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				innerWireType := int(innerWire & 0x7)
-				if innerWireType == 4 {
-					break
-				}
-				next, err := skipCommit(dAtA[start:])
-				if err != nil {
-					return 0, err
-				}
-				iNdEx = start + next
-				if iNdEx < 0 {
-					return 0, ErrInvalidLengthCommit
-				}
-			}
-			return iNdEx, nil
+			depth++
 		case 4:
-			return iNdEx, nil
+			if depth == 0 {
+				return 0, ErrUnexpectedEndOfGroupCommit
+			}
+			depth--
 		case 5:
 			iNdEx += 4
-			return iNdEx, nil
 		default:
 			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
 		}
+		if iNdEx < 0 {
+			return 0, ErrInvalidLengthCommit
+		}
+		if depth == 0 {
+			return iNdEx, nil
+		}
 	}
-	panic("unreachable")
+	return 0, io.ErrUnexpectedEOF
 }
 
 var (
-	ErrInvalidLengthCommit = fmt.Errorf("proto: negative length found during unmarshaling")
-	ErrIntOverflowCommit   = fmt.Errorf("proto: integer overflow")
+	ErrInvalidLengthCommit        = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowCommit          = fmt.Errorf("proto: integer overflow")
+	ErrUnexpectedEndOfGroupCommit = fmt.Errorf("proto: unexpected end of group")
 )

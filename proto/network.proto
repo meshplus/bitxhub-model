@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package pb;
 
+option go_package = "../pb";
 message Message {
     enum Type {
         GET_BLOCK = 0;

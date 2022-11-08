@@ -1,6 +1,7 @@
 syntax = "proto3";
 package pb;
 
+option go_package = "../pb";
 import "ibtp.proto";
 import "bxh_transaction.proto";
 import "offchain_transmission.proto";

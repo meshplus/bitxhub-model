@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package pb;
 
+option go_package = "../pb";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "bxh_transaction.proto";
@@ -60,6 +61,18 @@ service ChainBroker {
   rpc GetTransaction (TransactionHashMsg) returns (GetTransactionResponse) {
     option (google.api.http) = {
       get: "/v1/transaction/{tx_hash}"
+    };
+  }
+
+  rpc GetTransactionByBlockHashAndIndex (TransactionBlockHashAndIndexMsg) returns (GetTransactionResponse) {
+    option (google.api.http) = {
+      get: "/v1/transaction_by_block_hash_index/{block_hash}/{index}"
+    };
+  }
+
+  rpc GetTransactionByBlockNumberAndIndex (TransactionBlockNumberAndIndexMsg) returns (GetTransactionResponse) {
+    option (google.api.http) = {
+      get: "/v1/transaction_by_block_number_index/{block_number}/{index}"
     };
   }
 
@@ -184,13 +197,25 @@ message TransactionHashMsg {
   string tx_hash = 1;
 }
 
+message TransactionBlockNumberAndIndexMsg {
+  uint64 block_number = 1;
+  uint64 index = 2;
+}
+
+message TransactionBlockHashAndIndexMsg {
+  string block_hash = 1;
+  uint64 index = 2;
+}
+
 message GetBlockRequest {
   enum Type {
     HEIGHT = 0;
     HASH = 1;
+    LATEST = 2;
   }
   Type type = 1;
   string value = 2;
+  bool full_tx = 3;
 }
 
 message Request {
@@ -217,6 +242,7 @@ message Address {
 message GetBlocksRequest {
   uint64 start = 1;
   uint64 end = 2;
+  bool full_tx = 3;
 }
 
 message GetBlocksResponse {
