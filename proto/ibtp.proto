@@ -22,6 +22,12 @@ message IBTP {
         UNKNOWN = 2;
     }
 
+    enum PackIbtpNumber {
+        Single = 0;
+        Multi = 1;
+    }
+
+
     // ID of sending chain and sending service
     string from = 1;
     // ID of receiving chain and receiving service
@@ -56,7 +62,11 @@ message content {
 }
 
 message result {
-    repeated bytes data = 1;
+    message res{
+        repeated bytes data = 1;
+    }
+    repeated res data = 2;
+    repeated bool MultiStatus = 3;
 }
 
 message IBTPs {

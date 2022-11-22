@@ -294,8 +294,14 @@
         "data": {
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "byte"
+            "$ref": "#/definitions/resultres"
+          }
+        },
+        "MultiStatus": {
+          "type": "array",
+          "items": {
+            "type": "boolean",
+            "format": "boolean"
           }
         }
       }
@@ -309,6 +315,18 @@
         "value": {
           "type": "string",
           "format": "byte"
+        }
+      }
+    },
+    "resultres": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
         }
       }
     },
