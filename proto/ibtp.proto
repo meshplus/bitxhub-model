@@ -56,7 +56,11 @@ message content {
 }
 
 message result {
-    repeated bytes data = 1;
+    message res{
+        repeated bytes data = 1;
+    }
+    repeated res data = 2;
+    repeated bool MultiStatus = 3;
 }
 
 message IBTPs {
