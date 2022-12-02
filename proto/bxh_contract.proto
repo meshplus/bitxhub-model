@@ -6,13 +6,6 @@ option go_package = "../pb";
 import "bxh_transaction.proto";
 
 //=========transaction_manager=========
-message TransactionInfo {
-  pb.TransactionStatus GlobalState = 1;
-  uint64 Height = 2;
-  map<string, pb.TransactionStatus> ChildTxInfo = 3;
-  uint64 ChildTxCount = 4;
-}
-
 message StatusChange {
   pb.TransactionStatus PrevStatus = 1;
   pb.TransactionStatus CurStatus = 2;
