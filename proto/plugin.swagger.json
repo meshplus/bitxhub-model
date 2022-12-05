@@ -78,31 +78,6 @@
         }
       }
     },
-    "pbGetDataResponse": {
-      "type": "object",
-      "properties": {
-        "index": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "from": {
-          "type": "string"
-        },
-        "to": {
-          "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/pbGetDataResponseType"
-        },
-        "msg": {
-          "type": "string"
-        },
-        "data": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
-    },
     "pbGetDataResponseType": {
       "type": "string",
       "enum": [
@@ -191,6 +166,21 @@
       "type": "object",
       "properties": {
         "name": {
+          "type": "string"
+        }
+      }
+    },
+    "pbOffChainDataInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "path": {
           "type": "string"
         }
       }
