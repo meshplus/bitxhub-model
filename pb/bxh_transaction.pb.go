@@ -153,12 +153,12 @@ type BxhTransaction struct {
 	TransactionHash  *github_com_meshplus_bitxhub_kit_types.Hash    `protobuf:"bytes,5,opt,name=transaction_hash,json=transactionHash,proto3,customtype=github.com/meshplus/bitxhub-kit/types.Hash" json:"transaction_hash,omitempty"`
 	Payload          []byte                                         `protobuf:"bytes,6,opt,name=payload,proto3" json:"payload,omitempty"`
 	IBTP             *IBTP                                          `protobuf:"bytes,7,opt,name=IBTP,proto3" json:"IBTP,omitempty"`
-	Nonce            uint64                                         `protobuf:"varint,8,opt,name=nonce,proto3" json:"nonce,omitempty"`
+	Nonce            uint64                                         `protobuf:"varint,8,opt,name=nonce,proto3" json:"nonce,string,omitempty"`
 	Amount           string                                         `protobuf:"bytes,9,opt,name=amount,proto3" json:"amount,omitempty"`
 	Typ              TxType                                         `protobuf:"varint,10,opt,name=typ,proto3,enum=pb.TxType" json:"typ,omitempty"`
 	Signature        []byte                                         `protobuf:"bytes,11,opt,name=signature,proto3" json:"signature,omitempty"`
 	Extra            []byte                                         `protobuf:"bytes,12,opt,name=extra,proto3" json:"extra,omitempty"`
-	ReceiveTimestamp int64                                          `protobuf:"varint,13,opt,name=receiveTimestamp,proto3" json:"receiveTimestamp,omitempty"`
+	ReceiveTimestamp int64                                          `protobuf:"varint,13,opt,name=receiveTimestamp,proto3" json:"receiveTimestamp,string,omitempty"`
 }
 
 func (m *BxhTransaction) Reset()         { *m = BxhTransaction{} }
