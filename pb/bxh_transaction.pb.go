@@ -149,7 +149,7 @@ type BxhTransaction struct {
 	Version          []byte                                         `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
 	From             *github_com_meshplus_bitxhub_kit_types.Address `protobuf:"bytes,2,opt,name=from,proto3,customtype=github.com/meshplus/bitxhub-kit/types.Address" json:"from,omitempty"`
 	To               *github_com_meshplus_bitxhub_kit_types.Address `protobuf:"bytes,3,opt,name=to,proto3,customtype=github.com/meshplus/bitxhub-kit/types.Address" json:"to,omitempty"`
-	Timestamp        int64                                          `protobuf:"varint,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Timestamp        int64                                          `protobuf:"varint,4,opt,name=timestamp,proto3" json:"timestamp,string,omitempty"`
 	TransactionHash  *github_com_meshplus_bitxhub_kit_types.Hash    `protobuf:"bytes,5,opt,name=transaction_hash,json=transactionHash,proto3,customtype=github.com/meshplus/bitxhub-kit/types.Hash" json:"transaction_hash,omitempty"`
 	Payload          []byte                                         `protobuf:"bytes,6,opt,name=payload,proto3" json:"payload,omitempty"`
 	IBTP             *IBTP                                          `protobuf:"bytes,7,opt,name=IBTP,proto3" json:"IBTP,omitempty"`
