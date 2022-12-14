@@ -5,6 +5,11 @@ package pb;
 option go_package = "../pb";
 import "basic.proto";
 
+enum NotifyChain {
+    NOTIFY_SRC = 0;
+    NOTIFY_DEST = 1;
+}
+
 // Inter-blockchain Transfer Protocol
 message IBTP {
     enum Type {
