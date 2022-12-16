@@ -64,6 +64,7 @@ message Message {
         TSS_KEYGEN_REQ = 75;
 
         OFFCHAIN_DATA_GET = 81;
+        OFFCHAIN_DATA_SEND = 82;
     }
     Type type = 1;
     bytes Data = 2;

@@ -4,8 +4,12 @@
 package pb
 
 import (
+	context "context"
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
+	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -1475,95 +1479,1085 @@ func init() {
 func init() { proto.RegisterFile("plugin.proto", fileDescriptor_22a625af4bc1cc87) }
 
 var fileDescriptor_22a625af4bc1cc87 = []byte{
-	// 1401 bytes of a gzipped FileDescriptorProto
+	// 1403 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x57, 0xcd, 0x6e, 0xdb, 0xc6,
 	0x13, 0x0f, 0x2d, 0x59, 0xb6, 0x46, 0xb2, 0x13, 0x6f, 0x1c, 0xff, 0xf5, 0x57, 0x6c, 0x45, 0x61,
-	0xda, 0xc2, 0x40, 0x0d, 0xd5, 0x71, 0xd3, 0xaf, 0xb4, 0x28, 0x10, 0x7f, 0x54, 0x10, 0xda, 0x26,
-	0x2e, 0xed, 0x5c, 0x7a, 0x68, 0x40, 0x8a, 0x2b, 0x8b, 0xb0, 0xf8, 0x11, 0x72, 0x19, 0x48, 0x05,
-	0x7a, 0x28, 0xfa, 0x02, 0xbd, 0xf7, 0x45, 0xfa, 0x08, 0x05, 0x7a, 0xc9, 0xb1, 0xc7, 0x22, 0x79,
-	0x82, 0x5e, 0x7a, 0x2e, 0x76, 0x76, 0x97, 0x5c, 0x7d, 0x19, 0x0a, 0xd0, 0xde, 0x38, 0xb3, 0xb3,
-	0x33, 0xf3, 0x9b, 0x99, 0xdd, 0xdf, 0x12, 0xaa, 0xd1, 0x20, 0xbd, 0xf0, 0x82, 0x56, 0x14, 0x87,
-	0x2c, 0x24, 0x4b, 0x91, 0x53, 0x07, 0xcf, 0x61, 0x91, 0x90, 0xeb, 0xb7, 0x9c, 0x61, 0xff, 0x19,
-	0x8b, 0xed, 0x20, 0xb1, 0xbb, 0xcc, 0x0b, 0xa5, 0x59, 0xfd, 0x76, 0xd8, 0xeb, 0x75, 0xfb, 0xb6,
-	0x17, 0x88, 0x35, 0xdf, 0x4b, 0x92, 0x6c, 0xd1, 0x5c, 0x81, 0xe5, 0x13, 0x3f, 0x62, 0x23, 0xf3,
-	0x3b, 0xd8, 0xe8, 0x04, 0x1e, 0xf3, 0xec, 0x81, 0xf7, 0x3d, 0xb5, 0xe8, 0xf3, 0x94, 0x26, 0x8c,
-	0xdc, 0x81, 0x4a, 0x37, 0x0c, 0x7a, 0xde, 0xc5, 0xb3, 0xc8, 0x66, 0xfd, 0x9a, 0xd1, 0x34, 0x76,
-	0xcb, 0x16, 0x08, 0xd5, 0xa9, 0xcd, 0xfa, 0x64, 0x13, 0x96, 0xe9, 0x90, 0xc5, 0x76, 0x6d, 0xa9,
-	0x69, 0xec, 0x56, 0x2d, 0x21, 0x10, 0x02, 0x45, 0x3f, 0x74, 0x69, 0xad, 0x80, 0xf6, 0xf8, 0x6d,
-	0xf6, 0x81, 0x9c, 0xa5, 0x8e, 0xef, 0xb1, 0xce, 0xe1, 0xf9, 0xa9, 0x45, 0x93, 0x28, 0x0c, 0x12,
-	0x4a, 0xb6, 0xa0, 0x94, 0x30, 0x9b, 0xa5, 0x09, 0xfa, 0x5e, 0xb5, 0xa4, 0x44, 0x6a, 0xb0, 0xe2,
-	0xd3, 0x24, 0xb1, 0x2f, 0x28, 0x7a, 0x2e, 0x5b, 0x4a, 0x24, 0x4d, 0x28, 0xc5, 0x34, 0x49, 0x07,
-	0x0c, 0xbd, 0x57, 0x0e, 0x56, 0x5b, 0x91, 0xd3, 0x42, 0x9f, 0x52, 0x6f, 0xfe, 0x65, 0xc0, 0x86,
-	0x1e, 0x4a, 0x40, 0x21, 0x50, 0xec, 0xc5, 0xa1, 0x2f, 0x31, 0xe0, 0x37, 0xcf, 0xde, 0x0b, 0x5c,
-	0x3a, 0xc4, 0x18, 0x45, 0x4b, 0x08, 0x64, 0x1b, 0xca, 0x09, 0x8d, 0x5f, 0x78, 0x5d, 0xda, 0x71,
-	0x25, 0x84, 0x5c, 0x41, 0xee, 0x42, 0x91, 0x8d, 0x22, 0x5a, 0x2b, 0x36, 0x8d, 0xdd, 0xf5, 0x83,
-	0x35, 0x15, 0xbd, 0x75, 0x3e, 0x8a, 0xa8, 0x85, 0x4b, 0xe4, 0x6d, 0x58, 0xe9, 0x86, 0x01, 0xa3,
-	0x01, 0xab, 0x2d, 0x63, 0x8e, 0x15, 0x6e, 0x25, 0x55, 0x96, 0x5a, 0x23, 0xbb, 0xb0, 0xea, 0x0c,
-	0xfb, 0xa7, 0x71, 0x18, 0xf6, 0x6a, 0x25, 0xb4, 0xab, 0x72, 0x3b, 0xa5, 0xb3, 0xb2, 0x55, 0xd2,
-	0x84, 0x8a, 0x97, 0x9c, 0x04, 0xdd, 0x78, 0x14, 0x31, 0xea, 0xd6, 0x56, 0xb0, 0x54, 0xba, 0xca,
-	0xfc, 0xdb, 0x80, 0xad, 0x29, 0xcc, 0x87, 0x36, 0xeb, 0xf6, 0x35, 0xe0, 0x85, 0x59, 0xc0, 0x0b,
-	0x73, 0x81, 0x17, 0xe6, 0x01, 0x2f, 0x2c, 0x04, 0xbc, 0xb0, 0x20, 0xf0, 0xc2, 0x9b, 0x00, 0x2f,
-	0x4c, 0x02, 0xff, 0xdd, 0x80, 0x4d, 0x01, 0xdc, 0xa2, 0x5d, 0xea, 0x45, 0x4c, 0xf5, 0x7b, 0x1d,
-	0x96, 0x58, 0x28, 0xbb, 0xbd, 0xc4, 0xc2, 0xff, 0xaa, 0xd7, 0x66, 0x36, 0x8e, 0xa2, 0xd5, 0xc0,
-	0x8d, 0x84, 0x46, 0x0d, 0xe4, 0xe2, 0x8d, 0x36, 0x5f, 0x1a, 0xf0, 0xff, 0x59, 0x68, 0x44, 0x27,
-	0x15, 0xa4, 0xc2, 0x34, 0xa4, 0x7f, 0xb3, 0x8b, 0x3a, 0xa4, 0xc2, 0x42, 0x90, 0xae, 0x68, 0xa1,
-	0x79, 0x04, 0xb7, 0xbf, 0x49, 0x69, 0x3c, 0xfa, 0xc2, 0x1b, 0x30, 0x1a, 0x7f, 0x15, 0x76, 0x2f,
-	0xcf, 0x98, 0x1d, 0x67, 0x6d, 0x7a, 0x0b, 0xd6, 0xec, 0x28, 0xc2, 0xeb, 0xa9, 0x83, 0x58, 0x0c,
-	0x6c, 0xcf, 0xb8, 0xd2, 0xfc, 0x0c, 0xb6, 0x67, 0x3b, 0x91, 0xd7, 0xc8, 0x36, 0x94, 0x07, 0x4a,
-	0x29, 0x3d, 0xe4, 0x0a, 0xb3, 0x0d, 0x1b, 0x6d, 0xca, 0xbe, 0x16, 0x17, 0x88, 0x0a, 0xdc, 0x84,
-	0x8a, 0xac, 0xca, 0xa9, 0xed, 0xc5, 0x72, 0x50, 0x74, 0x15, 0xb9, 0x01, 0x05, 0xcf, 0x55, 0xf3,
-	0xc2, 0x3f, 0xcd, 0x1f, 0xe0, 0x3a, 0x3a, 0x62, 0x76, 0x16, 0xf9, 0x3e, 0x14, 0x7d, 0xca, 0x6c,
-	0xec, 0x4a, 0xe5, 0x60, 0x87, 0x17, 0x61, 0xc2, 0xa4, 0xc5, 0x85, 0x93, 0x80, 0xc5, 0x23, 0x0b,
-	0x4d, 0xeb, 0x1f, 0x41, 0x39, 0x53, 0xf1, 0x20, 0x97, 0x74, 0x24, 0xc3, 0xf3, 0x4f, 0xde, 0xd5,
-	0x17, 0xf6, 0x20, 0xa5, 0x6a, 0x50, 0x51, 0x78, 0xb8, 0xf4, 0xb1, 0x61, 0xee, 0xc1, 0x8d, 0x33,
-	0x91, 0x5f, 0x92, 0xc5, 0xaf, 0xc1, 0x8a, 0xcc, 0x59, 0x0e, 0x86, 0x12, 0xcd, 0x36, 0x5c, 0x3f,
-	0xc2, 0x0a, 0x1e, 0x67, 0xc6, 0x9b, 0xb0, 0xec, 0x0c, 0xfb, 0x9d, 0x63, 0x19, 0x4e, 0x08, 0xa4,
-	0x01, 0x90, 0x55, 0xfb, 0x58, 0x5e, 0xb7, 0x9a, 0x86, 0x87, 0x15, 0x8e, 0x82, 0x5e, 0xa8, 0xaa,
-	0x57, 0x83, 0x15, 0xb5, 0x41, 0xf8, 0x52, 0xa2, 0xf9, 0x21, 0x6c, 0x1f, 0x7b, 0x31, 0xed, 0xb2,
-	0xf3, 0x9c, 0x88, 0x44, 0x39, 0xc4, 0xce, 0x2d, 0x28, 0xf1, 0x81, 0xf3, 0x5c, 0xb9, 0x51, 0x4a,
-	0xa6, 0x07, 0x1b, 0x5a, 0x94, 0x9c, 0x1e, 0x9c, 0x38, 0xbc, 0xa4, 0xaa, 0x3f, 0x52, 0xe2, 0xcd,
-	0x63, 0x71, 0x9a, 0x30, 0xea, 0x5a, 0x61, 0xc8, 0x24, 0xf9, 0xe8, 0x2a, 0x52, 0x87, 0xd5, 0x38,
-	0x1d, 0xd0, 0x47, 0xae, 0x1b, 0xcb, 0x73, 0x9d, 0xc9, 0xe6, 0x2f, 0x06, 0xec, 0xcc, 0xc9, 0x51,
-	0xc6, 0x7d, 0x07, 0xd6, 0x13, 0x3e, 0x3a, 0xe7, 0x9e, 0x4f, 0x13, 0x66, 0xfb, 0x91, 0x1c, 0xaa,
-	0x09, 0x2d, 0x9f, 0x5e, 0xe6, 0xf9, 0x34, 0x4c, 0xd9, 0x29, 0x8d, 0xbd, 0xd0, 0x95, 0x3d, 0x1b,
-	0x57, 0x92, 0x3d, 0xd8, 0xd0, 0x58, 0xf9, 0x4c, 0xf0, 0x5d, 0x01, 0x2d, 0xa7, 0x17, 0x4c, 0x13,
-	0xaa, 0x8f, 0x6d, 0x9f, 0x66, 0xb9, 0x10, 0x28, 0x06, 0xb6, 0x4f, 0x15, 0x71, 0xf1, 0x6f, 0x6e,
-	0x83, 0x07, 0x56, 0xb3, 0xc1, 0x53, 0x2d, 0x6d, 0xf8, 0xb7, 0xf9, 0x93, 0x01, 0x65, 0x7e, 0x52,
-	0x4e, 0x5e, 0xf0, 0x3b, 0xb7, 0x06, 0x2b, 0xb1, 0xb8, 0x52, 0xd0, 0xa8, 0x6a, 0x29, 0x91, 0x0f,
-	0x45, 0x84, 0xe7, 0x58, 0x52, 0x38, 0x0a, 0xd3, 0xe7, 0xb2, 0x30, 0xe3, 0x5c, 0xf2, 0x3e, 0x38,
-	0xfc, 0x9c, 0x3d, 0x4e, 0x7d, 0x87, 0xc6, 0x78, 0x4f, 0x16, 0x2d, 0x5d, 0x65, 0x36, 0x01, 0x9e,
-	0x46, 0xae, 0xcd, 0x28, 0xaf, 0x2f, 0x3e, 0x0c, 0xc4, 0x69, 0xe1, 0xa1, 0xf0, 0xdb, 0xfc, 0xd5,
-	0x80, 0xd2, 0xd3, 0x80, 0x67, 0xca, 0x53, 0x61, 0xe1, 0x25, 0x0d, 0xd4, 0x7c, 0xa2, 0x90, 0x11,
-	0xd8, 0x92, 0xc6, 0xdc, 0x1a, 0x1c, 0xd1, 0xdd, 0x0c, 0xce, 0x16, 0x94, 0x6c, 0x3f, 0x4c, 0x03,
-	0x86, 0xd9, 0x54, 0x2d, 0x29, 0x61, 0x89, 0x86, 0x1d, 0x17, 0xaf, 0x69, 0x5e, 0xa2, 0x61, 0xc7,
-	0xe5, 0x93, 0x1f, 0xd3, 0x81, 0x3d, 0x12, 0x08, 0x4b, 0x98, 0xbd, 0xa6, 0xe1, 0xeb, 0x7e, 0x3a,
-	0x60, 0xde, 0x99, 0x77, 0x11, 0x24, 0xc8, 0x3e, 0x55, 0x4b, 0xd3, 0x98, 0x9f, 0xc0, 0xff, 0xf0,
-	0x5a, 0xb2, 0xb2, 0x2d, 0x59, 0x47, 0xc6, 0x5d, 0x1b, 0x93, 0xae, 0xcd, 0x43, 0xa8, 0xe3, 0xd6,
-	0x47, 0x7a, 0x3d, 0xb3, 0xdd, 0x8b, 0xdd, 0x8a, 0x0f, 0xe4, 0xad, 0x98, 0x75, 0xf9, 0x50, 0x25,
-	0x21, 0x8e, 0x5a, 0xc6, 0x0f, 0x86, 0x46, 0x79, 0x07, 0x3f, 0x02, 0xac, 0xab, 0xa8, 0xa7, 0xf8,
-	0x9c, 0x24, 0x2d, 0x80, 0xfc, 0xed, 0x47, 0x6e, 0x21, 0x29, 0x4c, 0xbe, 0x05, 0xeb, 0x65, 0xae,
-	0xc6, 0xb7, 0x22, 0xd9, 0x81, 0x65, 0xbc, 0x59, 0x49, 0xae, 0xd3, 0x97, 0xb7, 0xa1, 0x78, 0xc6,
-	0xc2, 0x68, 0xce, 0xaa, 0x09, 0xe5, 0x36, 0xc5, 0x67, 0xca, 0x51, 0x5f, 0x37, 0xc9, 0x1e, 0x72,
-	0xfb, 0x06, 0xd9, 0x83, 0xb5, 0x36, 0x65, 0xda, 0xe0, 0x68, 0x76, 0xeb, 0xfc, 0x33, 0x5f, 0xda,
-	0x37, 0xc8, 0xa7, 0x00, 0xf9, 0xdb, 0x47, 0xa4, 0x3f, 0xf5, 0x16, 0xaa, 0x6f, 0x4d, 0xaa, 0x65,
-	0xa9, 0x4f, 0xe0, 0x7a, 0xae, 0x15, 0x3c, 0x5b, 0x9f, 0xe9, 0x01, 0xd7, 0xe6, 0xba, 0x79, 0x04,
-	0x6b, 0x63, 0xc4, 0x4d, 0x6a, 0xb9, 0xe1, 0x38, 0x97, 0xcf, 0x75, 0xf1, 0xa5, 0x7a, 0x21, 0x4b,
-	0x7b, 0x91, 0xcc, 0xce, 0x3c, 0x3f, 0x57, 0xe7, 0xb3, 0x8f, 0x15, 0x7c, 0x92, 0x2a, 0xda, 0x13,
-	0x65, 0x99, 0xa2, 0xc1, 0xbc, 0xea, 0xe4, 0x01, 0xb2, 0xa4, 0x8c, 0xb1, 0xf0, 0xae, 0x77, 0x45,
-	0x37, 0x83, 0xc9, 0x2e, 0xdd, 0x9c, 0xc1, 0x84, 0x64, 0x0f, 0x40, 0x25, 0xb5, 0x80, 0xf5, 0x7d,
-	0x64, 0xdb, 0x23, 0x7b, 0x30, 0x70, 0xec, 0xee, 0xe5, 0x42, 0x5b, 0x1e, 0x00, 0x69, 0x53, 0x76,
-	0x9c, 0x30, 0x2b, 0x7c, 0x83, 0x5d, 0x2d, 0xa8, 0xb4, 0x29, 0x53, 0xd4, 0xaa, 0x9b, 0x6f, 0x62,
-	0x75, 0x27, 0x39, 0x57, 0xc0, 0x90, 0xe4, 0x3a, 0xe5, 0x7d, 0x92, 0x74, 0x3f, 0x47, 0x18, 0xf9,
-	0x39, 0xef, 0x85, 0x64, 0x33, 0xb7, 0xcb, 0x39, 0xb5, 0x7e, 0x6b, 0x42, 0x2b, 0xf7, 0x3f, 0x83,
-	0x1a, 0xc7, 0x34, 0x8b, 0xaf, 0x48, 0x93, 0x6f, 0xb9, 0x8a, 0x6e, 0xeb, 0x77, 0xaf, 0xb0, 0x90,
-	0x01, 0xee, 0x41, 0x91, 0x13, 0x8e, 0x0e, 0xe4, 0x06, 0xff, 0x1c, 0x63, 0xa1, 0x7b, 0x50, 0xe4,
-	0x8c, 0x33, 0x65, 0x34, 0x46, 0x43, 0x0f, 0x11, 0xea, 0x93, 0x5e, 0x0f, 0x51, 0x1c, 0xdb, 0xfc,
-	0xc6, 0x97, 0x05, 0xe7, 0x82, 0xca, 0xe9, 0xe6, 0x98, 0x4e, 0xee, 0xfd, 0x00, 0x5b, 0xa7, 0xef,
-	0xb5, 0xe8, 0x73, 0x3d, 0xdc, 0x0c, 0x4f, 0xfb, 0x06, 0xef, 0xb8, 0x98, 0xfe, 0xb1, 0xa8, 0xb3,
-	0x22, 0x68, 0x77, 0xd0, 0xe1, 0x9d, 0xdf, 0x5e, 0x35, 0x8c, 0x97, 0xaf, 0x1a, 0xc6, 0x9f, 0xaf,
-	0x1a, 0xc6, 0xcf, 0xaf, 0x1b, 0xd7, 0x5e, 0xbe, 0x6e, 0x5c, 0xfb, 0xe3, 0x75, 0xe3, 0xda, 0xb7,
-	0xcb, 0xad, 0xd6, 0x7b, 0x91, 0xe3, 0x94, 0xf0, 0xef, 0xf8, 0xfd, 0x7f, 0x02, 0x00, 0x00, 0xff,
-	0xff, 0xda, 0x98, 0x65, 0x3b, 0x71, 0x0f, 0x00, 0x00,
+	0xda, 0xc2, 0x40, 0x0d, 0xd5, 0x71, 0xd3, 0xcf, 0x14, 0x05, 0xe2, 0x8f, 0x0a, 0x42, 0xdb, 0xc4,
+	0xa5, 0x9d, 0x4b, 0x0f, 0x0d, 0x48, 0x71, 0x65, 0x11, 0x16, 0x3f, 0x42, 0x2e, 0x03, 0xa9, 0x40,
+	0x2f, 0xed, 0x0b, 0xf4, 0xde, 0x17, 0xe9, 0x23, 0x14, 0xe8, 0x25, 0xc7, 0x1e, 0x8b, 0xe4, 0x09,
+	0x7a, 0xe9, 0xb9, 0xd8, 0xd9, 0x5d, 0x72, 0xf5, 0x65, 0x28, 0x40, 0x7b, 0xe3, 0xcc, 0xce, 0xce,
+	0xcc, 0x6f, 0x66, 0x76, 0x7f, 0x4b, 0xa8, 0x46, 0x83, 0xf4, 0xc2, 0x0b, 0x5a, 0x51, 0x1c, 0xb2,
+	0x90, 0x2c, 0x45, 0x4e, 0x1d, 0x3c, 0x87, 0x45, 0x42, 0xae, 0xdf, 0x72, 0x86, 0xfd, 0x67, 0x2c,
+	0xb6, 0x83, 0xc4, 0xee, 0x32, 0x2f, 0x94, 0x66, 0xf5, 0xdb, 0x61, 0xaf, 0xd7, 0xed, 0xdb, 0x5e,
+	0x20, 0xd6, 0x7c, 0x2f, 0x49, 0xb2, 0x45, 0x73, 0x05, 0x96, 0x4f, 0xfc, 0x88, 0x8d, 0xcc, 0xef,
+	0x60, 0xa3, 0x13, 0x78, 0xcc, 0xb3, 0x07, 0xde, 0xf7, 0xd4, 0xa2, 0xcf, 0x53, 0x9a, 0x30, 0x72,
+	0x07, 0x2a, 0xdd, 0x30, 0xe8, 0x79, 0x17, 0xcf, 0x22, 0x9b, 0xf5, 0x6b, 0x46, 0xd3, 0xd8, 0x2d,
+	0x5b, 0x20, 0x54, 0xa7, 0x36, 0xeb, 0x93, 0x4d, 0x58, 0xa6, 0x43, 0x16, 0xdb, 0xb5, 0xa5, 0xa6,
+	0xb1, 0x5b, 0xb5, 0x84, 0x40, 0x08, 0x14, 0xfd, 0xd0, 0xa5, 0xb5, 0x02, 0xda, 0xe3, 0xb7, 0xd9,
+	0x07, 0x72, 0x96, 0x3a, 0xbe, 0xc7, 0x3a, 0x87, 0xe7, 0xa7, 0x16, 0x4d, 0xa2, 0x30, 0x48, 0x28,
+	0xd9, 0x82, 0x52, 0xc2, 0x6c, 0x96, 0x26, 0xe8, 0x7b, 0xd5, 0x92, 0x12, 0xa9, 0xc1, 0x8a, 0x4f,
+	0x93, 0xc4, 0xbe, 0xa0, 0xe8, 0xb9, 0x6c, 0x29, 0x91, 0x34, 0xa1, 0x14, 0xd3, 0x24, 0x1d, 0x30,
+	0xf4, 0x5e, 0x39, 0x58, 0x6d, 0x45, 0x4e, 0x0b, 0x7d, 0x4a, 0xbd, 0xf9, 0x97, 0x01, 0x1b, 0x7a,
+	0x28, 0x01, 0x85, 0x40, 0xb1, 0x17, 0x87, 0xbe, 0xc4, 0x80, 0xdf, 0x3c, 0x7b, 0x2f, 0x70, 0xe9,
+	0x10, 0x63, 0x14, 0x2d, 0x21, 0x90, 0x6d, 0x28, 0x27, 0x34, 0x7e, 0xe1, 0x75, 0x69, 0xc7, 0x95,
+	0x10, 0x72, 0x05, 0xb9, 0x0b, 0x45, 0x36, 0x8a, 0x68, 0xad, 0xd8, 0x34, 0x76, 0xd7, 0x0f, 0xd6,
+	0x54, 0xf4, 0xd6, 0xf9, 0x28, 0xa2, 0x16, 0x2e, 0x91, 0xb7, 0x61, 0xa5, 0x1b, 0x06, 0x8c, 0x06,
+	0xac, 0xb6, 0x8c, 0x39, 0x56, 0xb8, 0x95, 0x54, 0x59, 0x6a, 0x8d, 0xec, 0xc2, 0xaa, 0x33, 0xec,
+	0x9f, 0xc6, 0x61, 0xd8, 0xab, 0x95, 0xd0, 0xae, 0xca, 0xed, 0x94, 0xce, 0xca, 0x56, 0x49, 0x13,
+	0x2a, 0x5e, 0x72, 0x12, 0x74, 0xe3, 0x51, 0xc4, 0xa8, 0x5b, 0x5b, 0xc1, 0x52, 0xe9, 0x2a, 0xf3,
+	0x6f, 0x03, 0xb6, 0xa6, 0x30, 0x1f, 0xda, 0xac, 0xdb, 0xd7, 0x80, 0x17, 0x66, 0x01, 0x2f, 0xcc,
+	0x05, 0x5e, 0x98, 0x07, 0xbc, 0xb0, 0x10, 0xf0, 0xc2, 0x82, 0xc0, 0x0b, 0x6f, 0x02, 0xbc, 0x30,
+	0x09, 0xfc, 0x77, 0x03, 0x36, 0x05, 0x70, 0x8b, 0x76, 0xa9, 0x17, 0x31, 0xd5, 0xef, 0x75, 0x58,
+	0x62, 0xa1, 0xec, 0xf6, 0x12, 0x0b, 0xff, 0xab, 0x5e, 0x9b, 0xd9, 0x38, 0x8a, 0x56, 0x03, 0x37,
+	0x12, 0x1a, 0x35, 0x90, 0x8b, 0x37, 0xda, 0x7c, 0x69, 0xc0, 0xff, 0x67, 0xa1, 0x11, 0x9d, 0x54,
+	0x90, 0x0a, 0xd3, 0x90, 0xfe, 0xcd, 0x2e, 0xea, 0x90, 0x0a, 0x0b, 0x41, 0xba, 0xa2, 0x85, 0xe6,
+	0x11, 0xdc, 0xfe, 0x26, 0xa5, 0xf1, 0xe8, 0x0b, 0x6f, 0xc0, 0x68, 0xfc, 0x55, 0xd8, 0xbd, 0x3c,
+	0x63, 0x76, 0x9c, 0xb5, 0xe9, 0x2d, 0x58, 0xb3, 0xa3, 0x08, 0xaf, 0xa7, 0x0e, 0x62, 0x31, 0xb0,
+	0x3d, 0xe3, 0x4a, 0xf3, 0x33, 0xd8, 0x9e, 0xed, 0x44, 0x5e, 0x23, 0xdb, 0x50, 0x1e, 0x28, 0xa5,
+	0xf4, 0x90, 0x2b, 0xcc, 0x36, 0x6c, 0xb4, 0x29, 0xfb, 0x5a, 0x5c, 0x20, 0x2a, 0x70, 0x13, 0x2a,
+	0xb2, 0x2a, 0xa7, 0xb6, 0x17, 0xcb, 0x41, 0xd1, 0x55, 0xe4, 0x06, 0x14, 0x3c, 0x57, 0xcd, 0x0b,
+	0xff, 0x34, 0x7f, 0x80, 0xeb, 0xe8, 0x88, 0xd9, 0x59, 0xe4, 0xfb, 0x50, 0xf4, 0x29, 0xb3, 0xb1,
+	0x2b, 0x95, 0x83, 0x1d, 0x5e, 0x84, 0x09, 0x93, 0x16, 0x17, 0x4e, 0x02, 0x16, 0x8f, 0x2c, 0x34,
+	0xad, 0x7f, 0x04, 0xe5, 0x4c, 0xc5, 0x83, 0x5c, 0xd2, 0x91, 0x0c, 0xcf, 0x3f, 0x79, 0x57, 0x5f,
+	0xd8, 0x83, 0x94, 0xaa, 0x41, 0x45, 0xe1, 0xd3, 0xa5, 0x8f, 0x0d, 0x73, 0x0f, 0x6e, 0x9c, 0x89,
+	0xfc, 0x92, 0x2c, 0x7e, 0x0d, 0x56, 0x64, 0xce, 0x72, 0x30, 0x94, 0x68, 0xb6, 0xe1, 0xfa, 0x11,
+	0x56, 0xf0, 0x38, 0x33, 0xde, 0x84, 0x65, 0x67, 0xd8, 0xef, 0x1c, 0xcb, 0x70, 0x42, 0x20, 0x0d,
+	0x80, 0xac, 0xda, 0xc7, 0xf2, 0xba, 0xd5, 0x34, 0x3c, 0xac, 0x70, 0x14, 0xf4, 0x42, 0x55, 0xbd,
+	0x1a, 0xac, 0xa8, 0x0d, 0xc2, 0x97, 0x12, 0xcd, 0x0f, 0x61, 0xfb, 0xd8, 0x8b, 0x69, 0x97, 0x9d,
+	0xe7, 0x44, 0x24, 0xca, 0x21, 0x76, 0x6e, 0x41, 0x89, 0x0f, 0x9c, 0xe7, 0xca, 0x8d, 0x52, 0x32,
+	0x3d, 0xd8, 0xd0, 0xa2, 0xe4, 0xf4, 0xe0, 0xc4, 0xe1, 0x25, 0x55, 0xfd, 0x91, 0x12, 0x6f, 0x1e,
+	0x8b, 0xd3, 0x84, 0x51, 0xd7, 0x0a, 0x43, 0x26, 0xc9, 0x47, 0x57, 0x91, 0x3a, 0xac, 0xc6, 0xe9,
+	0x80, 0x3e, 0x72, 0xdd, 0x58, 0x9e, 0xeb, 0x4c, 0x36, 0x7f, 0x31, 0x60, 0x67, 0x4e, 0x8e, 0x32,
+	0xee, 0x3b, 0xb0, 0x9e, 0xf0, 0xd1, 0x39, 0xf7, 0x7c, 0x9a, 0x30, 0xdb, 0x8f, 0xe4, 0x50, 0x4d,
+	0x68, 0xf9, 0xf4, 0x32, 0xcf, 0xa7, 0x61, 0xca, 0x4e, 0x69, 0xec, 0x85, 0xae, 0xec, 0xd9, 0xb8,
+	0x92, 0xec, 0xc1, 0x86, 0xc6, 0xca, 0x67, 0x82, 0xef, 0x0a, 0x68, 0x39, 0xbd, 0x60, 0x9a, 0x50,
+	0x7d, 0x6c, 0xfb, 0x34, 0xcb, 0x85, 0x40, 0x31, 0xb0, 0x7d, 0xaa, 0x88, 0x8b, 0x7f, 0x73, 0x1b,
+	0x3c, 0xb0, 0x9a, 0x0d, 0x9e, 0x6a, 0x69, 0xc3, 0xbf, 0xcd, 0x9f, 0x0c, 0x28, 0xf3, 0x93, 0x72,
+	0xf2, 0x82, 0xdf, 0xb9, 0x35, 0x58, 0x89, 0xc5, 0x95, 0x82, 0x46, 0x55, 0x4b, 0x89, 0x7c, 0x28,
+	0x22, 0x3c, 0xc7, 0x92, 0xc2, 0x51, 0x98, 0x3e, 0x97, 0x85, 0x19, 0xe7, 0x92, 0xf7, 0xc1, 0xe1,
+	0xe7, 0xec, 0x71, 0xea, 0x3b, 0x34, 0xc6, 0x7b, 0xb2, 0x68, 0xe9, 0x2a, 0xb3, 0x09, 0xf0, 0x34,
+	0x72, 0x6d, 0x46, 0x79, 0x7d, 0xf1, 0x61, 0x20, 0x4e, 0x0b, 0x0f, 0x85, 0xdf, 0xe6, 0xaf, 0x06,
+	0x94, 0x9e, 0x06, 0x3c, 0x53, 0x9e, 0x0a, 0x0b, 0x2f, 0x69, 0xa0, 0xe6, 0x13, 0x85, 0x8c, 0xc0,
+	0x96, 0x34, 0xe6, 0xd6, 0xe0, 0x88, 0xee, 0x66, 0x70, 0xb6, 0xa0, 0x64, 0xfb, 0x61, 0x1a, 0x30,
+	0xcc, 0xa6, 0x6a, 0x49, 0x09, 0x4b, 0x34, 0xec, 0xb8, 0x78, 0x4d, 0xf3, 0x12, 0x0d, 0x3b, 0x2e,
+	0x9f, 0xfc, 0x98, 0x0e, 0xec, 0x91, 0x40, 0x58, 0xc2, 0xec, 0x35, 0x0d, 0x5f, 0xf7, 0xd3, 0x01,
+	0xf3, 0xce, 0xbc, 0x8b, 0x20, 0x41, 0xf6, 0xa9, 0x5a, 0x9a, 0xc6, 0xfc, 0x04, 0xfe, 0x87, 0xd7,
+	0x92, 0x95, 0x6d, 0xc9, 0x3a, 0x32, 0xee, 0xda, 0x98, 0x74, 0x6d, 0x1e, 0x42, 0x1d, 0xb7, 0x3e,
+	0xd2, 0xeb, 0x99, 0xed, 0x5e, 0xec, 0x56, 0x7c, 0x20, 0x6f, 0xc5, 0xac, 0xcb, 0x87, 0x2a, 0x09,
+	0x71, 0xd4, 0x32, 0x7e, 0x30, 0x34, 0xca, 0x3b, 0xf8, 0x11, 0x60, 0x5d, 0x45, 0x3d, 0xc5, 0xe7,
+	0x24, 0x69, 0x01, 0xe4, 0x6f, 0x3f, 0x72, 0x0b, 0x49, 0x61, 0xf2, 0x2d, 0x58, 0x2f, 0x73, 0x35,
+	0xbe, 0x15, 0xc9, 0x0e, 0x2c, 0xe3, 0xcd, 0x4a, 0x72, 0x9d, 0xbe, 0xbc, 0x0d, 0xc5, 0x33, 0x16,
+	0x46, 0x73, 0x56, 0x4d, 0x28, 0xb7, 0x29, 0x3e, 0x53, 0x8e, 0xfa, 0xba, 0x49, 0xf6, 0x90, 0xdb,
+	0x37, 0xc8, 0x1e, 0xac, 0xb5, 0x29, 0xd3, 0x06, 0x47, 0xb3, 0x5b, 0xe7, 0x9f, 0xf9, 0xd2, 0xbe,
+	0x41, 0x1e, 0x02, 0xe4, 0x6f, 0x1f, 0x91, 0xfe, 0xd4, 0x5b, 0xa8, 0xbe, 0x35, 0xa9, 0x96, 0xa5,
+	0x3e, 0x81, 0xeb, 0xb9, 0x56, 0xf0, 0x6c, 0x7d, 0xa6, 0x07, 0x5c, 0x9b, 0xeb, 0xe6, 0x11, 0xac,
+	0x8d, 0x11, 0x37, 0xa9, 0xe5, 0x86, 0xe3, 0x5c, 0x3e, 0xd7, 0xc5, 0x97, 0xea, 0x85, 0x2c, 0xed,
+	0x45, 0x32, 0x3b, 0xf3, 0xfc, 0x5c, 0x9d, 0xcf, 0x3e, 0x56, 0xf0, 0x49, 0xaa, 0x68, 0x4f, 0x94,
+	0x65, 0x8a, 0x06, 0xf3, 0xaa, 0x93, 0x07, 0xc8, 0x92, 0x32, 0xc6, 0xc2, 0xbb, 0xde, 0x15, 0xdd,
+	0x0c, 0x26, 0xbb, 0x74, 0x73, 0x06, 0x13, 0x92, 0x3d, 0x00, 0x95, 0xd4, 0x02, 0xd6, 0xf7, 0x91,
+	0x6d, 0x8f, 0xec, 0xc1, 0xc0, 0xb1, 0xbb, 0x97, 0x0b, 0x6d, 0x79, 0x00, 0xa4, 0x4d, 0xd9, 0x71,
+	0xc2, 0xac, 0xf0, 0x0d, 0x76, 0xb5, 0xa0, 0xd2, 0xa6, 0x4c, 0x51, 0xab, 0x6e, 0xbe, 0x89, 0xd5,
+	0x9d, 0xe4, 0x5c, 0x01, 0x43, 0x92, 0xeb, 0x94, 0xf7, 0x49, 0xd2, 0xfd, 0x1c, 0x61, 0xe4, 0xe7,
+	0xbc, 0x17, 0x92, 0xcd, 0xdc, 0x2e, 0xe7, 0xd4, 0xfa, 0xad, 0x09, 0xad, 0xdc, 0xff, 0x0c, 0x6a,
+	0x1c, 0xd3, 0x2c, 0xbe, 0x22, 0x4d, 0xbe, 0xe5, 0x2a, 0xba, 0xad, 0xdf, 0xbd, 0xc2, 0x42, 0x06,
+	0xb8, 0x07, 0x45, 0x4e, 0x38, 0x3a, 0x90, 0x1b, 0xfc, 0x73, 0x8c, 0x85, 0xee, 0x41, 0x91, 0x33,
+	0xce, 0x94, 0xd1, 0x18, 0x0d, 0x3d, 0x44, 0xa8, 0x4f, 0x7a, 0x3d, 0x44, 0x71, 0x6c, 0xf3, 0x1b,
+	0x5f, 0x16, 0x9c, 0x0b, 0x2a, 0x27, 0x84, 0xaf, 0x5b, 0x61, 0x51, 0x3e, 0xc0, 0xde, 0xe9, 0x6a,
+	0x8b, 0x3e, 0xd7, 0xe3, 0xcd, 0x70, 0xb5, 0x6f, 0xf0, 0x96, 0x8b, 0xf1, 0x1f, 0x0b, 0x7b, 0x73,
+	0xcc, 0x56, 0xa4, 0xa7, 0x5d, 0x42, 0x87, 0x77, 0x7e, 0x7b, 0xd5, 0x30, 0x5e, 0xbe, 0x6a, 0x18,
+	0x7f, 0xbe, 0x6a, 0x18, 0x3f, 0xbf, 0x6e, 0x5c, 0x7b, 0xf9, 0xba, 0x71, 0xed, 0x8f, 0xd7, 0x8d,
+	0x6b, 0xdf, 0x2e, 0xb7, 0x5a, 0xef, 0x45, 0x8e, 0x53, 0xc2, 0xdf, 0xe3, 0xf7, 0xff, 0x09, 0x00,
+	0x00, 0xff, 0xff, 0x51, 0xc4, 0x73, 0x38, 0x72, 0x0f, 0x00, 0x00,
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// AppchainPluginClient is the client API for AppchainPlugin service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type AppchainPluginClient interface {
+	Initialize(ctx context.Context, in *InitializeRequest, opts ...grpc.CallOption) (*Empty, error)
+	Start(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
+	Stop(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
+	GetIBTPCh(ctx context.Context, in *Empty, opts ...grpc.CallOption) (AppchainPlugin_GetIBTPChClient, error)
+	GetUpdateMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (AppchainPlugin_GetUpdateMetaClient, error)
+	SubmitIBTP(ctx context.Context, in *SubmitIBTPRequest, opts ...grpc.CallOption) (*SubmitIBTPResponse, error)
+	SubmitIBTPBatch(ctx context.Context, in *SubmitIBTPRequestBatch, opts ...grpc.CallOption) (*SubmitIBTPResponse, error)
+	SubmitReceipt(ctx context.Context, in *SubmitReceiptRequest, opts ...grpc.CallOption) (*SubmitIBTPResponse, error)
+	SubmitReceiptBatch(ctx context.Context, in *SubmitReceiptRequestBatch, opts ...grpc.CallOption) (*SubmitIBTPResponse, error)
+	GetOutMessage(ctx context.Context, in *GetMessageRequest, opts ...grpc.CallOption) (*IBTP, error)
+	GetReceiptMessage(ctx context.Context, in *GetMessageRequest, opts ...grpc.CallOption) (*IBTP, error)
+	GetInMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
+	GetOutMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
+	GetCallbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
+	GetDstRollbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error)
+	GetServices(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ServicesResponse, error)
+	GetChainID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ChainIDResponse, error)
+	GetAppchainInfo(ctx context.Context, in *ChainInfoRequest, opts ...grpc.CallOption) (*ChainInfoResponse, error)
+	GetDirectTransactionMeta(ctx context.Context, in *DirectTransactionMetaRequest, opts ...grpc.CallOption) (*DirectTransactionMetaResponse, error)
+	Name(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NameResponse, error)
+	Type(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*TypeResponse, error)
+	GetOffChainData(ctx context.Context, in *GetDataRequest, opts ...grpc.CallOption) (*OffChainDataInfo, error)
+	GetOffChainDataReq(ctx context.Context, in *Empty, opts ...grpc.CallOption) (AppchainPlugin_GetOffChainDataReqClient, error)
+	SubmitOffChainData(ctx context.Context, in *GetDataResponse, opts ...grpc.CallOption) (*Empty, error)
+}
+
+type appchainPluginClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewAppchainPluginClient(cc *grpc.ClientConn) AppchainPluginClient {
+	return &appchainPluginClient{cc}
+}
+
+func (c *appchainPluginClient) Initialize(ctx context.Context, in *InitializeRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Initialize", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) Start(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Start", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) Stop(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Stop", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetIBTPCh(ctx context.Context, in *Empty, opts ...grpc.CallOption) (AppchainPlugin_GetIBTPChClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_AppchainPlugin_serviceDesc.Streams[0], "/pb.AppchainPlugin/GetIBTPCh", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &appchainPluginGetIBTPChClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type AppchainPlugin_GetIBTPChClient interface {
+	Recv() (*IBTP, error)
+	grpc.ClientStream
+}
+
+type appchainPluginGetIBTPChClient struct {
+	grpc.ClientStream
+}
+
+func (x *appchainPluginGetIBTPChClient) Recv() (*IBTP, error) {
+	m := new(IBTP)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *appchainPluginClient) GetUpdateMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (AppchainPlugin_GetUpdateMetaClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_AppchainPlugin_serviceDesc.Streams[1], "/pb.AppchainPlugin/GetUpdateMeta", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &appchainPluginGetUpdateMetaClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type AppchainPlugin_GetUpdateMetaClient interface {
+	Recv() (*UpdateMeta, error)
+	grpc.ClientStream
+}
+
+type appchainPluginGetUpdateMetaClient struct {
+	grpc.ClientStream
+}
+
+func (x *appchainPluginGetUpdateMetaClient) Recv() (*UpdateMeta, error) {
+	m := new(UpdateMeta)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *appchainPluginClient) SubmitIBTP(ctx context.Context, in *SubmitIBTPRequest, opts ...grpc.CallOption) (*SubmitIBTPResponse, error) {
+	out := new(SubmitIBTPResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/SubmitIBTP", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) SubmitIBTPBatch(ctx context.Context, in *SubmitIBTPRequestBatch, opts ...grpc.CallOption) (*SubmitIBTPResponse, error) {
+	out := new(SubmitIBTPResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/SubmitIBTPBatch", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) SubmitReceipt(ctx context.Context, in *SubmitReceiptRequest, opts ...grpc.CallOption) (*SubmitIBTPResponse, error) {
+	out := new(SubmitIBTPResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/SubmitReceipt", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) SubmitReceiptBatch(ctx context.Context, in *SubmitReceiptRequestBatch, opts ...grpc.CallOption) (*SubmitIBTPResponse, error) {
+	out := new(SubmitIBTPResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/SubmitReceiptBatch", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetOutMessage(ctx context.Context, in *GetMessageRequest, opts ...grpc.CallOption) (*IBTP, error) {
+	out := new(IBTP)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetOutMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetReceiptMessage(ctx context.Context, in *GetMessageRequest, opts ...grpc.CallOption) (*IBTP, error) {
+	out := new(IBTP)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetReceiptMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetInMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error) {
+	out := new(GetMetaResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetInMeta", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetOutMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error) {
+	out := new(GetMetaResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetOutMeta", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetCallbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error) {
+	out := new(GetMetaResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetCallbackMeta", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetDstRollbackMeta(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetMetaResponse, error) {
+	out := new(GetMetaResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetDstRollbackMeta", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetServices(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ServicesResponse, error) {
+	out := new(ServicesResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetServices", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetChainID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ChainIDResponse, error) {
+	out := new(ChainIDResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetChainID", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetAppchainInfo(ctx context.Context, in *ChainInfoRequest, opts ...grpc.CallOption) (*ChainInfoResponse, error) {
+	out := new(ChainInfoResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetAppchainInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetDirectTransactionMeta(ctx context.Context, in *DirectTransactionMetaRequest, opts ...grpc.CallOption) (*DirectTransactionMetaResponse, error) {
+	out := new(DirectTransactionMetaResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetDirectTransactionMeta", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) Name(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NameResponse, error) {
+	out := new(NameResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Name", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) Type(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*TypeResponse, error) {
+	out := new(TypeResponse)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/Type", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetOffChainData(ctx context.Context, in *GetDataRequest, opts ...grpc.CallOption) (*OffChainDataInfo, error) {
+	out := new(OffChainDataInfo)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/GetOffChainData", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appchainPluginClient) GetOffChainDataReq(ctx context.Context, in *Empty, opts ...grpc.CallOption) (AppchainPlugin_GetOffChainDataReqClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_AppchainPlugin_serviceDesc.Streams[2], "/pb.AppchainPlugin/GetOffChainDataReq", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &appchainPluginGetOffChainDataReqClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type AppchainPlugin_GetOffChainDataReqClient interface {
+	Recv() (*GetDataRequest, error)
+	grpc.ClientStream
+}
+
+type appchainPluginGetOffChainDataReqClient struct {
+	grpc.ClientStream
+}
+
+func (x *appchainPluginGetOffChainDataReqClient) Recv() (*GetDataRequest, error) {
+	m := new(GetDataRequest)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *appchainPluginClient) SubmitOffChainData(ctx context.Context, in *GetDataResponse, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/pb.AppchainPlugin/SubmitOffChainData", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AppchainPluginServer is the server API for AppchainPlugin service.
+type AppchainPluginServer interface {
+	Initialize(context.Context, *InitializeRequest) (*Empty, error)
+	Start(context.Context, *Empty) (*Empty, error)
+	Stop(context.Context, *Empty) (*Empty, error)
+	GetIBTPCh(*Empty, AppchainPlugin_GetIBTPChServer) error
+	GetUpdateMeta(*Empty, AppchainPlugin_GetUpdateMetaServer) error
+	SubmitIBTP(context.Context, *SubmitIBTPRequest) (*SubmitIBTPResponse, error)
+	SubmitIBTPBatch(context.Context, *SubmitIBTPRequestBatch) (*SubmitIBTPResponse, error)
+	SubmitReceipt(context.Context, *SubmitReceiptRequest) (*SubmitIBTPResponse, error)
+	SubmitReceiptBatch(context.Context, *SubmitReceiptRequestBatch) (*SubmitIBTPResponse, error)
+	GetOutMessage(context.Context, *GetMessageRequest) (*IBTP, error)
+	GetReceiptMessage(context.Context, *GetMessageRequest) (*IBTP, error)
+	GetInMeta(context.Context, *Empty) (*GetMetaResponse, error)
+	GetOutMeta(context.Context, *Empty) (*GetMetaResponse, error)
+	GetCallbackMeta(context.Context, *Empty) (*GetMetaResponse, error)
+	GetDstRollbackMeta(context.Context, *Empty) (*GetMetaResponse, error)
+	GetServices(context.Context, *Empty) (*ServicesResponse, error)
+	GetChainID(context.Context, *Empty) (*ChainIDResponse, error)
+	GetAppchainInfo(context.Context, *ChainInfoRequest) (*ChainInfoResponse, error)
+	GetDirectTransactionMeta(context.Context, *DirectTransactionMetaRequest) (*DirectTransactionMetaResponse, error)
+	Name(context.Context, *Empty) (*NameResponse, error)
+	Type(context.Context, *Empty) (*TypeResponse, error)
+	GetOffChainData(context.Context, *GetDataRequest) (*OffChainDataInfo, error)
+	GetOffChainDataReq(*Empty, AppchainPlugin_GetOffChainDataReqServer) error
+	SubmitOffChainData(context.Context, *GetDataResponse) (*Empty, error)
+}
+
+// UnimplementedAppchainPluginServer can be embedded to have forward compatible implementations.
+type UnimplementedAppchainPluginServer struct {
+}
+
+func (*UnimplementedAppchainPluginServer) Initialize(ctx context.Context, req *InitializeRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Initialize not implemented")
+}
+func (*UnimplementedAppchainPluginServer) Start(ctx context.Context, req *Empty) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Start not implemented")
+}
+func (*UnimplementedAppchainPluginServer) Stop(ctx context.Context, req *Empty) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Stop not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetIBTPCh(req *Empty, srv AppchainPlugin_GetIBTPChServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetIBTPCh not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetUpdateMeta(req *Empty, srv AppchainPlugin_GetUpdateMetaServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetUpdateMeta not implemented")
+}
+func (*UnimplementedAppchainPluginServer) SubmitIBTP(ctx context.Context, req *SubmitIBTPRequest) (*SubmitIBTPResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitIBTP not implemented")
+}
+func (*UnimplementedAppchainPluginServer) SubmitIBTPBatch(ctx context.Context, req *SubmitIBTPRequestBatch) (*SubmitIBTPResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitIBTPBatch not implemented")
+}
+func (*UnimplementedAppchainPluginServer) SubmitReceipt(ctx context.Context, req *SubmitReceiptRequest) (*SubmitIBTPResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitReceipt not implemented")
+}
+func (*UnimplementedAppchainPluginServer) SubmitReceiptBatch(ctx context.Context, req *SubmitReceiptRequestBatch) (*SubmitIBTPResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitReceiptBatch not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetOutMessage(ctx context.Context, req *GetMessageRequest) (*IBTP, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOutMessage not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetReceiptMessage(ctx context.Context, req *GetMessageRequest) (*IBTP, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetReceiptMessage not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetInMeta(ctx context.Context, req *Empty) (*GetMetaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInMeta not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetOutMeta(ctx context.Context, req *Empty) (*GetMetaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOutMeta not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetCallbackMeta(ctx context.Context, req *Empty) (*GetMetaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCallbackMeta not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetDstRollbackMeta(ctx context.Context, req *Empty) (*GetMetaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDstRollbackMeta not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetServices(ctx context.Context, req *Empty) (*ServicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetServices not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetChainID(ctx context.Context, req *Empty) (*ChainIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetChainID not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetAppchainInfo(ctx context.Context, req *ChainInfoRequest) (*ChainInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAppchainInfo not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetDirectTransactionMeta(ctx context.Context, req *DirectTransactionMetaRequest) (*DirectTransactionMetaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDirectTransactionMeta not implemented")
+}
+func (*UnimplementedAppchainPluginServer) Name(ctx context.Context, req *Empty) (*NameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Name not implemented")
+}
+func (*UnimplementedAppchainPluginServer) Type(ctx context.Context, req *Empty) (*TypeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Type not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetOffChainData(ctx context.Context, req *GetDataRequest) (*OffChainDataInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOffChainData not implemented")
+}
+func (*UnimplementedAppchainPluginServer) GetOffChainDataReq(req *Empty, srv AppchainPlugin_GetOffChainDataReqServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetOffChainDataReq not implemented")
+}
+func (*UnimplementedAppchainPluginServer) SubmitOffChainData(ctx context.Context, req *GetDataResponse) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitOffChainData not implemented")
+}
+
+func RegisterAppchainPluginServer(s *grpc.Server, srv AppchainPluginServer) {
+	s.RegisterService(&_AppchainPlugin_serviceDesc, srv)
+}
+
+func _AppchainPlugin_Initialize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InitializeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).Initialize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/Initialize",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).Initialize(ctx, req.(*InitializeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_Start_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).Start(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/Start",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).Start(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_Stop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).Stop(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/Stop",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).Stop(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetIBTPCh_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(Empty)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(AppchainPluginServer).GetIBTPCh(m, &appchainPluginGetIBTPChServer{stream})
+}
+
+type AppchainPlugin_GetIBTPChServer interface {
+	Send(*IBTP) error
+	grpc.ServerStream
+}
+
+type appchainPluginGetIBTPChServer struct {
+	grpc.ServerStream
+}
+
+func (x *appchainPluginGetIBTPChServer) Send(m *IBTP) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _AppchainPlugin_GetUpdateMeta_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(Empty)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(AppchainPluginServer).GetUpdateMeta(m, &appchainPluginGetUpdateMetaServer{stream})
+}
+
+type AppchainPlugin_GetUpdateMetaServer interface {
+	Send(*UpdateMeta) error
+	grpc.ServerStream
+}
+
+type appchainPluginGetUpdateMetaServer struct {
+	grpc.ServerStream
+}
+
+func (x *appchainPluginGetUpdateMetaServer) Send(m *UpdateMeta) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _AppchainPlugin_SubmitIBTP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubmitIBTPRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).SubmitIBTP(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/SubmitIBTP",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).SubmitIBTP(ctx, req.(*SubmitIBTPRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_SubmitIBTPBatch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubmitIBTPRequestBatch)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).SubmitIBTPBatch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/SubmitIBTPBatch",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).SubmitIBTPBatch(ctx, req.(*SubmitIBTPRequestBatch))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_SubmitReceipt_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubmitReceiptRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).SubmitReceipt(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/SubmitReceipt",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).SubmitReceipt(ctx, req.(*SubmitReceiptRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_SubmitReceiptBatch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubmitReceiptRequestBatch)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).SubmitReceiptBatch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/SubmitReceiptBatch",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).SubmitReceiptBatch(ctx, req.(*SubmitReceiptRequestBatch))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetOutMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetOutMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetOutMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetOutMessage(ctx, req.(*GetMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetReceiptMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetReceiptMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetReceiptMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetReceiptMessage(ctx, req.(*GetMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetInMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetInMeta(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetInMeta",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetInMeta(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetOutMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetOutMeta(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetOutMeta",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetOutMeta(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetCallbackMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetCallbackMeta(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetCallbackMeta",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetCallbackMeta(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetDstRollbackMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetDstRollbackMeta(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetDstRollbackMeta",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetDstRollbackMeta(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetServices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetServices",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetServices(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetChainID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetChainID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetChainID",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetChainID(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetAppchainInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChainInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetAppchainInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetAppchainInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetAppchainInfo(ctx, req.(*ChainInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetDirectTransactionMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DirectTransactionMetaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetDirectTransactionMeta(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetDirectTransactionMeta",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetDirectTransactionMeta(ctx, req.(*DirectTransactionMetaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_Name_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).Name(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/Name",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).Name(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_Type_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).Type(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/Type",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).Type(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetOffChainData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).GetOffChainData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/GetOffChainData",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).GetOffChainData(ctx, req.(*GetDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppchainPlugin_GetOffChainDataReq_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(Empty)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(AppchainPluginServer).GetOffChainDataReq(m, &appchainPluginGetOffChainDataReqServer{stream})
+}
+
+type AppchainPlugin_GetOffChainDataReqServer interface {
+	Send(*GetDataRequest) error
+	grpc.ServerStream
+}
+
+type appchainPluginGetOffChainDataReqServer struct {
+	grpc.ServerStream
+}
+
+func (x *appchainPluginGetOffChainDataReqServer) Send(m *GetDataRequest) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _AppchainPlugin_SubmitOffChainData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDataResponse)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppchainPluginServer).SubmitOffChainData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AppchainPlugin/SubmitOffChainData",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppchainPluginServer).SubmitOffChainData(ctx, req.(*GetDataResponse))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AppchainPlugin_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "pb.AppchainPlugin",
+	HandlerType: (*AppchainPluginServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Initialize",
+			Handler:    _AppchainPlugin_Initialize_Handler,
+		},
+		{
+			MethodName: "Start",
+			Handler:    _AppchainPlugin_Start_Handler,
+		},
+		{
+			MethodName: "Stop",
+			Handler:    _AppchainPlugin_Stop_Handler,
+		},
+		{
+			MethodName: "SubmitIBTP",
+			Handler:    _AppchainPlugin_SubmitIBTP_Handler,
+		},
+		{
+			MethodName: "SubmitIBTPBatch",
+			Handler:    _AppchainPlugin_SubmitIBTPBatch_Handler,
+		},
+		{
+			MethodName: "SubmitReceipt",
+			Handler:    _AppchainPlugin_SubmitReceipt_Handler,
+		},
+		{
+			MethodName: "SubmitReceiptBatch",
+			Handler:    _AppchainPlugin_SubmitReceiptBatch_Handler,
+		},
+		{
+			MethodName: "GetOutMessage",
+			Handler:    _AppchainPlugin_GetOutMessage_Handler,
+		},
+		{
+			MethodName: "GetReceiptMessage",
+			Handler:    _AppchainPlugin_GetReceiptMessage_Handler,
+		},
+		{
+			MethodName: "GetInMeta",
+			Handler:    _AppchainPlugin_GetInMeta_Handler,
+		},
+		{
+			MethodName: "GetOutMeta",
+			Handler:    _AppchainPlugin_GetOutMeta_Handler,
+		},
+		{
+			MethodName: "GetCallbackMeta",
+			Handler:    _AppchainPlugin_GetCallbackMeta_Handler,
+		},
+		{
+			MethodName: "GetDstRollbackMeta",
+			Handler:    _AppchainPlugin_GetDstRollbackMeta_Handler,
+		},
+		{
+			MethodName: "GetServices",
+			Handler:    _AppchainPlugin_GetServices_Handler,
+		},
+		{
+			MethodName: "GetChainID",
+			Handler:    _AppchainPlugin_GetChainID_Handler,
+		},
+		{
+			MethodName: "GetAppchainInfo",
+			Handler:    _AppchainPlugin_GetAppchainInfo_Handler,
+		},
+		{
+			MethodName: "GetDirectTransactionMeta",
+			Handler:    _AppchainPlugin_GetDirectTransactionMeta_Handler,
+		},
+		{
+			MethodName: "Name",
+			Handler:    _AppchainPlugin_Name_Handler,
+		},
+		{
+			MethodName: "Type",
+			Handler:    _AppchainPlugin_Type_Handler,
+		},
+		{
+			MethodName: "GetOffChainData",
+			Handler:    _AppchainPlugin_GetOffChainData_Handler,
+		},
+		{
+			MethodName: "SubmitOffChainData",
+			Handler:    _AppchainPlugin_SubmitOffChainData_Handler,
+		},
+	},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "GetIBTPCh",
+			Handler:       _AppchainPlugin_GetIBTPCh_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetUpdateMeta",
+			Handler:       _AppchainPlugin_GetUpdateMeta_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetOffChainDataReq",
+			Handler:       _AppchainPlugin_GetOffChainDataReq_Handler,
+			ServerStreams: true,
+		},
+	},
+	Metadata: "plugin.proto",
 }
 
 func (m *Empty) Marshal() (dAtA []byte, err error) {
