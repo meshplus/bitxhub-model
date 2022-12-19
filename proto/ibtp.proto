@@ -42,6 +42,10 @@ message IBTP {
     string version = 9;
     // Self-defined fields used by app-chain
     bytes extra = 10;
+    // generate IBTP timeStamp
+    int64 timestamp = 11;
+    // debug mode for performance test
+    bool debug = 12;
 }
 
 message payload {
