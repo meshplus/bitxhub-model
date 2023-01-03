@@ -64,6 +64,13 @@ service ChainBroker {
     };
   }
 
+
+  rpc GetTransactionMeta (TransactionHashMsg) returns (GetTransactionMetaResponse) {
+    option (google.api.http) = {
+      get: "/v1/transaction_meta/{tx_hash}"
+    };
+  }
+
   rpc GetTransactionByBlockHashAndIndex (TransactionBlockHashAndIndexMsg) returns (GetTransactionResponse) {
     option (google.api.http) = {
       get: "/v1/transaction_by_block_hash_index/{block_hash}/{index}"
@@ -295,6 +302,10 @@ message GetSignsRequest {
 message GetTransactionResponse {
   pb.BxhTransaction tx = 1;
   pb.TransactionMeta tx_meta = 2;
+}
+
+message GetTransactionMetaResponse {
+  pb.TransactionMeta tx_meta = 1;
 }
 
 message VerifiedTx {
