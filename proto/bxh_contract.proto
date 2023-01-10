@@ -9,7 +9,10 @@ import "bxh_transaction.proto";
 message StatusChange {
   pb.TransactionStatus PrevStatus = 1;
   pb.TransactionStatus CurStatus = 2;
-  repeated string OtherIBTPIDs = 3;
+  repeated string NotifySrcIBTPIDs = 3;
+  repeated string NotifyDstIBTPIDs = 4;
+  repeated string ChildIBTPIDs = 5;
+  bool IsFailChildIBTP = 6;
 }
 
 //=========dapp_manager=========

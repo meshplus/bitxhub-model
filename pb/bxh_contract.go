@@ -20,11 +20,19 @@ func (c *StatusChange) NotifyFlags() (bool, bool) {
 		}
 		return false, false
 	case TransactionStatus_ROLLBACK:
-		if c.PrevStatus == TransactionStatus_BEGIN {
+		if c.PrevStatus == TransactionStatus_BEGIN || c.PrevStatus == -1 {
 			return true, false
 		}
 		return false, false
 	}
 
 	return false, false
+}
+
+func IsFinalStatus(status TransactionStatus) bool {
+	if status == TransactionStatus_SUCCESS || status == TransactionStatus_FAILURE ||
+		status == TransactionStatus_ROLLBACK {
+		return true
+	}
+	return false
 }

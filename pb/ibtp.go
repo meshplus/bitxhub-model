@@ -62,7 +62,7 @@ func ParseIBTPID(id string) (string, string, uint64, error) {
 
 	index, err := strconv.Atoi(splits[2])
 	if err != nil {
-		return "", "", 0, fmt.Errorf("invalid  IBTP ID: %s", id)
+		return "", "", 0, fmt.Errorf("invalid IBTP ID: %s", id)
 	}
 
 	return splits[0], splits[1], uint64(index), nil
