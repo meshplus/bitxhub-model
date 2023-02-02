@@ -30,12 +30,21 @@ func (m *IBTP) ParseTo() (string, string, string) {
 }
 
 func (m *IBTP) CheckServiceID() error {
-	_, _, _, err := ParseFullServiceID(m.From)
-	if err != nil {
+	if err := checkServiceID(m.From); err != nil {
 		return err
 	}
-	_, _, _, err = ParseFullServiceID(m.To)
-	return err
+	if err := checkServiceID(m.To); err != nil {
+		return err
+	}
+	return nil
+}
+
+func checkServiceID(id string) error {
+	splits := strings.Split(id, ":")
+	if len(splits) != 3 {
+		return fmt.Errorf("invalid full service ID: %s", id)
+	}
+	return nil
 }
 
 func ParseFullServiceID(id string) (string, string, string, error) {

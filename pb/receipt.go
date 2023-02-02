@@ -42,7 +42,7 @@ type Log struct {
 	Removed     bool           `json:"removed"`
 }
 
-//MarshalJSON marshals as JSON.
+// MarshalJSON marshals as JSON.
 func (l EvmLog) MarshalJSON() ([]byte, error) {
 	var enc Log
 
