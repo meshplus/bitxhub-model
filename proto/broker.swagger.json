@@ -786,7 +786,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbResponse"
+              "$ref": "#/definitions/pbGetTPSResponse"
             }
           },
           "default": {
@@ -1356,6 +1356,19 @@
       ],
       "default": "MULTI_ASSET_EXCHANGE"
     },
+    "pbGetTPSResponse": {
+      "type": "object",
+      "properties": {
+        "tx_count": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "tps": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
     "pbGetTransactionResponse": {
       "type": "object",
       "properties": {
@@ -1454,6 +1467,16 @@
           "type": "string",
           "format": "byte",
           "title": "Self-defined fields used by app-chain"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64",
+          "title": "generate IBTP timeStamp"
+        },
+        "debug": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "debug mode for performance test"
         }
       },
       "title": "Inter-blockchain Transfer Protocol"

@@ -142,7 +142,7 @@ service ChainBroker {
     };
   }
 
-  rpc GetTPS(GetTPSRequest) returns (Response) {
+  rpc GetTPS(GetTPSRequest) returns (GetTPSResponse) {
     option (google.api.http) = {
       get: "/v1/tps/{begin}/{end}"
     };
@@ -319,6 +319,11 @@ message InterchainTxWrappers {
 message GetTPSRequest {
   uint64 begin = 1;
   uint64 end = 2;
+}
+
+message GetTPSResponse {
+  uint64 tx_count = 1;
+  float  tps = 2;
 }
 
 message DelVPNodeRequest {
