@@ -114,15 +114,15 @@ func (sum *StringUint64Map) toMap() map[string]uint64 {
 	return m
 }
 
-func (sum *StringUint64SliceMap) toMap() map[string]*Uint64Slice {
-	m := make(map[string]*Uint64Slice)
-
-	for i := range sum.Keys {
-		m[sum.Keys[i]] = sum.Vals[i]
-	}
-
-	return m
-}
+// func (sum *StringUint64SliceMap) toMap() map[string]*Uint64Slice {
+// 	m := make(map[string]*Uint64Slice)
+//
+// 	for i := range sum.Keys {
+// 		m[sum.Keys[i]] = sum.Vals[i]
+// 	}
+//
+// 	return m
+// }
 
 func stringUint64MapToSlice(m map[string]uint64) *StringUint64Map {
 	sum := &StringUint64Map{}
@@ -142,15 +142,15 @@ func stringUint64MapToSlice(m map[string]uint64) *StringUint64Map {
 	return sum
 }
 
-func (sum *StringVerifiedIndexMap) toMap() map[string]*VerifiedIndex {
-	m := make(map[string]*VerifiedIndex)
-
-	for i := range sum.Keys {
-		m[sum.Keys[i]] = sum.Vals[i]
-	}
-
-	return m
-}
+// func (sum *StringVerifiedIndexMap) toMap() map[string]*VerifiedIndex {
+// 	m := make(map[string]*VerifiedIndex)
+//
+// 	for i := range sum.Keys {
+// 		m[sum.Keys[i]] = sum.Vals[i]
+// 	}
+//
+// 	return m
+// }
 
 func (sum *StringVerifiedIndexSliceMap) toMap() map[string]*VerifiedIndexSlice {
 	m := make(map[string]*VerifiedIndexSlice)
