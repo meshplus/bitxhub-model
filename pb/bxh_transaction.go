@@ -154,14 +154,14 @@ func (m *BxhTransaction) GetRawSignature() (v, r, s *big.Int) {
 	return decodeSignature(m.Signature[1:])
 }
 
-func decodeSignature(sig []byte) (r, s, v *big.Int) {
+func decodeSignature(sig []byte) (v, r, s *big.Int) {
 	if len(sig) != SignatureLen {
 		panic(fmt.Sprintf("wrong size for signature: got %d, want %d", len(sig), SignatureLen))
 	}
 	r = new(big.Int).SetBytes(sig[:32])
 	s = new(big.Int).SetBytes(sig[32:64])
-	v = new(big.Int).SetBytes([]byte{sig[64] + 27})
-	return r, s, v
+	v = new(big.Int).SetBytes([]byte{sig[64]})
+	return v, r, s
 }
 
 // RawSignatureValues returns the V, R, S signature values of the transaction.
@@ -185,7 +185,6 @@ func (m *BxhTransaction) VerifySignature() error {
 		msg := m.ethSignMsg()
 		hash := ecdsa.Keccak256(msg)
 		v, r, s := m.GetRawSignature()
-
 		addr, err := ecdsa.RecoverPlain(hash, r, s, v, true)
 		if err != nil {
 			return err
