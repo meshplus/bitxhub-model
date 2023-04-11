@@ -62,6 +62,8 @@ message Message {
         TSS_TASK = 73;
         TSS_CULPRITS = 74;
         TSS_KEYGEN_REQ = 75;
+        Tss_KEYSIGN_NOT_PARTIES = 76;
+        Tss_KEYSIGN_NOT_PARTIES_ACK = 77;
 
         OFFCHAIN_DATA_GET = 81;
         OFFCHAIN_DATA_SEND = 82;
