@@ -23,3 +23,5 @@ require (
 replace google.golang.org/genproto => google.golang.org/genproto v0.0.0-20200218151345-dad8c97a84f5
 
 replace google.golang.org/grpc => google.golang.org/grpc v1.33.0
+
+replace github.com/meshplus/bitxhub-kit => git.hyperchain.cn/bitxhub/bitxhub-kit v1.28.0
