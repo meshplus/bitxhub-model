@@ -34,3 +34,7 @@ func (addr BoltContractAddress) Address() *types.Address {
 func (addr BoltContractAddress) String() string {
 	return string(addr)
 }
+
+const (
+	NoMaster = "nomaster"
+)

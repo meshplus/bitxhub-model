@@ -339,6 +339,7 @@ message CheckPierResponse {
   }
   Status status = 1;
   string address = 2;
+  string Index = 3;
 }
 
 message HeartBeatRespones {
