@@ -72,10 +72,6 @@
         "to": {
           "type": "string"
         },
-        "isSrc": {
-          "type": "boolean",
-          "format": "boolean"
-        },
         "req": {
           "type": "string",
           "format": "byte"
@@ -111,7 +107,8 @@
       "type": "string",
       "enum": [
         "DATA_GET_SUCCESS",
-        "DATA_OUT_OF_SIZE"
+        "DATA_OUT_OF_SIZE",
+        "DATA_GET_INTERNAL_ERR"
       ],
       "default": "DATA_GET_SUCCESS"
     },
@@ -123,6 +120,17 @@
           "additionalProperties": {
             "type": "string",
             "format": "uint64"
+          }
+        }
+      }
+    },
+    "pbGetRollbackNotFinishResponse": {
+      "type": "object",
+      "properties": {
+        "indexes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
           }
         }
       }
@@ -231,8 +239,7 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "boolean",
-          "format": "boolean"
+          "type": "boolean"
         },
         "message": {
           "type": "string"

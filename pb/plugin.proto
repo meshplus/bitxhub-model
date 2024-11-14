@@ -123,6 +123,15 @@ message QueryLockEventByIndexRequest {
   uint64 index = 1;
 }
 
+message GetRollbackNotFinishRequest {
+  string srcFullID = 1;
+  string dstFullID = 2;
+}
+
+message GetRollbackNotFinishResponse {
+  map<uint64, bool> indexes = 1;
+}
+
 service AppchainPlugin {
   rpc Initialize(InitializeRequest) returns (Empty);
   rpc Start(Empty) returns (Empty);
@@ -146,4 +155,5 @@ service AppchainPlugin {
   rpc GetOffChainData(pb.GetDataRequest) returns (pb.GetDataResponse);
   rpc GetOffChainDataReq(Empty) returns (stream pb.GetDataRequest);
   rpc SubmitOffChainData(pb.GetDataResponse) returns (Empty);
+  rpc GetRollbackNotFinish(GetRollbackNotFinishRequest) returns (GetRollbackNotFinishResponse);
 }
