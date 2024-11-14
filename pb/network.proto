@@ -69,6 +69,7 @@ message Message {
 
         // payload reuse GetRollbackNotFinishRequest
         ROLLBACK_NOT_FINISH_GET = 91;
+        ROLLBACK_NOT_FINISH_GET_RESP = 92;
     }
     Type type = 1;
     bytes Data = 2;
