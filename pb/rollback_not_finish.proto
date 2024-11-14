@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package pb;
+
+message RollbackNotFinishRespMsg {
+  map<uint64, bool> indexes = 1;
+  string errMsg = 2;
+}
