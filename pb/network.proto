@@ -66,6 +66,10 @@ message Message {
         TSS_UNKNOW = 79;
 
         OFFCHAIN_DATA_GET = 81;
+
+        // payload reuse GetRollbackNotFinishRequest
+        ROLLBACK_NOT_FINISH_GET = 91;
+        ROLLBACK_NOT_FINISH_RESP = 92;
     }
     Type type = 1;
     bytes Data = 2;
